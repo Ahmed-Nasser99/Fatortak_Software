@@ -10,6 +10,7 @@
 
 <p align="center">
   <a href="#-quickstart">Quickstart</a> ·
+  <a href="https://ahmed-nasser99.github.io/Fatortak_Software/">Website</a> ·
   <a href="docs/self-hosting.md">Self-hosting</a> ·
   <a href="CONTRIBUTING.md">Contributing</a> ·
   <a href="docs/roadmap.md">Roadmap</a> ·
@@ -40,16 +41,17 @@ Most accounting platforms are built for the US or Europe first. Fatortak is buil
 - **Own your data.** Self-host the whole stack with Docker. No per-invoice tax, no vendor lock-in.
 - **Open source.** AGPL-3.0. Audit it, extend it, integrate it, or run it on your own servers.
 
-## Product preview
+## Product tour
+
+Fatortak is a real application, not a landing-page mockup. Rather than ship staged screenshots, we describe the architecture honestly and let you run it:
 
 <p align="center">
-  <img src="docs/assets/screenshots/dashboard.png" alt="Fatortak dashboard" width="49%" />
-  <img src="docs/assets/screenshots/invoices.png" alt="Fatortak invoices" width="49%" />
+  <img src="docs/assets/one-ledger.svg" alt="Invoices, purchases, expenses, payments and payroll post to one double-entry journal that produces the trial balance, P&amp;L, balance sheet and project margin" width="100%" />
 </p>
-<p align="center">
-  <img src="docs/assets/screenshots/accounting.png" alt="Fatortak accounting reports" width="49%" />
-  <img src="docs/assets/screenshots/ocr.png" alt="Fatortak AI invoice OCR" width="49%" />
-</p>
+
+Every module writes to the same ledger. Project revenue, purchases, expenses and payroll can be linked to a project, so project margin is a ledger number rather than a separate spreadsheet.
+
+A public demo tenant and real UI screenshots are on the launch checklist. Until then, the fastest way to see the interface is the Docker quickstart below.
 
 ## What's inside
 
@@ -177,7 +179,7 @@ Never commit `appsettings.json` or `.env` files. Use environment variables or .N
 
 See [docs/roadmap.md](docs/roadmap.md). Highlights:
 
-- [ ] Docker Compose + one-command self-hosting
+- [x] Docker Compose + one-command self-hosting
 - [ ] Demo dataset and seeded demo tenant
 - [ ] Integration tests for invoicing and accounting posting
 - [ ] E-invoicing integrations (Egypt ETA, Saudi ZATCA) — research
