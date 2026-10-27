@@ -1,0 +1,94 @@
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+/* Add this to your global CSS */
+.react-select__control {
+  border-radius: 0.75rem !important;
+  border: 2px solid #e5e7eb !important;
+  min-height: 48px !important;
+  background-color: white !important;
+}
+
+.dark .react-select__control {
+  background-color: #374151 !important;
+  border-color: #4b5563 !important;
+}
+
+.react-select__input input {
+  color: inherit !important;
+}
+
+.react-select__single-value {
+  color: inherit !important;
+}
+
+.react-select__menu {
+  z-index: 9999 !important;
+}
+/* Phone input RTL support */
+.rtl-phone-input .PhoneInput {
+  direction: rtl;
+}
+
+.rtl-phone-input .PhoneInputCountry {
+  margin-right: 0;
+  margin-left: 0.5em;
+}
+
+.rtl-phone-input .PhoneInputCountryIcon {
+  margin-right: 0;
+  margin-left: 0.5em;
+}
+
+.rtl-phone-input .PhoneInputCountrySelectArrow {
+  margin-right: 0;
+  margin-left: 0.35em;
+}
+
+/* Dark mode support */
+.dark .PhoneInputInput {
+  background-color: #374151;
+  color: white;
+}
+
+.dark .PhoneInputCountrySelect {
+  background-color: #374151;
+  color: white;
+}

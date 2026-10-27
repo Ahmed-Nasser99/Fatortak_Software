@@ -1,0 +1,10 @@
+bin/
+obj/
+appsettings.json
+appsettings.Production.json
+appsettings.*.local.json
+App_Data/
+TestResults/
+*.user
+*.suo
+.vs/

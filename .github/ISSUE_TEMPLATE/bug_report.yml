@@ -1,0 +1,103 @@
+name: Bug report
+description: Something is broken or behaves unexpectedly.
+title: "[bug] "
+labels: ["bug", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. **Do not include passwords, API keys, customer data or production connection strings.** For security vulnerabilities, follow [SECURITY.md](../SECURITY.md) instead.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the actual behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to ...
+        2. Click ...
+        3. See error ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Invoicing / sales
+        - Purchases / suppliers
+        - Accounting / reports
+        - Projects
+        - Inventory / items
+        - HR / attendance / payroll
+        - AI / OCR
+        - Authentication / permissions
+        - UI / translation / RTL
+        - Docker / deployment
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Release tag, branch or commit SHA.
+      placeholder: main @ abc1234
+    validations:
+      required: true
+
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: How are you running it?
+      options:
+        - Docker Compose
+        - Local development (dotnet run + npm run dev)
+        - Self-hosted with a custom setup
+        - Fatortak Cloud
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, browser, .NET version, Node version, SQL Server version.
+      placeholder: Windows 11, Chrome 130, .NET 8.0.x, Node 20, SQL Server 2022
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or screenshots
+      description: Paste stack traces or attach screenshots. Remove secrets first.
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and this is not a duplicate.
+          required: true
+        - label: I removed all secrets and personal data from this report.
+          required: true

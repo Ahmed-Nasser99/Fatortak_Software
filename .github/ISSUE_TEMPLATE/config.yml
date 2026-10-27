@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question / start a discussion
+    url: https://github.com/Ahmed-Nasser99/Fatortak_Software/discussions
+    about: Setup help, architecture questions and ideas belong in Discussions.
+  - name: Self-hosting guide
+    url: https://github.com/Ahmed-Nasser99/Fatortak_Software/blob/main/docs/self-hosting.md
+    about: Docker, backups, reverse proxy and troubleshooting.
+  - name: Security vulnerability
+    url: https://github.com/Ahmed-Nasser99/Fatortak_Software/blob/main/SECURITY.md
+    about: Please report security issues privately, not as public issues.
+  - name: Commercial license or support
+    url: mailto:info@fatortak.net
+    about: Managed hosting, commercial licensing, SLAs and implementation.

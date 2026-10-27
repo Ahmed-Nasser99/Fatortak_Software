@@ -1,0 +1,38 @@
+name: Welcome contributors
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: |
+            Thanks for opening your first issue in Fatortak! 👋
+
+            A maintainer will triage it soon. To help us help you:
+            - include the version/commit and how you run the app
+            - remove any secrets, customer data or connection strings
+            - add screenshots or logs if the problem is visual
+
+            If this is a security issue, please close this and follow SECURITY.md instead.
+          pr-message: |
+            Thank you for your first pull request! 🎉
+
+            Before review, please make sure:
+            - `dotnet build` and `npm run build` pass
+            - migrations are included if you changed entities
+            - UI changes work in both Arabic (RTL) and English
+            - no secrets or customer data are included
+
+            A maintainer will review as soon as possible. If you get stuck, ask in the PR — we are happy to help.
