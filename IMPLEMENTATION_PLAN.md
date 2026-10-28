@@ -64,7 +64,7 @@ Last updated: 2026-10-27
 |---|---|---|---|
 | P2-1 | CSP/HSTS/cookie hardening and secure token storage | DONE (cookie) / TODO (CSP) | HttpOnly JWT cookie, CORS credentials, HSTS/security headers |
 | P2-2 | Health/readiness endpoints | DONE | `/health`, `/ready` |
-| P2-3 | Structured logging, correlation IDs, no PII/token logging | TODO | Code review |
+| P2-3 | Structured logging, correlation IDs, no PII/token logging | PARTIAL | Global exception handler + correlation ID; audit/PII review remains |
 | P2-4 | Audit log for financial/role/invoice changes | TODO | Schema + tests |
 | P2-5 | Backup/restore runbook and test | TODO | Ops drill |
 | P2-6 | Real subscription billing; payment provider integration | DEFERRED | Product decision |

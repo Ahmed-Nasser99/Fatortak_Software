@@ -297,6 +297,8 @@ namespace fatortak
 
             var app = builder.Build();
 
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+
             app.Use(async (context, next) =>
             {
                 context.Response.Headers["X-Content-Type-Options"] = "nosniff";
