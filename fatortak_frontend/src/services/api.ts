@@ -138,7 +138,7 @@ class ApiClient {
       const data = await response.json();
 
       // Check if response has the ServiceResult format
-      if (data?.hasOwnProperty("success")) {
+      if (Object.prototype.hasOwnProperty.call(data, "success")) {
         return data;
       }
 

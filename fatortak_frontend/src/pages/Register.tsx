@@ -1010,7 +1010,7 @@ const Register = () => {
                                     value={field.value}
                                     onChange={(val) => {
                                       // Format the phone number properly for RTL
-                                      let formattedValue = val || "";
+                                      const formattedValue = val || "";
                                       form.setFieldValue(
                                         "phone",
                                         formattedValue

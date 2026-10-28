@@ -143,7 +143,9 @@ const Custody: React.FC = () => {
       });
       setIsGiveModalOpen(false);
       resetForm();
-    } catch (error) {}
+    } catch {
+      /* mutation hook surfaces the error */
+    }
   };
 
   const handleReturn = async () => {
@@ -161,7 +163,9 @@ const Custody: React.FC = () => {
       });
       setIsReturnModalOpen(false);
       resetForm();
-    } catch (error) {}
+    } catch {
+      /* mutation hook surfaces the error */
+    }
   };
 
   const handleReplenish = async () => {
@@ -190,7 +194,9 @@ const Custody: React.FC = () => {
       });
       setIsReplenishModalOpen(false);
       resetForm();
-    } catch (error) {}
+    } catch {
+      /* mutation hook surfaces the error */
+    }
   };
 
   const handleCreateAccount = async () => {
@@ -207,7 +213,9 @@ const Custody: React.FC = () => {
       setIsCreateModalOpen(false);
       setNewAccountName("");
       setNewAccountDescription("");
-    } catch (error) {}
+    } catch {
+      /* mutation hook surfaces the error */
+    }
   };
 
   return (

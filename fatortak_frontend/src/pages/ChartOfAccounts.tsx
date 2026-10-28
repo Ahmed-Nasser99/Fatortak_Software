@@ -801,7 +801,9 @@ const InitialBalanceModal: React.FC<InitialBalanceModalProps> = ({
       if (result.success) {
         onSuccess();
       }
-    } catch (error: any) {}
+    } catch {
+      /* mutation hook surfaces the error */
+    }
   };
 
   return (

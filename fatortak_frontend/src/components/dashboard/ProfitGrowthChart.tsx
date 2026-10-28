@@ -111,7 +111,7 @@ const ProfitGrowthChart: React.FC<ProfitGrowthChartProps> = ({
         : 100;
     const isPositive = profitChange >= 0;
 
-    let text = "";
+    let text: string;
     if (isPositive) {
       text = `Your profit ${
         profitChange > 0 ? "increased" : "remained stable"
