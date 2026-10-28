@@ -36,6 +36,7 @@ namespace fatortak.Services.HR
 
         public async Task<ServiceResult<PayrollDto>> GeneratePayrollAsync(GeneratePayrollDto dto)
         {
+            await using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 // Check if payroll already exists for this month/year
@@ -114,11 +115,13 @@ namespace fatortak.Services.HR
 
                 _context.Payrolls.Add(payroll);
                 await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
 
                 return ServiceResult<PayrollDto>.SuccessResult(MapToDto(payroll));
             }
             catch (Exception ex)
             {
+                await transaction.RollbackAsync();
                 _logger.LogError(ex, "Error generating payroll");
                 return ServiceResult<PayrollDto>.Failure("Failed to generate payroll");
             }

@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="#-quickstart">Quickstart</a> ·
-  <a href="https://ahmed-nasser99.github.io/Fatortak_Software/">Website</a> ·
+  <a href="https://fatortak.rabbeh.com/">Website</a> ·
   <a href="docs/self-hosting.md">Self-hosting</a> ·
   <a href="CONTRIBUTING.md">Contributing</a> ·
   <a href="docs/roadmap.md">Roadmap</a> ·
@@ -43,7 +43,29 @@ Most accounting platforms are built for the US or Europe first. Fatortak is buil
 
 ## Product tour
 
-Fatortak is a real application, not a landing-page mockup. Rather than ship staged screenshots, we describe the architecture honestly and let you run it:
+Fatortak is a real application, not a landing-page mockup. The screens below are captures of the running application with demo data:
+
+<p align="center">
+  <img src="marketing/landing/assets/screenshots/dashboard.png" alt="Fatortak dashboard with revenue, expenses, bank balance and profit chart" width="49%" />
+  <img src="marketing/landing/assets/screenshots/ai-chat.png" alt="Fatortak AI chat answering a question about October revenue with KPI cards" width="49%" />
+</p>
+<p align="center">
+  <sub><strong>Dashboard</strong> — revenue, expenses, cash and receivables in one view.</sub>
+  &nbsp;&nbsp;&nbsp;
+  <sub><strong>AI assistant</strong> — ask your ledger a question and get the figures back.</sub>
+</p>
+
+<p align="center">
+  <img src="marketing/landing/assets/screenshots/ocr-invoice.png" alt="Fatortak OCR invoice page with an uploaded supplier invoice preview" width="49%" />
+  <img src="marketing/landing/assets/screenshots/income-statement.png" alt="Fatortak income statement with revenue, expenses and net income" width="49%" />
+</p>
+<p align="center">
+  <sub><strong>OCR invoice</strong> — upload, preview and review before creating the invoice.</sub>
+  &nbsp;&nbsp;&nbsp;
+  <sub><strong>Income statement</strong> — close the month with a real ledger report.</sub>
+</p>
+
+The [landing page](https://fatortak.rabbeh.com/) has an interactive 3D tour of these screens, including the AI chat and OCR flows.
 
 <p align="center">
   <img src="docs/assets/one-ledger.svg" alt="Invoices, purchases, expenses, payments and payroll post to one double-entry journal that produces the trial balance, P&amp;L, balance sheet and project margin" width="100%" />
@@ -51,7 +73,7 @@ Fatortak is a real application, not a landing-page mockup. Rather than ship stag
 
 Every module writes to the same ledger. Project revenue, purchases, expenses and payroll can be linked to a project, so project margin is a ledger number rather than a separate spreadsheet.
 
-A public demo tenant and real UI screenshots are on the launch checklist. Until then, the fastest way to see the interface is the Docker quickstart below.
+A public demo tenant is still on the launch checklist. Until then, the fastest way to see the interface is the Docker quickstart below.
 
 ## What's inside
 

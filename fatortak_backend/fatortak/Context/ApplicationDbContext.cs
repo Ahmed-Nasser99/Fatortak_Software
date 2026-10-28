@@ -143,6 +143,10 @@ namespace fatortak.Context
                 .HasForeignKey(n => n.TenantId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Payroll>()
+                .HasIndex(p => new { p.TenantId, p.Year, p.Month })
+                .IsUnique();
+
             modelBuilder.Entity<PayrollItem>()
                 .HasOne(n => n.Tenant)
                 .WithMany()

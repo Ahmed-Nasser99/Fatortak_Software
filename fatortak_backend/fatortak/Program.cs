@@ -327,6 +327,22 @@ namespace fatortak
                     }
                 }
             });
+
+            app.MapGet("/health", () => Results.Ok(new
+            {
+                status = "ok",
+                service = "fatortak-api",
+                timestamp = DateTime.UtcNow
+            })).AllowAnonymous();
+
+            app.MapGet("/ready", async (ApplicationDbContext db) =>
+            {
+                var canConnect = await db.Database.CanConnectAsync();
+                return canConnect
+                    ? Results.Ok(new { status = "ready", database = "ok" })
+                    : Results.StatusCode(StatusCodes.Status503ServiceUnavailable);
+            }).AllowAnonymous();
+
             app.MapControllers();
 
             // Seed data on startup

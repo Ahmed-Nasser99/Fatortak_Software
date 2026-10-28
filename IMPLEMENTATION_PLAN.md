@@ -28,7 +28,7 @@ Last updated: 2026-10-27
 | # | Work item | Status | Verification |
 |---|---|---|---|
 | P1-1 | Implement missing backend endpoints: mark-paid, duplicate, switch-tenant | DONE | Route audit |
-| P1-2 | Resolve PDF endpoint gap: remove broken UI action and expose a clear unsupported response | PARTIAL | The broken helper is unused; backend PDF remains deferred |
+| P1-2 | Resolve PDF endpoint gap: remove broken UI action and expose a clear unsupported response | DONE | Removed the unused broken backend download helper; client-side PDF export remains |
 | P1-3 | Add `/reports`, `/reports-group`, `/invoice-templates` routes/redirects | DONE | `tsc` + route review |
 | P1-4 | Fix `InvoiceDetailsModal` and `ModernHeader` runtime errors | DONE | `tsc` |
 | P1-5 | Make API client fail loudly; no `onSuccess` on failed mutations; preserve return path on 401 | DONE | Invoice mutations now reject on failure |
@@ -38,12 +38,14 @@ Last updated: 2026-10-27
 | P1-9 | Single source of truth for plan prices | DONE | `config/plans.ts` |
 | P1-10 | Fix expense lookup by exact reference; validate non-negative amounts | DONE | Service review |
 | P1-11 | Exclude cancelled/draft invoices from sales reports | DONE | Service review |
-| P1-12 | Payroll uniqueness/transaction guard | TODO | Service review |
+| P1-12 | Payroll uniqueness/transaction guard | DONE | Unique period index + transaction |
+| P1-27 | Backend test project for token, deployment mode and quota behavior | DONE | 8 tests passing |
+| P1-28 | Health/readiness endpoints for Docker and reverse proxies | DONE | `/health`, `/ready` |
 | P1-13 | Frontend typecheck clean and CI gate | DONE | `tsc -p tsconfig.app.json` exits 0 |
-| P1-14 | Add backend test project for auth, accounting, invoice/payment invariants | TODO | `dotnet test` |
+| P1-14 | Add backend test project for auth, accounting, invoice/payment invariants | PARTIAL | Token, deployment and quota tests; accounting tests still needed |
 | P1-15 | Add frontend tests for routing, API error handling, money formatting | TODO | `npm test` |
-| P1-16 | Add CI secret scan, dependency audit, typecheck, tests | TODO | CI run |
-| P1-17 | Remove/move stray root `package.json`; align env examples | PARTIAL | Env examples aligned; root file still untracked |
+| P1-16 | Add CI secret scan, dependency audit, typecheck, tests | PARTIAL | Typecheck + dotnet test in CI; secret scan/audit still needed |
+| P1-17 | Remove/move stray root `package.json`; align env examples | DONE | Removed generated root file |
 | P1-18 | Stakeholder module: CRUD for stakeholders, linked chart-of-accounts account, ownership/type metadata | DONE | API + UI + migration |
 | P1-19 | Stakeholder transactions: capital contribution, dividend, loan, repayment, withdrawal; accounting postings | DONE | API + ledger postings |
 | P1-20 | Stakeholders page with list, create/edit modal, transaction history, balances | DONE | `tsc` + build |
@@ -59,7 +61,7 @@ Last updated: 2026-10-27
 | # | Work item | Status | Verification |
 |---|---|---|---|
 | P2-1 | CSP/HSTS/cookie hardening and secure token storage | IN PROGRESS | Header review |
-| P2-2 | Health/readiness endpoints | TODO | Docker check |
+| P2-2 | Health/readiness endpoints | DONE | `/health`, `/ready` |
 | P2-3 | Structured logging, correlation IDs, no PII/token logging | TODO | Code review |
 | P2-4 | Audit log for financial/role/invoice changes | TODO | Schema + tests |
 | P2-5 | Backup/restore runbook and test | TODO | Ops drill |
@@ -133,6 +135,9 @@ Last updated: 2026-10-27
 - Frontend: `npm run build` → success; one 3.26 MB chunk (857 KB gzip).
 - EF: migration `20261027194419_AddStakeholdersAndPresence` generated and scripted successfully; includes `LastSeenAt`, stakeholder tables, and the unique invoice-number index with duplicate cleanup.
 - Secret scan of the staged tree: no database, SMTP, Gemini, OpenRouter or JWT secrets; removed Supabase client and OpenReplay key from source.
+- Backend tests: `dotnet test` → 8 passed (public invoice token, self-hosted detection, quota limits).
+- Health checks: `GET /health` and `GET /ready` added.
+- Payroll period uniqueness: migration `20261028103009_AddPayrollPeriodUniqueIndex` with duplicate cleanup.
 
 ## Remaining work (next commits)
 

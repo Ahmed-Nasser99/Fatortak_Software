@@ -173,31 +173,6 @@ export const invoiceService = {
     return apiClient.post<InvoiceDto>(`/api/invoices/${id}/mark-paid`, data);
   },
 
-  // Download invoice PDF
-  downloadPdf: async (id: string) => {
-    // This would need special handling for file downloads
-    const response = await fetch(
-      `${
-        import.meta.env.VITE_API_URL || "https://localhost:44338"
-      }/api/invoices/${id}/pdf`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-        },
-      }
-    );
-
-    if (response.ok) {
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `invoice-${id}.pdf`;
-      a.click();
-      window.URL.revokeObjectURL(url);
-    }
-  },
-
   // Duplicate invoice with quota check
   duplicateInvoice: async (id: string) => {
     // Check quota before duplicating (which creates a new invoice)

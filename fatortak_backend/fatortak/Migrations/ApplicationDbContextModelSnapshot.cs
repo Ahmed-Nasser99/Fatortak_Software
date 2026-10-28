@@ -1400,9 +1400,10 @@ namespace fatortak.Migrations
 
                     b.HasIndex("ExpenseId");
 
-                    b.HasIndex("TenantId");
-
                     b.HasIndex("TransactionId");
+
+                    b.HasIndex("TenantId", "Year", "Month")
+                        .IsUnique();
 
                     b.ToTable("Payrolls", "dbo");
                 });

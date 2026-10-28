@@ -62,8 +62,8 @@ Commit both the migration and the model snapshot. Never edit an existing migrati
 ## Pull request checklist
 
 - [ ] The change is described in the PR template.
-- [ ] `npm run build` passes in `fatortak_frontend`.
-- [ ] `dotnet build` passes in `fatortak_backend/fatortak`.
+- [ ] `npm run build` and `npx tsc -p tsconfig.app.json --noEmit` pass in `fatortak_frontend`.
+- [ ] `dotnet build` and `dotnet test` pass in `fatortak_backend`.
 - [ ] New behavior has tests where practical.
 - [ ] No secrets, credentials or customer data are included.
 - [ ] Database changes include a migration.

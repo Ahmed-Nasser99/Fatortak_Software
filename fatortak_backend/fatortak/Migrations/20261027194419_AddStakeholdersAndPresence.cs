@@ -16,6 +16,12 @@ namespace fatortak.Migrations
                 schema: "dbo",
                 table: "Invoices");
 
+            migrationBuilder.Sql(@"
+UPDATE dbo.Invoices
+SET InvoiceNumber = 'INV-' + CONVERT(nvarchar(36), Id)
+WHERE InvoiceNumber IS NULL OR LTRIM(RTRIM(InvoiceNumber)) = '';
+");
+
             migrationBuilder.AlterColumn<string>(
                 name: "InvoiceNumber",
                 schema: "dbo",
