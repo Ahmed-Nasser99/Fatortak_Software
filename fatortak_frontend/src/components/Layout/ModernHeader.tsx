@@ -115,7 +115,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
 
   return (
     <header
-      className={`bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 ${className}`}
+      className={`bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200/80 dark:border-slate-800 ${className}`}
     >
       <div className="px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center justify-between h-16`}>
@@ -138,7 +138,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
             <img
               src="/lovable-uploads/8f24889c-d3d3-4842-a775-81f28f9af29a.png"
               alt="FATORTAK"
-              className="h-56 object-contain"
+              className="h-8 w-auto object-contain"
             />
           </div>
 

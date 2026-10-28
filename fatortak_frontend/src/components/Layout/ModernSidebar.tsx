@@ -392,8 +392,8 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
               touch-manipulation min-h-[48px] relative ${rowClass}
               ${
                 isActive
-                  ? "bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 shadow-sm border border-blue-200 dark:border-blue-800"
-                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  ? "bg-brand-50 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 border border-brand-100 dark:border-brand-900"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/70"
               }
             `}
             style={level > 0 ? { paddingLeft: `${paddingLeft}px` } : {}}
@@ -426,7 +426,7 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
                 )}
                 {!hasSubItems && isActive && (
                   <div
-                    className={`w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full shrink-0 ${
+                    className={`w-1.5 h-1.5 bg-brand-600 dark:bg-brand-300 rounded-full shrink-0 ${
                       isRTL ? "mr-auto" : "ml-auto"
                     }`}
                   />
@@ -460,8 +460,8 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
       <div
         className={`
           fixed top-0 ${isRTL ? "right-0" : "left-0"} z-50
-          h-screen bg-white dark:bg-slate-900 flex flex-col shadow-xl transition-all duration-300 ease-in-out
-          border-slate-200 dark:border-slate-700 transform-gpu
+          h-screen bg-white dark:bg-slate-900 flex flex-col transition-all duration-300 ease-in-out
+          border-slate-200/80 dark:border-slate-800 transform-gpu
           ${
             isMobile
               ? `w-72 max-w-[80vw] ${
@@ -485,17 +485,8 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
             <img
               src="/lovable-uploads/8f24889c-d3d3-4842-a775-81f28f9af29a.png"
               alt="FATORTAK"
-              className="h-56 object-contain"
+              className="h-9 w-auto max-w-full object-contain"
             />
-            {(!collapsed || isMobile) && (
-              <div className="min-w-0 flex-1">
-                <img
-                  src="/lovable-uploads/8f24889c-d3d3-4842-a775-81f28f9af29a.png"
-                  alt="FATORTAK"
-                  className="w-6 h-6 object-contain brightness-0 invert"
-                />
-              </div>
-            )}
           </div>
 
           {/* Mobile Close Button */}

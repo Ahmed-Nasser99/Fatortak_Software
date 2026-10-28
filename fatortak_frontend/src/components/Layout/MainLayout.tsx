@@ -133,7 +133,7 @@ const MainLayout: React.FC = () => {
         {/* Main Content Area */}
         <main
           className={`
-            flex-1 bg-slate-50 dark:bg-slate-900 
+            flex-1 bg-canvas dark:bg-slate-950
             min-h-[calc(100vh-4rem)] relative
             ${isMobile && sidebarOpen ? "pointer-events-none" : ""}
           `}

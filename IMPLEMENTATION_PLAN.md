@@ -49,6 +49,10 @@ Last updated: 2026-10-27
 | P1-16 | Add CI secret scan, dependency audit, typecheck, tests | PARTIAL | Typecheck + dotnet test in CI; secret scan/audit still needed |
 | P1-31 | Review and clear all open Dependabot PRs | DONE | All open PRs closed as superseded or deferred with rationale |
 | P1-32 | Upgrade ESLint, Recharts, TypeScript, iText, EPPlus, Vite, day-picker and resizable panels | DONE | npm ci, lint, tsc, build and tests pass |
+| P1-33 | UI redesign foundations: lighter brand tokens, Arabic/Latin font stack, shell refinements | DONE | CSS/Tailwind tokens, sidebar/header, build pass |
+| P1-34 | UI pilot: shared StatCard and dashboard header/cards | DONE | Typecheck/lint/build, browser smoke |
+| P1-35 | Roll out redesigned tables, forms, modals and page templates to all modules | IN PROGRESS | Follow UI/UX plan phases 1–3 |
+| P1-36 | Add quotations, sales orders, purchase orders, GRN, credit/debit notes and approval flows | TODO | Commercial document chain in plan |
 | P1-17 | Remove/move stray root `package.json`; align env examples | DONE | Removed generated root file |
 | P1-18 | Stakeholder module: CRUD for stakeholders, linked chart-of-accounts account, ownership/type metadata | DONE | API + UI + migration |
 | P1-19 | Stakeholder transactions: capital contribution, dividend, loan, repayment, withdrawal; accounting postings | DONE | API + ledger postings |
@@ -88,6 +92,51 @@ Last updated: 2026-10-27
 - [x] Stakeholder list + detail page, account balance, transaction history, create/edit modal.
 - [x] Validation: ownership 0–100, positive amounts, no over-repayment, no negative balance.
 - [ ] Export statement to PDF/Excel/CSV.
+
+### Commercial document chain (missing modules)
+
+The current system jumps from a draft invoice to a paid invoice. A professional sales and purchasing flow needs the full document chain:
+
+- [ ] **Quotation / estimate**
+  - customer, validity date, price list, discount, VAT, terms, versions;
+  - draft → sent → accepted / rejected / expired;
+  - duplicate, print/PDF, email/WhatsApp;
+  - convert accepted quotation to sales order or invoice;
+  - optional approval before sending.
+- [ ] **Sales order**
+  - confirmed customer commitment, delivery date, partial fulfilment;
+  - convert to invoice or delivery note;
+  - cancel/close with reason.
+- [ ] **Delivery note / goods issue**
+  - quantities delivered, remaining quantities, customer signature/reference;
+  - stock movement only on delivery.
+- [ ] **Purchase requisition**
+  - internal request, requester, department, budget check, approval.
+- [ ] **Request for quotation (RFQ)**
+  - send to multiple suppliers, compare responses, select winner.
+- [ ] **Purchase order**
+  - supplier, lines, expected delivery, terms, approval threshold;
+  - partial receipt and close.
+- [ ] **Goods received note (GRN)**
+  - received quantities, rejected quantities, batch/serial if needed;
+  - stock and accounts payable accrual.
+- [ ] **Supplier bill matching**
+  - match purchase order, GRN and supplier invoice; flag price/quantity variance.
+- [ ] **Credit note / debit note**
+  - linked to original invoice, reason, tax adjustment, ledger reversal, customer balance update.
+- [ ] **Recurring invoices / subscriptions**
+  - schedule, frequency, start/end, auto-send, retry, pause/resume.
+- [ ] **Price lists and customer-specific pricing**
+  - currency, validity, quantity breaks, minimum price, approval for override.
+- [ ] **Sales commissions**
+  - salesperson, rate, basis, payable after payment/collection, ledger posting.
+- [ ] **Approval workflows**
+  - invoice, quotation, purchase order, expense, payment, discount and credit-note approvals;
+  - thresholds, approver roles, audit trail, mobile approval.
+- [ ] **Numbering and document versions**
+  - separate sequences per document type; immutable issued documents; revision history.
+- [ ] **Customer/supplier portal**
+  - accept quotation, download statements, upload payment proof, raise support request.
 
 ### Competitor parity backlog
 
@@ -148,6 +197,7 @@ Last updated: 2026-10-27
 - Final verification after rebase: `dotnet test` 10/10, `npm run build` success.
 - Local SQL Server smoke test on an isolated `FatortakSmoke_20261029` database: health/readiness, cookie login, `/api/auth/me`, tenant isolation (cross-tenant stakeholder returns 404), stakeholder capital posting, invoice creation with discount/VAT, balanced journal (102.60 debit = 102.60 credit), mark-paid, duplicate, and public invoice token (rejected without token, accepted with token).
 - Vite 8 dev server and Chromium UI smoke test: login, dashboard, stakeholders page, reports hub, invoice-template hub, installation insights; no runtime console errors after login.
+- UI redesign started: brand palette softened, Arabic font added, sidebar/header refined, dashboard header and KPI cards migrated to the light shared `StatCard` pattern; typecheck, lint and production build pass.
 - Dependency review completed: ESLint 10.13, Recharts 3.10 + react-is 19.3, TypeScript 6.0, iText 9.8 + pdfCalligraph 5.1, EPPlus 8.7 with explicit license configuration, Vite 8.3 + plugin 4.3, react-day-picker 10 and react-resizable-panels 4.
 - `npm ci` completes successfully; `eslint .` reports 0 errors (31 legacy warnings); `tsc` 0 errors; production build passes.
 - All 10 open Dependabot PRs were reviewed and closed with a comment: implemented on main, or deferred because TypeScript 7 is not supported by typescript-eslint and dotnet-ef 10 requires a .NET 10 migration.

@@ -54,6 +54,7 @@ import { formatCurrency } from "@/Helpers/formatCurrency";
 import { formatNumber, formatDate } from "@/Helpers/localization";
 import { useCurrentUserProfile } from "@/hooks/useUserProfile";
 import ProfitGrowthChart from "@/components/dashboard/ProfitGrowthChart";
+import StatCard from "@/components/ui/StatCard";
 
 const Dashboard: React.FC = () => {
   const roleAccess = useRoleAccess();
@@ -113,6 +114,7 @@ const Dashboard: React.FC = () => {
           title: t("totalRevenue"),
           value: `${formatCurrency(stats?.totalRevenue)}`,
           icon: DollarSign,
+          tone: "success" as const,
           color: "from-emerald-500 to-teal-600",
           bgColor:
             "bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950 dark:to-teal-950",
@@ -124,6 +126,7 @@ const Dashboard: React.FC = () => {
           title: t("totalExpenses"),
           value: `${formatCurrency(stats?.totalExpenses)}`,
           icon: FileText,
+          tone: "neutral" as const,
           color: "from-blue-500 to-indigo-600",
           bgColor:
             "bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950",
@@ -135,6 +138,7 @@ const Dashboard: React.FC = () => {
           title: t("currentBalance"),
           value: `${formatCurrency(stats?.currentBalance)}`,
           icon: Wallet,
+          tone: "brand" as const,
           color: "from-purple-500 to-violet-600",
           bgColor:
             "bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950 dark:to-violet-950",
@@ -146,6 +150,7 @@ const Dashboard: React.FC = () => {
           title: t("totalCustomers"),
           value: formatNumber(stats?.totalCustomers),
           icon: Users,
+          tone: "warning" as const,
           color: "from-amber-500 to-orange-600",
           bgColor:
             "bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950 dark:to-orange-950",
@@ -291,23 +296,27 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
-      <div className="mx-auto space-y-6">
+    <div className="min-h-screen bg-canvas p-4 sm:p-6">
+      <div className="mx-auto max-w-[1440px] space-y-6">
         {/* Header Section */}
-        <div className="flex items-center justify-between">
-          <div className="space-y-2">
-            <div className="flex items-center gap-3">
-              <div>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {userProfile?.firstName
-                    ? `${t("welcome")}, ${userProfile.firstName}`
-                    : t("welcome")}
-                </p>
-              </div>
-            </div>
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-600 dark:text-brand-300">
+              {t("dashboard")}
+            </p>
+            <h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+              {userProfile?.firstName
+                ? `${t("welcome")}, ${userProfile.firstName}`
+                : t("welcome")}
+            </h1>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              {isRTL
+                ? "نظرة سريعة على أداء أعمالك اليوم."
+                : "A clear view of how your business is doing."}
+            </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <Select value={period} onValueChange={setPeriod}>
               <SelectTrigger className="w-40 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-xl">
                 <SelectValue placeholder={t("selectPeriod")} />
@@ -370,32 +379,16 @@ const Dashboard: React.FC = () => {
               <TooltipProvider key={index}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Card
-                      className={`${stat.bgColor} border-0 shadow-lg hover:shadow-xl transition-all duration-300 group cursor-help`}
-                    >
-                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-                        <div className="space-y-1">
-                          <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                            {stat.title}
-                          </CardTitle>
-                          <div className="text-2xl font-bold text-slate-900 dark:text-white">
-                            {stat.value}
-                          </div>
-                        </div>
-                        <div
-                          className={`p-3 rounded-xl bg-white/80 dark:bg-slate-800/80 shadow-sm`}
-                        >
-                          <Icon className={`w-5 h-5 ${stat.iconColor}`} />
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="flex items-center justify-between">
-                          <div className="text-xs text-slate-500 dark:text-slate-400">
-                            {stat.subtitle}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                    <div className="cursor-help">
+                      <StatCard
+                        title={stat.title}
+                        value={stat.value}
+                        subtitle={stat.subtitle}
+                        icon={Icon}
+                        tone={stat.tone}
+                        tooltip={stat.tooltip}
+                      />
+                    </div>
                   </TooltipTrigger>
                   <TooltipContent className="p-0 border-0 bg-transparent shadow-none">
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 p-4 min-w-[280px]">
