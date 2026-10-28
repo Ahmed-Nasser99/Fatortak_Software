@@ -47,6 +47,8 @@ Last updated: 2026-10-27
 | P1-14 | Add backend test project for auth, accounting, invoice/payment invariants | PARTIAL | Token, deployment and quota tests; accounting tests still needed |
 | P1-15 | Add frontend tests for routing, API error handling, money formatting | TODO | `npm test` |
 | P1-16 | Add CI secret scan, dependency audit, typecheck, tests | PARTIAL | Typecheck + dotnet test in CI; secret scan/audit still needed |
+| P1-31 | Review and clear all open Dependabot PRs | DONE | All open PRs closed as superseded or deferred with rationale |
+| P1-32 | Upgrade ESLint, Recharts, TypeScript, iText, EPPlus, Vite, day-picker and resizable panels | DONE | npm ci, lint, tsc, build and tests pass |
 | P1-17 | Remove/move stray root `package.json`; align env examples | DONE | Removed generated root file |
 | P1-18 | Stakeholder module: CRUD for stakeholders, linked chart-of-accounts account, ownership/type metadata | DONE | API + UI + migration |
 | P1-19 | Stakeholder transactions: capital contribution, dividend, loan, repayment, withdrawal; accounting postings | DONE | API + ledger postings |
@@ -143,7 +145,10 @@ Last updated: 2026-10-27
 - Browser auth now uses an HttpOnly, SameSite=Lax JWT cookie; JWTs are no longer persisted in localStorage. `/api/auth/me` validates the session on reload.
 - Dependabot updates were rebased onto the branch; `npm install` + typecheck + production build verified with the updated dependency tree.
 - Reports hub, invoice-template hub, global error boundary and API exception/correlation middleware added.
-- Final verification after rebase: `dotnet test` 8/8, `tsc` 0 errors, `npm run build` success.
+- Final verification after rebase: `dotnet test` 10/10, `npm run build` success.
+- Dependency review completed: ESLint 10.13, Recharts 3.10 + react-is 19.3, TypeScript 6.0, iText 9.8 + pdfCalligraph 5.1, EPPlus 8.7 with explicit license configuration, Vite 8.3 + plugin 4.3, react-day-picker 10 and react-resizable-panels 4.
+- `npm ci` completes successfully; `eslint .` reports 0 errors (31 legacy warnings); `tsc` 0 errors; production build passes.
+- All 10 open Dependabot PRs were reviewed and closed with a comment: implemented on main, or deferred because TypeScript 7 is not supported by typescript-eslint and dotnet-ef 10 requires a .NET 10 migration.
 
 ## Remaining work (next commits)
 
