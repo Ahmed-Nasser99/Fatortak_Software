@@ -34,7 +34,11 @@ namespace fatortak.Controllers
             Response.Cookies.Append(AuthCookieName, token, new CookieOptions
             {
                 HttpOnly = true,
-                Secure = !_environment.IsDevelopment(),
+                // Works for direct HTTPS and for a TLS-terminating reverse proxy
+                // that forwards X-Forwarded-Proto; plain HTTP local Docker still works.
+                Secure = Request.IsHttps ||
+                         string.Equals(Request.Headers["X-Forwarded-Proto"].FirstOrDefault(),
+                             "https", StringComparison.OrdinalIgnoreCase),
                 SameSite = SameSiteMode.Lax,
                 Path = "/",
                 Expires = DateTimeOffset.UtcNow.AddDays(20),
@@ -143,7 +147,9 @@ namespace fatortak.Controllers
             Response.Cookies.Delete(AuthCookieName, new CookieOptions
             {
                 Path = "/",
-                Secure = !_environment.IsDevelopment(),
+                Secure = Request.IsHttps ||
+                         string.Equals(Request.Headers["X-Forwarded-Proto"].FirstOrDefault(),
+                             "https", StringComparison.OrdinalIgnoreCase),
                 SameSite = SameSiteMode.Lax
             });
             return Ok(new { success = true });
