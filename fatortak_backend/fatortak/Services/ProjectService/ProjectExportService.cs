@@ -30,13 +30,26 @@ namespace fatortak.Services.ProjectService
             ApplicationDbContext context,
             IHttpContextAccessor httpContextAccessor,
             IWebHostEnvironment env,
-            ILogger<ProjectExportService> logger)
+            ILogger<ProjectExportService> logger,
+            IConfiguration configuration)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
             _logger = logger;
             _env = env;
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            // EPPlus 8 requires an explicit license configuration.
+            // Commercial deployments must provide EPPlus:LicenseKey.
+            var licenseKey = configuration["EPPlus:LicenseKey"];
+            if (!string.IsNullOrWhiteSpace(licenseKey))
+            {
+                ExcelPackage.License.SetCommercial(licenseKey);
+            }
+            else
+            {
+                ExcelPackage.License.SetNonCommercialOrganization(
+                    configuration["EPPlus:Organization"] ?? "Fatortak");
+            }
         }
 
         private Guid TenantId =>
@@ -101,8 +114,6 @@ namespace fatortak.Services.ProjectService
                 .SetTextAlignment(useArabic ? TextAlignment.RIGHT : TextAlignment.LEFT);
 
             if (fontSize.HasValue) p.SetFontSize(fontSize.Value);
-            if (bold) p.SetBold();
-
             return p;
         }
 
@@ -280,7 +291,6 @@ namespace fatortak.Services.ProjectService
                     .Add(CreateParagraph(h, arabicFont, latinFont))
                     .SetBackgroundColor(fatortakPrimarySoft)
                     .SetFontColor(ColorConstants.BLACK)
-                    .SetBold()
                     .SetTextAlignment(TextAlignment.CENTER)
                     .SetPaddingTop(10)
                     .SetPaddingBottom(10)
@@ -379,7 +389,7 @@ namespace fatortak.Services.ProjectService
 
                 if (!string.IsNullOrEmpty(project.PaymentTerms))
                     document.Add(CreateParagraph(project.PaymentTerms, arabicFont, latinFont, 9)
-                        .SetItalic().SetFontColor(slate600));
+                        .SetFontColor(slate600));
 
                 if (!string.IsNullOrEmpty(project.Notes))
                     document.Add(CreateParagraph(project.Notes, arabicFont, latinFont, 9)
@@ -406,8 +416,8 @@ namespace fatortak.Services.ProjectService
 
             if (isBold)
             {
-                labelCell.SetFontSize(13).SetBold();
-                valueCell.SetFontSize(13).SetBold()
+                labelCell.SetFontSize(13);
+                valueCell.SetFontSize(13)
                     .SetBackgroundColor(new DeviceRgb(243, 239, 250))
                     .SetBorder(new ITextSolidBorder(new DeviceRgb(48, 23, 107), 1));
             }

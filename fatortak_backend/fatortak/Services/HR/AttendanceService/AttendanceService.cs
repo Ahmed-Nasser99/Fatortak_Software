@@ -1,4 +1,4 @@
-﻿using fatortak.Common.Enum;
+using fatortak.Common.Enum;
 using fatortak.Context;
 using fatortak.Dtos.HR.Attendance;
 using fatortak.Dtos.Shared;
@@ -479,13 +479,13 @@ namespace fatortak.Services.HR.AttendanceService
                 worksheet.View.RightToLeft = true;
 
                 // Report title and date
-                worksheet.Cells[1, 1].Value = "تقرير الحضور اليومي";
+                worksheet.Cells[1, 1].Value = "????? ?????? ??????";
                 worksheet.Cells[1, 1].Style.Font.Size = 16;
                 worksheet.Cells[1, 1].Style.Font.Bold = true;
                 worksheet.Cells[1, 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
                 worksheet.Cells[1, 1, 1, 9].Merge = true;
 
-                worksheet.Cells[2, 1].Value = $"تاريخ التقرير: {date:yyyy-MM-dd}";
+                worksheet.Cells[2, 1].Value = $"????? ???????: {date:yyyy-MM-dd}";
                 worksheet.Cells[2, 1].Style.Font.Bold = true;
                 worksheet.Cells[2, 1, 2, 9].Merge = true;
 
@@ -493,14 +493,14 @@ namespace fatortak.Services.HR.AttendanceService
                 var startRow = 4;
                 var headers = new string[]
                 {
-                    "اسم الموظف",
-                    "القسم",
-                    "وقت الحضور",
-                    "وقت الانصراف",
-                    "مدة التأخير",
-                    "ساعات العمل الكلية",
-                    "حالة الحضور",
-                    "في إجازة"
+                    "??? ??????",
+                    "?????",
+                    "??? ??????",
+                    "??? ????????",
+                    "??? ???????",
+                    "????? ????? ??????",
+                    "???? ??????",
+                    "?? ?????"
                 };
 
                 for (int i = 0; i < headers.Length; i++)
@@ -532,8 +532,8 @@ namespace fatortak.Services.HR.AttendanceService
                     worksheet.Cells[currentRow, 4].Value = item.DepartureTime?.ToString() ?? "";
                     worksheet.Cells[currentRow, 5].Value = item.DelayDurationHours.ToString();
                     worksheet.Cells[currentRow, 6].Value = item.TotalWorkingHours.ToString();
-                    worksheet.Cells[currentRow, 7].Value = item.IsAttended ? "حاضر" : "غائب";
-                    worksheet.Cells[currentRow, 8].Value = item.IsVacation ? "نعم" : "لا";
+                    worksheet.Cells[currentRow, 7].Value = item.IsAttended ? "????" : "????";
+                    worksheet.Cells[currentRow, 8].Value = item.IsVacation ? "???" : "??";
 
                     // Color coding for attendance status
                     if (!item.IsAttended)
@@ -585,13 +585,13 @@ namespace fatortak.Services.HR.AttendanceService
                 worksheet.View.RightToLeft = true;
 
                 // Report title and date
-                worksheet.Cells[1, 1].Value = "تقرير الحضور الشهري";
+                worksheet.Cells[1, 1].Value = "????? ?????? ??????";
                 worksheet.Cells[1, 1].Style.Font.Size = 16;
                 worksheet.Cells[1, 1].Style.Font.Bold = true;
                 worksheet.Cells[1, 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
                 worksheet.Cells[1, 1, 1, 11].Merge = true;
 
-                worksheet.Cells[2, 1].Value = $"الشهر: {month:D2}/{year}";
+                worksheet.Cells[2, 1].Value = $"?????: {month:D2}/{year}";
                 worksheet.Cells[2, 1].Style.Font.Bold = true;
                 worksheet.Cells[2, 1, 2, 11].Merge = true;
 
@@ -599,19 +599,19 @@ namespace fatortak.Services.HR.AttendanceService
                 var startRow = 4;
                 var headers = new string[]
                 {
-                    "اسم الموظف",
-                    "القسم",
-                    "ساعات العمل الكلية",
-                    "ساعات التأخير الكلية",
-                    "ساعات العمل الإضافي",
-                    "أيام التأخير",
-                    "أيام العمل الإضافي",
-                    "ساعات العمل المتوقعة",
-                    "أيام الحضور",
-                    "أيام الغياب",
-                    "أيام الإجازة",
-                    "المرتب",
-                    "المرتب الأساسي"
+                    "??? ??????",
+                    "?????",
+                    "????? ????? ??????",
+                    "????? ??????? ??????",
+                    "????? ????? ???????",
+                    "???? ???????",
+                    "???? ????? ???????",
+                    "????? ????? ????????",
+                    "???? ??????",
+                    "???? ??????",
+                    "???? ???????",
+                    "??????",
+                    "?????? ???????"
                 };
 
                 for (int i = 0; i < headers.Length; i++)
@@ -699,16 +699,15 @@ namespace fatortak.Services.HR.AttendanceService
                     document.SetProperty(Property.TEXT_ALIGNMENT, TextAlignment.RIGHT);
 
                     // Add Arabic title
-                    var title = new Paragraph("تقرير الحضور اليومي")
+                    var title = new Paragraph("????? ?????? ??????")
                         .SetFont(arabicFont)
                         .SetFontSize(18)
-                        .SetBold()
                         .SetTextAlignment(TextAlignment.CENTER)
                         .SetMarginBottom(10);
                     document.Add(title);
 
                     // Add date in Arabic
-                    var dateParagraph = new Paragraph($"تاريخ التقرير: {date:yyyy-MM-dd}")
+                    var dateParagraph = new Paragraph($"????? ???????: {date:yyyy-MM-dd}")
                         .SetFont(arabicFont)
                         .SetFontSize(12)
                         .SetTextAlignment(TextAlignment.RIGHT)
@@ -717,8 +716,8 @@ namespace fatortak.Services.HR.AttendanceService
 
                     // Arabic headers
                     string[] headers = {
-                "اسم الموظف", "القسم", "وقت الحضور", "وقت الانصراف",
-                "مدة التأخير", "ساعات العمل الكلية", "حالة الحضور", "في إجازة"
+                "??? ??????", "?????", "??? ??????", "??? ????????",
+                "??? ???????", "????? ????? ??????", "???? ??????", "?? ?????"
             };
 
                     // Create table with appropriate column widths for Arabic text
@@ -733,7 +732,6 @@ namespace fatortak.Services.HR.AttendanceService
                         table.AddHeaderCell(new Cell()
                             .Add(new Paragraph(header).SetFont(arabicFont))
                             .SetBackgroundColor(new DeviceRgb(200, 200, 200))
-                            .SetBold()
                             .SetPadding(8)
                             .SetTextAlignment(TextAlignment.CENTER));
                     }
@@ -777,7 +775,7 @@ namespace fatortak.Services.HR.AttendanceService
 
 
                         // Attendance Status (Arabic)
-                        var statusText = item.IsAttended ? "حاضر" : "غائب";
+                        var statusText = item.IsAttended ? "????" : "????";
                         var statusCell = new Cell()
                             .Add(new Paragraph(statusText).SetFont(arabicFont))
                             .SetPadding(6)
@@ -792,7 +790,7 @@ namespace fatortak.Services.HR.AttendanceService
                         table.AddCell(statusCell);
 
                         // On Leave (Arabic)
-                        var leaveText = item.IsVacation ? "نعم" : "لا";
+                        var leaveText = item.IsVacation ? "???" : "??";
                         table.AddCell(new Cell()
                             .Add(new Paragraph(leaveText).SetFont(arabicFont))
                             .SetPadding(6)
@@ -806,10 +804,9 @@ namespace fatortak.Services.HR.AttendanceService
                     {
                         document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
 
-                        var summaryTitle = new Paragraph("ملخص التقرير")
+                        var summaryTitle = new Paragraph("???? ???????")
                             .SetFont(arabicFont)
                             .SetFontSize(16)
-                            .SetBold()
                             .SetTextAlignment(TextAlignment.CENTER)
                             .SetMarginBottom(15);
                         document.Add(summaryTitle);
@@ -821,10 +818,10 @@ namespace fatortak.Services.HR.AttendanceService
                         var summaryContent = new Paragraph()
                             .SetFont(arabicFont)
                             .SetFontSize(12)
-                            .Add($"إجمالي الموظفين: {data.Count}\n")
-                            .Add($"عدد الحاضرين: {presentCount}\n")
-                            .Add($"عدد الغائبين: {absentCount}\n")
-                            .Add($"عدد الموجودين في إجازة: {vacationCount}")
+                            .Add($"?????? ????????: {data.Count}\n")
+                            .Add($"??? ????????: {presentCount}\n")
+                            .Add($"??? ????????: {absentCount}\n")
+                            .Add($"??? ????????? ?? ?????: {vacationCount}")
                             .SetTextAlignment(TextAlignment.RIGHT)
                             .SetMarginBottom(20);
 
@@ -858,16 +855,15 @@ namespace fatortak.Services.HR.AttendanceService
                     document.SetProperty(Property.TEXT_ALIGNMENT, TextAlignment.RIGHT);
 
                     // Arabic title
-                    var title = new Paragraph("تقرير الحضور الشهري")
+                    var title = new Paragraph("????? ?????? ??????")
                         .SetFont(arabicFont)
                         .SetFontSize(18)
-                        .SetBold()
                         .SetTextAlignment(TextAlignment.CENTER)
                         .SetMarginBottom(10);
                     document.Add(title);
 
                     // Arabic date
-                    var dateParagraph = new Paragraph($"الشهر: {month:D2}/{year}")
+                    var dateParagraph = new Paragraph($"?????: {month:D2}/{year}")
                         .SetFont(arabicFont)
                         .SetFontSize(12)
                         .SetTextAlignment(TextAlignment.RIGHT)
@@ -876,9 +872,9 @@ namespace fatortak.Services.HR.AttendanceService
 
                     // Arabic headers
                     string[] headers = {
-                "اسم الموظف", "القسم", "ساعات العمل الكلية", "ساعات التأخير الكلية",
-                "ساعات العمل الإضافي", "أيام التأخير", "أيام العمل الإضافي",
-                "ساعات العمل المتوقعة", "أيام الحضور", "أيام الغياب", "أيام الإجازة"
+                "??? ??????", "?????", "????? ????? ??????", "????? ??????? ??????",
+                "????? ????? ???????", "???? ???????", "???? ????? ???????",
+                "????? ????? ????????", "???? ??????", "???? ??????", "???? ???????"
             };
 
                     float[] columnWidths = { 2.5f, 2f, 1.5f, 1.5f, 1.5f, 1f, 1f, 1.5f, 1f, 1f, 1f };
@@ -892,7 +888,6 @@ namespace fatortak.Services.HR.AttendanceService
                         table.AddHeaderCell(new Cell()
                             .Add(new Paragraph(header).SetFont(arabicFont))
                             .SetBackgroundColor(new DeviceRgb(200, 200, 200))
-                            .SetBold()
                             .SetPadding(6)
                             .SetTextAlignment(TextAlignment.CENTER));
                     }
