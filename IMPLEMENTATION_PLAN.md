@@ -146,6 +146,8 @@ Last updated: 2026-10-27
 - Dependabot updates were rebased onto the branch; `npm install` + typecheck + production build verified with the updated dependency tree.
 - Reports hub, invoice-template hub, global error boundary and API exception/correlation middleware added.
 - Final verification after rebase: `dotnet test` 10/10, `npm run build` success.
+- Local SQL Server smoke test on an isolated `FatortakSmoke_20261029` database: health/readiness, cookie login, `/api/auth/me`, tenant isolation (cross-tenant stakeholder returns 404), stakeholder capital posting, invoice creation with discount/VAT, balanced journal (102.60 debit = 102.60 credit), mark-paid, duplicate, and public invoice token (rejected without token, accepted with token).
+- Vite 8 dev server and Chromium UI smoke test: login, dashboard, stakeholders page, reports hub, invoice-template hub, installation insights; no runtime console errors after login.
 - Dependency review completed: ESLint 10.13, Recharts 3.10 + react-is 19.3, TypeScript 6.0, iText 9.8 + pdfCalligraph 5.1, EPPlus 8.7 with explicit license configuration, Vite 8.3 + plugin 4.3, react-day-picker 10 and react-resizable-panels 4.
 - `npm ci` completes successfully; `eslint .` reports 0 errors (31 legacy warnings); `tsc` 0 errors; production build passes.
 - All 10 open Dependabot PRs were reviewed and closed with a comment: implemented on main, or deferred because TypeScript 7 is not supported by typescript-eslint and dotnet-ef 10 requires a .NET 10 migration.

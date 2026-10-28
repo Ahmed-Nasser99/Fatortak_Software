@@ -34,6 +34,12 @@ interface InstallationStats {
 
 const statIcons = [Users, UserCheck, Activity, Database];
 
+const parseUtc = (value?: string | null) => {
+  if (!value) return null;
+  const normalized = /Z$|[+-]\d{2}:\d{2}$/.test(value) ? value : `${value}Z`;
+  return new Date(normalized);
+};
+
 const InstallationInsights = () => {
   const [stats, setStats] = useState<InstallationStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -86,9 +92,9 @@ const InstallationInsights = () => {
             Installation insights
           </h1>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            A self-hosted reference for registered users, online sessions and
-            stored data. No tenant or subscription limits apply in self-hosted
-            mode.
+            {stats.selfHosted
+              ? "A self-hosted reference for registered users, online sessions and stored data. No tenant or subscription limits apply in self-hosted mode."
+              : "A tenant-scoped view of registered users, online sessions and stored records."}
           </p>
         </div>
         <button
@@ -135,7 +141,7 @@ const InstallationInsights = () => {
           <dl className="space-y-3 text-sm">
             <Row label="Mode" value={stats.selfHosted ? "Self-hosted" : "Multi-tenant SaaS"} />
             <Row label="Registration" value={stats.registrationEnabled ? "Open" : "Admin only"} />
-            <Row label="Generated" value={new Date(stats.generatedAt).toLocaleString()} />
+            <Row label="Generated" value={parseUtc(stats.generatedAt)?.toLocaleString() ?? "—"} />
             <Row label="Tenants" value={String(stats.data.tenants ?? 1)} />
           </dl>
         </div>
@@ -189,9 +195,10 @@ const InstallationInsights = () => {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {stats.recentUsers.map((user) => {
+                const lastSeen = parseUtc(user.lastSeenAt);
                 const online =
-                  user.lastSeenAt &&
-                  Date.now() - new Date(user.lastSeenAt).getTime() < 5 * 60 * 1000;
+                  lastSeen !== null &&
+                  Date.now() - lastSeen.getTime() < 5 * 60 * 1000;
                 return (
                   <tr key={user.id}>
                     <td className="px-5 py-3">
@@ -204,12 +211,10 @@ const InstallationInsights = () => {
                       {user.role}
                     </td>
                     <td className="px-5 py-3 text-slate-600 dark:text-slate-300">
-                      {new Date(user.createdAt).toLocaleDateString()}
+                      {parseUtc(user.createdAt)?.toLocaleDateString() ?? "—"}
                     </td>
                     <td className="px-5 py-3 text-slate-600 dark:text-slate-300">
-                      {user.lastSeenAt
-                        ? new Date(user.lastSeenAt).toLocaleString()
-                        : "—"}
+                      {lastSeen?.toLocaleString() ?? "—"}
                     </td>
                     <td className="px-5 py-3">
                       <span

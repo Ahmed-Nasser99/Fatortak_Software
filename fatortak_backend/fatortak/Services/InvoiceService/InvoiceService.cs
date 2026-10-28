@@ -64,6 +64,9 @@ namespace fatortak.Services.InvoiceService
                     return ServiceResult<InvoiceDto>.Failure(
                         "Monthly invoice limit reached. Upgrade your plan to create more invoices.");
 
+                if (dto.Items == null || dto.Items.Count == 0)
+                    return ServiceResult<InvoiceDto>.Failure("At least one invoice item is required.");
+
                 var userId = new Guid(UserHelper.GetUserId());
                 var company = await _context.Companies.FirstOrDefaultAsync(c => c.TenantId == TenantId);
                 if (company == null)
@@ -298,6 +301,9 @@ namespace fatortak.Services.InvoiceService
                 if (!await _quotaService.CanCreateInvoiceAsync(TenantId))
                     return ServiceResult<InvoiceDto>.Failure(
                         "Monthly invoice limit reached. Upgrade your plan to create more invoices.");
+
+                if (dto.Items == null || dto.Items.Count == 0)
+                    return ServiceResult<InvoiceDto>.Failure("At least one invoice item is required.");
 
                 var userId = new Guid(UserHelper.GetUserId());
                 var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id == dto.CustomerId && c.TenantId == TenantId);
