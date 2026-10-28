@@ -36,22 +36,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const initializeAuth = async () => {
-      const token = localStorage.getItem("auth_token");
-      const userData = localStorage.getItem("user_data");
-      const tenantData = localStorage.getItem("tenant_data");
-
-      if (token && userData) {
-        try {
-          apiClient.setToken(token);
-          setUser(JSON.parse(userData));
-          if (tenantData) {
-            setTenant(JSON.parse(tenantData));
+      try {
+        const result = await apiClient.get<any>("/api/auth/me");
+        if (result.success && result.data) {
+          setUser(result.data.user);
+          setTenant(result.data.tenant ?? null);
+          localStorage.setItem("user_data", JSON.stringify(result.data.user));
+          if (result.data.tenant) {
+            localStorage.setItem("tenant_data", JSON.stringify(result.data.tenant));
           }
-        } catch (error) {
-          logout();
+        } else {
+          localStorage.removeItem("user_data");
+          localStorage.removeItem("tenant_data");
         }
+      } catch {
+        localStorage.removeItem("user_data");
+        localStorage.removeItem("tenant_data");
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     initializeAuth();
@@ -67,15 +70,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (result.success && result.data) {
         queryClient.clear();
 
-        const { token, user: userData, tenant: tenantData } = result.data;
+        const { user: userData, tenant: tenantData } = result.data;
 
-        localStorage.setItem("auth_token", token);
         localStorage.setItem("user_data", JSON.stringify(userData));
         if (tenantData) {
           localStorage.setItem("tenant_data", JSON.stringify(tenantData));
         }
 
-        apiClient.setToken(token);
         setUser(userData);
         setTenant(tenantData);
         return true;
@@ -92,15 +93,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
       // Check if the request was successful
       if (result.success && result.data) {
-        const { token, user: userData, tenant: tenantData } = result.data;
+        const { user: userData, tenant: tenantData } = result.data;
 
-        localStorage.setItem("auth_token", token);
         localStorage.setItem("user_data", JSON.stringify(userData));
         if (tenantData) {
           localStorage.setItem("tenant_data", JSON.stringify(tenantData));
         }
 
-        apiClient.setToken(token);
         setUser(userData);
         setTenant(tenantData);
         return result;
@@ -120,7 +119,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const logout = () => {
-    localStorage.removeItem("auth_token");
+    void fetch(`${import.meta.env.VITE_API_URL || "https://localhost:44338"}/api/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    }).catch(() => undefined);
     localStorage.removeItem("user_data");
     localStorage.removeItem("tenant_data");
     apiClient.clearToken();
@@ -136,13 +138,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       });
 
       if (result.success && result.data) {
-        const { token, user: userData, tenant: tenantData } = result.data;
+        const { user: userData, tenant: tenantData } = result.data;
 
-        localStorage.setItem("auth_token", token);
         localStorage.setItem("user_data", JSON.stringify(userData));
         localStorage.setItem("tenant_data", JSON.stringify(tenantData));
 
-        apiClient.setToken(token);
         setUser(userData);
         setTenant(tenantData);
         return true;

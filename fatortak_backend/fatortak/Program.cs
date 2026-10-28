@@ -73,7 +73,8 @@ namespace fatortak
                     policy
                         .WithOrigins(allowedOrigins)
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                 });
             });
 
@@ -256,6 +257,21 @@ namespace fatortak
             {
                 options.RequireHttpsMetadata = true;
                 options.SaveToken = true;
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        // Browser clients use the HttpOnly cookie. API clients
+                        // can continue to use the Authorization header.
+                        if (string.IsNullOrEmpty(context.Request.Headers.Authorization) &&
+                            context.Request.Cookies.TryGetValue("fatortak_at", out var cookieToken))
+                        {
+                            context.Token = cookieToken;
+                        }
+
+                        return Task.CompletedTask;
+                    }
+                };
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,

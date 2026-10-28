@@ -469,6 +469,22 @@ namespace fatortak.Services.AuthService
             }
         }
 
+        public async Task<ServiceResult<AuthResponseDto>> GetSessionAsync(Guid userId)
+        {
+            var user = await _userManager.Users
+                .Include(u => u.Tenant)
+                .FirstOrDefaultAsync(u => u.Id == userId && u.IsActive);
+
+            if (user == null)
+                return ServiceResult<AuthResponseDto>.Failure("Session is no longer valid.");
+
+            return ServiceResult<AuthResponseDto>.SuccessResult(new AuthResponseDto
+            {
+                User = MapToUserDto(user),
+                Tenant = user.Tenant != null ? MapToTenantDto(user.Tenant) : null
+            });
+        }
+
         private async Task SendWelcomeEmailAsync(ApplicationUser user, Tenant tenant)
         {
             try

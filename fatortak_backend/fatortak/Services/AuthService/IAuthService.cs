@@ -8,6 +8,7 @@ namespace fatortak.Services.AuthService
         Task<ServiceResult<AuthResponseDto>> RegisterAsync(RegisterDto dto);
         Task<ServiceResult<AuthResponseDto>> LoginAsync(LoginDto dto);
         Task<ServiceResult<AuthResponseDto>> SwitchTenantAsync(Guid userId, Guid tenantId);
+        Task<ServiceResult<AuthResponseDto>> GetSessionAsync(Guid userId);
 
         Task<ServiceResult<string>> ForgetPasswordRequestAsync(string email);
         Task<ServiceResult<string>> SetNewPassword(string userId ,string token, string NewPassword);

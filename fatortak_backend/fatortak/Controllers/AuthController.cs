@@ -12,13 +12,34 @@ namespace fatortak.Controllers
     [EnableRateLimiting("auth")]
     public class AuthController : ControllerBase
     {
+        private const string AuthCookieName = "fatortak_at";
         private readonly IAuthService _authService;
         private readonly ILogger<AuthController> _logger;
+        private readonly IWebHostEnvironment _environment;
 
-        public AuthController(IAuthService authService, ILogger<AuthController> logger)
+        public AuthController(
+            IAuthService authService,
+            ILogger<AuthController> logger,
+            IWebHostEnvironment environment)
         {
             _authService = authService;
             _logger = logger;
+            _environment = environment;
+        }
+
+        private void SetAuthCookie(string? token)
+        {
+            if (string.IsNullOrWhiteSpace(token)) return;
+
+            Response.Cookies.Append(AuthCookieName, token, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = !_environment.IsDevelopment(),
+                SameSite = SameSiteMode.Lax,
+                Path = "/",
+                Expires = DateTimeOffset.UtcNow.AddDays(20),
+                IsEssential = true
+            });
         }
 
         [AllowAnonymous]
@@ -44,6 +65,7 @@ namespace fatortak.Controllers
                     return BadRequest(result);
                 }
 
+                SetAuthCookie(result.Data?.Token);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -76,6 +98,7 @@ namespace fatortak.Controllers
                     return Unauthorized(result);
                 }
 
+                SetAuthCookie(result.Data?.Token);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -95,7 +118,35 @@ namespace fatortak.Controllers
                 return Unauthorized(ServiceResult<AuthResponseDto>.Failure("Invalid token."));
 
             var result = await _authService.SwitchTenantAsync(userId, dto.TenantId);
-            return result.Success ? Ok(result) : BadRequest(result);
+            if (!result.Success) return BadRequest(result);
+
+            SetAuthCookie(result.Data?.Token);
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public async Task<ActionResult<ServiceResult<AuthResponseDto>>> Me()
+        {
+            var userIdClaim = User.FindFirst("UserId")?.Value;
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized(ServiceResult<AuthResponseDto>.Failure("Invalid token."));
+
+            var result = await _authService.GetSessionAsync(userId);
+            return result.Success ? Ok(result) : Unauthorized(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete(AuthCookieName, new CookieOptions
+            {
+                Path = "/",
+                Secure = !_environment.IsDevelopment(),
+                SameSite = SameSiteMode.Lax
+            });
+            return Ok(new { success = true });
         }
 
         [AllowAnonymous]

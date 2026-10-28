@@ -48,9 +48,9 @@ export class AiChatService {
         `${AiChatService.API_BASE_URL}${AiChatService.ENDPOINTS.ASK}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
           body: JSON.stringify({
             query: query,
@@ -87,9 +87,7 @@ export class AiChatService {
     const response = await fetch(
       `${AiChatService.API_BASE_URL}${AiChatService.ENDPOINTS.SESSIONS}`,
       {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-        },
+        credentials: "include",
       }
     );
     return await response.json();
@@ -99,9 +97,7 @@ export class AiChatService {
     const response = await fetch(
       `${AiChatService.API_BASE_URL}${AiChatService.ENDPOINTS.MESSAGES}/${sessionId}`,
       {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-        },
+        credentials: "include",
       }
     );
     return await response.json();
@@ -112,9 +108,7 @@ export class AiChatService {
       `${AiChatService.API_BASE_URL}${AiChatService.ENDPOINTS.DELETE_SESSION}/${sessionId}`,
       {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-        },
+        credentials: "include",
       }
     );
   }

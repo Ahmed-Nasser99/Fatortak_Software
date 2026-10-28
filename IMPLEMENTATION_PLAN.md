@@ -60,7 +60,7 @@ Last updated: 2026-10-27
 
 | # | Work item | Status | Verification |
 |---|---|---|---|
-| P2-1 | CSP/HSTS/cookie hardening and secure token storage | IN PROGRESS | Header review |
+| P2-1 | CSP/HSTS/cookie hardening and secure token storage | DONE (cookie) / TODO (CSP) | HttpOnly JWT cookie, CORS credentials, HSTS/security headers |
 | P2-2 | Health/readiness endpoints | DONE | `/health`, `/ready` |
 | P2-3 | Structured logging, correlation IDs, no PII/token logging | TODO | Code review |
 | P2-4 | Audit log for financial/role/invoice changes | TODO | Schema + tests |
@@ -138,6 +138,7 @@ Last updated: 2026-10-27
 - Backend tests: `dotnet test` → 8 passed (public invoice token, self-hosted detection, quota limits).
 - Health checks: `GET /health` and `GET /ready` added.
 - Payroll period uniqueness: migration `20261028103009_AddPayrollPeriodUniqueIndex` with duplicate cleanup.
+- Browser auth now uses an HttpOnly, SameSite=Lax JWT cookie; JWTs are no longer persisted in localStorage. `/api/auth/me` validates the session on reload.
 
 ## Remaining work (next commits)
 

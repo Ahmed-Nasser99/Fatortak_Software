@@ -29,8 +29,9 @@ class ApiClient {
 
   constructor(baseURL: string) {
     this.baseURL = baseURL;
-    // Initialize token from localStorage on startup
-    this.token = localStorage.getItem("auth_token");
+    // The browser session is carried by the HttpOnly cookie.
+    // The in-memory token is only for non-browser/API compatibility.
+    this.token = null;
   }
 
   setSubscriptionRequiredHandler(handler: () => void) {
@@ -38,8 +39,8 @@ class ApiClient {
   }
 
   setToken(token: string) {
+    // Keep the token in memory only; never persist JWTs in localStorage.
     this.token = token;
-    localStorage.setItem("auth_token", token);
   }
 
   clearToken() {
@@ -62,6 +63,7 @@ class ApiClient {
 
     const requestConfig: RequestInit = {
       ...options,
+      credentials: "include",
       headers: {
         ...(isFormData ? {} : { "Content-Type": "application/json" }),
         ...(this.token && { Authorization: `Bearer ${this.token}` }),
@@ -266,10 +268,7 @@ class ApiClient {
     return this.request<T>(endpoint, {
       method: "POST",
       body: formData,
-      headers: {
-        ...(this.token && { Authorization: `Bearer ${this.token}` }),
-        // Don't set Content-Type for FormData, browser will set it with boundary
-      },
+      // Don't set Content-Type for FormData, browser will set it with boundary
     });
   }
 }
