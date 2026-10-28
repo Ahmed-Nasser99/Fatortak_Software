@@ -9,7 +9,7 @@ Thanks for helping build an open-source business platform for MENA. Every bug re
 - **Improve translations** in `fatortak_frontend/public/locale/ar` and `.../en`.
 - **Write docs** — setup guides, module explanations, API examples.
 - **Write tests** — invoice math, VAT, installments, accounting posting, permissions.
-- **Fix issues** labeled [`good first issue`](https://github.com/Ahmed-Nasser99/Fatortak_Software/labels/good%20first%20issue).
+- **Fix issues** labeled [`good first issue`](https://github.com/Fatortak/Fatortak_Software/labels/good%20first%20issue).
 
 ## Development setup
 
