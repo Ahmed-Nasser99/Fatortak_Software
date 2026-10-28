@@ -54,7 +54,7 @@ export function DatePicker({ date, setDate, disabled, className, placeholder }: 
           mode="single"
           selected={date}
           onSelect={setDate}
-          initialFocus
+          autoFocus
           locale={locale}
           dir={isRTL ? 'rtl' : 'ltr'}
         />
