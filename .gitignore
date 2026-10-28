@@ -71,5 +71,9 @@ Thumbs.db
 marketing/automation/.env
 marketing/automation/node_modules/
 marketing/automation/.state/
+marketing/portal/.env
+marketing/portal/data/portal.json
+marketing/portal/export/
+marketing/portal/backups/
 marketing/landing/.vercel/
 marketing/landing/.netlify/

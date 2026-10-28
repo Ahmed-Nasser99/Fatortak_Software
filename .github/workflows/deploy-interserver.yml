@@ -1,0 +1,128 @@
+name: Deploy landing page to InterServer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "marketing/landing/**"
+      - ".github/workflows/deploy-interserver.yml"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Preview only — connect and compare, do not upload"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: interserver-landing
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: FTPS deploy to fatortak.rabbeh.com
+    if: github.event_name == 'workflow_dispatch' || vars.INTERSERVER_AUTODEPLOY == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: ${{ vars.LANDING_URL || 'https://fatortak.rabbeh.com/' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate landing files
+        run: |
+          set -euo pipefail
+          for file in index.html styles.css app.js site.webmanifest robots.txt sitemap.xml; do
+            test -f "marketing/landing/$file" || { echo "::error::Missing marketing/landing/$file"; exit 1; }
+          done
+          test -d "marketing/landing/assets/screenshots" || { echo "::error::Missing marketing/landing/assets/screenshots"; exit 1; }
+
+      - name: Check deployment secrets
+        env:
+          FTP_HOST: ${{ secrets.INTERSERVER_FTP_HOST }}
+          FTP_USER: ${{ secrets.INTERSERVER_FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.INTERSERVER_FTP_PASSWORD }}
+          FTP_DIR: ${{ secrets.INTERSERVER_FTP_DIR }}
+        run: |
+          set -euo pipefail
+          missing=0
+          for name in FTP_HOST FTP_USER FTP_PASSWORD FTP_DIR; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name is not set. See marketing/deploy/INTERSERVER-AUTODEPLOY.md"
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - name: Back up current public root files
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
+        env:
+          LANDING_URL: ${{ vars.LANDING_URL || 'https://fatortak.rabbeh.com/' }}
+        run: |
+          set -euo pipefail
+          mkdir -p deploy-backup
+          base="${LANDING_URL%/}"
+          for file in index.html styles.css app.js; do
+            curl -fsS --retry 3 --retry-delay 2 "$base/$file" -o "deploy-backup/$file" || true
+          done
+
+      - name: Upload backup artifact
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: landing-backup-${{ github.run_id }}
+          path: deploy-backup
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Deploy over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.INTERSERVER_FTP_HOST }}
+          port: ${{ secrets.INTERSERVER_FTP_PORT || 21 }}
+          username: ${{ secrets.INTERSERVER_FTP_USER }}
+          password: ${{ secrets.INTERSERVER_FTP_PASSWORD }}
+          protocol: ftps
+          security: strict
+          local-dir: ./marketing/landing/
+          server-dir: ${{ secrets.INTERSERVER_FTP_DIR }}
+          dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+          dangerous-clean-slate: false
+          log-level: standard
+          exclude: |
+            **/.og-card.html
+            **/.icon.html
+            **/README.md
+            **/.ftp-deploy-sync-state.json
+            **/assets/logo-mark.svg
+            **/assets/logo-mark.png
+            **/assets/banner.svg
+            **/assets/logo.png
+            **/assets/screenshots/dashboard-ar.png
+
+      - name: Smoke test
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
+        env:
+          LANDING_URL: ${{ vars.LANDING_URL || 'https://fatortak.rabbeh.com/' }}
+        run: |
+          set -euo pipefail
+          base="${LANDING_URL%/}"
+          curl -fsS --retry 10 --retry-delay 3 "$base/" -o /tmp/landing.html
+          grep -q "Fatortak" /tmp/landing.html
+          curl -fsS --retry 5 --retry-delay 2 "$base/styles.css" -o /dev/null
+          curl -fsS --retry 5 --retry-delay 2 "$base/assets/fatortak-logo-white.png" -o /dev/null
+          echo "Smoke test passed: $base/"
+
+      - name: Write deployment summary
+        if: always()
+        run: |
+          echo "### InterServer landing deploy" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Trigger: \`${{ github.event_name }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Dry run: \`${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Target: ${{ vars.LANDING_URL || 'https://fatortak.rabbeh.com/' }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Commit: \`${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"
