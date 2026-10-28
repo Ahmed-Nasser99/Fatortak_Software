@@ -41,6 +41,8 @@ Last updated: 2026-10-27
 | P1-12 | Payroll uniqueness/transaction guard | DONE | Unique period index + transaction |
 | P1-27 | Backend test project for token, deployment mode and quota behavior | DONE | 8 tests passing |
 | P1-28 | Health/readiness endpoints for Docker and reverse proxies | DONE | `/health`, `/ready` |
+| P1-29 | Reports hub with search, groups and consistent cards | DONE | `/reports` |
+| P1-30 | Invoice template hub with sales/purchase entry points | DONE | `/invoice-templates` |
 | P1-13 | Frontend typecheck clean and CI gate | DONE | `tsc -p tsconfig.app.json` exits 0 |
 | P1-14 | Add backend test project for auth, accounting, invoice/payment invariants | PARTIAL | Token, deployment and quota tests; accounting tests still needed |
 | P1-15 | Add frontend tests for routing, API error handling, money formatting | TODO | `npm test` |
@@ -49,7 +51,7 @@ Last updated: 2026-10-27
 | P1-18 | Stakeholder module: CRUD for stakeholders, linked chart-of-accounts account, ownership/type metadata | DONE | API + UI + migration |
 | P1-19 | Stakeholder transactions: capital contribution, dividend, loan, repayment, withdrawal; accounting postings | DONE | API + ledger postings |
 | P1-20 | Stakeholders page with list, create/edit modal, transaction history, balances | DONE | `tsc` + build |
-| P1-21 | Competitor parity gap analysis and missing pages (credit notes, recurring invoices, bank reconciliation, audit trail, approval queue) | TODO | Gap matrix |
+| P1-21 | Competitor parity gap analysis and missing pages (credit notes, recurring invoices, bank reconciliation, audit trail, approval queue) | PARTIAL | Reports/templates hubs added; credit notes/recurring/reconciliation still TODO |
 | P1-22 | Add the highest-value missing pages: credit/debit notes, recurring invoices, reconciliation workspace | TODO | Routes + APIs |
 | P1-23 | Consistent design system: typography, spacing, colors, empty/loading/error states, table patterns, modals, RTL | PARTIAL | `.input`, stakeholder page, insights page |
 | P1-24 | Professional UI pass on dashboard, invoices, accounting, reports, settings, stakeholder pages | PARTIAL | New pages follow the new pattern |

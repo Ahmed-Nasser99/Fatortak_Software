@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { AuthProvider } from "./contexts/AuthContext";
@@ -35,6 +30,7 @@ import SalesReport from "./pages/Reports/SalesReport";
 import ProjectProfitability from "./pages/Reports/ProjectProfitability";
 import ProjectCostBreakdown from "./pages/Reports/ProjectCostBreakdown";
 import CashBankReport from "./pages/Reports/CashBankReport";
+import ReportsHub from "./pages/Reports/ReportsHub";
 import Team from "./pages/Team";
 import Settings from "./pages/Settings";
 import UserProfile from "./pages/UserProfile";
@@ -71,6 +67,7 @@ import Cheques from "./pages/Cheques";
 import JournalEntries from "./pages/JournalEntries";
 import Stakeholders from "./pages/Stakeholders";
 import InstallationInsights from "./pages/InstallationInsights";
+import InvoiceTemplatesHub from "./pages/InvoiceTemplate/InvoiceTemplatesHub";
 
 import ExpenseCategories from "./pages/ExpenseCategories";
 import Custody from "./pages/Custody";
@@ -156,14 +153,8 @@ function AppContent() {
           <Route path="custody" element={<Custody />} />
 
           {/* Revamped Reports */}
-          <Route
-            path="reports"
-            element={<Navigate to="/reports/trial-balance" replace />}
-          />
-          <Route
-            path="reports-group"
-            element={<Navigate to="/reports/trial-balance" replace />}
-          />
+          <Route path="reports" element={<ReportsHub />} />
+          <Route path="reports-group" element={<ReportsHub />} />
 
           <Route path="reports/trial-balance" element={<TrialBalance />} />
           <Route path="reports/ledger" element={<GeneralLedger />} />
@@ -199,10 +190,7 @@ function AppContent() {
           <Route path="notifications" element={<Notifications />} />
           <Route path="ai-chat" element={<AIChat />} />
           <Route path="ocr-invoice" element={<OcrInvoicePage />} />
-          <Route
-            path="invoice-templates"
-            element={<Navigate to="/invoice-templates/sell" replace />}
-          />
+          <Route path="invoice-templates" element={<InvoiceTemplatesHub />} />
           <Route
             path="invoice-templates/:invoiceType"
             element={<InvoiceTemplateDemo />}
