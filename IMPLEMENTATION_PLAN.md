@@ -125,6 +125,28 @@ Last updated: 2026-10-27
 - [ ] Accessibility: labels, focus rings, contrast, ARIA.
 - [ ] Remove one-off gradients/shadows; use a restrained professional palette.
 
+## Verification log
+
+- 2026-10-28: committed and pushed `2955b6b` to `origin/main`.
+- Backend: `dotnet build fatortak.sln` → 0 errors.
+- Frontend: `npx tsc -p tsconfig.app.json --noEmit` → 0 errors.
+- Frontend: `npm run build` → success; one 3.26 MB chunk (857 KB gzip).
+- EF: migration `20261027194419_AddStakeholdersAndPresence` generated and scripted successfully; includes `LastSeenAt`, stakeholder tables, and the unique invoice-number index with duplicate cleanup.
+- Secret scan of the staged tree: no database, SMTP, Gemini, OpenRouter or JWT secrets; removed Supabase client and OpenReplay key from source.
+
+## Remaining work (next commits)
+
+| Area | Remaining |
+|---|---|
+| Security | Move JWT from localStorage to HttpOnly cookies; add refresh-token rotation; add CSP at the Nginx layer; add 2FA/SSO |
+| Data isolation | Add EF Core global query filters as defense in depth; finish IDOR audit on every controller |
+| Accounting | Add automated journal-balance tests for every posting path; reconcile cheque lifecycle; payroll transaction guard |
+| Product | Credit/debit notes, recurring invoices, bank reconciliation, approval queue, audit trail |
+| Self-hosted | Session/device history table, backup/upgrade status on the insights page |
+| UI | Full design-token pass and professional review of older pages; code splitting; mobile QA |
+| Quality | Backend test project, frontend tests, CI secret scan, dependency audit, load test |
+| Marketing | Uncommitted `marketing/` changes are intentionally excluded until reviewed and scanned separately |
+
 ## Guardrails
 
 - No production secrets in git; use env vars/user secrets.
