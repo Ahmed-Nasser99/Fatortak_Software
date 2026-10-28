@@ -51,7 +51,7 @@ jobs:
           node-version: "20"
 
       - name: Restore posting state
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: marketing/automation/.state
           key: marketing-state-${{ github.run_id }}
@@ -81,7 +81,7 @@ jobs:
 
       - name: Save posting state
         if: always()
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         with:
           path: marketing/automation/.state
           key: marketing-state-${{ github.run_id }}
