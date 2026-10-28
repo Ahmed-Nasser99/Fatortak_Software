@@ -16,8 +16,8 @@ jobs:
     steps:
       - uses: actions/first-interaction@v3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-message: |
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_message: |
             Thanks for opening your first issue in Fatortak! 👋
 
             A maintainer will triage it soon. To help us help you:
@@ -26,7 +26,7 @@ jobs:
             - add screenshots or logs if the problem is visual
 
             If this is a security issue, please close this and follow SECURITY.md instead.
-          pr-message: |
+          pr_message: |
             Thank you for your first pull request! 🎉
 
             Before review, please make sure:
