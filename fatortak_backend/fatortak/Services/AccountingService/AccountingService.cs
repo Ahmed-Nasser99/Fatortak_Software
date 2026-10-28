@@ -1518,13 +1518,25 @@ namespace fatortak.Services.AccountingService
         #endregion
         private async Task<string> SaveFile(IFormFile file, string subFolder)
         {
+            if (file.Length <= 0 || file.Length > 10 * 1024 * 1024)
+                throw new InvalidOperationException("Attachment must be between 1 byte and 10MB.");
+
+            var allowedExtensions = new[]
+            {
+                ".pdf", ".jpg", ".jpeg", ".png", ".webp", ".gif",
+                ".doc", ".docx", ".xls", ".xlsx", ".csv", ".txt"
+            };
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!allowedExtensions.Contains(extension))
+                throw new InvalidOperationException("This attachment type is not allowed.");
+
             var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", subFolder);
             if (!Directory.Exists(uploadsFolder))
             {
                 Directory.CreateDirectory(uploadsFolder);
             }
 
-            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            var uniqueFileName = Guid.NewGuid().ToString("N") + extension;
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
             using (var fileStream = new FileStream(filePath, FileMode.Create))

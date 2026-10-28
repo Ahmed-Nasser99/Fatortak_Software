@@ -35,6 +35,8 @@ namespace fatortak.Dtos.Invoice
         public bool hasInstallments { get; set; } = false;
         public IEnumerable<InstallmentDto> Installments { get; set; } = new List<InstallmentDto>();
         public string? AttachmentUrl { get; set; }
+        /// <summary>Signed, expiring token for the public invoice link.</summary>
+        public string? PublicToken { get; set; }
         public decimal RemainingAmount => Total - (AmountPaid ?? 0);
     }
 }

@@ -273,6 +273,9 @@ namespace fatortak.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("LastSeenAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -983,7 +986,7 @@ namespace fatortak.Migrations
 
                     b.Property<string>("InvoiceNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("InvoiceType")
                         .IsRequired()
@@ -1045,9 +1048,10 @@ namespace fatortak.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.HasIndex("TenantId");
-
                     b.HasIndex("UserId");
+
+                    b.HasIndex("TenantId", "InvoiceNumber")
+                        .IsUnique();
 
                     b.ToTable("Invoices", "dbo");
                 });
@@ -1548,6 +1552,105 @@ namespace fatortak.Migrations
                     b.HasIndex("ProjectId");
 
                     b.ToTable("ProjectLines", "dbo");
+                });
+
+            modelBuilder.Entity("fatortak.Entities.Stakeholder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("OwnershipPercent")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Stakeholders", "dbo");
+                });
+
+            modelBuilder.Entity("fatortak.Entities.StakeholderTransaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("JournalEntryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("PaymentAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Reference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("StakeholderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JournalEntryId");
+
+                    b.HasIndex("PaymentAccountId");
+
+                    b.HasIndex("StakeholderId");
+
+                    b.ToTable("StakeholderTransactions", "dbo");
                 });
 
             modelBuilder.Entity("fatortak.Entities.Subscription", b =>
@@ -2260,6 +2363,49 @@ namespace fatortak.Migrations
                     b.Navigation("Project");
                 });
 
+            modelBuilder.Entity("fatortak.Entities.Stakeholder", b =>
+                {
+                    b.HasOne("fatortak.Entities.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("fatortak.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+
+                    b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("fatortak.Entities.StakeholderTransaction", b =>
+                {
+                    b.HasOne("fatortak.Entities.JournalEntry", "JournalEntry")
+                        .WithMany()
+                        .HasForeignKey("JournalEntryId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("fatortak.Entities.Account", "PaymentAccount")
+                        .WithMany()
+                        .HasForeignKey("PaymentAccountId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("fatortak.Entities.Stakeholder", "Stakeholder")
+                        .WithMany("Transactions")
+                        .HasForeignKey("StakeholderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JournalEntry");
+
+                    b.Navigation("PaymentAccount");
+
+                    b.Navigation("Stakeholder");
+                });
+
             modelBuilder.Entity("fatortak.Entities.Transaction", b =>
                 {
                     b.HasOne("fatortak.Entities.Branch", "Branch")
@@ -2351,6 +2497,11 @@ namespace fatortak.Migrations
 
                     b.Navigation("ProjectLines");
 
+                    b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("fatortak.Entities.Stakeholder", b =>
+                {
                     b.Navigation("Transactions");
                 });
 

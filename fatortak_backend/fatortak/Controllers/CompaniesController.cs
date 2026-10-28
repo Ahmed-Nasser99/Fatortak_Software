@@ -3,11 +3,12 @@ using fatortak.Common.Enum;
 using fatortak.Dtos.Company;
 using fatortak.Dtos.Shared;
 using fatortak.Services.CompanyService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("api/[controller]")]
 [ApiController]
-
+[Authorize]
 public class CompaniesController : ControllerBase
 {
     private readonly ICompanyService _companyService;

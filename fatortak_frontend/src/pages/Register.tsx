@@ -1171,7 +1171,7 @@ const Register = () => {
                             <Field name="country">
                               {({ field, form }) => (
                                 <SearchableDropdown
-                                  options={countryOptions}
+                                  options={countryOptions as Array<{ value: string; label: string }>}
                                   value={field.value}
                                   onChange={(value) => {
                                     const selected = countryOptions.find(
@@ -1222,7 +1222,7 @@ const Register = () => {
                             <Field name="currency">
                               {({ field, form }) => (
                                 <SearchableDropdown
-                                  options={currencyOptions}
+                                  options={currencyOptions as Array<{ value: string; label: string }>}
                                   value={field.value}
                                   onChange={(value) => {
                                     form.setFieldValue("currency", value);

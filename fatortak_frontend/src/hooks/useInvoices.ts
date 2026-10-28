@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { invoiceService } from "../services/invoiceService";
+import { unwrapServiceResult } from "../services/api";
 import {
   InvoiceCreateDto,
   InvoiceUpdateDto,
@@ -31,7 +32,8 @@ export const useCreateInvoice = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: InvoiceCreateDto) => invoiceService.createInvoice(data),
+    mutationFn: (data: InvoiceCreateDto) =>
+      unwrapServiceResult(invoiceService.createInvoice(data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
     },
@@ -43,7 +45,7 @@ export const useUpdateInvoice = () => {
 
   return useMutation({
     mutationFn: ({ id, data }: { id: string; data: InvoiceUpdateDto }) =>
-      invoiceService.updateInvoice(id, data),
+      unwrapServiceResult(invoiceService.updateInvoice(id, data)),
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
       queryClient.invalidateQueries({ queryKey: ["installments", id] });
@@ -56,7 +58,8 @@ export const useDeleteInvoice = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id: string) => invoiceService.deleteInvoice(id),
+    mutationFn: (id: string) =>
+      unwrapServiceResult(invoiceService.deleteInvoice(id)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
     },
@@ -68,7 +71,7 @@ export const useSendInvoice = () => {
 
   return useMutation({
     mutationFn: ({ id, data }: { id: string; data: SendInvoiceDto }) =>
-      invoiceService.sendInvoice(id, data),
+      unwrapServiceResult(invoiceService.sendInvoice(id, data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
     },
@@ -80,7 +83,7 @@ export const useUpdateInvoiceStatus = () => {
 
   return useMutation({
     mutationFn: ({ id, status }: { id: string; status: string }) =>
-      invoiceService.updateInvoiceStatus(id, status),
+      unwrapServiceResult(invoiceService.updateInvoiceStatus(id, status)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
     },
@@ -95,7 +98,7 @@ export const useMarkPaid = () => {
 
   return useMutation({
     mutationFn: ({ id, data }: { id: string; data: MarkPaidDto }) =>
-      invoiceService.markPaid(id, data),
+      unwrapServiceResult(invoiceService.markPaid(id, data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
     },
@@ -106,7 +109,8 @@ export const useDuplicateInvoice = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id: string) => invoiceService.duplicateInvoice(id),
+    mutationFn: (id: string) =>
+      unwrapServiceResult(invoiceService.duplicateInvoice(id)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
     },
@@ -133,7 +137,7 @@ export const usePayInstallment = () => {
 
   return useMutation({
     mutationFn: (installmentId: string) =>
-      invoiceService.payInstallment(installmentId),
+      unwrapServiceResult(invoiceService.payInstallment(installmentId)),
     onSuccess: (_, installmentId) => {
       // Invalidate installments queries to refresh the data
       queryClient.invalidateQueries({ queryKey: ["installments"] });
@@ -149,7 +153,7 @@ export const useUnPayInstallment = () => {
 
   return useMutation({
     mutationFn: (installmentId: string) =>
-      invoiceService.unPayInstallment(installmentId),
+      unwrapServiceResult(invoiceService.unPayInstallment(installmentId)),
     onSuccess: (_, installmentId) => {
       // Invalidate installments queries to refresh the data
       queryClient.invalidateQueries({ queryKey: ["installments"] });

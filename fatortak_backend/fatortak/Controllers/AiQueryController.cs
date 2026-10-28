@@ -7,6 +7,7 @@ using fatortak.Services.GeminiService;
 using fatortak.Services.QuotaService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using System.Text.Json;
 
 namespace fatortak.Controllers
@@ -14,6 +15,7 @@ namespace fatortak.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+    [EnableRateLimiting("ai")]
     public class AiQueryController : ControllerBase
     {
         private readonly IQuotaService _quota;
@@ -47,6 +49,12 @@ namespace fatortak.Controllers
         {
             try
             {
+                if (!await _quota.CanUseAiAssistantAsync(_tenantId))
+                {
+                    return StatusCode(430,
+                        new { success = false, errorMessage = "AI usage limit reached for your plan." });
+                }
+
                 // Step 1: Session management
                 var sessionId = request.SessionId ?? Guid.NewGuid();
                 if (request.SessionId == null)

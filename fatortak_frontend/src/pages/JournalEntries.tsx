@@ -121,6 +121,7 @@ const JournalEntries: React.FC = () => {
     [JournalEntryReferenceType.Reversing]: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
     [JournalEntryReferenceType.Inventory]: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
     [JournalEntryReferenceType.Payroll]: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
+    [JournalEntryReferenceType.OpeningBalance]: "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200",
   };
 
   const handleViewDetails = (entry: JournalEntryDto) => {

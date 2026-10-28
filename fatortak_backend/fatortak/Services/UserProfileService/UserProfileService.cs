@@ -48,9 +48,19 @@ namespace fatortak.Services.UserService
         {
             try
             {
-                var user = await _userManager.Users
-                    .Include(u => u.Tenant)
-                    .FirstOrDefaultAsync(u => u.Id == userId);
+                var tenant = _httpContextAccessor.HttpContext?.Items["CurrentTenant"] as Tenant;
+                var isSysAdmin = UserHelper.IaSysAdminUser();
+
+                var query = _userManager.Users.Include(u => u.Tenant).AsQueryable();
+                if (!isSysAdmin)
+                {
+                    if (tenant == null)
+                        return ServiceResult<UserProfileDto>.Failure("Tenant context not found");
+
+                    query = query.Where(u => u.TenantId == tenant.Id);
+                }
+
+                var user = await query.FirstOrDefaultAsync(u => u.Id == userId);
 
                 if (user == null)
                     return ServiceResult<UserProfileDto>.Failure("User not found");

@@ -5,28 +5,29 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Phone, MessageSquare, ArrowLeft, Copy } from "lucide-react";
 import { toast } from "react-toastify";
+import { planPricing } from "@/config/plans";
 
 const plans = [
   {
     id: "starter",
     name: "Starter",
     nameAr: "المبتدئ",
-    price: 250,
-    yearly: 2000,
+    price: planPricing.starter.monthly,
+    yearly: planPricing.starter.yearly,
   },
   {
     id: "professional",
     name: "Professional",
     nameAr: "المحترف",
-    price: 499,
-    yearly: 3992,
+    price: planPricing.professional.monthly,
+    yearly: planPricing.professional.yearly,
   },
   {
     id: "enterprise",
     name: "Enterprise",
     nameAr: "المؤسسي",
-    price: 999,
-    yearly: 7992,
+    price: planPricing.enterprise.monthly,
+    yearly: planPricing.enterprise.yearly,
   },
 ];
 

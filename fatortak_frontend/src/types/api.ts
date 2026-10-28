@@ -20,6 +20,7 @@ export interface InvoiceDto {
   customerId?: string;
   attachmentUrl?: string;
   installments?: InstallmentDto[];
+  publicToken?: string;
 }
 
 export interface InstallmentDto {
@@ -394,6 +395,7 @@ export interface ExpenseDto {
   notes?: string;
   fileUrl?: string;
   fileName?: string;
+  attachmentUrl?: string;
   createdAt: Date;
   updatedAt?: Date;
   branchId?: string;
@@ -504,6 +506,14 @@ export interface DateRangeDto {
   endDate: string;
 }
 // Notification related DTOs
+export interface NotificationFilterDto {
+  search?: string;
+  isRead?: boolean;
+  notificationType?: string;
+  fromDate?: string;
+  toDate?: string;
+}
+
 export interface NotificationDto {
   id: string;
   title: string;

@@ -650,7 +650,15 @@ namespace fatortak.Services.FinancialReportService
             try
             {
                 if (TenantId == Guid.Empty) return ServiceResult<SalesReportDto>.Failure("Tenant context not found");
-                var query = _context.Invoices.Include(i => i.Customer).Where(i => i.TenantId == TenantId && i.IssueDate >= fromDate && i.IssueDate <= toDate && i.InvoiceType == InvoiceTypes.Sell.ToString());
+                var query = _context.Invoices
+                    .Include(i => i.Customer)
+                    .Where(i =>
+                        i.TenantId == TenantId &&
+                        i.IssueDate >= fromDate &&
+                        i.IssueDate <= toDate &&
+                        i.InvoiceType == InvoiceTypes.Sell.ToString() &&
+                        i.Status != InvoiceStatus.Draft.ToString() &&
+                        i.Status != InvoiceStatus.Cancelled.ToString());
                 if (customerId.HasValue) query = query.Where(i => i.CustomerId == customerId.Value);
                 if (projectId.HasValue) query = query.Where(i => i.ProjectId == projectId.Value);
 

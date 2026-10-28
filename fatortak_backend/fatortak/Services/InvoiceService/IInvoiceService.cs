@@ -15,12 +15,14 @@ namespace fatortak.Services.InvoiceService
         Task<ServiceResult<PagedResponseDto<InvoiceDto>>> GetInvoicesAsync(
             InvoiceFilterDto filter, PaginationDto pagination);
         Task<ServiceResult<InvoiceDto>> GetInvoiceAsync(Guid invoiceId);
-        Task<ServiceResult<InvoiceDto>> GetPublicInvoiceAsync(Guid invoiceId);
+        Task<ServiceResult<InvoiceDto>> GetPublicInvoiceAsync(Guid invoiceId, string? token);
 
         Task<IEnumerable<InstallmentDto>> GetInstallmentsByInvoiceIdAsync(Guid invoiceId);
         Task<InstallmentDto?> GetInstallmentByIdAsync(Guid installmentId);
         Task<ServiceResult<bool>> PayInstallmentAsync(Guid installmentId);
         Task<ServiceResult<bool>> UnPayInstallmentAsync(Guid installmentId);
         Task<ServiceResult<bool>> RecordPaymentAsync(Guid invoiceId, RecordPaymentDto dto);
+        Task<ServiceResult<InvoiceDto>> MarkPaidAsync(Guid invoiceId, MarkPaidDto dto);
+        Task<ServiceResult<InvoiceDto>> DuplicateInvoiceAsync(Guid invoiceId);
     }
 }

@@ -8,6 +8,20 @@ export interface ServiceResult<T> {
   errors?: string[];
 }
 
+/**
+ * Turn a failed ServiceResult into a rejected promise so React Query
+ * mutations do not run onSuccess for an API failure.
+ */
+export const unwrapServiceResult = async <T>(
+  promise: Promise<ServiceResult<T>>
+): Promise<ServiceResult<T>> => {
+  const result = await promise;
+  if (!result.success) {
+    throw new Error(result.errorMessage || "The request failed.");
+  }
+  return result;
+};
+
 class ApiClient {
   private baseURL: string;
   private token: string | null = null;

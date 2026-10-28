@@ -9,25 +9,35 @@ namespace fatortak.Services.EmailService
 {
     public class EmailService : IEmailService
     {
-        private UserManager<ApplicationUser> _userManager;
-        public EmailService(UserManager<ApplicationUser> userManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IConfiguration _configuration;
+
+        public EmailService(
+            UserManager<ApplicationUser> userManager,
+            IConfiguration configuration)
         {
             _userManager = userManager;
+            _configuration = configuration;
         }
+
         public async Task<EmailResponseViewModel> ForgotPasswordAsync(ApplicationUser user)
         {
             try
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
-                var resetLink = $"https://fatortak.net/reset-password?userId={user.Id}&token={encodedToken}";
+                var frontendBaseUrl = _configuration["App:FrontendBaseUrl"]?.TrimEnd('/')
+                    ?? "https://fatortak.net";
+
+                // Put the token in the fragment so it is not sent to the server,
+                // analytics, or third-party referrers.
+                var resetLink = $"{frontendBaseUrl}/reset-password#userId={user.Id}&token={encodedToken}";
 
                 // Prepare the email
                 MailRequest mailRequest = new MailRequest
                 {
                     ToEmail = new[] { user.Email },
-                    CC = new[] { "ahmednasserr86@gmail.com" },
-                    Subject = "Fatortak – Password Reset Request",
+                    Subject = "Fatortak - Password Reset Request",
                     Body = $@"
                     <!DOCTYPE html>
                     <html>

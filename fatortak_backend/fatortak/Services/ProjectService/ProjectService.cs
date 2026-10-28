@@ -62,7 +62,8 @@ namespace fatortak.Services.ProjectService
                 // Explicitly load Customer if needed, or just map what we have
                 if (dto.CustomerId.HasValue)
                 {
-                    project.Customer = await _context.Customers.FindAsync(dto.CustomerId);
+                    project.Customer = await _context.Customers.FirstOrDefaultAsync(
+                        c => c.Id == dto.CustomerId && c.TenantId == TenantId);
                 }
 
                 return ServiceResult<ProjectDto>.SuccessResult(MapToDto(project));
@@ -234,7 +235,8 @@ namespace fatortak.Services.ProjectService
 
                 if (dto.CustomerId.HasValue)
                 {
-                    project.Customer = await _context.Customers.FindAsync(dto.CustomerId);
+                    project.Customer = await _context.Customers.FirstOrDefaultAsync(
+                        c => c.Id == dto.CustomerId && c.TenantId == TenantId);
                 }
 
                 return ServiceResult<ProjectDto>.SuccessResult(await MapToDtoWithFinancialsAsync(project));
@@ -318,7 +320,8 @@ namespace fatortak.Services.ProjectService
                 await transaction.CommitAsync();
 
                 // 6) Return Project DTO
-                project.Customer = await _context.Customers.FindAsync(command.ClientId);
+                project.Customer = await _context.Customers.FirstOrDefaultAsync(
+                        c => c.Id == command.ClientId && c.TenantId == TenantId);
                 var dto = MapToDto(project);
                 dto.InvoiceId = invoiceId;
 
@@ -480,7 +483,8 @@ namespace fatortak.Services.ProjectService
 
                 await transaction.CommitAsync();
 
-                project.Customer = await _context.Customers.FindAsync(command.ClientId);
+                project.Customer = await _context.Customers.FirstOrDefaultAsync(
+                        c => c.Id == command.ClientId && c.TenantId == TenantId);
                 return ServiceResult<ProjectDto>.SuccessResult(await MapToDtoWithFinancialsAsync(project));
             }
             catch (Exception ex)

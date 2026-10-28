@@ -3,6 +3,7 @@ using fatortak.Dtos.Shared;
 using fatortak.Services.InvoiceService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace fatortak.Controllers
 {
@@ -274,6 +275,22 @@ namespace fatortak.Controllers
             }
         }
 
+        [HttpPost("{invoiceId}/mark-paid")]
+        public async Task<ActionResult<ServiceResult<InvoiceDto>>> MarkPaid(
+            Guid invoiceId,
+            [FromBody] MarkPaidDto dto)
+        {
+            var result = await _invoiceService.MarkPaidAsync(invoiceId, dto);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+
+        [HttpPost("{invoiceId}/duplicate")]
+        public async Task<ActionResult<ServiceResult<InvoiceDto>>> Duplicate(Guid invoiceId)
+        {
+            var result = await _invoiceService.DuplicateInvoiceAsync(invoiceId);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+
         [HttpPost("{invoiceId}/status")]
         public async Task<ActionResult<ServiceResult<bool>>> UpdateInvoiceStatus(
             Guid invoiceId,
@@ -312,12 +329,15 @@ namespace fatortak.Controllers
         }
 
         [AllowAnonymous]
+        [EnableRateLimiting("public")]
         [HttpGet("public/{invoiceId}")]
-        public async Task<ActionResult<ServiceResult<InvoiceDto>>> GetPublicInvoice(Guid invoiceId)
+        public async Task<ActionResult<ServiceResult<InvoiceDto>>> GetPublicInvoice(
+            Guid invoiceId,
+            [FromQuery] string? token = null)
         {
             try
             {
-                var invoice = await _invoiceService.GetPublicInvoiceAsync(invoiceId);
+                var invoice = await _invoiceService.GetPublicInvoiceAsync(invoiceId, token);
                 if (invoice == null || !invoice.Success)
                     return NotFound();
 

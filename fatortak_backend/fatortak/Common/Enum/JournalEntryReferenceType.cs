@@ -49,7 +49,12 @@ namespace fatortak.Common.Enum
         /// <summary>
         /// Entry generated for opening/initial balances
         /// </summary>
-        OpeningBalance = 9
+        OpeningBalance = 9,
+
+        /// <summary>
+        /// Entry generated from a stakeholder capital, dividend, loan or withdrawal
+        /// </summary>
+        Stakeholder = 10
     }
 }
 

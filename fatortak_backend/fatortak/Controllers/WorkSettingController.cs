@@ -1,11 +1,13 @@
 ﻿using fatortak.Dtos.HR.Settings;
 using fatortak.Services.HR.WorkSettingService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace fatortak.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class WorkSettingController : ControllerBase
     {

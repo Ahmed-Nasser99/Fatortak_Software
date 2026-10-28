@@ -34,6 +34,8 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
+      Deployment__Mode: ${DEPLOYMENT_MODE:-SelfHosted}
+      SelfHosted__AllowRegistration: ${SELF_HOSTED_ALLOW_REGISTRATION:-true}
       ConnectionStrings__DefaultConnection: "Server=db;Database=Fatortak;User Id=sa;Password=${MSSQL_SA_PASSWORD};Encrypt=False;TrustServerCertificate=True;"
       Jwt__Key: ${JWT_KEY}
       Jwt__Issuer: https://fatortak.net
@@ -48,6 +50,8 @@ services:
       EmailSetting__Email: ${SMTP_EMAIL}
       EmailSetting__Password: ${SMTP_PASSWORD}
       EmailSetting__DisplayName: Fatortak
+      App__FrontendBaseUrl: ${PUBLIC_WEB_URL:-http://localhost:3000}
+      Cors__AllowedOrigins__0: ${PUBLIC_WEB_URL:-http://localhost:3000}
     ports:
       - "${API_PORT:-5000}:8080"
     volumes:

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { InvoiceDto } from "../types/api";
 import {
@@ -25,14 +25,18 @@ import { exportService } from "@/services/exportService";
 const PublicInvoicePage = () => {
   const { t, isRTL } = useLanguage();
   const { invoiceId, invoiceTemplate, invoiceTemplateColor } = useParams();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
   const [invoice, setInvoice] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchInvoice = async () => {
       try {
+        if (!token) throw new Error("Invoice link is invalid or has expired.");
+
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/invoices/public/${invoiceId}`
+          `${import.meta.env.VITE_API_URL}/api/invoices/public/${invoiceId}?token=${encodeURIComponent(token)}`
         );
         if (!response.ok) throw new Error(t("invoiceNotFound"));
 
@@ -50,7 +54,7 @@ const PublicInvoicePage = () => {
     };
 
     fetchInvoice();
-  }, [invoiceId]);
+  }, [invoiceId, token]);
 
   const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {

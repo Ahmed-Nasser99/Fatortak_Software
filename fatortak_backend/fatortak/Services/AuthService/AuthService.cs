@@ -4,6 +4,7 @@ using fatortak.Dtos.Auth;
 using fatortak.Dtos.Company;
 using fatortak.Dtos.Shared;
 using fatortak.Entities;
+using fatortak.Services.Deployment;
 using fatortak.Services.EmailService;
 using fatortak.Services.TenantService;
 using fatortak.Services.TokenService;
@@ -26,6 +27,7 @@ namespace fatortak.Services.AuthService
         private readonly IEmailService _emailServices;
         private readonly ILogger<AuthService> _logger;
         private readonly ApplicationDbContext _context;
+        private readonly IDeploymentMode _deployment;
 
         public AuthService(
             UserManager<ApplicationUser> userManager,
@@ -35,7 +37,8 @@ namespace fatortak.Services.AuthService
             IExpenseCategoryService expenseCategoryService,
             ILogger<AuthService> logger,
             ApplicationDbContext context,
-            IEmailService emailServices)
+            IEmailService emailServices,
+            IDeploymentMode deployment)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -45,6 +48,7 @@ namespace fatortak.Services.AuthService
             _logger = logger;
             _context = context;
             _emailServices = emailServices;
+            _deployment = deployment;
         }
 
         public async Task<ServiceResult<AuthResponseDto>> LoginAsync(LoginDto dto)
@@ -100,6 +104,18 @@ namespace fatortak.Services.AuthService
                 if (existingUser != null)
                     return ServiceResult<AuthResponseDto>.Failure("Email already registered");
 
+                Tenant? selfHostedTenant = null;
+                if (_deployment.IsSelfHosted)
+                {
+                    selfHostedTenant = await _context.Tenants
+                        .OrderBy(t => t.CreatedAt)
+                        .FirstOrDefaultAsync();
+
+                    if (selfHostedTenant != null && !_deployment.AllowRegistration)
+                        return ServiceResult<AuthResponseDto>.Failure(
+                            "Registration is disabled on this self-hosted installation. Ask an administrator to create your account.");
+                }
+
                 // 3. Check subdomain uniqueness (moved from TenantService to avoid duplication)
                 if (!string.IsNullOrEmpty(dto.Subdomain))
                 {
@@ -116,6 +132,23 @@ namespace fatortak.Services.AuthService
                 }
 
                 var user = userCreationResult.Data;
+
+                if (_deployment.IsSelfHosted && selfHostedTenant != null)
+                {
+                    user.TenantId = selfHostedTenant.Id;
+                    await _userManager.UpdateAsync(user);
+
+                    var existingTenantToken = _tokenService.GenerateToken(user, selfHostedTenant.Id);
+                    await transaction.CommitAsync();
+
+                    return ServiceResult<AuthResponseDto>.SuccessResult(new AuthResponseDto
+                    {
+                        Token = existingTenantToken,
+                        User = MapToUserDto(user),
+                        Tenant = MapToTenantDto(selfHostedTenant)
+                    });
+                }
+
                 // 5. Create Tenant (Company) - Using simplified approach to avoid duplication
                 var tenantCreationResult = await CreateTenantForUserSimple(dto, user.Id);
                 if (!tenantCreationResult.Success)
@@ -402,6 +435,40 @@ namespace fatortak.Services.AuthService
         }
 
 
+        public async Task<ServiceResult<AuthResponseDto>> SwitchTenantAsync(Guid userId, Guid tenantId)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (user == null || !user.IsActive)
+                    return ServiceResult<AuthResponseDto>.Failure("User not found or inactive.");
+
+                var isSysAdmin = string.Equals(user.Role, RoleEnum.SysAdmin.ToString(), StringComparison.OrdinalIgnoreCase);
+                if (!isSysAdmin && user.TenantId != tenantId)
+                    return ServiceResult<AuthResponseDto>.Failure("You do not have access to this tenant.");
+
+                var tenant = await _context.Tenants
+                    .FirstOrDefaultAsync(t => t.Id == tenantId && t.IsActive);
+
+                if (tenant == null)
+                    return ServiceResult<AuthResponseDto>.Failure("Tenant not found or inactive.");
+
+                var token = _tokenService.GenerateToken(user, tenant.Id);
+
+                return ServiceResult<AuthResponseDto>.SuccessResult(new AuthResponseDto
+                {
+                    Token = token,
+                    User = MapToUserDto(user),
+                    Tenant = MapToTenantDto(tenant)
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error switching tenant for user {UserId}", userId);
+                return ServiceResult<AuthResponseDto>.Failure("Failed to switch tenant.");
+            }
+        }
+
         private async Task SendWelcomeEmailAsync(ApplicationUser user, Tenant tenant)
         {
             try
@@ -434,8 +501,15 @@ namespace fatortak.Services.AuthService
             if (string.IsNullOrWhiteSpace(dto.Password))
                 return ServiceResult<AuthResponseDto>.Failure("Password is required");
 
-            if (dto.Password.Length < 8)
-                return ServiceResult<AuthResponseDto>.Failure("Password must be at least 8 characters");
+            if (dto.Password.Length < 12 ||
+                !dto.Password.Any(char.IsLower) ||
+                !dto.Password.Any(char.IsUpper) ||
+                !dto.Password.Any(char.IsDigit) ||
+                !dto.Password.Any(c => !char.IsLetterOrDigit(c)))
+            {
+                return ServiceResult<AuthResponseDto>.Failure(
+                    "Password must be at least 12 characters and include upper case, lower case, a number and a symbol.");
+            }
 
             if (string.IsNullOrWhiteSpace(dto.CompanyName))
                 return ServiceResult<AuthResponseDto>.Failure("Company name is required");

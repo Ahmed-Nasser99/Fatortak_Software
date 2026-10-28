@@ -135,6 +135,9 @@ namespace fatortak.Services.ExpenseService
         {
             try
             {
+                if (expenseDto.Total <= 0)
+                    return ServiceResult<ExpenseDto>.Failure("Expense amount must be greater than zero.");
+
                 // Handle file upload
                 string filePath = null;
                 string originalFileName = null;
@@ -298,6 +301,9 @@ namespace fatortak.Services.ExpenseService
                 if (expense == null)
                     return ServiceResult<ExpenseDto>.Failure("Expense not found");
 
+                if (expenseDto.Total.HasValue && expenseDto.Total.Value <= 0)
+                    return ServiceResult<ExpenseDto>.Failure("Expense amount must be greater than zero.");
+
                 // Handle file removal/upload omitted for brevity in snippet, assume existing logic preserved if not touched
                 // Handle file removal if requested
                 if (expenseDto.RemoveFile == true)
@@ -407,7 +413,7 @@ namespace fatortak.Services.ExpenseService
                 var journalEntries = await _context.JournalEntries
                     .Where(je => je.TenantId == _tenantId &&
                                  je.ReferenceType == JournalEntryReferenceType.Expense &&
-                                 je.Description != null && je.Description.Contains($"Expense ID: {id}"))
+                                 je.Description != null && je.Description.StartsWith($"Expense ID: {id} "))
                     .ToListAsync();
 
                 foreach (var je in journalEntries)

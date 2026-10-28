@@ -24,8 +24,11 @@ const ResetPassword: React.FC = () => {
   const [searchParams] = useSearchParams();
   const { isRTL, t, language, toggleLanguage } = useLanguage();
 
-  const userId = searchParams.get("userId");
-  const token = searchParams.get("token");
+  const hashParams = new URLSearchParams(
+    window.location.hash.replace(/^#/, "")
+  );
+  const userId = searchParams.get("userId") ?? hashParams.get("userId");
+  const token = searchParams.get("token") ?? hashParams.get("token");
 
   useEffect(() => {
     // Validate token on component mount
@@ -43,8 +46,18 @@ const ResetPassword: React.FC = () => {
       return;
     }
 
-    if (newPassword.length < 6) {
-      toast.error(t("passwordTooShort"));
+    if (
+      newPassword.length < 12 ||
+      !/[a-z]/.test(newPassword) ||
+      !/[A-Z]/.test(newPassword) ||
+      !/[0-9]/.test(newPassword) ||
+      !/[^A-Za-z0-9]/.test(newPassword)
+    ) {
+      toast.error(
+        isRTL
+          ? "يجب أن تكون كلمة المرور 12 حرفًا على الأقل وتحتوي على حرف كبير وصغير ورقم ورمز."
+          : "Password must be at least 12 characters and include upper case, lower case, a number and a symbol."
+      );
       return;
     }
 

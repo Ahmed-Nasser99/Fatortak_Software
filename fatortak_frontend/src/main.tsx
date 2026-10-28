@@ -9,11 +9,16 @@ const rootElement = document.getElementById("root");
 if (!rootElement) {
   throw new Error("Root element not found");
 }
-const tracker = new Tracker({ projectKey: "VGhrpcIasBKj6b0n5ajq" });
+const openReplayKey = import.meta.env.VITE_OPENREPLAY_PROJECT_KEY;
 
-tracker.use(trackerAssist());
-tracker.use(trackerFetch());
+if (openReplayKey) {
+  const tracker = new Tracker({ projectKey: openReplayKey });
 
-tracker.start();
+  tracker.use(trackerAssist());
+  tracker.use(trackerFetch());
+
+  tracker.start();
+}
+
 const root = createRoot(rootElement);
 root.render(<App />);

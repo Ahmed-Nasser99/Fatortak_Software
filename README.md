@@ -60,6 +60,8 @@ A public demo tenant and real UI screenshots are on the launch checklist. Until 
 | **Sales & invoicing** | Cash and credit invoices, VAT, discounts, installments, partial payments, 6 invoice templates, PDF export, public invoice links, email/WhatsApp delivery |
 | **Purchases & suppliers** | Purchase invoices, supplier statements, AP aging, expense tracking with attachments |
 | **Accounting** | Chart of accounts, journal entries, double-entry posting, trial balance, general ledger, income statement, balance sheet, cash-flow statement, customer/vendor statements, sales reports |
+| **Stakeholders** | Shareholders, partners and investors, ownership %, capital and loan balances, contributions, dividends, loans, withdrawals, ledger postings and statements |
+| **Installation insights** | Self-hosted view of registered users, online sessions (last 5 minutes) and stored record counts |
 | **Projects** | Contracts, project lines, budgets, cost breakdown, profitability per project, link invoices and expenses to projects |
 | **Inventory** | Items, categories, purchase/selling prices, stock quantities, images |
 | **HR & payroll** | Employees, departments, daily/monthly attendance, work settings, vacations, payroll runs |
@@ -172,6 +174,12 @@ See [docs/self-hosting.md](docs/self-hosting.md) for production notes, backups a
 | `GeminiApiKey` | Google Gemini key for the assistant and OCR |
 | `OpenRouterApiKey` | Optional OpenRouter fallback |
 | `VITE_API_URL` | Frontend build-time API URL |
+| `Deployment__Mode` | `SelfHosted` or `MultiTenant`; self-hosted bypasses tenant/subscription limits |
+| `SelfHosted__AllowRegistration` | Allow new users to join an existing self-hosted installation |
+| `App__FrontendBaseUrl` | Public web URL used in password-reset links and public invoice links |
+| `Cors__AllowedOrigins__0` | Allowed browser origin for the API |
+
+Self-hosted installations use a single installation tenant, unlimited users/invoices, and an **Installation insights** page for registered users, online sessions and record counts. Set `Deployment__Mode=SelfHosted`; the Docker Compose file does this by default.
 
 Never commit `appsettings.json` or `.env` files. Use environment variables or .NET user-secrets in production.
 

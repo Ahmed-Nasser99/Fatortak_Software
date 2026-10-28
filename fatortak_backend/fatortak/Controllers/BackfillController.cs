@@ -1,10 +1,11 @@
+using fatortak.Common.Enum;
 using fatortak.Services.BackfillService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace fatortak.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = nameof(RoleEnum.SysAdmin))]
     [Route("api/backfill")]
     [ApiController]
     public class BackfillController : ControllerBase

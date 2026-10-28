@@ -3,6 +3,7 @@ using fatortak.Context;
 using fatortak.Dtos.Shared;
 using fatortak.Dtos.User;
 using fatortak.Entities;
+using fatortak.Services.QuotaService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,22 +15,45 @@ namespace fatortak.Services.UserService
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<UserService> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IQuotaService _quotaService;
 
         public UserService(
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole<Guid>> roleManager,
             ILogger<UserService> logger,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            IQuotaService quotaService)
         {
             _context = context;
             _userManager = userManager;
             _logger = logger;
             _httpContextAccessor = httpContextAccessor;
+            _quotaService = quotaService;
         }
 
-        private Guid TenantId =>
-            ((Tenant)_httpContextAccessor.HttpContext.Items["CurrentTenant"]).Id;
+        private Guid? TenantId =>
+            (_httpContextAccessor.HttpContext?.Items["CurrentTenant"] as Tenant)?.Id;
+
+        private static readonly HashSet<string> TenantRoles = new(StringComparer.OrdinalIgnoreCase)
+        {
+            RoleEnum.Admin.ToString(),
+            RoleEnum.Editor.ToString(),
+            RoleEnum.Watcher.ToString()
+        };
+
+        private static bool CanAssignRole(string? requestedRole, string? currentRole)
+        {
+            if (string.IsNullOrWhiteSpace(requestedRole))
+                return true;
+
+            if (TenantRoles.Contains(requestedRole))
+                return true;
+
+            // Only an existing SysAdmin may create another SysAdmin.
+            return string.Equals(requestedRole, RoleEnum.SysAdmin.ToString(), StringComparison.OrdinalIgnoreCase)
+                && string.Equals(currentRole, RoleEnum.SysAdmin.ToString(), StringComparison.OrdinalIgnoreCase);
+        }
 
         public async Task<ServiceResult<UserDto>> CreateUserAsync(UserCreateDto dto, Guid currentUserId)
         {
@@ -40,6 +64,20 @@ namespace fatortak.Services.UserService
                 var currentUser = await _userManager.FindByIdAsync(currentUserId.ToString());
                 if (currentUser == null || currentUser.Role != RoleEnum.Admin.ToString())
                     return ServiceResult<UserDto>.Failure("Unauthorized");
+
+                if (TenantId == null)
+                    return ServiceResult<UserDto>.Failure("Tenant context is required.");
+
+                if (!await _quotaService.CanAddUserAsync(TenantId.Value))
+                    return ServiceResult<UserDto>.Failure(
+                        "User limit reached for your plan. Upgrade to add more users.");
+
+                var requestedRole = string.IsNullOrWhiteSpace(dto.Role)
+                    ? RoleEnum.Watcher.ToString()
+                    : dto.Role;
+
+                if (!CanAssignRole(requestedRole, currentUser.Role))
+                    return ServiceResult<UserDto>.Failure("You cannot assign this role.");
 
                 // Check if email exists
                 if (await _userManager.FindByEmailAsync(dto.Email) != null)
@@ -52,9 +90,9 @@ namespace fatortak.Services.UserService
                     Email = dto.Email,
                     FirstName = dto.FirstName,
                     LastName = dto.LastName,
-                    TenantId = TenantId, // Assign to current tenant
+                    TenantId = TenantId.Value,
                     PhoneNumber = dto.PhoneNumber,
-                    Role = dto.Role ?? RoleEnum.Watcher.ToString(),
+                    Role = requestedRole,
                     IsActive = true
                 };
 
@@ -67,7 +105,7 @@ namespace fatortak.Services.UserService
 
                 await transaction.CommitAsync();
 
-                return ServiceResult<UserDto>.SuccessResult(MapToDto(user, dto.Role));
+                return ServiceResult<UserDto>.SuccessResult(MapToDto(user, requestedRole));
             }
             catch (Exception ex)
             {
@@ -156,12 +194,21 @@ namespace fatortak.Services.UserService
             {
                 // Verify current user has permission to update users
                 var currentUser = await _userManager.FindByIdAsync(currentUserId.ToString());
-                if (currentUser == null || currentUser.Role != RoleEnum.Admin.ToString())
+                if (currentUser == null ||
+                    (currentUser.Role != RoleEnum.Admin.ToString() &&
+                     currentUser.Role != RoleEnum.SysAdmin.ToString()))
                     return ServiceResult<UserDto>.Failure("Unauthorized");
 
                 var user = await _userManager.FindByIdAsync(userId.ToString());
                 if (user == null || user.TenantId != TenantId)
                     return ServiceResult<UserDto>.Failure("User not found");
+
+                if (!string.IsNullOrWhiteSpace(dto.Role) && !CanAssignRole(dto.Role, currentUser.Role))
+                    return ServiceResult<UserDto>.Failure("You cannot assign this role.");
+
+                if (user.Id == currentUserId && !string.IsNullOrWhiteSpace(dto.Role) &&
+                    !string.Equals(dto.Role, user.Role, StringComparison.OrdinalIgnoreCase))
+                    return ServiceResult<UserDto>.Failure("You cannot change your own role.");
 
                 // Update basic info
                 if (!string.IsNullOrWhiteSpace(dto.FirstName))
@@ -171,7 +218,14 @@ namespace fatortak.Services.UserService
                     user.LastName = dto.LastName;
 
                 if (!string.IsNullOrWhiteSpace(dto.Email))
+                {
+                    var emailOwner = await _userManager.FindByEmailAsync(dto.Email);
+                    if (emailOwner != null && emailOwner.Id != user.Id)
+                        return ServiceResult<UserDto>.Failure("Email already registered");
+
                     user.Email = dto.Email;
+                    user.UserName = dto.Email;
+                }
 
                 if (!string.IsNullOrWhiteSpace(dto.PhoneNumber))
                     user.PhoneNumber = dto.PhoneNumber;
@@ -182,11 +236,14 @@ namespace fatortak.Services.UserService
                     user.Role = dto.Role;
                 }
 
-                await _userManager.UpdateAsync(user);
+                var updateResult = await _userManager.UpdateAsync(user);
+                if (!updateResult.Succeeded)
+                    return ServiceResult<UserDto>.ValidationError(
+                        updateResult.Errors.Select(e => e.Description));
+
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
-                var roles = await _userManager.GetRolesAsync(user);
                 return ServiceResult<UserDto>.SuccessResult(MapToDto(user, user.Role ?? RoleEnum.Watcher.ToString()));
             }
             catch (Exception ex)
@@ -202,12 +259,18 @@ namespace fatortak.Services.UserService
             try
             {
                 var currentUser = await _userManager.FindByIdAsync(currentUserId.ToString());
-                if (currentUser == null || !(currentUser.Role == "Admin"))
+                if (currentUser == null ||
+                    (currentUser.Role != RoleEnum.Admin.ToString() &&
+                     currentUser.Role != RoleEnum.SysAdmin.ToString()))
                     return ServiceResult<bool>.Failure("Unauthorized");
 
                 var user = await _userManager.FindByIdAsync(userId.ToString());
                 if (user == null || user.TenantId != TenantId)
                     return ServiceResult<bool>.Failure("User not found");
+
+                if (user.Role == RoleEnum.SysAdmin.ToString() &&
+                    currentUser.Role != RoleEnum.SysAdmin.ToString())
+                    return ServiceResult<bool>.Failure("Only a SysAdmin can delete a SysAdmin.");
 
                 // Don't allow deactivating yourself
                 if (user.Id == currentUserId)

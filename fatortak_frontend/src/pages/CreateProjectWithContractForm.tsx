@@ -133,7 +133,7 @@ const CreateProjectWithContractForm = () => {
     const customer = customers.find((c) => c.id === id);
     if (customer) {
       setClientEmail(customer.email || "");
-      setClientPhone(customer.phoneNumber || "");
+      setClientPhone(customer.phone || "");
     }
   };
 

@@ -1,12 +1,15 @@
 ﻿using fatortak.Dtos.Auth;
 using fatortak.Dtos.Shared;
 using fatortak.Services.AuthService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace fatortak.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableRateLimiting("auth")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -18,6 +21,7 @@ namespace fatortak.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<ServiceResult<AuthResponseDto>>> Register(RegisterDto registerDto)
         {
@@ -49,6 +53,7 @@ namespace fatortak.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<ServiceResult<AuthResponseDto>>> Login(LoginDto loginDto)
         {
@@ -80,6 +85,20 @@ namespace fatortak.Controllers
             }
         }
 
+        [Authorize]
+        [HttpPost("switch-tenant")]
+        public async Task<ActionResult<ServiceResult<AuthResponseDto>>> SwitchTenant(
+            [FromBody] SwitchTenantDto dto)
+        {
+            var userIdClaim = User.FindFirst("UserId")?.Value;
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized(ServiceResult<AuthResponseDto>.Failure("Invalid token."));
+
+            var result = await _authService.SwitchTenantAsync(userId, dto.TenantId);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+
+        [AllowAnonymous]
         [HttpPost("ForgetPasswordRequest")]
         public async Task<ActionResult<ServiceResult<string>>> ForgetPasswordRequest([FromBody] ForgotPasswordViewModel model)
         {
@@ -99,6 +118,7 @@ namespace fatortak.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost("SetNewPassword")]
         public async Task<ActionResult<ServiceResult<string>>> SetNewPassword([FromBody] SetPasswordViewModel model)
         {

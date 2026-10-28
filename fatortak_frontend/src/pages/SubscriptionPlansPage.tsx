@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useQuotaUsage } from "@/hooks/useQuota";
+import { planPricing } from "@/config/plans";
 import {
   Check,
   Crown,
@@ -26,8 +27,8 @@ const plans = [
     id: "starter",
     name: "Starter",
     nameAr: "المبتدئ",
-    price: 300,
-    yearly: 2700,
+    price: planPricing.starter.monthly,
+    yearly: planPricing.starter.yearly,
     icon: Zap,
     color: "from-blue-500 to-blue-600",
     popular: false,
@@ -56,8 +57,8 @@ const plans = [
     id: "professional",
     name: "Professional",
     nameAr: "المحترف",
-    price: 600,
-    yearly: 5400,
+    price: planPricing.professional.monthly,
+    yearly: planPricing.professional.yearly,
     icon: Crown,
     color: "from-purple-500 to-purple-600",
     popular: true,
@@ -86,8 +87,8 @@ const plans = [
     id: "enterprise",
     name: "Enterprise",
     nameAr: "المؤسسي",
-    price: 900,
-    yearly: 8100,
+    price: planPricing.enterprise.monthly,
+    yearly: planPricing.enterprise.yearly,
     icon: Star,
     color: "from-emerald-500 to-emerald-600",
     popular: false,

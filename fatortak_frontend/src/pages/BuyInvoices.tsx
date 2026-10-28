@@ -224,7 +224,7 @@ const BuyInvoices: React.FC = () => {
           invoice?.invoiceType?.toLowerCase() == "sell"
             ? company?.saleInvoiceTemplateColor || "professional-dark"
             : company?.purchaseInvoiceTemplateColor || "professional-dark"
-        }`
+        }?token=${encodeURIComponent(invoice.publicToken || "")}`
       : `Invoice Details\n\n` +
         `Invoice Number: ${invoice.invoiceNumber}\n` +
         `Customer: ${invoice.customerName}\n` +
@@ -240,7 +240,7 @@ const BuyInvoices: React.FC = () => {
           invoice?.invoiceType?.toLowerCase() == "sell"
             ? company?.saleInvoiceTemplateColor || "professional-dark"
             : company?.purchaseInvoiceTemplateColor || "professional-dark"
-        }`;
+        }?token=${encodeURIComponent(invoice.publicToken || "")}`;
 
     // Encode the message for WhatsApp URL
     const encodedMessage = encodeURIComponent(message);

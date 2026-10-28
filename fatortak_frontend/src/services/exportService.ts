@@ -94,16 +94,18 @@ function convertToCSV(data: any[]): string {
   if (data.length === 0) return '';
   
   const headers = Object.keys(data[0]);
+  const escapeCell = (raw: unknown) => {
+    let value = raw == null ? "" : String(raw);
+    // Prevent spreadsheet formula injection (=, +, -, @, tab, CR).
+    if (/^[=+\-@\t\r]/.test(value)) {
+      value = `'${value}`;
+    }
+    return `"${value.replace(/"/g, '""')}"`;
+  };
+
   const csvRows = [
-    headers.join(','),
-    ...data.map(row => 
-      headers.map(header => {
-        const value = row[header];
-        return typeof value === 'string' && value.includes(',') 
-          ? `"${value}"` 
-          : value;
-      }).join(',')
-    )
+    headers.map(escapeCell).join(','),
+    ...data.map(row => headers.map(header => escapeCell(row[header])).join(','))
   ];
   
   return csvRows.join('\n');

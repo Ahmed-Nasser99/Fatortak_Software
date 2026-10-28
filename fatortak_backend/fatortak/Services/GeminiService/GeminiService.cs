@@ -379,23 +379,33 @@ namespace fatortak.Services.GeminiService
 
         public async Task<List<Dictionary<string, object>>> ExecuteSqlAsync(DbContext db, string sql)
         {
+            ValidateSql(sql);
+            EnsureTenantFiltering(sql);
+
             var conn = db.Database.GetDbConnection();
             if (conn.State != ConnectionState.Open)
                 await conn.OpenAsync();
 
             using var cmd = conn.CreateCommand();
             cmd.CommandText = sql;
+            cmd.CommandTimeout = 15;
 
             var parameter = cmd.CreateParameter();
             parameter.ParameterName = "@TenantId";
             parameter.Value = _tenantId;
             cmd.Parameters.Add(parameter);
 
-            using var reader = await cmd.ExecuteReaderAsync();
+            // SingleResult prevents a second result set from being consumed.
+            using var reader = await cmd.ExecuteReaderAsync(CommandBehavior.SingleResult);
             var result = new List<Dictionary<string, object>>();
+            const int maxRows = 5000;
 
             while (await reader.ReadAsync())
             {
+                if (result.Count >= maxRows)
+                    throw new InvalidOperationException(
+                        $"Query returned more than {maxRows} rows. Add filters or a TOP clause.");
+
                 var row = new Dictionary<string, object>();
                 for (int i = 0; i < reader.FieldCount; i++)
                     row[reader.GetName(i)] = reader.GetValue(i);
@@ -774,37 +784,55 @@ namespace fatortak.Services.GeminiService
 
         private void ValidateSql(string sql)
         {
-            // Check for basic SQL injection patterns
-            var lowerSql = sql.ToLower();
+            if (string.IsNullOrWhiteSpace(sql))
+                throw new InvalidOperationException("Query is empty.");
 
-            // Must start with SELECT
-            if (!lowerSql.TrimStart().StartsWith("select"))
-            {
-                throw new InvalidOperationException("Query must start with SELECT");
-            }
+            if (sql.Length > 20000)
+                throw new InvalidOperationException("Query is too large.");
 
-            // Check for dangerous keywords
-            string[] dangerousKeywords = { "drop ", "delete ", "truncate ", "alter ", "create ", "insert ", "update ", "exec ", "execute " };
-            foreach (var keyword in dangerousKeywords)
+            var trimmed = sql.Trim();
+
+            // One statement only. A trailing semicolon is tolerated.
+            if (trimmed.EndsWith(";"))
+                trimmed = trimmed[..^1].TrimEnd();
+
+            if (trimmed.Contains(';'))
+                throw new InvalidOperationException("Multiple SQL statements are not allowed.");
+
+            if (trimmed.Contains("--", StringComparison.Ordinal) ||
+                trimmed.Contains("/*", StringComparison.Ordinal) ||
+                trimmed.Contains("*/", StringComparison.Ordinal))
+                throw new InvalidOperationException("SQL comments are not allowed.");
+
+            if (!trimmed.StartsWith("SELECT", StringComparison.OrdinalIgnoreCase) &&
+                !trimmed.StartsWith("WITH", StringComparison.OrdinalIgnoreCase))
+                throw new InvalidOperationException("Only SELECT queries are allowed.");
+
+            // Word-boundary matching avoids the old "delete " bypass and does
+            // not depend on whitespace formatting.
+            var dangerous = new[]
             {
-                if (lowerSql.Contains(keyword))
+                "insert", "update", "delete", "drop", "alter", "create", "truncate",
+                "merge", "exec", "execute", "grant", "revoke", "deny", "backup",
+                "restore", "dbcc", "shutdown", "reconfigure", "kill", "bulk",
+                "into", "openrowset", "opendatasource", "openquery", "waitfor",
+                "xp_", "sp_", "sysobjects", "syscolumns"
+            };
+
+            foreach (var keyword in dangerous)
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(
+                        trimmed,
+                        $@"\b{System.Text.RegularExpressions.Regex.Escape(keyword)}\b",
+                        System.Text.RegularExpressions.RegexOptions.IgnoreCase))
                 {
-                    throw new InvalidOperationException($"Dangerous SQL keyword detected: {keyword.Trim()}");
+                    throw new InvalidOperationException(
+                        $"Dangerous SQL keyword detected: {keyword}");
                 }
             }
 
-            // Check for UNION syntax issues (common problem)
-            if (lowerSql.Contains("union"))
-            {
-                // Count SELECT statements
-                var selectCount = System.Text.RegularExpressions.Regex.Matches(lowerSql, @"\bselect\b").Count;
-                var unionCount = System.Text.RegularExpressions.Regex.Matches(lowerSql, @"\bunion\s+all\b").Count;
-
-                if (selectCount != unionCount + 1)
-                {
-                    _logger.LogWarning("Potential UNION syntax issue: {SelectCount} SELECTs, {UnionCount} UNIONs", selectCount, unionCount);
-                }
-            }
+            if (trimmed.Contains("@@", StringComparison.Ordinal))
+                throw new InvalidOperationException("System variables are not allowed.");
         }
 
         public async Task<OcrInvoiceCreateDto> ExtractInvoiceDataAsync(IFormFile file)
@@ -1087,9 +1115,13 @@ namespace fatortak.Services.GeminiService
 
         private string EnsureTenantFiltering(string sql)
         {
-            if (!sql.Contains("@TenantId", StringComparison.OrdinalIgnoreCase))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(
+                    sql,
+                    @"\bTenantId\s*=\s*@TenantId\b",
+                    System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             {
-                throw new InvalidOperationException("SQL must include tenant filtering for security.");
+                throw new InvalidOperationException(
+                    "SQL must include a real TenantId = @TenantId predicate for security.");
             }
             return sql;
         }

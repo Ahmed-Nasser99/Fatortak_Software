@@ -281,7 +281,9 @@ const Dashboard: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 mb-4">{error}</p>
+          <p className="text-red-600 mb-4">
+            {error instanceof Error ? error.message : String(error)}
+          </p>
           <Button onClick={() => window.location.reload()}>{t("retry")}</Button>
         </div>
       </div>

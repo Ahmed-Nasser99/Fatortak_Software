@@ -109,8 +109,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
     }
   };
 
-  const handleNotificationClick = (id: string) => {
-    markAsRead(id);
+  const handleNotificationClick = (_id: string) => {
     setShowNotifications(false);
   };
 

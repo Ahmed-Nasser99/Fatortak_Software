@@ -59,14 +59,22 @@ namespace fatortak.Services.ChatService
                 : null,
             };
 
-            _context.ChatMessages.Add(message);
+            var userId = UserHelper.GetUserId();
+            if (!Guid.TryParse(userId, out var currentUserId))
+                throw new UnauthorizedAccessException("User not authenticated.");
 
-            // Update session's UpdatedAt
-            var session = await _context.ChatSessions.FindAsync(sessionId);
-            if (session != null)
-            {
-                session.UpdatedAt = DateTime.UtcNow;
-            }
+            var session = await _context.ChatSessions
+                .FirstOrDefaultAsync(s =>
+                    s.Id == sessionId &&
+                    s.TenantId == _tenantId &&
+                    s.UserId == currentUserId &&
+                    !s.IsDeleted);
+
+            if (session == null)
+                throw new UnauthorizedAccessException("Chat session not found.");
+
+            _context.ChatMessages.Add(message);
+            session.UpdatedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
         }
@@ -84,8 +92,16 @@ namespace fatortak.Services.ChatService
 
         public async Task<List<ChatMessageDto>> GetSessionMessagesAsync(Guid sessionId)
         {
+            var userId = UserHelper.GetUserId();
+            if (!Guid.TryParse(userId, out var currentUserId))
+                return new List<ChatMessageDto>();
+
             var messages = await _context.ChatMessages
-                .Where(m => m.SessionId == sessionId)
+                .Where(m =>
+                    m.SessionId == sessionId &&
+                    m.Session.TenantId == _tenantId &&
+                    m.Session.UserId == currentUserId &&
+                    !m.Session.IsDeleted)
                 .OrderBy(m => m.CreatedAt)
                 .ToListAsync();
             return messages.Select(m => new ChatMessageDto
@@ -104,8 +120,14 @@ namespace fatortak.Services.ChatService
         {
             var userId = UserHelper.GetUserId();
             var _userId = new Guid(userId);
-            var session = await _context.ChatSessions.FindAsync(sessionId);
-            if (session != null && session.TenantId == _tenantId && session.UserId == _userId)
+            var session = await _context.ChatSessions
+                .FirstOrDefaultAsync(s =>
+                    s.Id == sessionId &&
+                    s.TenantId == _tenantId &&
+                    s.UserId == _userId &&
+                    !s.IsDeleted);
+
+            if (session != null)
             {
                 session.IsDeleted = true;
                 await _context.SaveChangesAsync();

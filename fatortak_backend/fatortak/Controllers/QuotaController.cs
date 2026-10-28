@@ -52,12 +52,13 @@ namespace fatortak.Controllers
         public async Task<IActionResult> GetQuotaUsage()
         {
             var sub = await _quotaService.GetActiveSubscription(_tenantId);
+            var limits = _quotaService.GetPlanLimits(sub?.Plan);
 
-            int? aiLimit = null;
+            int? aiLimit = limits.Ai;
 
-            int? invoiceLimit = null;
+            int? invoiceLimit = limits.Invoices;
 
-            int? userLimit = null;
+            int? userLimit = limits.Users;
 
             var startOfMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1);
             var invoiceCount = await _context.Invoices.CountAsync(i => i.TenantId == _tenantId && i.CreatedAt >= startOfMonth);
@@ -67,7 +68,7 @@ namespace fatortak.Controllers
 
             return Ok(new
             {
-                plan = sub?.Plan.ToString() ?? "Enterprise",
+                plan = sub?.Plan.ToString() ?? "Trial",
                 startDate = sub?.StartDate ?? DateTime.UtcNow,
                 endDate = sub?.EndDate ?? DateTime.UtcNow.AddYears(1),
                 isYearly = sub?.IsYearly ?? true,

@@ -88,10 +88,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const register = async (data: any): Promise<ServiceResult<any>> => {
     try {
-      const result = await apiClient.post<ServiceResult<any>>(
-        "/api/auth/register",
-        data
-      );
+      const result = await apiClient.post<any>("/api/auth/register", data);
 
       // Check if the request was successful
       if (result.success && result.data) {

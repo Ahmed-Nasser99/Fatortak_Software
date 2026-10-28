@@ -22,6 +22,16 @@ import { formatCurrency } from "@/Helpers/formatCurrency";
 import { toast } from "react-toastify";
 import { invoiceTemplates } from "../invoice-templates";
 import { exportService } from "@/services/exportService";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+
+const formatDate = (value?: string | Date | null) => {
+  if (!value) return "-";
+  const date = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(date.getTime())
+    ? "-"
+    : new Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(date);
+};
 
 interface InvoiceDetailsModalProps {
   isOpen: boolean;

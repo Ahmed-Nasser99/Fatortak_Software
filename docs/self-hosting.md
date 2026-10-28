@@ -9,6 +9,28 @@ This guide runs Fatortak with Docker Compose: SQL Server, the ASP.NET Core API a
 - a domain name and TLS certificate for production
 - ports 3000 (web) and 5000 (API) free, or a reverse proxy in front
 
+## Deployment mode
+
+Docker Compose runs Fatortak in **SelfHosted** mode by default:
+
+```dotenv
+DEPLOYMENT_MODE=SelfHosted
+SELF_HOSTED_ALLOW_REGISTRATION=true
+```
+
+Self-hosted mode is a single installation, not a SaaS tenant:
+
+- there is one installation tenant; users join it instead of creating new tenants;
+- invoice/user/AI quotas are unlimited and no subscription is required;
+- the first registered user becomes the installation administrator;
+- set `SELF_HOSTED_ALLOW_REGISTRATION=false` to close registration after the first user;
+- administrators get an **Installation insights** page with registered users, online
+  sessions (active in the last five minutes) and counts for invoices, customers,
+  expenses, transactions, projects, accounts, employees, cheques and stakeholders.
+
+For a multi-tenant SaaS deployment set `DEPLOYMENT_MODE=MultiTenant` and configure
+subscriptions/quotas explicitly.
+
 ## Quick start
 
 ```bash

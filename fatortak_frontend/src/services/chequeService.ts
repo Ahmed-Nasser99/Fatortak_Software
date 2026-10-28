@@ -1,5 +1,5 @@
-import { apiClient } from './api';
-import { PagedResponse, ApiResponse } from '../types/api';
+import { apiClient, ServiceResult } from './api';
+import { PagedResponseDto } from '../types/api';
 
 export interface ChequeDto {
   id: string;
@@ -28,17 +28,17 @@ export interface UpdateChequeStatusDto {
 }
 
 export const chequeService = {
-  getCheques: async (filter: ChequeFilterDto): Promise<ApiResponse<PagedResponse<ChequeDto>>> => {
+  getCheques: async (filter: ChequeFilterDto): Promise<ServiceResult<PagedResponseDto<ChequeDto>>> => {
     const params = new URLSearchParams();
     if (filter.status) params.append('status', filter.status);
     params.append('pageNumber', filter.pageNumber.toString());
     params.append('pageSize', filter.pageSize.toString());
     
-    const response = await apiClient.get<PagedResponse<ChequeDto>>(`/api/Cheques?${params.toString()}`);
+    const response = await apiClient.get<PagedResponseDto<ChequeDto>>(`/api/Cheques?${params.toString()}`);
     return response as any;
   },
 
-  updateStatus: async (id: string, dto: UpdateChequeStatusDto): Promise<ApiResponse<ChequeDto>> => {
+  updateStatus: async (id: string, dto: UpdateChequeStatusDto): Promise<ServiceResult<ChequeDto>> => {
     const response = await apiClient.post<ChequeDto>(`/api/Cheques/${id}/status`, dto);
     return response as any;
   }

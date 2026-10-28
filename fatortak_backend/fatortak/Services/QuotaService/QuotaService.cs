@@ -1,5 +1,7 @@
-﻿using fatortak.Context;
+﻿using fatortak.Common.Enum;
+using fatortak.Context;
 using fatortak.Entities;
+using fatortak.Services.Deployment;
 using Microsoft.EntityFrameworkCore;
 
 namespace fatortak.Services.QuotaService
@@ -7,109 +9,121 @@ namespace fatortak.Services.QuotaService
     public class QuotaService : IQuotaService
     {
         private readonly ApplicationDbContext _db;
+        private readonly IDeploymentMode _deployment;
 
-        public QuotaService(ApplicationDbContext db)
+        public QuotaService(ApplicationDbContext db, IDeploymentMode deployment)
         {
             _db = db;
+            _deployment = deployment;
+        }
+
+        public (int? Invoices, int? Users, int? Ai) GetPlanLimits(SubscriptionPlan? plan)
+        {
+            if (_deployment.IsSelfHosted)
+                return (null, null, null);
+
+            return plan switch
+            {
+                SubscriptionPlan.Trial => (50, 1, 10),
+                SubscriptionPlan.Starter => (100, 3, 30),
+                SubscriptionPlan.Professional => (500, 5, 150),
+                SubscriptionPlan.Enterprise => (null, null, null),
+                null => (50, 1, 10),
+                _ => (50, 1, 10)
+            };
         }
 
         public async Task<bool> CanCreateInvoiceAsync(Guid tenantId)
         {
-            //var sub = await GetActiveSubscription(tenantId);
+            if (_deployment.IsSelfHosted) return true;
 
-            //var limit = sub?.Plan switch
-            //{
-            //    SubscriptionPlan.Trial => 50,
-            //    SubscriptionPlan.Starter => 100,
-            //    SubscriptionPlan.Professional => 500,
-            //    _ => (int?)null
-            //};
+            var subscription = await GetActiveSubscription(tenantId);
+            var limit = GetPlanLimits(subscription?.Plan).Invoices;
+            if (limit == null) return true;
 
-            //if (limit == null) return false;
-            //var startOfMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1);
-            //int count = await _db.Invoices.CountAsync(i => i.TenantId == tenantId && i.CreatedAt >= startOfMonth);
+            var startOfMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1);
+            var count = await _db.Invoices.CountAsync(i =>
+                i.TenantId == tenantId && i.CreatedAt >= startOfMonth);
 
-            // return count < limit;
-            return true;
+            return count < limit.Value;
         }
 
-        public async Task<bool> CanAddCustomerAsync(Guid tenantId) => true;
+        public Task<bool> CanAddCustomerAsync(Guid tenantId) => Task.FromResult(true);
 
-        public async Task<bool> CanAddItemAsync(Guid tenantId) => true;
+        public Task<bool> CanAddItemAsync(Guid tenantId) => Task.FromResult(true);
 
         public async Task<bool> CanAddUserAsync(Guid tenantId)
         {
-            //var sub = await GetActiveSubscription(tenantId);
-            //var limit = sub?.Plan switch
-            //{
-            //    SubscriptionPlan.Trial => 1,
-            //    SubscriptionPlan.Starter => 3,
-            //    SubscriptionPlan.Professional => 5,
-            //    _ => (int?)null
-            //};
+            if (_deployment.IsSelfHosted) return true;
 
-            //if (limit == null) return false;
-            //int count = await _db.Users.CountAsync(u => u.TenantId == tenantId);
-            //return count < limit;
-            return true;
+            var subscription = await GetActiveSubscription(tenantId);
+            var limit = GetPlanLimits(subscription?.Plan).Users;
+            if (limit == null) return true;
+
+            var count = await _db.Users.CountAsync(u => u.TenantId == tenantId);
+            return count < limit.Value;
         }
 
         public async Task<bool> CanUseAiAssistantAsync(Guid tenantId)
         {
-            //var sub = await GetActiveSubscription(tenantId);
-            //int? limit = sub?.Plan switch
-            //{
-            //    SubscriptionPlan.Trial => 10,
-            //    SubscriptionPlan.Starter => 30,
-            //    SubscriptionPlan.Professional => 150,
-            //    SubscriptionPlan.Enterprise => null,
-            //    _ => 0
-            //};
+            if (_deployment.IsSelfHosted) return true;
 
-            //return limit == null || sub.AiUsageThisMonth < limit;
-            return true;
+            var subscription = await GetActiveSubscription(tenantId);
+            var limit = GetPlanLimits(subscription?.Plan).Ai;
+            if (limit == null) return true;
+            if (subscription == null) return false;
+
+            await ResetAiUsageIfNeededAsync(subscription);
+            return subscription.AiUsageThisMonth < limit.Value;
         }
 
         public async Task RecordAiUsageAsync(Guid tenantId)
         {
-            //var sub = await _db.Subscriptions
-            //    .Where(s => s.TenantId == tenantId && (s.EndDate == null || s.EndDate > DateTime.UtcNow))
-            //    .OrderByDescending(s => s.StartDate)
-            //    .FirstOrDefaultAsync();
+            var subscription = await GetActiveSubscription(tenantId);
+            if (subscription == null) return;
 
-            //if (sub != null)
-            //{
-            //    sub.AiUsageThisMonth++;
-            //    await _db.SaveChangesAsync();
-            //}
-            return;
+            await ResetAiUsageIfNeededAsync(subscription);
+            subscription.AiUsageThisMonth++;
+            await _db.SaveChangesAsync();
         }
 
         public async Task ResetMonthlyAiUsageAsync()
         {
-            //var now = DateTime.UtcNow;
-            //var firstDay = new DateTime(now.Year, now.Month, 1);
+            var firstDay = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1);
+            var subscriptions = await _db.Subscriptions
+                .Where(s => s.AiUsageResetDate == null || s.AiUsageResetDate < firstDay)
+                .ToListAsync();
 
-            //var subs = await _db.Subscriptions
-            //    .Where(s => s.AiUsageResetDate == null || s.AiUsageResetDate < firstDay)
-            //    .ToListAsync();
+            foreach (var subscription in subscriptions)
+            {
+                subscription.AiUsageThisMonth = 0;
+                subscription.AiUsageResetDate = DateTime.UtcNow;
+            }
 
-            //foreach (var sub in subs)
-            //{
-            //    sub.AiUsageThisMonth = 0;
-            //    sub.AiUsageResetDate = now;
-            //}
-
-            //await _db.SaveChangesAsync();
-            return;
+            if (subscriptions.Count > 0)
+                await _db.SaveChangesAsync();
         }
 
         public async Task<Subscription?> GetActiveSubscription(Guid tenantId)
         {
+            if (_deployment.IsSelfHosted)
+                return null;
+
             return await _db.Subscriptions
                 .Where(s => s.TenantId == tenantId && (s.EndDate == null || s.EndDate > DateTime.UtcNow))
                 .OrderByDescending(s => s.StartDate)
                 .FirstOrDefaultAsync();
+        }
+
+        private async Task ResetAiUsageIfNeededAsync(Subscription subscription)
+        {
+            var firstDay = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1);
+            if (subscription.AiUsageResetDate == null || subscription.AiUsageResetDate < firstDay)
+            {
+                subscription.AiUsageThisMonth = 0;
+                subscription.AiUsageResetDate = DateTime.UtcNow;
+                await _db.SaveChangesAsync();
+            }
         }
     }
 }

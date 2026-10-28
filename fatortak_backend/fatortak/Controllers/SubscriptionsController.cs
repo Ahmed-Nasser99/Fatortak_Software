@@ -1,5 +1,7 @@
 ﻿// SubscriptionsController.cs
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using fatortak.Common.Enum;
 using fatortak.Services;
 using System;
 using fatortak.Dtos.Subscription;
@@ -8,6 +10,7 @@ using fatortak.Services.SubscriptionService;
 namespace fatortak.Controllers
 {
     [ApiController]
+    [Authorize(Roles = nameof(RoleEnum.SysAdmin))]
     [Route("api/[controller]")]
     public class SubscriptionsController : ControllerBase
     {

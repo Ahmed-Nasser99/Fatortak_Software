@@ -14,5 +14,6 @@ namespace fatortak.Entities
         public Guid? TenantId { get; set; }
         public Tenant? Tenant { get; set; }
         public DateTime? LastLoginAt { get; set; }
+        public DateTime? LastSeenAt { get; set; }
     }
 }

@@ -115,7 +115,8 @@ const InvoiceTemplateDemo: React.FC = () => {
   const { t, isRTL } = useLanguage();
 
   // Use the actual company data and mutation hook
-  const { data: currentCompany } = useCurrentCompany();
+  const { data: currentCompanyResult } = useCurrentCompany();
+  const currentCompany = currentCompanyResult?.data;
   const updateInvoiceTemplateMutation = useUpdateCompanyInvoiceTemplate();
 
   const formatCurrency = (amount: number) => amount.toFixed(2);

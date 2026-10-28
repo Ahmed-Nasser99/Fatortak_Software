@@ -8,6 +8,7 @@ using fatortak.Helpers;
 using fatortak.Services.AccountingPostingService;
 using fatortak.Services.AccountingService;
 using fatortak.Services.ProjectService;
+using fatortak.Services.QuotaService;
 using fatortak.Services.TransactionService;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
@@ -24,6 +25,8 @@ namespace fatortak.Services.InvoiceService
         private readonly IAccountingPostingService _accountingPostingService;
         private readonly IAccountingService _accountingService;
         private readonly IProjectService _projectService;
+        private readonly IPublicInvoiceTokenService _publicInvoiceTokenService;
+        private readonly IQuotaService _quotaService;
 
         public InvoiceService(
             ApplicationDbContext context,
@@ -33,7 +36,9 @@ namespace fatortak.Services.InvoiceService
             ITransactionService transactionService,
             IAccountingPostingService accountingPostingService,
             IAccountingService accountingService,
-            IProjectService projectService)
+            IProjectService projectService,
+            IPublicInvoiceTokenService publicInvoiceTokenService,
+            IQuotaService quotaService)
         {
             _context = context;
             _logger = logger;
@@ -43,6 +48,8 @@ namespace fatortak.Services.InvoiceService
             _accountingPostingService = accountingPostingService;
             _accountingService = accountingService;
             _projectService = projectService;
+            _publicInvoiceTokenService = publicInvoiceTokenService;
+            _quotaService = quotaService;
         }
 
         private Guid TenantId => GetCurrentTenantId();
@@ -53,6 +60,10 @@ namespace fatortak.Services.InvoiceService
 
             try
             {
+                if (!await _quotaService.CanCreateInvoiceAsync(TenantId))
+                    return ServiceResult<InvoiceDto>.Failure(
+                        "Monthly invoice limit reached. Upgrade your plan to create more invoices.");
+
                 var userId = new Guid(UserHelper.GetUserId());
                 var company = await _context.Companies.FirstOrDefaultAsync(c => c.TenantId == TenantId);
                 if (company == null)
@@ -168,7 +179,8 @@ namespace fatortak.Services.InvoiceService
 
                     if (itemDto.ItemId.HasValue)
                     {
-                        item = await _context.Items.FindAsync(itemDto.ItemId.Value);
+                        item = await _context.Items.FirstOrDefaultAsync(
+                            i => i.Id == itemDto.ItemId.Value && i.TenantId == TenantId);
                     }
                     else if (!string.IsNullOrWhiteSpace(itemDto.Name))
                     {
@@ -236,7 +248,8 @@ namespace fatortak.Services.InvoiceService
                 await _context.SaveChangesAsync();
 
                 // Handle final status and inventory updates ONLY if not staying in Draft
-                if (dto.Status.ToLower() == InvoiceStatus.Paid.ToString().ToLower() || dto.Status.ToLower() == InvoiceStatus.PartialPaid.ToString().ToLower())
+                if (dto.Status?.ToLower() == InvoiceStatus.Paid.ToString().ToLower() ||
+                    dto.Status?.ToLower() == InvoiceStatus.PartialPaid.ToString().ToLower())
                 {
                     await UpdateInventoryForInvoiceAsync(invoice, dto.InvoiceType);
 
@@ -282,6 +295,10 @@ namespace fatortak.Services.InvoiceService
 
             try
             {
+                if (!await _quotaService.CanCreateInvoiceAsync(TenantId))
+                    return ServiceResult<InvoiceDto>.Failure(
+                        "Monthly invoice limit reached. Upgrade your plan to create more invoices.");
+
                 var userId = new Guid(UserHelper.GetUserId());
                 var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id == dto.CustomerId && c.TenantId == TenantId);
                 if (customer == null)
@@ -375,7 +392,8 @@ namespace fatortak.Services.InvoiceService
                 foreach (var itemDto in dto.Items)
                 {
                     var item = itemDto.ItemId != null
-                        ? await _context.Items.FindAsync(itemDto.ItemId)
+                        ? await _context.Items.FirstOrDefaultAsync(
+                            i => i.Id == itemDto.ItemId && i.TenantId == TenantId)
                         : null;
 
                     var unitPrice = itemDto.UnitPrice > 0 ? itemDto.UnitPrice : item?.UnitPrice ?? 0;
@@ -415,7 +433,9 @@ namespace fatortak.Services.InvoiceService
                 await _context.SaveChangesAsync();
 
                 // Handle final status and inventory updates ONLY if not staying in Draft
-                if (dto.Status.ToLower() == InvoiceStatus.Paid.ToString().ToLower() || dto.Status.ToLower() == InvoiceStatus.PartialPaid.ToString().ToLower() || dto.Status.ToLower() == InvoiceStatus.Pending.ToString().ToLower())
+                if (dto.Status?.ToLower() == InvoiceStatus.Paid.ToString().ToLower() ||
+                    dto.Status?.ToLower() == InvoiceStatus.PartialPaid.ToString().ToLower() ||
+                    dto.Status?.ToLower() == InvoiceStatus.Pending.ToString().ToLower())
                 {
                     await UpdateInventoryForInvoiceAsync(invoice, dto.InvoiceType);
 
@@ -553,10 +573,13 @@ namespace fatortak.Services.InvoiceService
             }
         }
         #endregion
-        public async Task<ServiceResult<InvoiceDto>> GetPublicInvoiceAsync(Guid invoiceId)
+        public async Task<ServiceResult<InvoiceDto>> GetPublicInvoiceAsync(Guid invoiceId, string? token)
         {
             try
             {
+                if (!_publicInvoiceTokenService.Validate(invoiceId, token))
+                    return ServiceResult<InvoiceDto>.Failure("This invoice link is invalid or has expired.");
+
                 var invoice = await _context.Invoices
                     .Include(i => i.Customer)
                     .Include(i => i.Installments)
@@ -850,7 +873,8 @@ namespace fatortak.Services.InvoiceService
                     {
                         if (existingItem.ItemId.HasValue)
                         {
-                            var item = await _context.Items.FindAsync(existingItem.ItemId.Value);
+                            var item = await _context.Items.FirstOrDefaultAsync(
+                                i => i.Id == existingItem.ItemId.Value && i.TenantId == TenantId);
                             if (item != null)
                             {
                                 // Revert previous inventory change
@@ -1491,40 +1515,56 @@ namespace fatortak.Services.InvoiceService
                 .FirstOrDefaultAsync(i => i.Id == installmentId && i.TenantId == TenantId);
 
             if (installment == null) return ServiceResult<bool>.Failure("Installment not found");
+            if (string.Equals(installment.Status, InstallmentStatus.Paid.ToString(),
+                    StringComparison.OrdinalIgnoreCase))
+                return ServiceResult<bool>.Failure("Installment is already paid.");
 
-            installment.Status = InstallmentStatus.Paid.ToString();
-            installment.PaidAt = DateTime.UtcNow;
-
-            installment.Invoice.AmountPaid += installment.Amount;
-
-            // Update invoice status
-            if (installment.Invoice.AmountPaid >= installment.Invoice.Total)
+            await using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                installment.Invoice.Status = InvoiceStatus.Paid.ToString();
-                installment.Invoice.PaidAt = DateTime.UtcNow;
+                installment.Status = InstallmentStatus.Paid.ToString();
+                installment.PaidAt = DateTime.UtcNow;
+
+                installment.Invoice.AmountPaid += installment.Amount;
+
+                // Update invoice status
+                if (installment.Invoice.AmountPaid >= installment.Invoice.Total)
+                {
+                    installment.Invoice.Status = InvoiceStatus.Paid.ToString();
+                    installment.Invoice.PaidAt = DateTime.UtcNow;
+                }
+                else
+                {
+                    installment.Invoice.Status = InvoiceStatus.PartialPaid.ToString();
+                }
+
+                // Trigger project status check if project is linked and invoice is now paid
+                if (installment.Invoice.ProjectId.HasValue && installment.Invoice.Status == InvoiceStatus.Paid.ToString())
+                {
+                    await _projectService.CompleteProjectIfInvoicesPaidAsync(installment.Invoice.ProjectId.Value);
+                }
+
+                // Register the payment
+                var payment = await RegisterPaymentAsync(installment.Invoice, installment.Amount);
+                if (payment == null)
+                    throw new InvalidOperationException("Failed to post the installment payment.");
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return ServiceResult<bool>.SuccessResult(true);
             }
-            else
+            catch (Exception ex)
             {
-                installment.Invoice.Status = InvoiceStatus.PartialPaid.ToString();
+                await transaction.RollbackAsync();
+                _logger.LogError(ex, "Error paying installment {InstallmentId}", installmentId);
+                return ServiceResult<bool>.Failure("Failed to pay the installment.");
             }
-
-            // Trigger project status check if project is linked and invoice is now paid
-            if (installment.Invoice.ProjectId.HasValue && installment.Invoice.Status == InvoiceStatus.Paid.ToString())
-            {
-                await _projectService.CompleteProjectIfInvoicesPaidAsync(installment.Invoice.ProjectId.Value);
-            }
-
-            // Register the payment
-            await RegisterPaymentAsync(installment.Invoice, installment.Amount);
-
-            await _context.SaveChangesAsync();
-            return ServiceResult<bool>.SuccessResult(true);
         }
 
         public async Task<IEnumerable<InstallmentDto>> GetInstallmentsByInvoiceIdAsync(Guid invoiceId)
         {
             return await _context.Installments
-                .Where(i => i.InvoiceId == invoiceId)
+                .Where(i => i.InvoiceId == invoiceId && i.TenantId == TenantId)
                 .OrderBy(i => i.DueDate)
                 .Select(i => new InstallmentDto
                 {
@@ -1540,7 +1580,8 @@ namespace fatortak.Services.InvoiceService
 
         public async Task<InstallmentDto> GetInstallmentByIdAsync(Guid installmentId)
         {
-            var installment = await _context.Installments.FindAsync(installmentId);
+            var installment = await _context.Installments
+                .FirstOrDefaultAsync(i => i.Id == installmentId && i.TenantId == TenantId);
             if (installment == null) return null;
 
             return new InstallmentDto
@@ -1642,9 +1683,10 @@ namespace fatortak.Services.InvoiceService
 
         private decimal CalculateLineTotal(decimal quantity, decimal unitPrice, decimal discount, decimal vatRate)
         {
-            var totalDiscount = (quantity * unitPrice) * discount;
-            var totalVatRate = (quantity * unitPrice) * vatRate;
-            return ((quantity * unitPrice) + totalVatRate) - totalDiscount;
+            // Discount is applied before VAT, matching CalculateInvoiceTotals
+            // and the invoice-level total.
+            var net = quantity * unitPrice * (1 - discount);
+            return net + (net * vatRate);
         }
 
         // Method to calculate invoice totals dynamically
@@ -1699,7 +1741,8 @@ namespace fatortak.Services.InvoiceService
                 ProjectName = invoice.Project?.Name,
                 CreatedAt = invoice.CreatedAt,
                 PaidAt = invoice.PaidAt,
-                AttachmentUrl = invoice.AttachmentUrl
+                AttachmentUrl = invoice.AttachmentUrl,
+                PublicToken = _publicInvoiceTokenService.Create(invoice.Id, invoice.TenantId)
             };
         }
 
@@ -1754,8 +1797,85 @@ namespace fatortak.Services.InvoiceService
             UpdatedAt = company.UpdatedAt
         };
 
+        public async Task<ServiceResult<InvoiceDto>> MarkPaidAsync(Guid invoiceId, MarkPaidDto dto)
+        {
+            var invoice = await _context.Invoices
+                .Include(i => i.Customer)
+                .FirstOrDefaultAsync(i => i.Id == invoiceId && i.TenantId == TenantId);
+
+            if (invoice == null)
+                return ServiceResult<InvoiceDto>.Failure("Invoice not found.");
+
+            if (invoice.Status == InvoiceStatus.Cancelled.ToString())
+                return ServiceResult<InvoiceDto>.Failure("Cannot mark a cancelled invoice as paid.");
+
+            if (invoice.Status == InvoiceStatus.Paid.ToString() &&
+                (invoice.AmountPaid ?? 0) >= invoice.Total)
+            {
+                var current = await GetInvoiceWithRelations(invoiceId);
+                return ServiceResult<InvoiceDto>.SuccessResult(MapToDto(current));
+            }
+
+            var remaining = invoice.Total - (invoice.AmountPaid ?? 0);
+            if (remaining > 0)
+            {
+                var payment = await RecordPaymentAsync(invoiceId, new RecordPaymentDto
+                {
+                    Amount = remaining,
+                    PaymentMethod = string.IsNullOrWhiteSpace(dto.PaymentMethod)
+                        ? "Cash"
+                        : dto.PaymentMethod,
+                    PaymentDate = dto.PaidDate ?? DateTime.UtcNow
+                });
+
+                if (!payment.Success)
+                    return ServiceResult<InvoiceDto>.Failure(
+                        payment.ErrorMessage ?? "Failed to record payment.");
+            }
+
+            var updated = await GetInvoiceWithRelations(invoiceId);
+            return ServiceResult<InvoiceDto>.SuccessResult(MapToDto(updated));
+        }
+
+        public async Task<ServiceResult<InvoiceDto>> DuplicateInvoiceAsync(Guid invoiceId)
+        {
+            var source = await GetInvoiceWithRelations(invoiceId);
+            if (source == null)
+                return ServiceResult<InvoiceDto>.Failure("Invoice not found.");
+
+            if (!source.CustomerId.HasValue)
+                return ServiceResult<InvoiceDto>.Failure("Invoice has no customer.");
+
+            var dto = new InvoiceCreateDto
+            {
+                CustomerId = source.CustomerId.Value,
+                BranchId = source.BranchId,
+                ProjectId = source.ProjectId,
+                InvoiceType = source.InvoiceType,
+                Status = InvoiceStatus.Draft.ToString(),
+                Notes = source.Notes,
+                Terms = source.Terms,
+                IssueDate = DateTime.UtcNow,
+                DueDate = DateTime.UtcNow.AddDays(30),
+                DownPayment = 0,
+                Benefits = 0,
+                Items = source.InvoiceItems.Select(item => new InvoiceItemCreateDto
+                {
+                    ItemId = item.ItemId ?? Guid.Empty,
+                    Description = item.Description,
+                    Quantity = (int)(item.Quantity ?? 0),
+                    UnitPrice = item.UnitPrice ?? 0,
+                    VatRate = item.VatRate ?? 0,
+                    Discount = item.Discount ?? 0
+                }).ToList()
+            };
+
+            return await CreateInvoiceAsync(dto);
+        }
+
         public async Task<ServiceResult<bool>> RecordPaymentAsync(Guid invoiceId, RecordPaymentDto dto)
         {
+            await using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 if (dto.File != null && dto.File.Length > 0)
@@ -1769,6 +1889,12 @@ namespace fatortak.Services.InvoiceService
 
                 if (invoice == null)
                     return ServiceResult<bool>.Failure("Invoice not found.");
+
+                if (invoice.Status == InvoiceStatus.Cancelled.ToString())
+                    return ServiceResult<bool>.Failure("Cannot record a payment against a cancelled invoice.");
+
+                if (invoice.Status == InvoiceStatus.Paid.ToString())
+                    return ServiceResult<bool>.Failure("Invoice is already paid.");
 
                 if (dto.Amount <= 0)
                     return ServiceResult<bool>.Failure("Payment amount must be greater than zero.");
@@ -1822,6 +1948,12 @@ namespace fatortak.Services.InvoiceService
                 // Register payment (Transaction + Accounting Entry + optional Cheque)
                 var transactionResponse = await RegisterPaymentAsync(invoice, dto.Amount, dto.PaymentMethod, dto.AttachmentUrl, dto.PaymentAccountId, dto.PaymentDate);
 
+                if (transactionResponse == null)
+                {
+                    await transaction.RollbackAsync();
+                    return ServiceResult<bool>.Failure("Failed to post the payment to the ledger.");
+                }
+
                 if (dto.PaymentMethod?.ToLower() == "cheque" && !string.IsNullOrEmpty(dto.ChequeNumber))
                 {
                     var cheque = new Cheque
@@ -1847,10 +1979,12 @@ namespace fatortak.Services.InvoiceService
                     await _projectService.CompleteProjectIfInvoicesPaidAsync(invoice.ProjectId.Value);
                 }
 
+                await transaction.CommitAsync();
                 return ServiceResult<bool>.SuccessResult(true);
             }
             catch (Exception ex)
             {
+                await transaction.RollbackAsync();
                 _logger.LogError(ex, "Error recording partial payment for invoice {InvoiceId}", invoiceId);
                 return ServiceResult<bool>.Failure("Failed to record payment.");
             }
@@ -1903,8 +2037,8 @@ namespace fatortak.Services.InvoiceService
                         var invoicePosted = await _accountingPostingService.PostInvoiceAsync(invoice.Id);
                         if (!invoicePosted)
                         {
-                            _logger.LogWarning("Failed to auto-post invoice {InvoiceId} before payment registration.", invoice.Id);
-                            // We continue anyway mapping to the transaction, but accounting entries might be out of sync
+                            throw new InvalidOperationException(
+                                $"Failed to post invoice {invoice.Id} before recording its payment.");
                         }
                     }
 
@@ -1915,14 +2049,18 @@ namespace fatortak.Services.InvoiceService
                         paymentAccountId,
                         paymentMethod); // Pass the Transaction ID, Payment Account ID, and Payment Method
 
-                    if (paymentPosted)
+                    if (!paymentPosted)
                     {
-                        _logger.LogInformation("Successfully auto-posted payment for invoice {InvoiceId} to accounting (Amount: {Amount})", invoice.Id, amount);
+                        throw new InvalidOperationException(
+                            $"Failed to post payment for invoice {invoice.Id} to accounting.");
                     }
+
+                    _logger.LogInformation("Successfully auto-posted payment for invoice {InvoiceId} to accounting (Amount: {Amount})", invoice.Id, amount);
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "Error auto-posting payment for invoice {InvoiceId} to accounting", invoice.Id);
+                    throw;
                 }
                 
                 return transactionResult.Data;
@@ -1947,13 +2085,25 @@ namespace fatortak.Services.InvoiceService
 
         private async Task<string> SaveFile(IFormFile file, string subFolder)
         {
+            if (file.Length <= 0 || file.Length > 10 * 1024 * 1024)
+                throw new InvalidOperationException("Attachment must be between 1 byte and 10MB.");
+
+            var allowedExtensions = new[]
+            {
+                ".pdf", ".jpg", ".jpeg", ".png", ".webp", ".gif",
+                ".doc", ".docx", ".xls", ".xlsx", ".csv", ".txt"
+            };
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!allowedExtensions.Contains(extension))
+                throw new InvalidOperationException("This attachment type is not allowed.");
+
             var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", subFolder);
             if (!Directory.Exists(uploadsFolder))
             {
                 Directory.CreateDirectory(uploadsFolder);
             }
 
-            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            var uniqueFileName = Guid.NewGuid().ToString("N") + extension;
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
             using (var fileStream = new FileStream(filePath, FileMode.Create))

@@ -179,14 +179,15 @@ namespace fatortak.Services.AccountingPostingService
                         Description = $"Invoice {invoice.InvoiceNumber} - Receivable"
                     });
 
-                    // Cr Sales Revenue (Subtotal)
+                    // Cr Sales Revenue (net of VAT; includes discounts and benefits)
+                    // Total = net revenue + VAT, so revenue = Total - VAT.
                     _context.JournalEntryLines.Add(new JournalEntryLine
                     {
                         Id = Guid.NewGuid(),
                         JournalEntryId = journalEntry.Id,
                         AccountId = salesRevenueAccount.Id,
                         Debit = 0,
-                        Credit = invoice.Total,
+                        Credit = invoice.Total - invoice.VatAmount,
                         Description = $"Invoice {invoice.InvoiceNumber} - Revenue"
                     });
 
@@ -217,13 +218,14 @@ namespace fatortak.Services.AccountingPostingService
                         return false;
                     }
 
-                    // Dr Expense Account (Subtotal)
+                    // Dr Expense/Inventory Account (net of VAT; includes discounts and benefits)
+                    // Total = net cost + VAT, so net cost = Total - VAT.
                     _context.JournalEntryLines.Add(new JournalEntryLine
                     {
                         Id = Guid.NewGuid(),
                         JournalEntryId = journalEntry.Id,
                         AccountId = expenseAccount.Id,
-                        Debit = invoice.Subtotal,
+                        Debit = invoice.Total - invoice.VatAmount,
                         Credit = 0,
                         Description = $"Purchase Invoice {invoice.InvoiceNumber} - Expense"
                     });
@@ -252,6 +254,21 @@ namespace fatortak.Services.AccountingPostingService
                         Credit = invoice.Total,
                         Description = $"Purchase Invoice {invoice.InvoiceNumber} - Payable"
                     });
+                }
+
+                var postedLines = _context.JournalEntryLines.Local
+                    .Where(l => l.JournalEntryId == journalEntry.Id)
+                    .ToList();
+
+                var totalDebit = postedLines.Sum(l => l.Debit);
+                var totalCredit = postedLines.Sum(l => l.Credit);
+                if (Math.Abs(totalDebit - totalCredit) > 0.01m)
+                {
+                    _logger.LogError(
+                        "Refusing to post unbalanced invoice journal {InvoiceId}: debit {Debit}, credit {Credit}",
+                        invoiceId, totalDebit, totalCredit);
+                    if (transaction != null) await transaction.RollbackAsync();
+                    return false;
                 }
 
                 await _context.SaveChangesAsync();
@@ -285,7 +302,7 @@ namespace fatortak.Services.AccountingPostingService
                 var existingEntry = await _context.JournalEntries
                     .FirstOrDefaultAsync(je => je.TenantId == TenantId &&
                                                je.ReferenceType == JournalEntryReferenceType.Expense &&
-                                               je.Description != null && je.Description.Contains($"Expense ID: {expenseId}") &&
+                                               je.Description != null && je.Description.StartsWith($"Expense ID: {expenseId} ") &&
                                                je.IsPosted);
 
                 if (existingEntry != null)
@@ -764,7 +781,7 @@ namespace fatortak.Services.AccountingPostingService
             var entry = await _context.JournalEntries
                 .FirstOrDefaultAsync(je => je.TenantId == TenantId &&
                                            je.ReferenceType == JournalEntryReferenceType.Expense &&
-                                           je.Description != null && je.Description.Contains($"Expense ID: {expenseId}") &&
+                                           je.Description != null && je.Description.StartsWith($"Expense ID: {expenseId} ") &&
                                            je.IsPosted);
 
             return entry != null;

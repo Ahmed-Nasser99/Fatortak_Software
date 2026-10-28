@@ -99,6 +99,9 @@ const ChartOfAccounts: React.FC = () => {
     [AccountType.Equity]: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
     [AccountType.Revenue]: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
     [AccountType.Expense]: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+    [AccountType.Cash]: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
+    [AccountType.Bank]: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
+    [AccountType.Other]: "bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-200",
   };
 
   const toggleExpand = (accountId: string) => {
@@ -332,8 +335,12 @@ const ChartOfAccounts: React.FC = () => {
                 />
               </div>
               <Select
-                value={selectedAccountType}
-                onValueChange={(val) => setSelectedAccountType(val as any)}
+                value={String(selectedAccountType)}
+                onValueChange={(val) =>
+                  setSelectedAccountType(
+                    val === "all" ? "all" : (Number(val) as AccountType)
+                  )
+                }
               >
                 <SelectTrigger className="w-full md:w-56 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                   <SelectValue />

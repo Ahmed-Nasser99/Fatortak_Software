@@ -4,6 +4,7 @@ export interface EmployeeDto {
   email: string;
   phone: string;
   position: string;
+  departmentId?: string;
   departmentName: string;
   hireDate?: Date;
   salary?: number;
@@ -25,7 +26,7 @@ export interface UpdateEmployeeDto {
   email?: string;
   phone?: string;
   position?: string;
-  hireDate?: Date;
+  hireDate?: string;
   salary?: number;
 }
 

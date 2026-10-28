@@ -44,6 +44,8 @@ namespace fatortak.Context
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectLine> ProjectLines { get; set; }
         public DbSet<Cheque> Cheques { get; set; }
+        public DbSet<Stakeholder> Stakeholders { get; set; }
+        public DbSet<StakeholderTransaction> StakeholderTransactions { get; set; }
 
         // Accounting module
         public DbSet<Account> Accounts { get; set; }
@@ -61,6 +63,10 @@ namespace fatortak.Context
                 .WithMany(c => c.Invoices)
                 .HasForeignKey(i => i.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Invoice>()
+                .HasIndex(i => new { i.TenantId, i.InvoiceNumber })
+                .IsUnique();
 
             modelBuilder.Entity<InvoiceItem>()
                 .HasOne(ii => ii.Invoice)
@@ -154,6 +160,30 @@ namespace fatortak.Context
                 .WithMany(p => p.ProjectLines)
                 .HasForeignKey(pl => pl.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Stakeholder>()
+                .HasOne(s => s.Account)
+                .WithMany()
+                .HasForeignKey(s => s.AccountId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<StakeholderTransaction>()
+                .HasOne(t => t.Stakeholder)
+                .WithMany(s => s.Transactions)
+                .HasForeignKey(t => t.StakeholderId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StakeholderTransaction>()
+                .HasOne(t => t.PaymentAccount)
+                .WithMany()
+                .HasForeignKey(t => t.PaymentAccountId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<StakeholderTransaction>()
+                .HasOne(t => t.JournalEntry)
+                .WithMany()
+                .HasForeignKey(t => t.JournalEntryId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }

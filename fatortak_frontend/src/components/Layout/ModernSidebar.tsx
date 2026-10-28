@@ -41,6 +41,7 @@ import {
   BookOpen,
   Calculator,
   Tag,
+  Server,
 } from "lucide-react";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useAuth } from "../../contexts/AuthContext";
@@ -62,7 +63,9 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
   const location = useLocation();
   const navigate = useNavigate();
   const { isRTL, t } = useLanguage();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
+  const canViewInstallation =
+    user?.role === "Admin" || user?.role === "SysAdmin";
   const [activeItem, setActiveItem] = useState("");
   const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({});
 
@@ -167,6 +170,11 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
           name: isRTL ? "الشيكات" : "Cheques",
           path: "/cheques",
           icon: Wallet,
+        },
+        {
+          name: isRTL ? "أصحاب المصلحة" : "Stakeholders",
+          path: "/stakeholders",
+          icon: Users,
         },
       ],
     },
@@ -308,6 +316,15 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
     },
     { name: t("team") || "Team", icon: UserCheck, path: "/team" },
     { name: t("settings") || "Settings", icon: Settings, path: "/settings" },
+    ...(canViewInstallation
+      ? [
+          {
+            name: isRTL ? "بيانات التثبيت" : "Installation insights",
+            icon: Server,
+            path: "/installation",
+          },
+        ]
+      : []),
     // {
     //   name: t("invoiceScanner") || "Invoice Scanner",
     //   icon: ScanText,

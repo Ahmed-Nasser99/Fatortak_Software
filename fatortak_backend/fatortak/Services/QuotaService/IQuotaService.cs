@@ -1,9 +1,11 @@
-﻿using fatortak.Entities;
+﻿using fatortak.Common.Enum;
+using fatortak.Entities;
 
 namespace fatortak.Services.QuotaService
 {
     public interface IQuotaService
     {
+        (int? Invoices, int? Users, int? Ai) GetPlanLimits(SubscriptionPlan? plan);
         Task<bool> CanCreateInvoiceAsync(Guid tenantId);
         Task<bool> CanAddCustomerAsync(Guid tenantId);
         Task<bool> CanAddItemAsync(Guid tenantId);

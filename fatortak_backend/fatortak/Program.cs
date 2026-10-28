@@ -15,6 +15,7 @@ using fatortak.Services.ChequeService;
 using fatortak.Services.CustodyService;
 using fatortak.Services.CustomerService;
 using fatortak.Services.DashboardService;
+using fatortak.Services.Deployment;
 using fatortak.Services.EmailService;
 using fatortak.Services.ExpenseCategoryService;
 using fatortak.Services.ExpenseService;
@@ -31,18 +32,22 @@ using fatortak.Services.NotificationService;
 using fatortak.Services.ProjectService;
 using fatortak.Services.QuotaService;
 using fatortak.Services.ReminderService;
+using fatortak.Services.StakeholderService;
 using fatortak.Services.SubscriptionService;
 using fatortak.Services.TenantService;
 using fatortak.Services.TokenService;
 using fatortak.Services.TransactionService;
 using fatortak.Services.UserService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using StudBook.Helpers;
 using System.Text;
+using System.Threading.RateLimiting;
 
 namespace fatortak
 {
@@ -53,15 +58,56 @@ namespace fatortak
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
+                ?? new[]
+                {
+                    "http://localhost:3000",
+                    "http://localhost:5173",
+                    "http://localhost:5002"
+                };
+
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowAll", policy =>
+                options.AddPolicy("AppCors", policy =>
                 {
                     policy
-                        .AllowAnyOrigin()
+                        .WithOrigins(allowedOrigins)
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
+            });
+
+            builder.Services.AddRateLimiter(options =>
+            {
+                options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+                options.AddPolicy("auth", context =>
+                    RateLimitPartition.GetFixedWindowLimiter(
+                        context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+                        _ => new FixedWindowRateLimiterOptions
+                        {
+                            PermitLimit = 10,
+                            Window = TimeSpan.FromMinutes(1),
+                            QueueLimit = 0
+                        }));
+                options.AddPolicy("ai", context =>
+                    RateLimitPartition.GetFixedWindowLimiter(
+                        context.User.FindFirst("UserId")?.Value ??
+                        context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+                        _ => new FixedWindowRateLimiterOptions
+                        {
+                            PermitLimit = 20,
+                            Window = TimeSpan.FromMinutes(1),
+                            QueueLimit = 0
+                        }));
+                options.AddPolicy("public", context =>
+                    RateLimitPartition.GetFixedWindowLimiter(
+                        context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+                        _ => new FixedWindowRateLimiterOptions
+                        {
+                            PermitLimit = 60,
+                            Window = TimeSpan.FromMinutes(1),
+                            QueueLimit = 0
+                        }));
             });
 
             builder.Services.AddControllers()
@@ -129,6 +175,8 @@ namespace fatortak
             builder.Services.AddScoped<IUserProfileService, UserProfileService>();
             builder.Services.AddScoped<ICustomerService, CustomerService>();
             builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+            builder.Services.AddSingleton<IPublicInvoiceTokenService, PublicInvoiceTokenService>();
+            builder.Services.AddSingleton<IDeploymentMode, DeploymentMode>();
             builder.Services.AddScoped<IItemService, ItemService>();
 
             builder.Services.AddScoped<ITenantService, TenantService>();
@@ -160,6 +208,7 @@ namespace fatortak
             builder.Services.AddScoped<IAccountingPostingService, AccountingPostingService>();
             builder.Services.AddScoped<ICustodyService, CustodyService>();
             builder.Services.AddScoped<IChequeService, ChequeService>();
+            builder.Services.AddScoped<IStakeholderService, StakeholderService>();
             builder.Services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
             builder.Services.AddScoped<IFinancialReportService, fatortak.Services.FinancialReportService.FinancialReportService>();
             #endregion
@@ -168,12 +217,15 @@ namespace fatortak
             builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(option =>
             {
                 // Password settings.
-                option.Password.RequireDigit = false;
-                option.Password.RequireLowercase = false;
-                option.Password.RequireNonAlphanumeric = false;
-                option.Password.RequireUppercase = false;
-                option.Password.RequiredLength = 6;
-                option.Password.RequiredUniqueChars = 0;
+                option.Password.RequireDigit = true;
+                option.Password.RequireLowercase = true;
+                option.Password.RequireNonAlphanumeric = true;
+                option.Password.RequireUppercase = true;
+                option.Password.RequiredLength = 12;
+                option.Password.RequiredUniqueChars = 4;
+                option.Lockout.MaxFailedAccessAttempts = 5;
+                option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+                option.User.RequireUniqueEmail = true;
             })
              .AddEntityFrameworkStores<ApplicationDbContext>()
              .AddDefaultTokenProviders();
@@ -182,7 +234,18 @@ namespace fatortak
             #region Jwt Config
 
             var jwtSettings = builder.Configuration.GetSection("Jwt");
-            var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+            var jwtKey = jwtSettings["Key"];
+            if (string.IsNullOrWhiteSpace(jwtKey) ||
+                Encoding.UTF8.GetByteCount(jwtKey) < 32 ||
+                jwtKey.Contains("your-very-secure-key", StringComparison.OrdinalIgnoreCase) ||
+                jwtKey.Contains("REPLACE_WITH", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException(
+                    "Jwt:Key must be a random secret of at least 32 bytes. " +
+                    "Set Jwt__Key or Jwt:Key in your environment/user secrets.");
+            }
+
+            var key = Encoding.UTF8.GetBytes(jwtKey);
 
             builder.Services.AddAuthentication(options =>
             {
@@ -205,26 +268,65 @@ namespace fatortak
                 };
             });
 
+            builder.Services.AddAuthorization(options =>
+            {
+                // Every endpoint requires an authenticated user unless it is
+                // explicitly marked with [AllowAnonymous].
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
+
             #endregion
 
             var app = builder.Build();
-            app.UseCors("AllowAll");
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+                context.Response.Headers["X-Frame-Options"] = "DENY";
+                context.Response.Headers["Referrer-Policy"] = "no-referrer";
+                context.Response.Headers["Permissions-Policy"] =
+                    "camera=(), microphone=(), geolocation=(), payment=()";
+                await next();
+            });
+
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseHsts();
+            }
+
+            app.UseCors("AppCors");
 
             var httpContextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
             UserHelper.Configure(httpContextAccessor);
             EmailHelper.Initialize(builder.Configuration);
 
-
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
-            app.UseAuthorization();
             app.UseMiddleware<TenantResolutionMiddleware>();
+            app.UseAuthorization();
+            app.UseRateLimiter();
             // app.UseMiddleware<SubscriptionValidationMiddleware>();
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    // Never let a browser render a stored upload as active content.
+                    if (ctx.Context.Request.Path.StartsWithSegments("/uploads"))
+                    {
+                        ctx.Context.Response.Headers["Content-Disposition"] = "attachment";
+                        ctx.Context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+                    }
+                }
+            });
             app.MapControllers();
 
             // Seed data on startup

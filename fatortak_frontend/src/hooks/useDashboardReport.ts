@@ -39,6 +39,8 @@ export interface DashboardStats {
   stockValue: number;
   totalReceivables: number;
   totalPayables: number;
+  totalCustody: number;
+  totalChequesUnderCollection: number;
   revenueBreakdown: RevenueBreakdown;
   expenseBreakdown: ExpenseBreakdown;
   startDate: string;
