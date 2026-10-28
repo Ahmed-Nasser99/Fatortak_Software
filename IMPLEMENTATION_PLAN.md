@@ -71,7 +71,7 @@ Last updated: 2026-10-27
 | P2-7 | E-invoicing (Egypt ETA / Saudi ZATCA), credit/debit notes, recurring invoices | DEFERRED | Product decision |
 | P2-8 | Multi-currency, inventory valuation, bank reconciliation, VAT filing | DEFERRED | Product decision |
 | P2-9 | 2FA/SSO/session management | TODO | Auth tests |
-| P2-10 | Frontend code splitting, React Query cache tuning, accessibility/i18n pass | TODO | Build + manual |
+| P2-10 | Frontend code splitting, React Query cache tuning, accessibility/i18n pass | PARTIAL | Error boundary, shared header/input; code splitting still TODO |
 | P2-11 | Marketing copy: remove security claims until code matches; rotate demo password | TODO | Content review |
 
 ## Product expansion

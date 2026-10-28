@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
+import ErrorBoundary from "./components/ErrorBoundary";
 import "./index.css";
 import Tracker from "@openreplay/tracker";
 import trackerAssist from "@openreplay/tracker-assist";
@@ -21,4 +22,8 @@ if (openReplayKey) {
 }
 
 const root = createRoot(rootElement);
-root.render(<App />);
+root.render(
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
+);
