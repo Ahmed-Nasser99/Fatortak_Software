@@ -34,7 +34,7 @@ subscriptions/quotas explicitly.
 ## Quick start
 
 ```bash
-git clone https://github.com/Ahmed-Nasser99/Fatortak_Software.git
+git clone https://github.com/Fatortak/Fatortak_Software.git
 cd Fatortak_Software
 cp .env.docker.example .env
 ```

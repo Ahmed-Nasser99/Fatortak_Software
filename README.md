@@ -122,7 +122,7 @@ More detail: [docs/architecture.md](docs/architecture.md).
 ### 1. Clone
 
 ```bash
-git clone https://github.com/Ahmed-Nasser99/Fatortak_Software.git
+git clone https://github.com/Fatortak/Fatortak_Software.git
 cd Fatortak_Software
 ```
 
@@ -223,8 +223,8 @@ See [docs/roadmap.md](docs/roadmap.md). Highlights:
 Contributions are welcome — code, docs, translations, bug reports and design.
 
 1. Read [CONTRIBUTING.md](CONTRIBUTING.md).
-2. Pick an issue labeled [`good first issue`](https://github.com/Ahmed-Nasser99/Fatortak_Software/labels/good%20first%20issue).
-3. Join the discussion in [GitHub Discussions](https://github.com/Ahmed-Nasser99/Fatortak_Software/discussions).
+2. Pick an issue labeled [`good first issue`](https://github.com/Fatortak/Fatortak_Software/labels/good%20first%20issue).
+3. Join the discussion in [GitHub Discussions](https://github.com/Fatortak/Fatortak_Software/discussions).
 4. Follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 Great places to start:
@@ -260,5 +260,5 @@ Please do not open public issues for security vulnerabilities. See [SECURITY.md]
 ---
 
 <p align="center">
-  Built in Egypt 🇪🇬 for MENA businesses · <a href="https://github.com/Ahmed-Nasser99/Fatortak_Software">Star the repo</a> if Fatortak saves you time.
+  Built in Egypt 🇪🇬 for MENA businesses · <a href="https://github.com/Fatortak/Fatortak_Software">Star the repo</a> if Fatortak saves you time.
 </p>
