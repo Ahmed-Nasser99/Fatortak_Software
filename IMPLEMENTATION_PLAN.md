@@ -129,7 +129,7 @@ Last updated: 2026-10-27
 
 ## Verification log
 
-- 2026-10-28: committed and pushed `2955b6b` to `origin/main`.
+- 2026-10-28: committed and pushed `2955b6b`, `9862e73`, `5c166e4` and `fb9961e` to `origin/main`.
 - Backend: `dotnet build fatortak.sln` → 0 errors.
 - Frontend: `npx tsc -p tsconfig.app.json --noEmit` → 0 errors.
 - Frontend: `npm run build` → success; one 3.26 MB chunk (857 KB gzip).
@@ -139,6 +139,7 @@ Last updated: 2026-10-27
 - Health checks: `GET /health` and `GET /ready` added.
 - Payroll period uniqueness: migration `20261028103009_AddPayrollPeriodUniqueIndex` with duplicate cleanup.
 - Browser auth now uses an HttpOnly, SameSite=Lax JWT cookie; JWTs are no longer persisted in localStorage. `/api/auth/me` validates the session on reload.
+- Dependabot updates were rebased onto the branch; `npm install` + typecheck + production build verified with the updated dependency tree.
 
 ## Remaining work (next commits)
 
