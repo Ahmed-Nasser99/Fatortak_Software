@@ -55,7 +55,7 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {},
     additionalHeaders: Record<string, string> = {},
-    config?: { responseType?: "json" | "blob" }
+    config?: { responseType?: "json" | "blob"; skipAuthRedirect?: boolean }
   ): Promise<ServiceResult<T>> {
     const url = `${this.baseURL}${endpoint}`;
     const isFormData = options.body instanceof FormData;
@@ -78,8 +78,12 @@ class ApiClient {
       if (!response.ok) {
         if (response.status === 401) {
           this.clearToken();
-          // Only redirect if we're not already on the login page
-          if (!window.location.pathname.includes("/login")) {
+          // Only redirect if we're not already on the login page and the
+          // caller did not explicitly opt out (e.g. session bootstrap).
+          if (
+            !config?.skipAuthRedirect &&
+            !window.location.pathname.includes("/login")
+          ) {
             window.location.href = "/login";
           }
           throw new Error("Unauthorized");
@@ -160,7 +164,7 @@ class ApiClient {
   async get<T>(
     endpoint: string,
     params?: Record<string, any>,
-    config?: { responseType?: "json" | "blob" }
+    config?: { responseType?: "json" | "blob"; skipAuthRedirect?: boolean }
   ): Promise<ServiceResult<T>> {
     let url = endpoint;
     if (params) {

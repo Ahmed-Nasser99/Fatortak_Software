@@ -37,7 +37,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const initializeAuth = async () => {
       try {
-        const result = await apiClient.get<any>("/api/auth/me");
+        const result = await apiClient.get<any>("/api/auth/me", undefined, {
+          skipAuthRedirect: true,
+        });
         if (result.success && result.data) {
           setUser(result.data.user);
           setTenant(result.data.tenant ?? null);
