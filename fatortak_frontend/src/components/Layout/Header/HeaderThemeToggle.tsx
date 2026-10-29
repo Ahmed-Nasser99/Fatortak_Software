@@ -13,7 +13,7 @@ const HeaderThemeToggle: React.FC = () => {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      className="hover:bg-gray-100/80 dark:hover:bg-gray-800/80 transition-all duration-200 hover:scale-105 rounded-xl group"
+      className="hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-all duration-200  rounded-xl group"
     >
       <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-xl ${
         theme === 'light' 

@@ -35,7 +35,7 @@ const VendorStatement: React.FC = () => {
           </Button>
           <div>
             <h1 className="text-2xl font-bold">{isRTL ? "كشف حساب مورد" : "Vendor Statement"}</h1>
-            <p className="text-sm text-gray-500">{isRTL ? "كشف تفصيلي لمستحقات ومدفوعات المورد" : "Detailed statement of vendor bills and payments"}</p>
+            <p className="text-sm text-slate-500">{isRTL ? "كشف تفصيلي لمستحقات ومدفوعات المورد" : "Detailed statement of vendor bills and payments"}</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -46,7 +46,7 @@ const VendorStatement: React.FC = () => {
         </div>
       </div>
 
-      <Card className="bg-gray-50 dark:bg-gray-800/50 border-none shadow-sm">
+      <Card className="bg-slate-50 dark:bg-slate-800/50 border-none shadow-sm">
         <CardContent className="p-4 flex flex-wrap items-end gap-4">
           <div className="flex-1 min-w-[300px] flex flex-col gap-1">
             <Label className="text-xs">{isRTL ? "اختر المورد" : "Select Vendor"}</Label>
@@ -76,23 +76,23 @@ const VendorStatement: React.FC = () => {
 
       {!selectedVendorId ? (
         <div className="py-20 text-center flex flex-col items-center gap-4 border-2 border-dashed rounded-xl">
-           <Truck className="w-12 h-12 text-gray-300" />
-           <p className="text-gray-500">{isRTL ? "يرجى اختيار مورد لعرض كشف الحساب" : "Please select a vendor to view their statement"}</p>
+           <Truck className="w-12 h-12 text-slate-300" />
+           <p className="text-slate-500">{isRTL ? "يرجى اختيار مورد لعرض كشف الحساب" : "Please select a vendor to view their statement"}</p>
         </div>
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-950 dark:text-white dark:border-gray-800/50 overflow-hidden">
-              <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/5">
-                <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400 font-mono">{isRTL ? "الرصيد الافتتاحي" : "Opening Balance"}</CardTitle>
+            <Card className="bg-slate-100 text-slate-900 border-slate-200 dark:bg-slate-950 dark:text-white dark:border-slate-800/50 overflow-hidden">
+              <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/5">
+                <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 font-mono">{isRTL ? "الرصيد الافتتاحي" : "Opening Balance"}</CardTitle>
               </CardHeader>
               <CardContent className="pt-4 px-6 pb-6">
                 <div className="text-2xl lg:text-3xl font-bold font-mono">{formatCurrency(response?.openingBalance || 0)}</div>
               </CardContent>
             </Card>
-            <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-950 dark:text-white dark:border-gray-800/50 overflow-hidden shadow-xl">
-              <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/10">
-                <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-300 font-mono">{isRTL ? "الرصيد الختامي" : "Closing Balance"}</CardTitle>
+            <Card className="bg-slate-100 text-slate-900 border-slate-200 dark:bg-slate-950 dark:text-white dark:border-slate-800/50 overflow-hidden">
+              <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/10">
+                <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-300 font-mono">{isRTL ? "الرصيد الختامي" : "Closing Balance"}</CardTitle>
               </CardHeader>
               <CardContent className="pt-4 px-6 pb-6">
                 <div className="text-2xl lg:text-3xl font-bold font-mono">{formatCurrency(response?.closingBalance || 0)}</div>
@@ -101,8 +101,8 @@ const VendorStatement: React.FC = () => {
           </div>
 
           <Card>
-            <CardHeader className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
-              <CardTitle className="text-sm font-bold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{isRTL ? "تفاصيل كشف الحساب" : "Statement Details"}</CardTitle>
+            <CardHeader className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700">
+              <CardTitle className="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">{isRTL ? "تفاصيل كشف الحساب" : "Statement Details"}</CardTitle>
             </CardHeader>
             <CardContent className="p-0">
                {isLoading ? <div className="p-20 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div> : (
@@ -112,9 +112,9 @@ const VendorStatement: React.FC = () => {
                         <TableHead>{isRTL ? "التاريخ" : "Date"}</TableHead>
                         <TableHead>{isRTL ? "المرجع" : "Reference"}</TableHead>
                         <TableHead>{isRTL ? "البيان" : "Description"}</TableHead>
-                        <TableHead className="text-right">{isRTL ? "مدين (-)" : "Debit (-)"}</TableHead>
-                        <TableHead className="text-right">{isRTL ? "دائن (+)" : "Credit (+)"}</TableHead>
-                        <TableHead className="text-right font-bold">{isRTL ? "الرصيد" : "Balance"}</TableHead>
+                        <TableHead className="text-end">{isRTL ? "مدين (-)" : "Debit (-)"}</TableHead>
+                        <TableHead className="text-end">{isRTL ? "دائن (+)" : "Credit (+)"}</TableHead>
+                        <TableHead className="text-end font-bold">{isRTL ? "الرصيد" : "Balance"}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -123,9 +123,9 @@ const VendorStatement: React.FC = () => {
                               <TableCell className="text-xs">{new Date(entry.date).toLocaleDateString()}</TableCell>
                               <TableCell className="text-xs font-bold text-blue-600">{entry.referenceNumber}</TableCell>
                               <TableCell className="text-sm">{entry.description}</TableCell>
-                              <TableCell className="text-right font-mono text-green-600">{entry.debit > 0 ? formatCurrency(entry.debit) : '-'}</TableCell>
-                              <TableCell className="text-right font-mono text-red-600">{entry.credit > 0 ? formatCurrency(entry.credit) : '-'}</TableCell>
-                              <TableCell className="text-right font-mono font-bold">{formatCurrency(entry.runningBalance)}</TableCell>
+                              <TableCell className="text-end font-mono text-green-600">{entry.debit > 0 ? formatCurrency(entry.debit) : '-'}</TableCell>
+                              <TableCell className="text-end font-mono text-red-600">{entry.credit > 0 ? formatCurrency(entry.credit) : '-'}</TableCell>
+                              <TableCell className="text-end font-mono font-bold">{formatCurrency(entry.runningBalance)}</TableCell>
                            </TableRow>
                         ))}
                     </TableBody>

@@ -42,13 +42,13 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
               </div>
             )}
             <div>
-              <h3 className="text-4xl font-black uppercase tracking-tight mb-2">
+              <h3 className="text-3xl font-bold uppercase tracking-tight mb-2">
                 {company?.name || t("company")}
               </h3>
             </div>
           </div>
-          <div className="text-right rtl:text-left">
-            <div className="text-4xl font-black mb-2">
+          <div className="text-end rtl:text-start">
+            <div className="text-3xl font-bold mb-2">
               {invoice.invoiceNumber}
             </div>
             <div className="flex gap-2 justify-end rtl:justify-start">
@@ -65,7 +65,7 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
       </div>
 
       {/* Content */}
-      <div className="bg-white dark:bg-gray-800 p-10">
+      <div className="bg-white dark:bg-slate-800 p-10">
         {/* Bold Info Boxes */}
         <div className="grid grid-cols-3 gap-6 mb-10">
           <div
@@ -76,13 +76,13 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
             >
               {t("company")}
             </div>
-            <div className="text-gray-900 dark:text-white font-bold text-lg mb-1">
+            <div className="text-slate-900 dark:text-white font-bold text-lg mb-1">
               {company?.name || t("company")}
             </div>
-            <div className="text-gray-600 dark:text-gray-400 text-sm">
+            <div className="text-slate-600 dark:text-slate-400 text-sm">
               {company?.address || t("defaultAddress")}
             </div>
-            <div className="text-gray-600 dark:text-gray-400 text-sm">
+            <div className="text-slate-600 dark:text-slate-400 text-sm">
               {company?.phone || t("defaultPhone")}
             </div>
           </div>
@@ -95,10 +95,10 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
             >
               {t("billTo")}
             </div>
-            <div className="text-gray-900 dark:text-white font-bold text-lg mb-1">
+            <div className="text-slate-900 dark:text-white font-bold text-lg mb-1">
               {invoice.customerName}
             </div>
-            <div className="text-gray-600 dark:text-gray-400 text-sm">
+            <div className="text-slate-600 dark:text-slate-400 text-sm">
               {invoice.customerEmail}
             </div>
           </div>
@@ -111,10 +111,10 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
             >
               {t("dates")}
             </div>
-            <div className="text-gray-900 dark:text-white font-bold mb-1">
+            <div className="text-slate-900 dark:text-white font-bold mb-1">
               {t("issueDate")}: {formatDate(invoice.issueDate)}
             </div>
-            <div className="text-gray-900 dark:text-white font-bold">
+            <div className="text-slate-900 dark:text-white font-bold">
               {t("dueDate")}: {formatDate(invoice.dueDate)}
             </div>
           </div>
@@ -125,16 +125,16 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
           <table className="w-full">
             <thead>
               <tr className={`bg-gradient-to-r ${colors.gradient} text-white`}>
-                <th className="text-left rtl:text-right py-4 px-6 font-black uppercase tracking-wider">
+                <th className="text-start rtl:text-end py-4 px-6 font-bold uppercase tracking-wider">
                   {t("item")}
                 </th>
-                <th className="text-center py-4 px-6 font-black uppercase tracking-wider">
+                <th className="text-center py-4 px-6 font-bold uppercase tracking-wider">
                   {t("qty")}
                 </th>
-                <th className="text-center py-4 px-6 font-black uppercase tracking-wider">
+                <th className="text-center py-4 px-6 font-bold uppercase tracking-wider">
                   {t("price")}
                 </th>
-                <th className="text-right rtl:text-left py-4 px-6 font-black uppercase tracking-wider">
+                <th className="text-end rtl:text-start py-4 px-6 font-bold uppercase tracking-wider">
                   {t("amount")}
                 </th>
               </tr>
@@ -143,25 +143,25 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
               {invoice.items.map((item: any, index: number) => (
                 <tr
                   key={item.id || index}
-                  className="border-b-2 border-gray-200 dark:border-gray-700"
+                  className="border-b-2 border-slate-200 dark:border-slate-700"
                 >
                   <td className="py-4 px-6">
-                    <div className="font-bold text-gray-900 dark:text-white">
+                    <div className="font-bold text-slate-900 dark:text-white">
                       {item.itemName || item.name}
                     </div>
                     {item.description && (
-                      <div className="text-sm text-gray-600 dark:text-gray-400">
+                      <div className="text-sm text-slate-600 dark:text-slate-400">
                         {item.description}
                       </div>
                     )}
                   </td>
-                  <td className="py-4 px-6 text-center font-bold text-gray-900 dark:text-white">
+                  <td className="py-4 px-6 text-center font-bold text-slate-900 dark:text-white">
                     {item.quantity}
                   </td>
-                  <td className="py-4 px-6 text-center font-bold text-gray-900 dark:text-white">
+                  <td className="py-4 px-6 text-center font-bold text-slate-900 dark:text-white">
                     {item.unitPrice?.toFixed(2)}
                   </td>
-                  <td className="py-4 px-6 text-right rtl:text-left font-black text-gray-900 dark:text-white text-lg">
+                  <td className="py-4 px-6 text-end rtl:text-start font-bold text-slate-900 dark:text-white text-lg">
                     {(item.quantity * item.unitPrice)?.toFixed(2)}
                   </td>
                 </tr>
@@ -174,14 +174,14 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
         <div className="flex justify-end">
           <div className="w-96">
             <div className="space-y-3 mb-4">
-              <div className="flex justify-between text-gray-700 dark:text-gray-300">
+              <div className="flex justify-between text-slate-700 dark:text-slate-300">
                 <span className="font-bold uppercase">{t("subtotal")}</span>
                 <span className="font-bold">
                   {formatCurrency(invoice.total - (invoice.vatAmount || 0))}
                 </span>
               </div>
               {invoice.vatAmount > 0 && (
-                <div className="flex justify-between text-gray-700 dark:text-gray-300">
+                <div className="flex justify-between text-slate-700 dark:text-slate-300">
                   <span className="font-bold uppercase">{t("vatLabel")}</span>
                   <span className="font-bold">
                     {formatCurrency(invoice.vatAmount || 0)}
@@ -191,10 +191,10 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
             </div>
             <div className={`${colors.bg} text-white p-6 rounded-2xl`}>
               <div className="flex justify-between items-center">
-                <span className="text-2xl font-black uppercase">
+                <span className="text-2xl font-bold uppercase">
                   {t("total")}
                 </span>
-                <span className="text-4xl font-black">
+                <span className="text-3xl font-bold">
                   {formatCurrency(invoice.total || 0)}
                 </span>
               </div>
@@ -208,11 +208,11 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
             className={`mt-10 p-6 ${colors.bgLight} dark:${colors.bg}/20 border-l-8 border-${colors.primary} rounded-xl`}
           >
             <h3
-              className={`font-black ${colors.text} uppercase tracking-wider mb-3`}
+              className={`font-bold ${colors.text} uppercase tracking-wider mb-3`}
             >
               {t("notes")}
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 font-medium">
+            <p className="text-slate-700 dark:text-slate-300 font-medium">
               {invoice.notes}
             </p>
           </div>
@@ -220,24 +220,24 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
 
         {/* Bold Attachment */}
         {invoice.attachmentUrl && (
-          <div className={`mt-10 p-6 bg-gray-50 dark:bg-gray-800/50 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-3xl`}>
+          <div className={`mt-10 p-6 bg-slate-50 dark:bg-slate-800/50 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl`}>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4 rtl:space-x-reverse">
                 <div className={`p-3 bg-gradient-to-br ${colors.gradient} rounded-2xl shadow-lg`}>
                   <Paperclip className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <div className={`text-xs font-black ${colors.text} uppercase tracking-widest mb-1`}>
+                  <div className={`text-xs font-bold ${colors.text} uppercase tracking-wide mb-1`}>
                     {isRTL ? "تم إرفاق ملف" : "Attachment Linked"}
                   </div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-white">
+                  <div className="text-lg font-bold text-slate-900 dark:text-white">
                     {invoice.attachmentUrl.split('/').pop()}
                   </div>
                 </div>
               </div>
               <button
                 onClick={() => window.open(`${import.meta.env.VITE_API_URL || 'https://localhost:44338'}/${invoice.attachmentUrl}`, '_blank')}
-                className={`px-8 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-black uppercase tracking-widest rounded-xl hover:scale-105 transition-all shadow-xl`}
+                className={`px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold uppercase tracking-wide rounded-xl  transition-all shadow-xl`}
               >
                 {isRTL ? "فتح" : "Open"}
               </button>

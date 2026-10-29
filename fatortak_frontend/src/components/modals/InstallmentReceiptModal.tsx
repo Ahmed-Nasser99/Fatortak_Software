@@ -84,7 +84,7 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
     return (
       configs[statusLower] || {
         color:
-          "bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900/20 dark:text-gray-400",
+          "bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-900/20 dark:text-slate-400",
         icon: <Clock className="w-4 h-4" />,
         text: status,
       }
@@ -180,7 +180,7 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <div className="flex items-center justify-between">
-              <DialogTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+              <DialogTitle className="text-xl font-semibold text-slate-900 dark:text-slate-100">
                 {t("paymentReceipt")}
               </DialogTitle>
             </div>
@@ -189,10 +189,10 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
           <div className="space-y-6" ref={receiptRef}>
             {/* Receipt Header */}
             <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/20 dark:to-indigo-950/20 rounded-lg p-6 border border-purple-200 dark:border-purple-800 text-center">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-1">
                 {t("installmentPaymentReceipt")}
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
                 {t("receipt")} #{installment.id?.slice(0, 8).toUpperCase()}
               </p>
             </div>
@@ -210,42 +210,42 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
             </div>
 
             {/* Invoice Information */}
-            <div className="bg-gray-50 dark:bg-gray-900/20 rounded-lg p-4">
-              <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center">
+            <div className="bg-slate-50 dark:bg-slate-900/20 rounded-lg p-4">
+              <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-3 flex items-center">
                 <FileText className="w-4 h-4 mr-2" />
                 {t("invoiceInformation")}
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-slate-600 dark:text-slate-400">
                     {t("invoiceNumber")}:
                   </span>
-                  <p className="font-medium text-gray-900 dark:text-gray-100">
+                  <p className="font-medium text-slate-900 dark:text-slate-100">
                     {invoice.invoiceNumber}
                   </p>
                 </div>
                 <div>
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-slate-600 dark:text-slate-400">
                     <User className="w-3 h-3 inline mr-1" />
                     {t("customer")}:
                   </span>
-                  <p className="font-medium text-gray-900 dark:text-gray-100">
+                  <p className="font-medium text-slate-900 dark:text-slate-100">
                     {invoice.customerName}
                   </p>
                 </div>
                 <div>
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-slate-600 dark:text-slate-400">
                     {t("invoiceTotal")}:
                   </span>
-                  <p className="font-medium text-gray-900 dark:text-gray-100">
+                  <p className="font-medium text-slate-900 dark:text-slate-100">
                     {formatCurrency(invoice.total)} {invoice.currency || "EGP"}
                   </p>
                 </div>
                 <div>
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-slate-600 dark:text-slate-400">
                     {t("invoiceDate")}:
                   </span>
-                  <p className="font-medium text-gray-900 dark:text-gray-100">
+                  <p className="font-medium text-slate-900 dark:text-slate-100">
                     {formatDate(invoice.issueDate)}
                   </p>
                 </div>
@@ -256,7 +256,7 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
 
             {/* Installment Details */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-gray-900 dark:text-gray-100">
+              <h4 className="font-semibold text-slate-900 dark:text-slate-100">
                 {t("installmentDetails")}
               </h4>
 
@@ -292,11 +292,11 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
                   />
                 )}
 
-                <div className="bg-gray-50 dark:bg-gray-900/20 rounded-lg p-3">
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                <div className="bg-slate-50 dark:bg-slate-900/20 rounded-lg p-3">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">
                     {t("installmentNumber")}
                   </p>
-                  <p className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                  <p className="text-lg font-bold text-slate-900 dark:text-slate-100">
                     #{installmentNo || t("n/a")}
                   </p>
                 </div>
@@ -307,15 +307,15 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
 
             {/* Payment Summary */}
             <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/20 dark:to-indigo-950/20 rounded-lg p-4">
-              <h4 className="font-semibold text-purple-900 dark:text-purple-100 mb-3">
+              <h4 className="font-semibold text-slate-900 dark:text-white mb-3">
                 {t("paymentSummary")}
               </h4>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-slate-600 dark:text-slate-400">
                     {t("installmentAmount")}:
                   </span>
-                  <span className="font-medium text-gray-900 dark:text-gray-100">
+                  <span className="font-medium text-slate-900 dark:text-slate-100">
                     {formatCurrency(installment.amount)}{" "}
                     {invoice.currency || "EGP"}
                   </span>
@@ -325,7 +325,7 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
                     <span className="text-red-600 dark:text-red-400">
                       {t("lateFee")}:
                     </span>
-                    <span className="font-medium text-red-900 dark:text-red-100">
+                    <span className="font-medium text-slate-900 dark:text-white">
                       {formatCurrency(installment.lateFee)}{" "}
                       {invoice.currency || "EGP"}
                     </span>
@@ -333,10 +333,10 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
                 )}
                 <Separator />
                 <div className="flex justify-between items-center text-lg font-semibold">
-                  <span className="text-purple-900 dark:text-purple-100">
+                  <span className="text-slate-900 dark:text-white">
                     {t("totalPaid")}:
                   </span>
-                  <span className="text-purple-900 dark:text-purple-100">
+                  <span className="text-slate-900 dark:text-white">
                     {formatCurrency(totalPaid)} {invoice.currency || "EGP"}
                   </span>
                 </div>
@@ -348,14 +348,14 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <Paperclip className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                    <span className="font-semibold text-blue-900 dark:text-blue-100 italic">
+                    <span className="font-semibold text-slate-900 dark:text-white italic">
                       {isRTL ? "مرفق الدفع" : "Payment Attachment"}
                     </span>
                   </div>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 border-blue-200 dark:border-blue-800"
+                    className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700 border-blue-200 dark:border-blue-800"
                     onClick={() => window.open(`${import.meta.env.VITE_API_URL || 'https://localhost:44338'}/${installment.attachmentUrl}`, '_blank')}
                   >
                     <Eye className="w-4 h-4 mr-2 text-blue-600 dark:text-blue-400" />
@@ -370,7 +370,7 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
               <Button
                 variant="outline"
                 onClick={handlePrint}
-                className="flex-1 border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300"
+                className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300"
               >
                 <Printer className="w-4 h-4 mr-2" />
                 {t("print")}
@@ -378,7 +378,7 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
               <Button
                 variant="outline"
                 onClick={handleDownload}
-                className="flex-1 border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300"
+                className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300"
               >
                 <Download className="w-4 h-4 mr-2" />
                 {t("downloadPDF")}
@@ -399,10 +399,10 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
         <div className="p-8 bg-white text-black">
           <div className="text-center mb-6 border-b pb-4">
             <h1 className="text-2xl font-bold mb-2">{t("paymentReceipt")}</h1>
-            <p className="text-gray-600">
+            <p className="text-slate-600">
               {t("receipt")} #{installment.id?.slice(0, 8).toUpperCase()}
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-slate-500">
               {formatDate(new Date())}
             </p>
           </div>
@@ -462,7 +462,7 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
             </div>
           </div>
 
-          <div className="mb-6 p-4 bg-gray-100 rounded">
+          <div className="mb-6 p-4 bg-slate-100 rounded">
             <h2 className="text-lg font-semibold mb-2">
               {t("paymentSummary")}
             </h2>
@@ -483,7 +483,7 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
                   </span>
                 </div>
               )}
-              <div className="border-t border-gray-300 pt-2 mt-2 flex justify-between font-bold">
+              <div className="border-t border-slate-300 pt-2 mt-2 flex justify-between font-bold">
                 <span>{t("totalPaid")}:</span>
                 <span>
                   {formatCurrency(totalPaid)} {invoice.currency || "EGP"}
@@ -492,7 +492,7 @@ const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = ({
             </div>
           </div>
 
-          <div className="text-center text-sm text-gray-500 mt-8">
+          <div className="text-center text-sm text-slate-500 mt-8">
             <p>{t("thankYouPayment")}</p>
             <p>{t("automatedReceipt")}</p>
           </div>

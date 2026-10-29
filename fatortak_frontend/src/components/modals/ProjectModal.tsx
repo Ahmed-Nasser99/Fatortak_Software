@@ -108,14 +108,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       dir={isRTL ? "rtl" : "ltr"}
     >
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div
-          className={`flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 ${
+          className={`flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700 ${
             isRTL ? "flex-row-reverse" : ""
           }`}
         >
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">
             {isEditing
               ? isRTL
                 ? "تعديل المشروع"
@@ -126,7 +126,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
           </h2>
           <button
             onClick={handleClose}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"
           >
             <X className="w-6 h-6" />
           </button>
@@ -137,18 +137,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Name */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {isRTL ? "اسم المشروع" : "Project Name"} *
               </label>
               <input
                 type="text"
                 {...formik.getFieldProps("name")}
                 disabled={project?.status === ProjectStatus.Completed || project?.status === ProjectStatus.Cancelled}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
                   formik.touched.name && formik.errors.name
                     ? "border-red-500"
-                    : "border-gray-300 dark:border-gray-600"
-                } ${isRTL ? "text-right" : "text-left"} disabled:bg-gray-50 disabled:text-gray-500 cursor-not-allowed`}
+                    : "border-slate-300 dark:border-slate-600"
+                } ${isRTL ? "text-end" : "text-start"} disabled:bg-slate-50 disabled:text-slate-500 cursor-not-allowed`}
                 placeholder={isRTL ? "اسم المشروع" : "Project Name"}
               />
               {formik.touched.name && formik.errors.name && (
@@ -160,7 +160,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
             {/* Client Selector */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {isRTL ? "العميل" : "Client"} *
               </label>
               <div className={project?.status === ProjectStatus.Completed || project?.status === ProjectStatus.Cancelled ? "pointer-events-none opacity-60" : ""}>
@@ -174,15 +174,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
             {/* Status */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {isRTL ? "الحالة" : "Status"}
               </label>
               <select
                 {...formik.getFieldProps("status")}
                 disabled={project?.status === ProjectStatus.Completed || project.status === ProjectStatus.Cancelled}
-                className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  isRTL ? "text-right" : "text-left"
-                } disabled:bg-gray-50 cursor-not-allowed`}
+                className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  isRTL ? "text-end" : "text-start"
+                } disabled:bg-slate-50 cursor-not-allowed`}
               >
                 {Object.values(ProjectStatus)
                   .filter(status => {
@@ -206,16 +206,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
             {/* Contract Value */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {isRTL ? "قيمة العقد" : "Contract Value"}
               </label>
               <input
                 type="number"
                 {...formik.getFieldProps("contractValue")}
                 disabled={project?.status === ProjectStatus.Completed || project?.status === ProjectStatus.Cancelled}
-                className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  isRTL ? "text-right" : "text-left"
-                } disabled:bg-gray-50 cursor-not-allowed`}
+                className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  isRTL ? "text-end" : "text-start"
+                } disabled:bg-slate-50 cursor-not-allowed`}
                 placeholder="0.00"
               />
                {formik.touched.contractValue && formik.errors.contractValue && (
@@ -227,16 +227,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
             {/* Discount */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {isRTL ? "الخصم" : "Discount"}
               </label>
               <input
                 type="number"
                 {...formik.getFieldProps("discount")}
                 disabled={project?.status === ProjectStatus.Completed || project?.status === ProjectStatus.Cancelled}
-                className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  isRTL ? "text-right" : "text-left"
-                } disabled:bg-gray-50 cursor-not-allowed`}
+                className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  isRTL ? "text-end" : "text-start"
+                } disabled:bg-slate-50 cursor-not-allowed`}
                 placeholder="0.00"
               />
                {formik.touched.discount && formik.errors.discount && (
@@ -249,16 +249,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               {isRTL ? "الوصف" : "Description"}
             </label>
             <textarea
               rows={3}
               {...formik.getFieldProps("description")}
               disabled={project?.status === ProjectStatus.Completed || project.status === ProjectStatus.Cancelled}
-              className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                isRTL ? "text-right" : "text-left"
-              } disabled:bg-gray-50 cursor-not-allowed`}
+              className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                isRTL ? "text-end" : "text-start"
+              } disabled:bg-slate-50 cursor-not-allowed`}
             />
           </div>
 
@@ -271,7 +271,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
             <button
               type="button"
               onClick={handleClose}
-              className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              className="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
             >
               {isRTL ? "إلغاء" : "Cancel"}
             </button>

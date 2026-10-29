@@ -501,13 +501,13 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
-      <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 w-full max-w-7xl max-h-[95vh] overflow-hidden animate-scale-in">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 w-full max-w-7xl max-h-[95vh] overflow-hidden animate-scale-in">
         {/* Enhanced Header */}
         <div className="bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 p-8 text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20"></div>
           <div className={`flex items-center justify-between relative z-10`}>
             <div className={`flex items-center space-x-4`}>
-              <div className="w-16 h-16 mx-4 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="page-hero-icon mx-4">
                 <Calculator className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -522,7 +522,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
             </div>
             <button
               onClick={onClose}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 hover:scale-110"
+              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 "
             >
               <X className="w-6 h-6 text-white" />
             </button>
@@ -532,14 +532,14 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
         <div className="flex-1 overflow-y-auto max-h-[calc(95vh-120px)]">
           <form onSubmit={handleSubmit} className="p-8 space-y-8">
             {/* Invoice Header Section */}
-            <div className="bg-gradient-to-r from-gray-50 to-purple-50 dark:from-gray-800 dark:to-purple-900/20 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+            <div className="bg-gradient-to-r from-slate-50 to-purple-50 dark:from-slate-800 dark:to-purple-900/20 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6 flex items-center">
                 <Package className="w-6 h-6 mr-3 text-purple-600" />
                 {t("invoiceDetails") || "Invoice Details"}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                     {t("status") || "Status"}
                   </label>
                   <select
@@ -550,7 +550,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                         status: e.target.value,
                       }))
                     }
-                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm transition-all duration-200"
+                    className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all duration-200"
                   >
                     {statusOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -563,7 +563,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                 {(invoiceData.status === "Paid" ||
                   invoiceData.status === "PartialPaid") && (
                   <div className="space-y-2">
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                       {isRTL ? "حساب الدفع" : "Payment Account"} *
                     </label>
                     <select
@@ -574,7 +574,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                           paymentAccountId: e.target.value,
                         }))
                       }
-                      className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm transition-all duration-200"
+                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all duration-200"
                       required
                     >
                       <option value="">
@@ -629,7 +629,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                 )}
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                     {t("issueDate") || "Issue Date"}
                   </label>
                   <DatePicker
@@ -644,7 +644,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                     {t("dueDate") || "Due Date"}
                   </label>
                   <DatePicker
@@ -669,7 +669,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                   />
                 </div>
                 <div className="lg:col-span-1">
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                     {isRTL ? "المشروع" : "Project"}
                   </label>
                   <ProjectSelector
@@ -684,16 +684,16 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
             </div>
 
             {/* Customer Selection Section */}
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
               <div className={`flex items-center justify-between mb-6`}>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white flex items-center">
                   <User className="w-6 h-6 mr-3 text-blue-600" />
                   {!isSell ? t("supplier") : t("client") || "Customer"} *
                 </h3>
                 <button
                   type="button"
                   onClick={() => setShowCustomerModal(true)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                  className="flex items-center space-x-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform "
                 >
                   <Plus className="w-4 h-4" />
                   <span>
@@ -705,9 +705,9 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
               </div>
 
               {loadingCustomers ? (
-                <div className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center space-x-3">
+                <div className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center space-x-3">
                   <Loader2 className="w-5 h-5 animate-spin text-purple-600" />
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-slate-600 dark:text-slate-400">
                     {t("loading") || "Loading"}...
                   </span>
                 </div>
@@ -739,16 +739,16 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
             </div>
 
             {/* Items Section */}
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
               <div className={`flex items-center justify-between mb-6`}>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white flex items-center">
                   <Package className="w-6 h-6 mr-3 text-green-600" />
                   {t("items") || "Items"}
                 </h3>
                 <button
                   type="button"
                   onClick={() => setShowItemModal(true)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                  className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform "
                 >
                   <Plus className="w-4 h-4" />
                   <span>{t("newItem") || "New Item"}</span>
@@ -758,9 +758,9 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
               {/* Add Item Dropdown */}
               <div className="mb-6">
                 {loadingItems ? (
-                  <div className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center space-x-3">
+                  <div className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center space-x-3">
                     <Loader2 className="w-5 h-5 animate-spin text-green-600" />
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       {t("loading") || "Loading"}...
                     </span>
                   </div>
@@ -797,56 +797,56 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
 
               {/* Desktop Items Table */}
               <div className="hidden lg:block">
-                <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-lg">
+                <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg">
                   <table className="w-full">
-                    <thead className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600">
+                    <thead className="bg-slate-50 dark:bg-slate-800/60">
                       <tr>
-                        <th className="px-6 py-4 text-left text-sm font-bold text-gray-900 dark:text-white">
+                        <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                           {t("item") || "Item"}
                         </th>
-                        <th className="px-6 py-4 text-center text-sm font-bold text-gray-900 dark:text-white">
+                        <th className="px-4 py-3 text-center text-sm font-bold text-slate-900 dark:text-white">
                           {t("quantity") || "Qty"}
                         </th>
-                        <th className="px-6 py-4 text-center text-sm font-bold text-gray-900 dark:text-white">
+                        <th className="px-4 py-3 text-center text-sm font-bold text-slate-900 dark:text-white">
                           {t("price") || "Price"}
                         </th>
-                        <th className="px-6 py-4 text-center text-sm font-bold text-gray-900 dark:text-white">
+                        <th className="px-4 py-3 text-center text-sm font-bold text-slate-900 dark:text-white">
                           {t("discount") || "Discount"} (%)
                         </th>
-                        <th className="px-6 py-4 text-center text-sm font-bold text-gray-900 dark:text-white">
+                        <th className="px-4 py-3 text-center text-sm font-bold text-slate-900 dark:text-white">
                           {t("vatRate") || "VAT %"}
                         </th>
-                        <th className="px-6 py-4 text-center text-sm font-bold text-gray-900 dark:text-white">
+                        <th className="px-4 py-3 text-center text-sm font-bold text-slate-900 dark:text-white">
                           {t("total") || "Total"}
                         </th>
-                        <th className="px-6 py-4 text-center text-sm font-bold text-gray-900 dark:text-white">
+                        <th className="px-4 py-3 text-center text-sm font-bold text-slate-900 dark:text-white">
                           {t("actions") || "Actions"}
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                    <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                       {invoiceItems.map((item, index) => (
                         <tr
                           key={item.id}
-                          className={`hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-150 ${
+                          className={`hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors duration-150 ${
                             index % 2 === 0
-                              ? "bg-white dark:bg-gray-800"
-                              : "bg-gray-50/50 dark:bg-gray-700/30"
+                              ? "bg-white dark:bg-slate-800"
+                              : "bg-slate-50/50 dark:bg-slate-700/30"
                           }`}
                         >
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div>
-                              <div className="text-sm font-semibold text-gray-900 dark:text-white">
+                              <div className="text-sm font-semibold text-slate-900 dark:text-white">
                                 {item.itemName}
                               </div>
                               {item.description && (
-                                <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                <div className="text-sm text-slate-500 dark:text-slate-400 mt-1">
                                   {item.description}
                                 </div>
                               )}
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-center">
+                          <td className="px-4 py-3 text-center">
                             <input
                               type="number"
                               min="1"
@@ -858,10 +858,10 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                                   Number.parseInt(e.target.value) || 1,
                                 )
                               }
-                              className="w-20 px-3 py-2 text-center border-2 border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
+                              className="w-20 px-3 py-2 text-center border-2 border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
                             />
                           </td>
-                          <td className="px-6 py-4 text-center">
+                          <td className="px-4 py-3 text-center">
                             <input
                               type="number"
                               step="0.01"
@@ -874,10 +874,10 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                                   Number.parseFloat(e.target.value) || 0,
                                 )
                               }
-                              className="w-28 px-3 py-2 text-center border-2 border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
+                              className="w-28 px-3 py-2 text-center border-2 border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
                             />
                           </td>
-                          <td className="px-6 py-4 text-center">
+                          <td className="px-4 py-3 text-center">
                             <div className="relative">
                               <input
                                 type="number"
@@ -892,14 +892,14 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                                     Number.parseFloat(e.target.value) || 0,
                                   )
                                 }
-                                className="w-20 px-3 py-2 text-center border-2 border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200 pr-6"
+                                className="w-20 px-3 py-2 text-center border-2 border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200 pr-6"
                               />
-                              <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs text-gray-500 dark:text-gray-400">
+                              <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs text-slate-500 dark:text-slate-400">
                                 %
                               </span>
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-center">
+                          <td className="px-4 py-3 text-center">
                             <select
                               value={item.vatRate}
                               onChange={(e) =>
@@ -909,14 +909,14 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                                   Number.parseFloat(e.target.value),
                                 )
                               }
-                              className="w-20 px-2 py-1 border-2 border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
+                              className="w-20 px-2 py-1 border-2 border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
                             >
                               <option value={0}>0%</option>
                               <option value={0.05}>5%</option>
                               <option value={0.14}>14%</option>
                             </select>
                           </td>
-                          <td className="px-6 py-4 text-center">
+                          <td className="px-4 py-3 text-center">
                             <span className="text-sm font-bold text-green-600 dark:text-green-400">
                               {formatNumber(item.total, {
                                 minimumFractionDigits: 2,
@@ -924,7 +924,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                               })}
                             </span>
                           </td>
-                          <td className="px-6 py-4 text-center">
+                          <td className="px-4 py-3 text-center">
                             <button
                               type="button"
                               onClick={() => handleRemoveItem(item.id)}
@@ -945,15 +945,15 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                 {invoiceItems.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg"
+                    className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg"
                   >
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex-1">
-                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                        <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
                           {item.itemName}
                         </h4>
                         {item.description && (
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                          <p className="text-sm text-slate-500 dark:text-slate-400">
                             {item.description}
                           </p>
                         )}
@@ -969,7 +969,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">
+                        <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">
                           {t("quantity") || "Quantity"}
                         </label>
                         <input
@@ -983,11 +983,11 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                               Number.parseInt(e.target.value) || 1,
                             )
                           }
-                          className="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
+                          className="w-full px-3 py-2 border-2 border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">
+                        <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">
                           {t("price") || "Price"}
                         </label>
                         <input
@@ -1002,11 +1002,11 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                               Number.parseFloat(e.target.value) || 0,
                             )
                           }
-                          className="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
+                          className="w-full px-3 py-2 border-2 border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">
+                        <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">
                           {t("discount") || "Discount"} (%)
                         </label>
                         <div className="relative">
@@ -1023,16 +1023,16 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                                 Number.parseFloat(e.target.value) || 0,
                               )
                             }
-                            className="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200 pr-8"
+                            className="w-full px-3 py-2 border-2 border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200 pr-8"
                           />
-                          <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs text-gray-500 dark:text-gray-400">
+                          <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs text-slate-500 dark:text-slate-400">
                             %
                           </span>
                         </div>
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">
+                      <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">
                         {t("vatRate") || "VAT %"}
                       </label>
                       <select
@@ -1044,7 +1044,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                             Number.parseFloat(e.target.value),
                           )
                         }
-                        className="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
+                        className="w-full px-3 py-2 border-2 border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 transition-all duration-200"
                       >
                         <option value={0}>0%</option>
                         <option value={0.05}>5%</option>
@@ -1057,15 +1057,15 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
             </div>
 
             {/* Attachment Section */}
-            <div className="bg-gradient-to-r from-gray-50 to-indigo-50 dark:from-gray-800 dark:to-indigo-900/20 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+            <div className="bg-gradient-to-r from-slate-50 to-indigo-50 dark:from-slate-800 dark:to-indigo-900/20 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6 flex items-center">
                 <Paperclip className="w-6 h-6 mr-3 text-indigo-600" />
                 {isRTL ? "المرفقات" : "Attachments"}
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <div className="flex-1">
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                       {isRTL ? "إرفاق ملف" : "Attach File"} (PDF, JPEG, PNG,
                       etc.)
                     </label>
@@ -1077,9 +1077,9 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                         }
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                       />
-                      <div className="flex items-center gap-3 px-4 py-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl group-hover:border-indigo-500 transition-all duration-200 bg-white dark:bg-gray-800">
-                        <Paperclip className="w-5 h-5 text-gray-400 group-hover:text-indigo-500" />
-                        <span className="text-gray-600 dark:text-gray-400 truncate">
+                      <div className="flex items-center gap-3 px-4 py-3 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl group-hover:border-indigo-500 transition-all duration-200 bg-white dark:bg-slate-800">
+                        <Paperclip className="w-5 h-5 text-slate-400 group-hover:text-indigo-500" />
+                        <span className="text-slate-600 dark:text-slate-400 truncate">
                           {attachment
                             ? attachment.name
                             : isRTL
@@ -1114,13 +1114,13 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
             </div>
 
             {/* Totals Section */}
-            <div className="mt-8 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg">
+            <div className="mt-8 bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg">
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg text-gray-600 dark:text-gray-400">
+                  <span className="text-lg text-slate-600 dark:text-slate-400">
                     {t("subtotal") || "Subtotal"}:
                   </span>
-                  <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <span className="text-lg font-semibold text-slate-900 dark:text-white">
                     {formatNumber(subtotal, {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
@@ -1128,7 +1128,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-lg text-gray-600 dark:text-gray-400">
+                  <span className="text-lg text-slate-600 dark:text-slate-400">
                     {t("totalDiscount") || "Total Discount"}:
                   </span>
                   <span className="text-lg font-semibold text-red-600 dark:text-red-400">
@@ -1140,21 +1140,21 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-lg text-gray-600 dark:text-gray-400">
+                  <span className="text-lg text-slate-600 dark:text-slate-400">
                     {t("vatLabel") || "VAT"}:
                   </span>
-                  <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <span className="text-lg font-semibold text-slate-900 dark:text-white">
                     {formatNumber(vatTotal, {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}
                   </span>
                 </div>
-                <div className="flex justify-between items-center border-t border-gray-200 dark:border-gray-700 pt-4">
-                  <span className="text-lg font-bold text-gray-900 dark:text-white">
+                <div className="flex justify-between items-center border-t border-slate-200 dark:border-slate-700 pt-4">
+                  <span className="text-lg font-bold text-slate-900 dark:text-white">
                     {t("baseTotal") || "Base Total"}:
                   </span>
-                  <span className="text-lg font-bold text-gray-900 dark:text-white">
+                  <span className="text-lg font-bold text-slate-900 dark:text-white">
                     {formatNumber(total, {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
@@ -1164,7 +1164,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                 {showInstallmentSection && (
                   <>
                     <div className="flex justify-between items-center">
-                      <span className="text-lg text-gray-600 dark:text-gray-400">
+                      <span className="text-lg text-slate-600 dark:text-slate-400">
                         {t("benefits") || "Benefits/Interest"}:
                       </span>
                       <span className="text-lg font-semibold text-green-600 dark:text-green-400">
@@ -1176,7 +1176,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-lg text-gray-600 dark:text-gray-400">
+                      <span className="text-lg text-slate-600 dark:text-slate-400">
                         {t("downPayment") || "Down Payment"}:
                       </span>
                       <span className="text-lg font-semibold text-blue-600 dark:text-blue-400">
@@ -1188,7 +1188,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-lg text-gray-600 dark:text-gray-400">
+                      <span className="text-lg text-slate-600 dark:text-slate-400">
                         {t("remainingAmount") || "Remaining Amount"}:
                       </span>
                       <span className="text-lg font-semibold text-orange-600 dark:text-orange-400">
@@ -1198,7 +1198,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                         })}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center border-t border-gray-200 dark:border-gray-700 pt-4">
+                    <div className="flex justify-between items-center border-t border-slate-200 dark:border-slate-700 pt-4">
                       <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                         {t("adjustedTotal") || "Adjusted Total"}:
                       </span>
@@ -1212,7 +1212,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                   </>
                 )}
                 {!showInstallmentSection && (
-                  <div className="flex justify-between items-center border-t border-gray-200 dark:border-gray-700 pt-4">
+                  <div className="flex justify-between items-center border-t border-slate-200 dark:border-slate-700 pt-4">
                     <span className="text-2xl font-bold text-green-600 dark:text-green-400">
                       {t("total") || "Total"}:
                     </span>
@@ -1228,15 +1228,15 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
             </div>
 
             {showInstallmentSection && (
-              <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+              <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6 flex items-center">
                   <Calendar className="w-6 h-6 mr-3 text-orange-600" />
                   {t("paymentSchedule") || "Payment Schedule"}
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                   <div className="space-y-2">
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                       {t("downPayment") || "Down Payment"}
                     </label>
                     <input
@@ -1249,9 +1249,9 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                         const value = Number.parseFloat(e.target.value) || 0;
                         setDownPayment(Math.min(value, adjustedTotal));
                       }}
-                      className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm transition-all duration-200"
+                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all duration-200"
                     />
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                    <div className="text-xs text-slate-500 dark:text-slate-400">
                       {t("max")}:{" "}
                       {formatNumber(adjustedTotal, {
                         minimumFractionDigits: 2,
@@ -1261,7 +1261,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                       {t("numberOfInstallmentMonths") ||
                         "Number of Installments"}
                     </label>
@@ -1274,15 +1274,15 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                         const value = Number.parseInt(e.target.value) || 0;
                         setNumberOfInstallments(Math.min(value, 60));
                       }}
-                      className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm transition-all duration-200"
+                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all duration-200"
                     />
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                    <div className="text-xs text-slate-500 dark:text-slate-400">
                       {t("max60Months") || "Max: 60 months"}
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                       {t("benefits") || "Benefits/Interest"}
                     </label>
                     <input
@@ -1293,13 +1293,13 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                       onChange={(e) =>
                         setBenefits(Number.parseFloat(e.target.value) || 0)
                       }
-                      className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm transition-all duration-200"
+                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all duration-200"
                     />
                   </div>
                 </div>
 
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                  <span className="text-sm text-slate-600 dark:text-slate-400">
                     {t("remainingToDistribute", {
                       amount: remainingAmount.toFixed(2),
                     }) || ""}
@@ -1316,7 +1316,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
 
                 {installments.length > 0 && (
                   <div className="space-y-3">
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <h4 className="text-lg font-semibold text-slate-900 dark:text-white">
                       {t("installmentSchedule")} {installments.length}{" "}
                       {t("payments")}
                     </h4>
@@ -1336,7 +1336,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                               {/* Left Section - Installment Info */}
                               <div className="flex items-center space-x-4">
                                 <div className="flex items-center space-x-2">
-                                  <span className="text-sm font-bold text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 px-2 py-1 rounded-full">
+                                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 px-2 py-1 rounded-full">
                                     #{index + 1}
                                   </span>
                                 </div>
@@ -1354,7 +1354,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                                         e.target.value,
                                       )
                                     }
-                                    className="pl-10 pr-3 py-2 border-2 border-purple-200 dark:border-purple-700 rounded-lg text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 dark:focus:ring-purple-800 transition-all duration-200"
+                                    className="pl-10 pr-3 py-2 border-2 border-purple-200 dark:border-purple-700 rounded-lg text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 dark:focus:ring-purple-800 transition-all duration-200"
                                   />
                                 </div>
                               </div>
@@ -1375,7 +1375,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                                         Number.parseFloat(e.target.value) || 0,
                                       )
                                     }
-                                    className="w-32 pl-10 pr-3 py-2 border-2 border-purple-200 dark:border-purple-700 rounded-lg text-sm text-right bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 dark:focus:ring-purple-800 transition-all duration-200 font-semibold"
+                                    className="w-32 pl-10 pr-3 py-2 border-2 border-purple-200 dark:border-purple-700 rounded-lg text-sm text-end bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-200 dark:focus:ring-purple-800 transition-all duration-200 font-semibold"
                                   />
                                 </div>
 
@@ -1395,7 +1395,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                             </div>
 
                             {/* Additional Info Row */}
-                            <div className="mt-3 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                            <div className="mt-3 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
                               <span>
                                 {t("due")}:{" "}
                                 {installment?.dueDate
@@ -1419,8 +1419,8 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
             )}
 
             {/* Notes Section */}
-            <div className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
-              <label className="block text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <div className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+              <label className="block text-lg font-semibold text-slate-900 dark:text-white mb-4">
                 {t("notes") || "Notes"}
               </label>
               <textarea
@@ -1429,7 +1429,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                 onChange={(e) =>
                   setInvoiceData((prev) => ({ ...prev, notes: e.target.value }))
                 }
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm transition-all duration-200 resize-none"
+                className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all duration-200 resize-none"
                 placeholder={
                   t("additionalNotes") || "Add any additional notes here..."
                 }
@@ -1445,7 +1445,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-8 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 font-semibold"
+                className="px-8 py-4 border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200 font-semibold"
               >
                 {t("cancel") || "Cancel"}
               </button>
@@ -1456,7 +1456,7 @@ const EnhancedInvoiceModal: React.FC<EnhancedInvoiceModalProps> = ({
                   invoiceItems.length === 0 ||
                   createInvoiceMutation.isPending
                 }
-                className="px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-3 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 disabled:transform-none"
+                className="px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-3 font-semibold shadow-lg hover:shadow-xl transform  disabled:transform-none"
               >
                 {createInvoiceMutation.isPending ? (
                   <Loader2 className="w-5 h-5 animate-spin" />

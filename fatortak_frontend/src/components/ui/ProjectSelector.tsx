@@ -37,7 +37,7 @@ const ProjectSelector: React.FC<ProjectSelectorProps> = ({
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className={`${className} ${isRTL ? "text-right" : "text-left"}`}>
+      <SelectTrigger className={`${className} ${isRTL ? "text-end" : "text-start"}`}>
         <SelectValue placeholder={placeholder || (isRTL ? "اختر المشروع" : "Select Project")} />
       </SelectTrigger>
       <SelectContent>
@@ -50,7 +50,7 @@ const ProjectSelector: React.FC<ProjectSelectorProps> = ({
           </SelectItem>
         ))}
         {projects.length === 0 && !isLoading && (
-            <div className="p-2 text-sm text-gray-500 text-center">
+            <div className="p-2 text-sm text-slate-500 text-center">
                 {isRTL ? "لا يوجد مشاريع" : "No projects found"}
             </div>
         )}

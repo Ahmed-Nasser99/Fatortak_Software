@@ -84,12 +84,12 @@ export default function Cheques() {
   };
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto pb-12">
+    <div className="min-h-screen space-y-6 bg-canvas p-4 pb-12 sm:p-6 dark:bg-slate-950">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_1px_2px_rgba(16,24,40,0.04)] sm:p-6 md:flex-row md:items-center dark:border-slate-800 dark:bg-slate-900">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Cheques Management</h1>
-          <p className="text-slate-500 mt-1">Track and manage all customer cheque payments.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Cheques Management</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Track and manage all customer cheque payments.</p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" onClick={fetchCheques} disabled={loading} className="gap-2">
@@ -141,24 +141,24 @@ export default function Cheques() {
         ) : (
           <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left">
+              <table className="w-full text-sm text-start">
                 <thead className="bg-slate-50 border-b border-slate-200 text-xs uppercase font-semibold text-slate-500">
                   <tr>
-                    <th className="px-6 py-4">Cheque Number</th>
-                    <th className="px-6 py-4">Bank Name</th>
-                    <th className="px-6 py-4">Invoice</th>
-                    <th className="px-6 py-4">Project Name</th>
-                    <th className="px-6 py-4">Due Date</th>
-                    <th className="px-6 py-4 text-center">Attachment</th>
-                    <th className="px-6 py-4 text-right">Amount</th>
-                    <th className="px-6 py-4 text-center">Status</th>
-                    <th className="px-6 py-4 text-right">Actions</th>
+                    <th className="px-4 py-3">Cheque Number</th>
+                    <th className="px-4 py-3">Bank Name</th>
+                    <th className="px-4 py-3">Invoice</th>
+                    <th className="px-4 py-3">Project Name</th>
+                    <th className="px-4 py-3">Due Date</th>
+                    <th className="px-4 py-3 text-center">Attachment</th>
+                    <th className="px-4 py-3 text-end">Amount</th>
+                    <th className="px-4 py-3 text-center">Status</th>
+                    <th className="px-4 py-3 text-end">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {cheques.map((cheque) => (
                     <tr key={cheque.id} className="hover:bg-slate-50/50 transition-colors">
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-3">
                         <div className="flex flex-col">
                           <span className="font-medium text-slate-900">{cheque.chequeNumber}</span>
                           {cheque.paymentAccountName && (
@@ -166,17 +166,17 @@ export default function Cheques() {
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-3">
                         <span className="text-sm font-medium text-slate-700">{cheque.bankName}</span>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-3">
                         <div className="flex flex-col items-start gap-1">
                           <Badge variant="secondary" className="font-mono text-xs">
                             {cheque.invoiceNumber}
                           </Badge>
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-3">
                         {cheque.projectName ? (
                           <span className="text-sm text-slate-600 line-clamp-2 max-w-[200px]" title={cheque.projectName}>
                             {cheque.projectName}
@@ -185,10 +185,10 @@ export default function Cheques() {
                           <span className="text-sm text-slate-400 italic">---</span>
                         )}
                       </td>
-                      <td className="px-6 py-4 text-slate-600">
+                      <td className="px-4 py-3 text-slate-600">
                         {format(new Date(cheque.dueDate), "MMM dd, yyyy")}
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-4 py-3 text-center">
                         {cheque.attachmentUrl && (
                           <Button
                             variant="ghost"
@@ -201,7 +201,7 @@ export default function Cheques() {
                           </Button>
                         )}
                       </td>
-                      <td className="px-6 py-4 text-right">
+                      <td className="px-4 py-3 text-end">
                         <span className="font-medium text-slate-900">
                           {cheque.amount.toLocaleString(undefined, {
                             minimumFractionDigits: 2,
@@ -209,10 +209,10 @@ export default function Cheques() {
                           })}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-4 py-3 text-center">
                         {getStatusBadge(cheque.status)}
                       </td>
-                      <td className="px-6 py-4 text-right">
+                      <td className="px-4 py-3 text-end">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button variant="ghost" className="h-8 w-8 p-0">

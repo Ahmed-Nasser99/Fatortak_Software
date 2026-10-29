@@ -42,17 +42,17 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Financial Overview */}
-      <Card className="lg:col-span-2 border-0 shadow-xl bg-gradient-to-br from-white/90 to-blue-50/90 dark:from-gray-800/90 dark:to-blue-950/20 backdrop-blur-sm">
+      <Card className="lg:col-span-2 border-0 shadow-xl bg-gradient-to-br from-white/90 to-blue-50/90 dark:from-slate-800/90 dark:to-blue-950/20 backdrop-blur-sm">
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-xl font-bold">
             <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg">
               <Wallet className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+              <h3 className="text-slate-900 dark:text-white">
                 Financial Overview
               </h3>
-              <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
+              <p className="text-sm font-normal text-slate-500 dark:text-slate-400">
                 Revenue, expenses, and profit analysis
               </p>
             </div>
@@ -66,15 +66,15 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
                 <div className="flex items-center gap-3">
                   <TrendingUp className="w-5 h-5 text-emerald-600" />
                   <div>
-                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
                       Total Revenue
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       +{revenueGrowth}% growth
                     </p>
                   </div>
                 </div>
-                <div className="text-right">
+                <div className="text-end">
                   <p className="text-xl font-bold text-emerald-600">
                     ${formatNumber(totalRevenue)}
                   </p>
@@ -85,15 +85,15 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
                 <div className="flex items-center gap-3">
                   <TrendingDown className="w-5 h-5 text-red-600" />
                   <div>
-                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
                       Total Expenses
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       +{expenseGrowth}% increase
                     </p>
                   </div>
                 </div>
-                <div className="text-right">
+                <div className="text-end">
                   <p className="text-xl font-bold text-red-600">
                     ${formatNumber(totalExpenses)}
                   </p>
@@ -105,15 +105,15 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
                   <div className="flex items-center gap-3">
                     <DollarSign className="w-5 h-5 text-blue-600" />
                     <div>
-                      <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
                         Net Income
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
                         After all expenses
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-end">
                     <p className={`text-xl font-bold ${netIncome >= 0 ? 'text-blue-600' : 'text-red-600'}`}>
                       ${formatNumber(netIncome)}
                     </p>
@@ -126,10 +126,10 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
             <div className="space-y-6">
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Profit Margin
                   </span>
-                  <span className="text-sm font-bold text-gray-900 dark:text-white">
+                  <span className="text-sm font-bold text-slate-900 dark:text-white">
                     {profitMargin.toFixed(1)}%
                   </span>
                 </div>
@@ -137,17 +137,17 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
                   value={Math.max(0, Math.min(100, profitMargin))} 
                   className="h-3"
                 />
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Industry average: 15-20%
                 </p>
               </div>
 
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Expense Ratio
                   </span>
-                  <span className="text-sm font-bold text-gray-900 dark:text-white">
+                  <span className="text-sm font-bold text-slate-900 dark:text-white">
                     {expenseRatio.toFixed(1)}%
                   </span>
                 </div>
@@ -155,7 +155,7 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
                   value={Math.min(100, expenseRatio)} 
                   className="h-3"
                 />
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Target: Below 70%
                 </p>
               </div>
@@ -163,11 +163,11 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
               <div className="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/10 dark:to-indigo-900/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
                 <div className="flex items-center gap-3 mb-2">
                   <PieChart className="w-4 h-4 text-purple-600" />
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Revenue Breakdown
                   </span>
                 </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
+                <div className="text-xs text-slate-500 dark:text-slate-400 space-y-1">
                   <div className="flex justify-between">
                     <span>Sales</span>
                     <span>85%</span>
@@ -184,17 +184,17 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
       </Card>
 
       {/* Health Score & Insights */}
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/90 dark:to-gray-900/90 backdrop-blur-sm">
+      <Card className="bg-white dark:bg-slate-900">
         <CardHeader>
           <CardTitle className="flex items-center gap-3">
             <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg">
               <Target className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
                 Business Health
               </h3>
-              <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
+              <p className="text-sm font-normal text-slate-500 dark:text-slate-400">
                 Performance indicators
               </p>
             </div>
@@ -206,13 +206,13 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
             <div className={`text-3xl font-bold ${healthScore.color} mb-2`}>
               {healthScore.label}
             </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
+            <div className="text-sm text-slate-600 dark:text-slate-400">
               Overall Financial Health
             </div>
             <div className={`text-2xl font-bold ${healthScore.color} mt-2`}>
               {profitMargin.toFixed(1)}%
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">
+            <div className="text-xs text-slate-500 dark:text-slate-400">
               Profit Margin
             </div>
           </div>
@@ -222,7 +222,7 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
             <div className="flex items-start gap-3 p-3 bg-emerald-50 dark:bg-emerald-900/10 rounded-lg border border-emerald-200/50 dark:border-emerald-700/30">
               <TrendingUp className="w-4 h-4 text-emerald-600 mt-0.5" />
               <div>
-                <p className="text-sm font-medium text-emerald-800 dark:text-emerald-200">
+                <p className="text-sm font-medium text-slate-900 dark:text-white">
                   Revenue Growth
                 </p>
                 <p className="text-xs text-emerald-600 dark:text-emerald-400">
@@ -248,7 +248,7 @@ export const FinancialMetrics = ({ stats }: FinancialMetricsProps) => {
             <div className="flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-900/10 rounded-lg border border-blue-200/50 dark:border-blue-700/30">
               <Target className="w-4 h-4 text-blue-600 mt-0.5" />
               <div>
-                <p className="text-sm font-medium text-blue-800 dark:text-blue-200">
+                <p className="text-sm font-medium text-slate-900 dark:text-white">
                   Recommendations
                 </p>
                 <p className="text-xs text-blue-600 dark:text-blue-400">

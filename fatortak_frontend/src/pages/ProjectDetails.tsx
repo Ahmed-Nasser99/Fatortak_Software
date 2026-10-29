@@ -105,10 +105,10 @@ const ProjectDetails: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col items-center justify-center min-h-[400px] text-gray-500"
+        className="flex flex-col items-center justify-center min-h-[400px] text-slate-500"
       >
         <AlertCircle className="w-16 h-16 mb-4 text-rose-500" />
-        <h2 className="text-2xl font-bold text-gray-900">Project Not Found</h2>
+        <h2 className="text-2xl font-bold text-slate-900">Project Not Found</h2>
         <p className="mb-6">
           The project you're looking for doesn't exist or you don't have access.
         </p>
@@ -234,7 +234,7 @@ const ProjectDetails: React.FC = () => {
         );
       case ProjectStatus.Archived:
         return (
-          <Badge className="bg-gray-50 text-gray-700 border-gray-100 px-3 py-1">
+          <Badge className="bg-slate-50 text-slate-700 border-slate-100 px-3 py-1">
             Archived
           </Badge>
         );
@@ -256,10 +256,10 @@ const ProjectDetails: React.FC = () => {
       <CardContent className="p-6">
         <div className="flex justify-between items-start">
           <div className="space-y-1">
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
               {title}
             </p>
-            <h3 className="text-2xl font-black font-mono tracking-tighter text-slate-900 group-hover:text-indigo-600 transition-colors">
+            <h3 className="text-2xl font-bold font-mono tracking-tighter text-slate-900 group-hover:text-indigo-600 transition-colors">
               {formatNumber(value)}{" "}
               <span className="text-xs font-normal text-slate-400">EGP</span>
             </h3>
@@ -443,7 +443,7 @@ const ProjectDetails: React.FC = () => {
               <TabsTrigger
                 key={tab.id}
                 value={tab.id}
-                className="group relative px-6 py-2.5 rounded-xl data-[state=active]:text-slate-900 text-slate-500 font-bold uppercase tracking-widest text-[10px] transition-all shadow-none h-auto bg-transparent gap-2 flex items-center border-none"
+                className="group relative px-6 py-2.5 rounded-xl data-[state=active]:text-slate-900 text-slate-500 font-bold uppercase tracking-wide text-[10px] transition-all shadow-none h-auto bg-transparent gap-2 flex items-center border-none"
               >
                 <tab.icon
                   className={`w-3.5 h-3.5 relative z-10 transition-colors ${activeTab === tab.id ? "text-indigo-600" : "text-slate-400 group-hover:text-slate-600"}`}
@@ -474,7 +474,7 @@ const ProjectDetails: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Main Content: Document Details */}
                 <Card className="md:col-span-2 border-slate-100 shadow-sm overflow-hidden rounded-2xl">
-                  <div className="bg-slate-50/50 px-6 py-4 border-b border-slate-100 flex items-center justify-between font-bold text-slate-900">
+                  <div className="bg-slate-50/50 px-4 py-3 border-b border-slate-100 flex items-center justify-between font-bold text-slate-900">
                     <div className="flex items-center gap-2">
                       <Layers className="w-4 h-4 text-indigo-500" />
                       Contract Details & Items
@@ -482,7 +482,7 @@ const ProjectDetails: React.FC = () => {
                   </div>
                   <CardContent className="p-0">
                     <div className="overflow-x-auto">
-                      <table className="w-full text-sm text-left">
+                      <table className="w-full text-sm text-start">
                         <thead>
                           <tr className="bg-slate-50/30 text-slate-500 font-semibold border-b border-slate-100">
                             <th className="py-4 px-6">
@@ -490,10 +490,10 @@ const ProjectDetails: React.FC = () => {
                             </th>
                             <th className="py-4 px-3 text-center w-24">QTY</th>
                             <th className="py-4 px-3 text-center w-24">Unit</th>
-                            <th className="py-4 px-4 text-right w-32">
+                            <th className="py-4 px-4 text-end w-32">
                               Unit Price
                             </th>
-                            <th className="py-4 px-6 text-right w-40">
+                            <th className="py-4 px-6 text-end w-40">
                               Amount
                             </th>
                           </tr>
@@ -531,7 +531,7 @@ const ProjectDetails: React.FC = () => {
                               return grouped.map((group, gIdx) => (
                                 <React.Fragment key={gIdx}>
                                   <tr className="bg-[#cbd5e1] text-[#1e293b] font-bold text-sm">
-                                    <td colSpan={5} className="py-2 px-6 text-left tracking-widest uppercase">
+                                    <td colSpan={5} className="py-2 px-6 text-start tracking-wide uppercase">
                                       {group.sectionName}
                                     </td>
                                   </tr>
@@ -556,10 +556,10 @@ const ProjectDetails: React.FC = () => {
                                             {line.unit || "---"}
                                           </Badge>
                                         </td>
-                                        <td className="py-4 px-4 text-right text-slate-600 font-mono tracking-tighter">
+                                        <td className="py-4 px-4 text-end text-slate-600 font-mono tracking-tighter">
                                           {formatNumber(line.unitPrice)}
                                         </td>
-                                        <td className="py-4 px-6 text-right font-bold text-indigo-900 font-mono tracking-tighter">
+                                        <td className="py-4 px-6 text-end font-bold text-indigo-900 font-mono tracking-tighter">
                                           {formatNumber(line.lineTotal)}
                                         </td>
                                       </tr>
@@ -567,10 +567,10 @@ const ProjectDetails: React.FC = () => {
                                   })}
                                   {/* Section Total Row */}
                                   <tr className="bg-[#1e293b] text-white font-bold text-sm">
-                                    <td colSpan={4} className="py-2 px-6 text-right uppercase tracking-wider">
+                                    <td colSpan={4} className="py-2 px-6 text-end uppercase tracking-wider">
                                       Section Total
                                     </td>
-                                    <td className="py-2 px-6 text-right font-mono bg-[#0f172a]">
+                                    <td className="py-2 px-6 text-end font-mono bg-[#0f172a]">
                                       {formatNumber(
                                         group.lines.reduce((acc, l) => acc + (l.lineTotal || 0), 0)
                                       )}
@@ -586,11 +586,11 @@ const ProjectDetails: React.FC = () => {
                             <tr className="bg-slate-50 font-bold border-t border-slate-200">
                               <td
                                 colSpan={4}
-                                className="py-4 px-6 text-right text-slate-700 uppercase tracking-wider text-xs"
+                                className="py-4 px-6 text-end text-slate-700 uppercase tracking-wider text-xs"
                               >
                                 Contract Sub-Total
                               </td>
-                              <td className="py-4 px-6 text-right text-indigo-700 font-mono text-lg">
+                              <td className="py-4 px-6 text-end text-indigo-700 font-mono text-lg">
                                 {formatNumber(project.contractValue)} EGP
                               </td>
                             </tr>
@@ -612,7 +612,7 @@ const ProjectDetails: React.FC = () => {
                     </CardHeader>
                     <CardContent className="p-6 space-y-5">
                       <div className="space-y-1">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
                           Description
                         </span>
                         <p className="text-sm text-slate-600 leading-relaxed font-medium">
@@ -622,7 +622,7 @@ const ProjectDetails: React.FC = () => {
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
                             Created On
                           </span>
                           <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
@@ -631,7 +631,7 @@ const ProjectDetails: React.FC = () => {
                           </div>
                         </div>
                         <div className="space-y-1">
-                          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
                             Status
                           </span>
                           <div className="flex items-center gap-1.5">
@@ -658,7 +658,7 @@ const ProjectDetails: React.FC = () => {
                       <CardContent className="p-6 space-y-6">
                         {project.paymentTerms && (
                           <div className="space-y-2">
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
                               Invoicing Scheme
                             </span>
                             <p className="text-xs text-slate-600 leading-relaxed font-medium italic">
@@ -668,7 +668,7 @@ const ProjectDetails: React.FC = () => {
                         )}
                         {project.notes && (
                           <div className="space-y-2">
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
                               Special Notes
                             </span>
                             <div className="bg-slate-50 p-3 rounded-lg border border-slate-100 text-[11px] text-slate-500 font-medium whitespace-pre-wrap">
@@ -731,16 +731,16 @@ const ProjectDetails: React.FC = () => {
                 </CardHeader>
                 <CardContent className="p-0">
                   <div className="overflow-x-auto">
-                    <table className="w-full text-sm text-left">
+                    <table className="w-full text-sm text-start">
                       <thead className="bg-slate-50 font-bold text-slate-500">
                         <tr>
                           <th className="py-5 px-6">Invoice ID</th>
                           <th className="py-5 px-4">Date</th>
                           <th className="py-5 px-4">Amount</th>
-                          <th className="py-5 px-4 text-right">Paid</th>
-                          <th className="py-5 px-4 text-right">Balance</th>
+                          <th className="py-5 px-4 text-end">Paid</th>
+                          <th className="py-5 px-4 text-end">Balance</th>
                           <th className="py-5 px-4">Status</th>
-                          <th className="py-5 px-6 text-right">Action</th>
+                          <th className="py-5 px-6 text-end">Action</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100">
@@ -770,13 +770,13 @@ const ProjectDetails: React.FC = () => {
                               <td className="py-5 px-4 text-slate-600">
                                 {formatDate(inv.issueDate)}
                               </td>
-                              <td className="py-5 px-4 font-black font-mono tracking-tighter text-slate-900">
+                              <td className="py-5 px-4 font-bold font-mono tracking-tighter text-slate-900">
                                 {formatNumber(inv.total)} EGP
                               </td>
-                              <td className="py-5 px-4 text-right font-mono text-emerald-600 font-bold">
+                              <td className="py-5 px-4 text-end font-mono text-emerald-600 font-bold">
                                 {formatNumber((inv as any).amountPaid || 0)}
                               </td>
-                              <td className="py-5 px-4 text-right font-mono text-slate-500">
+                              <td className="py-5 px-4 text-end font-mono text-slate-500">
                                 {formatNumber(
                                   inv.total - ((inv as any).amountPaid || 0),
                                 )}
@@ -799,7 +799,7 @@ const ProjectDetails: React.FC = () => {
                                   {inv.status}
                                 </Badge>
                               </td>
-                              <td className="py-5 px-6 text-right flex justify-end gap-2">
+                              <td className="py-5 px-6 text-end flex justify-end gap-2">
                                 <Button
                                   variant="ghost"
                                   size="sm"
@@ -849,10 +849,10 @@ const ProjectDetails: React.FC = () => {
                   </div>
                   <div className="flex items-center gap-3 px-5 py-2.5 bg-emerald-900/5 rounded-2xl border border-emerald-100 shadow-sm backdrop-blur-sm group hover:bg-emerald-900/10 transition-all duration-300">
                     <div className="flex flex-col items-end">
-                      <span className="text-[10px] font-black text-emerald-600/70 uppercase tracking-widest leading-none mb-1">
+                      <span className="text-[10px] font-bold text-emerald-600/70 uppercase tracking-wide leading-none mb-1">
                         Project Liquidity
                       </span>
-                      <span className="text-xl font-black font-mono text-emerald-700 tracking-tighter leading-none">
+                      <span className="text-xl font-bold font-mono text-emerald-700 tracking-tighter leading-none">
                         {formatNumber(collectedAmount)}{" "}
                         <span className="text-[10px] font-normal opacity-70">
                           EGP
@@ -863,7 +863,7 @@ const ProjectDetails: React.FC = () => {
                 </div>
 
                 <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-500">
-                  <table className="w-full text-sm text-left">
+                  <table className="w-full text-sm text-start">
                     <thead className="bg-slate-50/50 font-bold text-slate-500 border-b border-slate-100">
                       <tr>
                         <th className="py-5 px-6 uppercase tracking-wider text-[10px]">
@@ -884,7 +884,7 @@ const ProjectDetails: React.FC = () => {
                         <th className="py-5 px-4 text-center uppercase tracking-wider text-[10px]">
                           Attachment
                         </th>
-                        <th className="py-5 px-6 text-right uppercase tracking-wider text-[10px]">
+                        <th className="py-5 px-6 text-end uppercase tracking-wider text-[10px]">
                           Amount Received
                         </th>
                       </tr>
@@ -965,15 +965,15 @@ const ProjectDetails: React.FC = () => {
                                 </Button>
                               )}
                             </td>
-                            <td className="py-5 px-6 text-right">
+                            <td className="py-5 px-6 text-end">
                               <div className="flex flex-col items-end">
-                                <span className="font-black font-mono text-lg text-emerald-600 tracking-tighter">
+                                <span className="font-bold font-mono text-lg text-emerald-600 tracking-tighter">
                                   {formatNumber(p.totalCredit)}{" "}
                                   <span className="text-[10px] font-normal opacity-70">
                                     EGP
                                   </span>
                                 </span>
-                                <span className="text-[9px] font-black text-emerald-500/50 uppercase tracking-tighter">
+                                <span className="text-[9px] font-bold text-emerald-500/50 uppercase tracking-tighter">
                                   Verified Collection
                                 </span>
                               </div>
@@ -1022,14 +1022,14 @@ const ProjectDetails: React.FC = () => {
                   </CardHeader>
                   <CardContent className="p-0">
                     <div className="overflow-x-auto">
-                      <table className="w-full text-sm text-left">
+                      <table className="w-full text-sm text-start">
                         <thead className="bg-slate-50 font-bold text-slate-500">
                           <tr>
                             <th className="py-5 px-6">Date</th>
                             <th className="py-5 px-4">Cost Center</th>
                             <th className="py-5 px-4">Activity / Note</th>
                             <th className="py-5 px-4 text-center">Attachment</th>
-                            <th className="py-5 px-6 text-right">
+                            <th className="py-5 px-6 text-end">
                               Debit Amount
                             </th>
                           </tr>
@@ -1076,7 +1076,7 @@ const ProjectDetails: React.FC = () => {
                                     </Button>
                                   )}
                                 </td>
-                                <td className="py-5 px-6 text-right font-black font-mono tracking-tighter text-rose-600">
+                                <td className="py-5 px-6 text-end font-bold font-mono tracking-tighter text-rose-600">
                                   {formatNumber(exp.total)} EGP
                                 </td>
                               </tr>
@@ -1105,13 +1105,13 @@ const ProjectDetails: React.FC = () => {
                   </CardHeader>
                   <CardContent className="p-0">
                     <div className="overflow-x-auto">
-                      <table className="w-full text-sm text-left">
+                      <table className="w-full text-sm text-start">
                         <thead className="bg-slate-50 font-bold text-slate-500">
                           <tr>
                             <th className="py-5 px-6">Invoice ID</th>
                             <th className="py-5 px-4">Date</th>
                             <th className="py-5 px-4">Amount</th>
-                            <th className="py-5 px-4 text-right">Paid</th>
+                            <th className="py-5 px-4 text-end">Paid</th>
                             <th className="py-5 px-4">Status</th>
                           </tr>
                         </thead>
@@ -1144,10 +1144,10 @@ const ProjectDetails: React.FC = () => {
                                 <td className="py-5 px-4 text-slate-600">
                                   {formatDate(inv.issueDate)}
                                 </td>
-                                <td className="py-5 px-4 font-black font-mono tracking-tighter text-slate-900">
+                                <td className="py-5 px-4 font-bold font-mono tracking-tighter text-slate-900">
                                   {formatNumber(inv.total)} EGP
                                 </td>
-                                <td className="py-5 px-4 text-right font-mono text-emerald-600 font-bold">
+                                <td className="py-5 px-4 text-end font-mono text-emerald-600 font-bold">
                                   {formatNumber((inv as any).amountPaid || 0)}
                                 </td>
                                 <td className="py-5 px-4">
@@ -1186,10 +1186,10 @@ const ProjectDetails: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-3 px-5 py-2.5 bg-rose-900/5 rounded-2xl border border-rose-100 shadow-sm">
                       <div className="flex flex-col items-end">
-                        <span className="text-[10px] font-black text-rose-600/70 uppercase tracking-widest leading-none mb-1">
+                        <span className="text-[10px] font-bold text-rose-600/70 uppercase tracking-wide leading-none mb-1">
                           Outbound Cash
                         </span>
-                        <span className="text-xl font-black font-mono text-rose-700 tracking-tighter leading-none">
+                        <span className="text-xl font-bold font-mono text-rose-700 tracking-tighter leading-none">
                           {formatNumber(totalPaidOut)}{" "}
                           <span className="text-[10px] font-normal opacity-70">
                             EGP
@@ -1200,7 +1200,7 @@ const ProjectDetails: React.FC = () => {
                   </div>
 
                   <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
-                    <table className="w-full text-sm text-left">
+                    <table className="w-full text-sm text-start">
                       <thead className="bg-slate-50/50 font-bold text-slate-500 border-b border-slate-100">
                         <tr>
                           <th className="py-5 px-6 uppercase tracking-wider text-[10px]">
@@ -1215,7 +1215,7 @@ const ProjectDetails: React.FC = () => {
                           <th className="py-5 px-4 text-center uppercase tracking-wider text-[10px]">
                             Attachment
                           </th>
-                          <th className="py-5 px-6 text-right uppercase tracking-wider text-[10px]">
+                          <th className="py-5 px-6 text-end uppercase tracking-wider text-[10px]">
                             Amount Paid
                           </th>
                         </tr>
@@ -1266,8 +1266,8 @@ const ProjectDetails: React.FC = () => {
                                   </Button>
                                 )}
                               </td>
-                              <td className="py-5 px-6 text-right">
-                                <span className="font-black font-mono text-lg text-rose-600 tracking-tighter">
+                              <td className="py-5 px-6 text-end">
+                                <span className="font-bold font-mono text-lg text-rose-600 tracking-tighter">
                                   {formatNumber(p.totalCredit)} EGP
                                 </span>
                               </td>

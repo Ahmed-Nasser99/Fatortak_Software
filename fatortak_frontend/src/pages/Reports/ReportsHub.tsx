@@ -146,7 +146,7 @@ const ReportsHub = () => {
   }, [group, query]);
 
   return (
-    <div className="space-y-6" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="min-h-screen space-y-6 bg-canvas p-4 sm:p-6 dark:bg-slate-950" dir={isRTL ? "rtl" : "ltr"}>
       <PageHeader
         eyebrow="Reports"
         title={isRTL ? "مركز التقارير" : "Reports hub"}
@@ -174,7 +174,7 @@ const ReportsHub = () => {
               onClick={() => setGroup(item)}
               className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
                 group === item
-                  ? "bg-slate-900 text-white dark:bg-indigo-600"
+                  ? "bg-brand-600 text-white"
                   : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300"
               }`}
             >
@@ -199,7 +199,7 @@ const ReportsHub = () => {
             <Link
               key={report.path}
               to={report.path}
-              className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-indigo-800"
+              className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-colors hover:border-brand-200 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-brand-800"
             >
               <div className="flex items-start justify-between gap-3">
                 <div

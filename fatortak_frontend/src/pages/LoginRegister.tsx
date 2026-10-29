@@ -87,14 +87,14 @@ const LoginRegister: React.FC = () => {
           {/* Logo */}
           <div className="text-center">
             <div className="flex justify-center">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center">
                 <Building2 className="w-8 h-8 text-white" />
               </div>
             </div>
-            <h2 className="mt-6 text-3xl font-bold text-gray-900">
+            <h2 className="mt-6 text-3xl font-bold text-slate-900">
               {isLogin ? t('welcomeBack') : t('createAccount')}
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm text-slate-600">
               {isLogin ? t('signInToAccount') : t('signUpForAccount')}
             </p>
           </div>
@@ -106,35 +106,35 @@ const LoginRegister: React.FC = () => {
                 <>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="firstName" className="block text-sm font-medium text-slate-700">
                         {t('firstName')}
                       </label>
                       <div className="mt-1 relative">
-                        <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                        <User className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                         <input
                           id="firstName"
                           type="text"
                           required
                           value={registerData.firstName}
                           onChange={(e) => setRegisterData({...registerData, firstName: e.target.value})}
-                          className="pl-10 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="pl-10 w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent"
                           placeholder={t('firstName')}
                         />
                       </div>
                     </div>
                     <div>
-                      <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="lastName" className="block text-sm font-medium text-slate-700">
                         {t('lastName')}
                       </label>
                       <div className="mt-1 relative">
-                        <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                        <User className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                         <input
                           id="lastName"
                           type="text"
                           required
                           value={registerData.lastName}
                           onChange={(e) => setRegisterData({...registerData, lastName: e.target.value})}
-                          className="pl-10 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="pl-10 w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent"
                           placeholder={t('lastName')}
                         />
                       </div>
@@ -142,34 +142,34 @@ const LoginRegister: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="phone" className="block text-sm font-medium text-slate-700">
                       {t('phone')}
                     </label>
                     <div className="mt-1 relative">
-                      <Phone className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                      <Phone className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                       <input
                         id="phone"
                         type="tel"
                         value={registerData.phone}
                         onChange={(e) => setRegisterData({...registerData, phone: e.target.value})}
-                        className="pl-10 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="pl-10 w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent"
                         placeholder={t('phone')}
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="company" className="block text-sm font-medium text-slate-700">
                       {t('company')}
                     </label>
                     <div className="mt-1 relative">
-                      <Building2 className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                      <Building2 className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                       <input
                         id="company"
                         type="text"
                         value={registerData.company}
                         onChange={(e) => setRegisterData({...registerData, company: e.target.value})}
-                        className="pl-10 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="pl-10 w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent"
                         placeholder={t('company')}
                       />
                     </div>
@@ -178,11 +178,11 @@ const LoginRegister: React.FC = () => {
               )}
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="email" className="block text-sm font-medium text-slate-700">
                   {t('email')}
                 </label>
                 <div className="mt-1 relative">
-                  <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                  <Mail className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                   <input
                     id="email"
                     type="email"
@@ -195,18 +195,18 @@ const LoginRegister: React.FC = () => {
                         setRegisterData({...registerData, email: e.target.value});
                       }
                     }}
-                    className="pl-10 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="pl-10 w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent"
                     placeholder={t('email')}
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="password" className="block text-sm font-medium text-slate-700">
                   {t('password')}
                 </label>
                 <div className="mt-1 relative">
-                  <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                  <Lock className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                   <input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
@@ -219,13 +219,13 @@ const LoginRegister: React.FC = () => {
                         setRegisterData({...registerData, password: e.target.value});
                       }
                     }}
-                    className="pl-10 pr-10 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="pl-10 pr-10 w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent"
                     placeholder={t('password')}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 h-5 w-5 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3 top-3 h-5 w-5 text-slate-400 hover:text-slate-600"
                   >
                     {showPassword ? <EyeOff /> : <Eye />}
                   </button>
@@ -240,9 +240,9 @@ const LoginRegister: React.FC = () => {
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-blue-600 focus:ring-brand-200 border-slate-300 rounded"
                   />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-slate-900">
                     {t('rememberMe')}
                   </label>
                 </div>
@@ -259,14 +259,14 @@ const LoginRegister: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
                 {isLoading ? t('loading') : (isLogin ? t('signIn') : t('signUp'))}
               </button>
             </div>
 
             <div className="text-center">
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-slate-600">
                 {isLogin ? t('dontHaveAccount') : t('alreadyHaveAccount')}
                 <button
                   type="button"

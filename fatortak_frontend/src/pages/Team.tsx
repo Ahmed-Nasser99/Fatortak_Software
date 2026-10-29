@@ -110,7 +110,7 @@ const Team: React.FC = () => {
       case "watcher":
         return <UserCheck className="w-4 h-4 text-green-500" />;
       default:
-        return <User className="w-4 h-4 text-gray-500" />;
+        return <User className="w-4 h-4 text-slate-500" />;
     }
   };
 
@@ -123,7 +123,7 @@ const Team: React.FC = () => {
       case "watcher":
         return "bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border-green-200 dark:from-green-900/30 dark:to-emerald-900/30 dark:text-green-400 dark:border-green-700";
       default:
-        return "bg-gradient-to-r from-gray-100 to-slate-100 text-gray-800 border-gray-200 dark:from-gray-800 dark:to-slate-800 dark:text-gray-400 dark:border-gray-600";
+        return "bg-slate-100 text-slate-800 border-slate-200 dark:from-slate-800 dark:to-slate-800 dark:text-slate-400 dark:border-slate-600";
     }
   };
 
@@ -154,12 +154,12 @@ const Team: React.FC = () => {
 
   const getAvatarColor = (name: string) => {
     const colors = [
-      "bg-gradient-to-r from-purple-500 to-violet-500",
-      "bg-gradient-to-r from-blue-500 to-indigo-500",
-      "bg-gradient-to-r from-green-500 to-emerald-500",
+      "bg-brand-600",
+      "bg-brand-600",
+      "bg-emerald-600",
       "bg-gradient-to-r from-yellow-500 to-amber-500",
       "bg-gradient-to-r from-pink-500 to-rose-500",
-      "bg-gradient-to-r from-red-500 to-orange-500",
+      "bg-rose-500",
     ];
     return colors[name.length % colors.length];
   };
@@ -216,14 +216,14 @@ const Team: React.FC = () => {
       dir={isRTL ? "rtl" : "ltr"}
     >
       {/* Enhanced Header */}
-      <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 text-white shadow-2xl">
+      <div className="page-hero">
         <div
           className={`flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 ${
             isRTL ? "lg:flex-row-reverse" : ""
           }`}
         >
           <div className={`flex items-center space-x-4`}>
-            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg mx-3">
+            <div className="page-hero-icon mx-3">
               <Users className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -241,7 +241,7 @@ const Team: React.FC = () => {
           {roleAccess.canCreate() && (
             <CreateUserButton
               onCreateClick={() => setShowAddModal(true)}
-              className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+              className="page-hero-action"
             >
               <Plus className="w-5 h-5 mr-2" />
               <span className="font-semibold">
@@ -254,17 +254,17 @@ const Team: React.FC = () => {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200 dark:border-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+        <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
           <CardContent className="p-6">
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg">
-                <Users className="w-6 h-6 text-white" />
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300">
+                <Users className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                   {isRTL ? "إجمالي الأعضاء" : "Total Members"}
                 </p>
-                <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">
+                <p className="text-2xl font-bold text-slate-900 dark:text-white">
                   {formatNumber(stats.total)}
                 </p>
               </div>
@@ -272,17 +272,17 @@ const Team: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border-red-200 dark:border-red-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+        <Card className="border-slate-200/80 bg-white transition-colors dark:border-slate-800 dark:bg-slate-900">
           <CardContent className="p-6">
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
-              <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
-                <Crown className="w-6 h-6 text-white" />
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300">
+                <Crown className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm text-red-600 dark:text-red-400 font-medium">
+                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                   {isRTL ? "المدراء" : "Admins"}
                 </p>
-                <p className="text-2xl font-bold text-red-700 dark:text-red-300">
+                <p className="text-2xl font-bold text-slate-900 dark:text-white">
                   {formatNumber(stats.admins)}
                 </p>
               </div>
@@ -290,17 +290,17 @@ const Team: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200 dark:border-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+        <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
           <CardContent className="p-6">
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg">
-                <Shield className="w-6 h-6 text-white" />
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300">
+                <Shield className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                   {isRTL ? "المحررين" : "Editors"}
                 </p>
-                <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">
+                <p className="text-2xl font-bold text-slate-900 dark:text-white">
                   {formatNumber(stats.editors)}
                 </p>
               </div>
@@ -308,17 +308,17 @@ const Team: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+        <Card className="border-slate-200/80 bg-white transition-colors dark:border-slate-800 dark:bg-slate-900">
           <CardContent className="p-6">
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
-              <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
-                <UserCheck className="w-6 h-6 text-white" />
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
+                <UserCheck className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm text-green-600 dark:text-green-400 font-medium">
+                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                   {isRTL ? "المراقبين" : "Watchers"}
                 </p>
-                <p className="text-2xl font-bold text-green-700 dark:text-green-300">
+                <p className="text-2xl font-bold text-slate-900 dark:text-white">
                   {formatNumber(stats.watchers)}
                 </p>
               </div>
@@ -340,7 +340,7 @@ const Team: React.FC = () => {
                 <Search
                   className={`absolute top-3 ${
                     isRTL ? "right-3" : "left-3"
-                  } w-5 h-5 text-gray-400`}
+                  } w-5 h-5 text-slate-400`}
                 />
                 <input
                   type="text"
@@ -351,7 +351,7 @@ const Team: React.FC = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className={`w-full ${
                     isRTL ? "pr-12 pl-4" : "pl-12 pr-4"
-                  } py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-200`}
+                  } py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-brand-200 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-200`}
                 />
               </div>
             </div>
@@ -359,7 +359,7 @@ const Team: React.FC = () => {
             <select
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value)}
-              className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white min-w-[150px]"
+              className="px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-brand-200 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white min-w-[150px]"
             >
               <option value="all">
                 {isRTL ? "جميع الأدوار" : "All Roles"}
@@ -379,26 +379,26 @@ const Team: React.FC = () => {
             <div className="flex items-center justify-center py-16">
               <div className="text-center">
                 <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
-                <p className="text-gray-600 dark:text-gray-400 text-lg">
+                <p className="text-slate-600 dark:text-slate-400 text-lg">
                   {isRTL ? "جاري التحميل..." : "Loading..."}
                 </p>
               </div>
             </div>
           ) : users.length === 0 ? (
             <div className="text-center py-16">
-              <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl">
+              <div className="w-24 h-24 bg-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <Users className="w-12 h-12 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
                 {isRTL ? "لا يوجد أعضاء فريق" : "No team members found"}
               </h3>
-              <p className="text-gray-500 dark:text-gray-400 mb-6 text-lg">
+              <p className="text-slate-500 dark:text-slate-400 mb-6 text-lg">
                 {isRTL ? "ابدأ ببناء فريق العمل" : "Start building your team"}
               </p>
               {roleAccess.canCreate() && (
                 <Button
                   onClick={() => setShowAddModal(true)}
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                  className="bg-brand-600 hover:bg-brand-700 text-white px-4 py-3 rounded-lg shadow-sm transition-colors "
                 >
                   <Plus className="w-5 h-5 mr-2" />
                   <span className="font-semibold">
@@ -412,56 +412,56 @@ const Team: React.FC = () => {
               {/* Desktop Table */}
               <div className="hidden lg:block overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600">
+                  <thead className="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-700 dark:to-slate-600">
                     <tr>
                       <th
-                        className={`px-6 py-4 ${
-                          isRTL ? "text-right" : "text-left"
-                        } text-sm font-bold text-gray-900 dark:text-white`}
+                        className={`px-4 py-3 ${
+                          isRTL ? "text-end" : "text-start"
+                        } text-sm font-bold text-slate-900 dark:text-white`}
                       >
                         {isRTL ? "المستخدم" : "User"}
                       </th>
                       <th
-                        className={`px-6 py-4 ${
-                          isRTL ? "text-right" : "text-left"
-                        } text-sm font-bold text-gray-900 dark:text-white`}
+                        className={`px-4 py-3 ${
+                          isRTL ? "text-end" : "text-start"
+                        } text-sm font-bold text-slate-900 dark:text-white`}
                       >
                         {isRTL ? "البريد الإلكتروني" : "Email"}
                       </th>
                       <th
-                        className={`px-6 py-4 ${
-                          isRTL ? "text-right" : "text-left"
-                        } text-sm font-bold text-gray-900 dark:text-white`}
+                        className={`px-4 py-3 ${
+                          isRTL ? "text-end" : "text-start"
+                        } text-sm font-bold text-slate-900 dark:text-white`}
                       >
                         {isRTL ? "الدور" : "Role"}
                       </th>
                       <th
-                        className={`px-6 py-4 ${
-                          isRTL ? "text-right" : "text-left"
-                        } text-sm font-bold text-gray-900 dark:text-white`}
+                        className={`px-4 py-3 ${
+                          isRTL ? "text-end" : "text-start"
+                        } text-sm font-bold text-slate-900 dark:text-white`}
                       >
                         {isRTL ? "تاريخ الانضمام" : "Joined"}
                       </th>
                       <th
-                        className={`px-6 py-4 ${
-                          isRTL ? "text-right" : "text-left"
-                        } text-sm font-bold text-gray-900 dark:text-white`}
+                        className={`px-4 py-3 ${
+                          isRTL ? "text-end" : "text-start"
+                        } text-sm font-bold text-slate-900 dark:text-white`}
                       >
                         {t("actions")}
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                     {users.map((user, index) => (
                       <tr
                         key={user.id}
-                        className={`hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 ${
+                        className={`hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200 ${
                           index % 2 === 0
-                            ? "bg-white dark:bg-gray-800"
-                            : "bg-gray-50/50 dark:bg-gray-800/50"
+                            ? "bg-white dark:bg-slate-800"
+                            : "bg-slate-50/50 dark:bg-slate-800/50"
                         }`}
                       >
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div className="flex items-center space-x-4 rtl:space-x-reverse">
                             <div
                               className={`w-12 h-12 ${getAvatarColor(
@@ -473,21 +473,21 @@ const Team: React.FC = () => {
                               </span>
                             </div>
                             <div>
-                              <div className="font-bold text-gray-900 dark:text-white text-lg">
+                              <div className="font-bold text-slate-900 dark:text-white text-lg">
                                 {getFullName(user)}
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                            <Mail className="w-4 h-4 text-gray-400" />
-                            <span className="text-gray-600 dark:text-gray-400">
+                            <Mail className="w-4 h-4 text-slate-400" />
+                            <span className="text-slate-600 dark:text-slate-400">
                               {user.email}
                             </span>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <Badge
                             className={`flex items-center space-x-2 rtl:space-x-reverse ${getRoleColor(
                               user.role
@@ -497,12 +497,12 @@ const Team: React.FC = () => {
                             <span>{getRoleLabel(user.role)}</span>
                           </Badge>
                         </td>
-                        <td className="px-6 py-4">
-                          <span className="text-gray-600 dark:text-gray-400 font-medium">
+                        <td className="px-4 py-3">
+                          <span className="text-slate-600 dark:text-slate-400 font-medium">
                             {formatDate(user.createdAt)}
                           </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div
                             className={`flex space-x-2 ${
                               isRTL ? "flex-row-reverse space-x-reverse" : ""
@@ -539,7 +539,7 @@ const Team: React.FC = () => {
                 {users.map((user) => (
                   <div
                     key={user.id}
-                    className="bg-white dark:bg-gray-800 rounded-3xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
+                    className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-xl transition-all duration-300 transform "
                   >
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex items-center space-x-4 rtl:space-x-reverse flex-1">
@@ -553,12 +553,12 @@ const Team: React.FC = () => {
                           </span>
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">
                             {getFullName(user)}
                           </h3>
                           <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                            <Mail className="w-4 h-4 text-gray-400" />
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <Mail className="w-4 h-4 text-slate-400" />
+                            <p className="text-sm text-slate-600 dark:text-slate-400">
                               {user.email}
                             </p>
                           </div>
@@ -591,8 +591,8 @@ const Team: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4 mb-4">
-                      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4">
-                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">
+                      <div className="rounded-xl border border-brand-100 bg-brand-50/70 p-4 dark:border-brand-900 dark:bg-brand-950/30">
+                        <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-2">
                           {isRTL ? "الدور" : "Role"}
                         </span>
                         <Badge
@@ -604,11 +604,11 @@ const Team: React.FC = () => {
                           <span>{getRoleLabel(user.role)}</span>
                         </Badge>
                       </div>
-                      <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-4">
-                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">
+                      <div className="rounded-xl border border-emerald-100 bg-emerald-50/70 p-4 dark:border-emerald-900 dark:bg-emerald-950/30">
+                        <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-2">
                           {isRTL ? "تاريخ الانضمام" : "Joined"}
                         </span>
-                        <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                        <span className="text-sm font-semibold text-slate-900 dark:text-white">
                             {formatDate(user.createdAt)}
                         </span>
                       </div>
@@ -619,9 +619,9 @@ const Team: React.FC = () => {
 
               {/* Pagination */}
               {totalCount > pagination.pageSize && (
-                <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                <div className="px-4 py-3 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
                   <div className="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
-                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                    <p className="text-sm text-slate-700 dark:text-slate-300">
                         {isRTL
                           ? `عرض ${formatNumber(users.length)} من أصل ${formatNumber(totalCount)}`
                           : `Showing ${formatNumber(users.length)} of ${formatNumber(totalCount)} results`}

@@ -148,7 +148,7 @@ const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
                 type="text"
                 value={formData.firstName}
                 onChange={(e) => handleInputChange("firstName", e.target.value)}
-                className={`${isRTL ? "pr-10 text-right" : "pl-10"} ${
+                className={`${isRTL ? "pr-10 text-end" : "pl-10"} ${
                   errors.firstName ? "border-red-500" : ""
                 }`}
                 placeholder={t("enterFirstName")}
@@ -176,7 +176,7 @@ const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
                 type="text"
                 value={formData.lastName}
                 onChange={(e) => handleInputChange("lastName", e.target.value)}
-                className={`${isRTL ? "pr-10 text-right" : "pl-10"} ${
+                className={`${isRTL ? "pr-10 text-end" : "pl-10"} ${
                   errors.lastName ? "border-red-500" : ""
                 }`}
                 placeholder={t("enterLastName")}
@@ -204,7 +204,7 @@ const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                className={`${isRTL ? "pr-10 text-right" : "pl-10"} ${
+                className={`${isRTL ? "pr-10 text-end" : "pl-10"} ${
                   errors.email ? "border-red-500" : ""
                 }`}
                 placeholder={t("enterEmail")}
@@ -232,7 +232,7 @@ const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
                 type="password"
                 value={formData.password}
                 onChange={(e) => handleInputChange("password", e.target.value)}
-                className={`${isRTL ? "pr-10 text-right" : "pl-10"} ${
+                className={`${isRTL ? "pr-10 text-end" : "pl-10"} ${
                   errors.password ? "border-red-500" : ""
                 }`}
                 placeholder={t("enterPassword")}
@@ -262,7 +262,7 @@ const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
                 onChange={(e) =>
                   handleInputChange("phoneNumber", e.target.value)
                 }
-                className={`${isRTL ? "pr-10 text-right" : "pl-10"}`}
+                className={`${isRTL ? "pr-10 text-end" : "pl-10"}`}
                 placeholder={t("enterPhoneNumber")}
                 disabled={createUserMutation.isPending}
               />

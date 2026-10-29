@@ -139,11 +139,11 @@ export default function SubscriptionPlansPage() {
   const currentPlan = getCurrentPlan();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950">
       <div className="container !max-w-full mx-auto px-4 py-8 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white mb-3">
             {isRTL ? "اختر الباقة المناسبة لك" : "Choose Your Perfect Plan"}
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
@@ -207,7 +207,7 @@ export default function SubscriptionPlansPage() {
             <button
               onClick={() => setIsYearly(!isYearly)}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                isYearly ? "bg-blue-600" : "bg-slate-200 dark:bg-slate-700"
+                isYearly ? "bg-brand-600" : "bg-slate-200 dark:bg-slate-700"
               }`}
             >
               <span
@@ -238,7 +238,7 @@ export default function SubscriptionPlansPage() {
             return (
               <Card
                 key={plan.id}
-                className={`relative overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${
+                className={`relative overflow-hidden border-0 shadow-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 ${
                   plan.popular ? "ring-2 ring-purple-500 ring-offset-4" : ""
                 }`}
               >

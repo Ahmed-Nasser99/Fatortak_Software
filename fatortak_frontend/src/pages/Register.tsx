@@ -110,7 +110,7 @@ const SubmitButton = ({
         type="button" // Make sure it's type="button" not "submit"
         onClick={handleNextStep}
         disabled={isLoading}
-        className={`px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl font-medium transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+        className={`px-4 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-medium transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${
           isRTL ? "flex-row-reverse" : ""
         }`}
       >
@@ -131,7 +131,7 @@ const SubmitButton = ({
     <button
       type="submit" // Only step 4 should submit the form
       disabled={isLoading || successMessage}
-      className={`px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl font-medium transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+      className={`px-4 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-medium transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${
         isRTL ? "flex-row-reverse" : ""
       }`}
     >
@@ -211,7 +211,7 @@ const Register = () => {
                 )}
                 <span>{countryName}</span>
                 {firstCurrency && (
-                  <span className="text-gray-500 text-sm">
+                  <span className="text-slate-500 text-sm">
                     ({firstCurrency})
                   </span>
                 )}
@@ -391,7 +391,7 @@ const Register = () => {
 
   return (
     <div
-      className={`min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-950 dark:to-indigo-950 flex items-center justify-center p-4 ${
+      className={`min-h-screen bg-gradient-to-br from-brand-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 flex items-center justify-center p-4 ${
         isRTL ? "rtl" : "ltr"
       }`}
       dir={isRTL ? "rtl" : "ltr"}
@@ -416,34 +416,25 @@ const Register = () => {
       <div className="w-full mx-auto grid lg:grid-cols-2 gap-8 relative z-10">
         {/* Left Side - Brand & Features */}
         <div className="hidden lg:flex flex-col justify-center px-12 space-y-8">
-          <div className={`space-y-6 ${isRTL ? "text-right" : "text-left"}`}>
+          <div className={`space-y-6 ${isRTL ? "text-end" : "text-start"}`}>
             {/* Logo */}
-            <div
-              className={`flex items-center space-x-4 ${
-                isRTL ? "flex-row-reverse space-x-reverse" : ""
-              }`}
-            >
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
-                  <FileText className="w-8 h-8 text-white" />
-                </div>
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
-                  FATORTAK
-                </h1>
-                <p className="text-slate-600 dark:text-slate-400 font-medium">
-                  {t("businessManagement")}
-                </p>
-              </div>
+            <div>
+              <img
+                src="/lovable-uploads/fatortak-logo.png"
+                alt="FATORTAK"
+                className="h-9 w-auto object-contain dark:brightness-0 dark:invert"
+              />
+              <p className="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">
+                {t("businessManagement")}
+              </p>
             </div>
 
             {/* Welcome Text */}
-            <div className="space-y-4">
-              <h2 className="text-4xl font-bold text-slate-800 dark:text-white leading-tight">
+            <div className="space-y-3">
+              <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white">
                 {t("createYourAccount")}
               </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-base text-slate-500 dark:text-slate-400">
                 {t("joinThousandsOfCompanies")}
               </p>
             </div>
@@ -469,18 +460,18 @@ const Register = () => {
               ].map((feature, index) => (
                 <div
                   key={index}
-                  className={`flex items-start space-x-4 p-4 bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300 ${
-                    isRTL ? "flex-row-reverse space-x-reverse text-right" : ""
+                  className={`flex items-start space-x-4 rounded-xl border border-slate-200/70 bg-white p-4 transition-colors hover:border-brand-200 ${
+                    isRTL ? "flex-row-reverse space-x-reverse text-end" : ""
                   }`}
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <feature.icon className="w-6 h-6 text-white" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300">
+                    <feature.icon className="h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-800 dark:text-white">
                       {feature.title}
                     </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                    <p className="text-sm text-slate-500 dark:text-slate-400">
                       {feature.desc}
                     </p>
                   </div>
@@ -494,22 +485,15 @@ const Register = () => {
         <div className="flex items-center justify-center">
           <div className="w-full max-w-lg">
             {/* Mobile Logo */}
-            <div
-              className={`lg:hidden flex items-center justify-center mb-8 space-x-3 ${
-                isRTL ? "flex-row-reverse space-x-reverse" : ""
-              }`}
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                <FileText className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-slate-800 dark:text-white">
-                  FATORTAK
-                </h1>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  {t("businessManagement")}
-                </p>
-              </div>
+            <div className="mb-8 flex flex-col items-center lg:hidden">
+              <img
+                src="/lovable-uploads/fatortak-logo.png"
+                alt="FATORTAK"
+                className="h-9 w-auto object-contain dark:brightness-0 dark:invert"
+              />
+              <p className="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">
+                {t("businessManagement")}
+              </p>
             </div>
 
             <Formik
@@ -530,7 +514,7 @@ const Register = () => {
                 isValid,
                 validateForm,
               }) => (
-                <Form className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 p-8 space-y-6">
+                <Form className="space-y-6 rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_1px_2px_rgba(16,24,40,0.04)] sm:p-8 dark:border-slate-800 dark:bg-slate-900">
                   {/* Header */}
                   <div className={`text-center space-y-2`}>
                     <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
@@ -545,7 +529,7 @@ const Register = () => {
                   <div className="space-y-2">
                     <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
                       <div
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all duration-500"
+                        className="h-1.5 rounded-full bg-brand-600 transition-all duration-500"
                         style={{ width: `${getStepProgress()}%` }}
                       ></div>
                     </div>
@@ -563,13 +547,13 @@ const Register = () => {
                         }`}
                       >
                         <AlertTriangle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                        <div className={`flex-1 ${isRTL ? "text-right" : ""}`}>
-                          <h4 className="text-sm font-medium text-red-800 dark:text-red-200 mb-2">
+                        <div className={`flex-1 ${isRTL ? "text-end" : ""}`}>
+                          <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-2">
                             {t("registrationFailedCheckErrors")}
                           </h4>
                           <ul
                             className={`list-disc list-inside space-y-1 text-sm text-red-700 dark:text-red-300 ${
-                              isRTL ? "text-right" : ""
+                              isRTL ? "text-end" : ""
                             }`}
                           >
                             {serverErrors.map((error, index) => (
@@ -612,11 +596,11 @@ const Register = () => {
                           <div className="flex flex-col items-center">
                             <div
                               className={`
-                                w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-medium transition-all duration-300
+                                w-9 h-9 rounded-xl flex items-center justify-center text-sm font-medium transition-all duration-300
                                 ${
                                   isActive
-                                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25"
-                                    : "bg-slate-100 dark:bg-slate-700 text-slate-400"
+                                    ? "bg-brand-600 text-white shadow-sm"
+                                    : "bg-slate-100 text-slate-400 dark:bg-slate-800"
                                 }
                                 ${
                                   isCurrent
@@ -645,7 +629,7 @@ const Register = () => {
                             <div
                               className={`flex-1 h-1 mx-2 rounded-full transition-all duration-300 ${
                                 currentStep > step.number
-                                  ? "bg-gradient-to-r from-blue-600 to-purple-600"
+                                  ? "bg-brand-600"
                                   : "bg-slate-200 dark:bg-slate-700"
                               }`}
                             />
@@ -665,7 +649,7 @@ const Register = () => {
                             <label
                               htmlFor="firstName"
                               className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                                isRTL ? "text-right" : ""
+                                isRTL ? "text-end" : ""
                               }`}
                             >
                               {t("firstName")} *
@@ -681,9 +665,9 @@ const Register = () => {
                                   <input
                                     {...field}
                                     id="firstName"
-                                    className={`w-full h-12 px-4 border-2 border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all ${
+                                    className={`w-full h-11 rounded-lg border border-slate-200 bg-white px-3 text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white ${
                                       isRTL
-                                        ? "pr-10 pl-4 text-right"
+                                        ? "pr-10 pl-4 text-end"
                                         : "pl-10 pr-4"
                                     } ${
                                       errors.firstName && touched.firstName
@@ -700,7 +684,7 @@ const Register = () => {
                               {(msg) => (
                                 <p
                                   className={`text-sm text-red-500 ${
-                                    isRTL ? "text-right" : ""
+                                    isRTL ? "text-end" : ""
                                   }`}
                                 >
                                   {msg}
@@ -713,7 +697,7 @@ const Register = () => {
                             <label
                               htmlFor="lastName"
                               className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                                isRTL ? "text-right" : ""
+                                isRTL ? "text-end" : ""
                               }`}
                             >
                               {t("lastName")} *
@@ -729,9 +713,9 @@ const Register = () => {
                                   <input
                                     {...field}
                                     id="lastName"
-                                    className={`w-full h-12 px-4 border-2 border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all ${
+                                    className={`w-full h-11 rounded-lg border border-slate-200 bg-white px-3 text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white ${
                                       isRTL
-                                        ? "pr-10 pl-4 text-right"
+                                        ? "pr-10 pl-4 text-end"
                                         : "pl-10 pr-4"
                                     } ${
                                       errors.lastName && touched.lastName
@@ -748,7 +732,7 @@ const Register = () => {
                               {(msg) => (
                                 <p
                                   className={`text-sm text-red-500 ${
-                                    isRTL ? "text-right" : ""
+                                    isRTL ? "text-end" : ""
                                   }`}
                                 >
                                   {msg}
@@ -762,7 +746,7 @@ const Register = () => {
                           <label
                             htmlFor="email"
                             className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                              isRTL ? "text-right" : ""
+                              isRTL ? "text-end" : ""
                             }`}
                           >
                             {t("email")} *
@@ -779,9 +763,9 @@ const Register = () => {
                                   {...field}
                                   id="email"
                                   type="email"
-                                  className={`w-full h-12 px-4 border-2 border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all ${
+                                  className={`w-full h-11 rounded-lg border border-slate-200 bg-white px-3 text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white ${
                                     isRTL
-                                      ? "pr-10 pl-4 text-right"
+                                      ? "pr-10 pl-4 text-end"
                                       : "pl-10 pr-4"
                                   } ${
                                     errors.email && touched.email
@@ -798,7 +782,7 @@ const Register = () => {
                             {(msg) => (
                               <p
                                 className={`text-sm text-red-500 ${
-                                  isRTL ? "text-right" : ""
+                                  isRTL ? "text-end" : ""
                                 }`}
                               >
                                 {msg}
@@ -812,7 +796,7 @@ const Register = () => {
                             <label
                               htmlFor="password"
                               className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                                isRTL ? "text-right" : ""
+                                isRTL ? "text-end" : ""
                               }`}
                             >
                               {t("password")} *
@@ -829,9 +813,9 @@ const Register = () => {
                                     {...field}
                                     id="password"
                                     type={showPassword ? "text" : "password"}
-                                    className={`w-full h-12 px-4 border-2 border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all ${
+                                    className={`w-full h-11 rounded-lg border border-slate-200 bg-white px-3 text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white ${
                                       isRTL
-                                        ? "pr-10 pl-10 text-right"
+                                        ? "pr-10 pl-10 text-end"
                                         : "pl-10 pr-10"
                                     } ${
                                       errors.password && touched.password
@@ -862,7 +846,7 @@ const Register = () => {
                               {(msg) => (
                                 <p
                                   className={`text-sm text-red-500 ${
-                                    isRTL ? "text-right" : ""
+                                    isRTL ? "text-end" : ""
                                   }`}
                                 >
                                   {msg}
@@ -875,7 +859,7 @@ const Register = () => {
                             <label
                               htmlFor="confirmPassword"
                               className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                                isRTL ? "text-right" : ""
+                                isRTL ? "text-end" : ""
                               }`}
                             >
                               {t("confirmPassword")} *
@@ -894,9 +878,9 @@ const Register = () => {
                                     type={
                                       showConfirmPassword ? "text" : "password"
                                     }
-                                    className={`w-full h-12 px-4 border-2 border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all ${
+                                    className={`w-full h-11 rounded-lg border border-slate-200 bg-white px-3 text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white ${
                                       isRTL
-                                        ? "pr-10 pl-10 text-right"
+                                        ? "pr-10 pl-10 text-end"
                                         : "pl-10 pr-10"
                                     } ${
                                       errors.confirmPassword &&
@@ -930,7 +914,7 @@ const Register = () => {
                               {(msg) => (
                                 <p
                                   className={`text-sm text-red-500 ${
-                                    isRTL ? "text-right" : ""
+                                    isRTL ? "text-end" : ""
                                   }`}
                                 >
                                   {msg}
@@ -949,7 +933,7 @@ const Register = () => {
                           <label
                             htmlFor="companyName"
                             className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                              isRTL ? "text-right" : ""
+                              isRTL ? "text-end" : ""
                             }`}
                           >
                             {t("companyName")} *
@@ -965,9 +949,9 @@ const Register = () => {
                                 <input
                                   {...field}
                                   id="companyName"
-                                  className={`w-full h-12 px-4 border-2 border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all ${
+                                  className={`w-full h-11 rounded-lg border border-slate-200 bg-white px-3 text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white ${
                                     isRTL
-                                      ? "pr-10 pl-4 text-right"
+                                      ? "pr-10 pl-4 text-end"
                                       : "pl-10 pr-4"
                                   } ${
                                     errors.companyName && touched.companyName
@@ -984,7 +968,7 @@ const Register = () => {
                             {(msg) => (
                               <p
                                 className={`text-sm text-red-500 ${
-                                  isRTL ? "text-right" : ""
+                                  isRTL ? "text-end" : ""
                                 }`}
                               >
                                 {msg}
@@ -998,7 +982,7 @@ const Register = () => {
                             <label
                               htmlFor="phone"
                               className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                                isRTL ? "text-right" : ""
+                                isRTL ? "text-end" : ""
                               }`}
                             >
                               {t("phoneNumber")}
@@ -1038,7 +1022,7 @@ const Register = () => {
                               {(msg) => (
                                 <p
                                   className={`text-sm text-red-500 flex items-center gap-1 ${
-                                    isRTL ? "text-right flex-row-reverse" : ""
+                                    isRTL ? "text-end flex-row-reverse" : ""
                                   }`}
                                 >
                                   <AlertTriangle className="w-3 h-3" />
@@ -1065,7 +1049,7 @@ const Register = () => {
                                       return (
                                         <div
                                           className={`text-xs text-slate-500 dark:text-slate-400 space-y-1 ${
-                                            isRTL ? "text-right" : ""
+                                            isRTL ? "text-end" : ""
                                           }`}
                                         >
                                           <p>
@@ -1097,7 +1081,7 @@ const Register = () => {
                             <label
                               htmlFor="taxNumber"
                               className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                                isRTL ? "text-right" : ""
+                                isRTL ? "text-end" : ""
                               }`}
                             >
                               {t("taxNumber")}
@@ -1107,8 +1091,8 @@ const Register = () => {
                                 <input
                                   {...field}
                                   id="taxNumber"
-                                  className={`w-full h-12 px-4 border-2 border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all ${
-                                    isRTL ? "text-right" : "text-left"
+                                  className={`w-full h-11 rounded-lg border border-slate-200 bg-white px-3 text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white ${
+                                    isRTL ? "text-end" : "text-start"
                                   }`}
                                   placeholder={t("taxNumber")}
                                   disabled={isLoading}
@@ -1122,7 +1106,7 @@ const Register = () => {
                           <label
                             htmlFor="address"
                             className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                              isRTL ? "text-right" : ""
+                              isRTL ? "text-end" : ""
                             }`}
                           >
                             {t("address")}
@@ -1139,9 +1123,9 @@ const Register = () => {
                                   {...field}
                                   id="address"
                                   rows={3}
-                                  className={`w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all resize-none ${
+                                  className={`w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white ${
                                     isRTL
-                                      ? "pr-10 pl-4 text-right"
+                                      ? "pr-10 pl-4 text-end"
                                       : "pl-10 pr-4"
                                   }`}
                                   placeholder={t("address")}
@@ -1162,7 +1146,7 @@ const Register = () => {
                             <label
                               htmlFor="country"
                               className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                                isRTL ? "text-right" : ""
+                                isRTL ? "text-end" : ""
                               }`}
                             >
                               {t("country")} *
@@ -1200,7 +1184,7 @@ const Register = () => {
                               {(msg) => (
                                 <p
                                   className={`text-sm text-red-500 ${
-                                    isRTL ? "text-right" : ""
+                                    isRTL ? "text-end" : ""
                                   }`}
                                 >
                                   {msg}
@@ -1213,7 +1197,7 @@ const Register = () => {
                             <label
                               htmlFor="currency"
                               className={`block text-sm font-medium text-slate-700 dark:text-slate-300 ${
-                                isRTL ? "text-right" : ""
+                                isRTL ? "text-end" : ""
                               }`}
                             >
                               {t("defaultCurrency")} *
@@ -1241,7 +1225,7 @@ const Register = () => {
                               {(msg) => (
                                 <p
                                   className={`text-sm text-red-500 ${
-                                    isRTL ? "text-right" : ""
+                                    isRTL ? "text-end" : ""
                                   }`}
                                 >
                                   {msg}
@@ -1258,7 +1242,7 @@ const Register = () => {
                       <div className="space-y-6 animate-fade-in">
                         <div
                           className={`text-center mb-6 ${
-                            isRTL ? "text-right" : ""
+                            isRTL ? "text-end" : ""
                           }`}
                         >
                           <h3 className="text-xl lg:text-2xl font-semibold text-slate-800 dark:text-white mb-2">
@@ -1270,9 +1254,9 @@ const Register = () => {
                         </div>
 
                         <div className="max-w-md mx-auto">
-                          <div className="border-2 border-blue-500 bg-blue-50 dark:bg-blue-950/30 shadow-lg shadow-blue-500/20 rounded-2xl p-8 relative">
+                          <div className="relative rounded-2xl border border-brand-200 bg-brand-50/60 p-6 dark:border-brand-900 dark:bg-brand-950/30">
                             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs px-4 py-1 rounded-full font-medium">
+                              <div className="bg-brand-600 text-white text-xs px-4 py-1 rounded-full font-medium">
                                 {t("trialPlan")}
                               </div>
                             </div>
@@ -1286,7 +1270,7 @@ const Register = () => {
                                 <h4 className="text-xl font-bold text-slate-800 dark:text-white mb-2">
                                   {t("trialPlan")}
                                 </h4>
-                                <p className="text-4xl font-bold text-blue-600 mb-1">
+                                <p className="mb-1 text-3xl font-bold text-brand-700 dark:text-brand-300">
                                   {t("free")}
                                 </p>
                                 <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -1296,7 +1280,7 @@ const Register = () => {
 
                               <div
                                 className={`space-y-4 ${
-                                  isRTL ? "text-right" : "text-left"
+                                  isRTL ? "text-end" : "text-start"
                                 }`}
                               >
                                 <div className="bg-white/50 dark:bg-slate-800/50 rounded-xl p-4">
@@ -1331,7 +1315,7 @@ const Register = () => {
                               <div className="bg-blue-50 dark:bg-blue-950/50 rounded-xl p-4">
                                 <p
                                   className={`text-xs text-blue-700 dark:text-blue-300 leading-relaxed ${
-                                    isRTL ? "text-right" : ""
+                                    isRTL ? "text-end" : ""
                                   }`}
                                 >
                                   {t("trialNote")}
@@ -1354,7 +1338,7 @@ const Register = () => {
                       type="button"
                       onClick={prevStep}
                       disabled={currentStep === 1 || isLoading}
-                      className={`px-6 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+                      className={`px-4 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${
                         currentStep === 1 ? "invisible" : ""
                       } ${isRTL ? "flex-row-reverse" : ""}`}
                     >
@@ -1376,55 +1360,21 @@ const Register = () => {
                   {/* Footer */}
                   <div
                     className={`text-center pt-4 border-t border-slate-200 dark:border-slate-700 ${
-                      isRTL ? "text-right" : ""
+                      isRTL ? "text-end" : ""
                     }`}
                   >
                     <p className="text-slate-600 dark:text-slate-400">
                       {t("alreadyHaveAccount")}{" "}
                       <Link
                         to="/login"
-                        className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                        className="font-medium text-brand-600 transition-colors hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
                       >
                         {t("signIn")}
                       </Link>
                     </p>
                   </div>
 
-                  {/* Form Validation Summary */}
-                  {currentStep < 4 && (
-                    <div className="mt-4 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
-                      <div
-                        className={`flex items-center justify-between text-sm ${
-                          isRTL ? "flex-row-reverse" : ""
-                        }`}
-                      >
-                        <span className="text-slate-600 dark:text-slate-400">
-                          {t("formValidation")}:
-                        </span>
-                        <div
-                          className={`flex items-center gap-2 ${
-                            isRTL ? "flex-row-reverse" : ""
-                          }`}
-                        >
-                          {Object.keys(errors).length === 0 ? (
-                            <>
-                              <CheckCircle className="w-4 h-4 text-green-500" />
-                              <span className="text-green-600">
-                                {t("valid")}
-                              </span>
-                            </>
-                          ) : (
-                            <>
-                              <AlertTriangle className="w-4 h-4 text-orange-500" />
-                              <span className="text-orange-600">
-                                {Object.keys(errors).length} {t("errorCount")}
-                              </span>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  )}
+
                 </Form>
               )}
             </Formik>
@@ -1434,8 +1384,8 @@ const Register = () => {
       {/* Loading Overlay */}
       {isLoading && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-2xl flex flex-col items-center space-y-4">
-            <Loader2 className="w-12 h-12 animate-spin text-blue-600" />
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-lg flex flex-col items-center space-y-4">
+            <Loader2 className="h-10 w-10 animate-spin text-brand-600" />
             <div className="text-center">
               <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-1">
                 {currentStep === 4 ? t("creatingAccount") : t("validating")}

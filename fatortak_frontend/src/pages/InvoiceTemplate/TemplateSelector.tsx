@@ -68,7 +68,7 @@ const templates = [
     description: "Bold gradients with contemporary design",
     descriptionAr: "تصميم عصري مع تدرجات جريئة",
     color: "from-purple-600 to-violet-600",
-    preview: "bg-gradient-to-br from-purple-600 to-violet-600",
+    preview: "bg-brand-600",
   },
   {
     id: "classic-professional",
@@ -85,8 +85,8 @@ const templates = [
     nameAr: "بسيط ونظيف",
     description: "Simple and elegant minimalism",
     descriptionAr: "بساطة وأناقة في التصميم",
-    color: "from-gray-800 to-gray-600",
-    preview: "bg-gradient-to-br from-gray-800 to-gray-600",
+    color: "from-slate-800 to-slate-600",
+    preview: "bg-gradient-to-br from-slate-800 to-slate-600",
   },
   {
     id: "bold-corporate",
@@ -130,23 +130,23 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
 
   return (
     <div
-      className={`min-h-screen bg-gradient-to-br from-purple-50 via-white to-violet-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900/20 ${
+      className={`min-h-screen bg-gradient-to-br from-purple-50 via-white to-violet-50 dark:from-slate-900 dark:via-slate-800 dark:to-purple-900/20 ${
         isRTL ? "rtl" : "ltr"
       }`}
     >
       {/* Header */}
-      <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
+      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-violet-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 bg-brand-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <Palette className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
                   {isRTL ? "قوالب الفواتير" : "Invoice Templates"}
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-1">
+                <p className="text-slate-600 dark:text-slate-400 mt-1">
                   {isRTL
                     ? "اختر التصميم المثالي لفواتيرك"
                     : "Choose the perfect design for your invoices"}
@@ -155,7 +155,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
             </div>
             <div className="flex items-center space-x-2 rtl:space-x-reverse">
               <Sparkles className="w-5 h-5 text-purple-600 animate-pulse" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                 {templates.length} {isRTL ? "قالب" : "Templates"}
               </span>
             </div>
@@ -165,8 +165,8 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
 
       {/* Color Selector */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-200 dark:border-gray-700 mb-8">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg rounded-2xl p-6 border border-slate-200 dark:border-slate-700 mb-8">
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
             <Palette className="w-5 h-5 text-purple-600" />
             {isRTL ? "اختر لون القالب" : "Choose Template Color"}
           </h3>
@@ -188,8 +188,8 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
                     <Check className="w-8 h-8 text-white drop-shadow-lg" />
                   )}
                 </div>
-                <div className="p-3 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-                  <p className="text-sm font-medium text-gray-900 dark:text-white text-center">
+                <div className="p-3 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700">
+                  <p className="text-sm font-medium text-slate-900 dark:text-white text-center">
                     {isRTL ? color.nameAr : color.name}
                   </p>
                 </div>
@@ -205,9 +205,9 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
           {templates.map((template) => (
             <Card
               key={template.id}
-              className={`group relative overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105 ${
+              className={`group relative overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg  ${
                 selectedTemplate === template.id
-                  ? "ring-4 ring-purple-600 shadow-2xl scale-105"
+                  ? "ring-4 ring-purple-600 shadow-lg scale-105"
                   : "hover:shadow-xl"
               }`}
               onMouseEnter={() => setHoveredTemplate(template.id)}
@@ -218,7 +218,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
               <div
                 className={`h-48 ${template.preview} relative overflow-hidden flex items-center justify-center p-4`}
               >
-                <div className="w-32 h-40 transform hover:scale-110 transition-transform duration-300">
+                <div className="w-32 h-40 transform  transition-transform duration-300">
                   <TemplatePreview
                     templateId={template.id}
                     companyLogo={companyLogo}
@@ -239,7 +239,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
                     <Button
                       variant="secondary"
                       size="lg"
-                      className="bg-white/90 hover:bg-white text-gray-900 shadow-xl"
+                      className="bg-white/90 hover:bg-white text-slate-900 shadow-xl"
                     >
                       <Eye className="w-5 h-5 mr-2 rtl:mr-0 rtl:ml-2" />
                       {isRTL ? "معاينة" : "Preview"}
@@ -249,11 +249,11 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
               </div>
 
               {/* Template Info */}
-              <div className="p-6 bg-white dark:bg-gray-800">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              <div className="p-6 bg-white dark:bg-slate-800">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
                   {isRTL ? template.nameAr : template.name}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                <p className="text-slate-600 dark:text-slate-400 text-sm">
                   {isRTL ? template.descriptionAr : template.description}
                 </p>
 
@@ -262,7 +262,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
                   className={`w-full mt-4 ${
                     selectedTemplate === template.id
                       ? `bg-gradient-to-r ${template.color} text-white`
-                      : "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600"
+                      : "bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-600"
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();

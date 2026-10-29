@@ -185,7 +185,7 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
     },
     { name: t("clients") || "Clients", icon: Users, path: "/clients" },
     {
-      name: t("projects") || "Projects",
+      name: isRTL ? "المشاريع" : "Projects",
       icon: FolderKanban,
       path: "/projects",
     },
@@ -388,7 +388,7 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
                 : handleNavigation(item.path)
             }
             className={`
-              w-full flex items-center px-3 py-3 rounded-xl transition-all duration-200 group text-left
+              w-full flex items-center px-3 py-3 rounded-xl transition-all duration-200 group text-start
               touch-manipulation min-h-[48px] relative ${rowClass}
               ${
                 isActive
@@ -410,7 +410,7 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
               <>
                 <span
                   className={`text-sm font-medium flex-1 truncate ${
-                    isRTL ? "text-right" : "text-left"
+                    isRTL ? "text-end" : "text-start"
                   }`}
                 >
                   {item.name}
@@ -482,11 +482,17 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
               isRTL ? "space-x-reverse space-x-3" : "space-x-3"
             }`}
           >
-            <img
-              src="/lovable-uploads/8f24889c-d3d3-4842-a775-81f28f9af29a.png"
-              alt="FATORTAK"
-              className="h-9 w-auto max-w-full object-contain"
-            />
+            {collapsed && !isMobile ? (
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-sm font-bold text-white">
+                F
+              </div>
+            ) : (
+              <img
+                src="/lovable-uploads/fatortak-logo.png"
+                alt="FATORTAK"
+                className="h-8 w-auto max-w-[180px] object-contain dark:brightness-0 dark:invert"
+              />
+            )}
           </div>
 
           {/* Mobile Close Button */}

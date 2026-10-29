@@ -466,9 +466,9 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
   };
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-6xl max-h-[95vh] overflow-y-auto">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg w-full max-w-6xl max-h-[95vh] overflow-y-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white">
+        <div className="bg-brand-600 p-6 text-white">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Calculator className="w-8 h-8" />
@@ -495,7 +495,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
           {/* Invoice Info */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t("status")}
               </label>
               <select
@@ -506,7 +506,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                     status: e.target.value,
                   }))
                 }
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
               >
                 {filteredStatusOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -519,7 +519,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
             {(invoiceData.status === "Paid" ||
               invoiceData.status === "PartialPaid") && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   {isRTL ? "حساب الدفع" : "Payment Account"} *
                 </label>
                 <select
@@ -530,7 +530,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                       paymentAccountId: e.target.value,
                     }))
                   }
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                   required
                 >
                   <option value="">
@@ -562,7 +562,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t("issueDate")}
               </label>
               <DatePicker
@@ -577,7 +577,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t("dueDate")}
               </label>
               <DatePicker
@@ -605,7 +605,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
           {/* Customer Selection */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                 {!isSell ? t("supplier") : t("client")} *
               </label>
               <button
@@ -632,7 +632,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
           {/* Items Section */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+              <h3 className="text-lg font-medium text-slate-900 dark:text-white">
                 {t("items")}
               </h3>
               <button
@@ -674,49 +674,49 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
             </div>
 
             {/* Items Table */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden mb-6">
+            <div className="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden mb-6">
               <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+                <thead className="bg-slate-50 dark:bg-slate-700">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <th className="px-4 py-3 text-start text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("item")}
                     </th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("quantity")}
                     </th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("price")}
                     </th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("discount")} (%)
                     </th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("vatRate")}
                     </th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("total")}
                     </th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("actions")}
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
                   {invoiceItems.map((item) => (
                     <tr key={item.id}>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-3">
                         <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          <div className="text-sm font-medium text-slate-900 dark:text-white">
                             {item.itemName}
                           </div>
                           {item.description && (
-                            <div className="text-sm text-gray-500 dark:text-gray-400">
+                            <div className="text-sm text-slate-500 dark:text-slate-400">
                               {item.description}
                             </div>
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-4 py-3 text-center">
                         <input
                           type="number"
                           min="1"
@@ -728,10 +728,10 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                               parseInt(e.target.value) || 1,
                             )
                           }
-                          className="w-20 px-3 py-2 text-center border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700"
+                          className="w-20 px-3 py-2 text-center border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700"
                         />
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-4 py-3 text-center">
                         <input
                           type="number"
                           step="0.01"
@@ -744,10 +744,10 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                               parseFloat(e.target.value) || 0,
                             )
                           }
-                          className="w-24 px-3 py-2 text-center border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700"
+                          className="w-24 px-3 py-2 text-center border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700"
                         />
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-4 py-3 text-center">
                         <input
                           type="number"
                           step="0.01"
@@ -761,10 +761,10 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                               parseFloat(e.target.value) || 0,
                             )
                           }
-                          className="w-20 px-3 py-2 text-center border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700"
+                          className="w-20 px-3 py-2 text-center border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700"
                         />
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-4 py-3 text-center">
                         <select
                           value={item.vatRate}
                           onChange={(e) =>
@@ -774,23 +774,23 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                               parseFloat(e.target.value),
                             )
                           }
-                          className="w-20 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700"
+                          className="w-20 px-2 py-1 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700"
                         >
                           <option value={0}>0%</option>
                           <option value={0.05}>5%</option>
                           <option value={0.14}>14%</option>
                         </select>
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-4 py-3 text-center">
                         <span className="text-sm font-medium text-green-600 dark:text-green-400">
                           ${item.total.toFixed(2)}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-center">
+                      <td className="px-4 py-3 text-center">
                         <button
                           type="button"
                           onClick={() => handleRemoveItem(item.id)}
-                          className="text-red-600 hover:text-red-800 dark:text-red-400 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                          className="text-red-600 hover:text-red-800 dark:text-red-400 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
@@ -802,16 +802,16 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
             </div>
 
             {/* Totals */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-6 border border-slate-200 dark:border-slate-700">
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-slate-600 dark:text-slate-400">
                     {t("subtotal")}:
                   </span>
                   <span className="font-semibold">${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-slate-600 dark:text-slate-400">
                     {t("totalDiscount")}:
                   </span>
                   <span className="font-semibold text-red-600 dark:text-red-400">
@@ -819,7 +819,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-slate-600 dark:text-slate-400">
                     {t("vatLabel")}:
                   </span>
                   <span className="font-semibold">${vatTotal.toFixed(2)}</span>
@@ -827,7 +827,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                 {showInstallmentSection && (
                   <>
                     <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         {t("benefits")}:
                       </span>
                       <span className="font-semibold text-green-600 dark:text-green-400">
@@ -835,7 +835,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         {t("downPayment")}:
                       </span>
                       <span className="font-semibold text-blue-600 dark:text-blue-400">
@@ -843,7 +843,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         {t("remainingAmount")}:
                       </span>
                       <span className="font-semibold text-orange-600 dark:text-orange-400">
@@ -852,8 +852,8 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                     </div>
                   </>
                 )}
-                <div className="flex justify-between border-t border-gray-200 dark:border-gray-700 pt-3">
-                  <span className="text-lg font-bold text-gray-900 dark:text-white">
+                <div className="flex justify-between border-t border-slate-200 dark:border-slate-700 pt-3">
+                  <span className="text-lg font-bold text-slate-900 dark:text-white">
                     {showInstallmentSection ? t("adjustedTotal") : t("total")}:
                   </span>
                   <span className="text-lg font-bold text-green-600 dark:text-green-400">
@@ -870,14 +870,14 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
           {/* Installment Section */}
           {showInstallmentSection && (
             <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-6 border border-orange-200 dark:border-orange-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center">
                 <Calendar className="w-5 h-5 mr-2 text-orange-600" />
                 {t("paymentSchedule")}
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t("downPayment")}
                   </label>
                   <input
@@ -894,12 +894,12 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                         ),
                       )
                     }
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t("numberOfInstallmentMonths")}
                   </label>
                   <input
@@ -912,12 +912,12 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                         Math.min(parseInt(e.target.value) || 0, 60),
                       )
                     }
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t("benefits")}
                   </label>
                   <input
@@ -928,13 +928,13 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                     onChange={(e) =>
                       setBenefits(parseFloat(e.target.value) || 0)
                     }
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg"
                   />
                 </div>
               </div>
 
               <div className="flex justify-between items-center mb-4">
-                <span className="text-sm text-gray-600 dark:text-gray-400">
+                <span className="text-sm text-slate-600 dark:text-slate-400">
                   {t("remainingToDistribute", {
                     amount: remainingAmount.toFixed(2),
                   })}
@@ -950,14 +950,14 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
 
               {installments.length > 0 && (
                 <div className="space-y-2">
-                  <h4 className="font-medium text-gray-900 dark:text-white">
+                  <h4 className="font-medium text-slate-900 dark:text-white">
                     {t("installmentSchedule")} ({installments.length}{" "}
                     {t("payments")})
                   </h4>
                   {installments.map((installment, index) => (
                     <div
                       key={index}
-                      className="flex items-center space-x-2 p-2 bg-white dark:bg-gray-800 rounded border"
+                      className="flex items-center space-x-2 p-2 bg-white dark:bg-slate-800 rounded border"
                     >
                       <span className="w-8 text-sm font-medium">
                         #{index + 1}
@@ -987,7 +987,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
                             parseFloat(e.target.value) || 0,
                           )
                         }
-                        className="w-24 px-2 py-1 border rounded text-sm text-right"
+                        className="w-24 px-2 py-1 border rounded text-sm text-end"
                       />
                       <button
                         type="button"
@@ -1005,7 +1005,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               {t("notes")}
             </label>
             <textarea
@@ -1014,7 +1014,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
               onChange={(e) =>
                 setInvoiceData((prev) => ({ ...prev, notes: e.target.value }))
               }
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
               placeholder={t("additionalNotes")}
             />
           </div>
@@ -1040,7 +1040,7 @@ const InvoiceUpdateModal: React.FC<InvoiceUpdateModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+              className="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700"
             >
               {t("cancel")}
             </button>

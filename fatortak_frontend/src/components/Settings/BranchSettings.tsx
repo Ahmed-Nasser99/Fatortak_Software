@@ -74,7 +74,7 @@ const BranchSettings: React.FC = () => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[1, 2].map((i) => (
-          <div key={i} className="h-48 rounded-3xl bg-muted animate-pulse border border-muted" />
+          <div key={i} className="h-48 rounded-2xl bg-muted animate-pulse border border-muted" />
         ))}
       </div>
     );
@@ -104,7 +104,7 @@ const BranchSettings: React.FC = () => {
         {branches.map((branch: any) => (
           <div
             key={branch.id}
-            className={`relative group bg-gradient-to-br from-background to-muted/20 rounded-3xl p-7 border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+            className={`relative group bg-gradient-to-br from-background to-muted/20 rounded-2xl p-7 border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
               branch.isMain ? 'border-primary ring-1 ring-primary/20 bg-primary/5' : 'border-border'
             }`}
           >
@@ -172,7 +172,7 @@ const BranchSettings: React.FC = () => {
             </p>
             <button
               onClick={() => handleOpenModal()}
-              className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-bold rounded-2xl hover:shadow-2xl hover:scale-105 transition-all text-sm"
+              className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-bold rounded-2xl hover:shadow-lg  transition-all text-sm"
             >
               <Plus className="w-6 h-6" />
               <span>{isRTL ? "إضافة أول فرع للشركة" : "Add Your First Branch"}</span>
@@ -184,7 +184,7 @@ const BranchSettings: React.FC = () => {
       {/* Branch Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="bg-background w-full max-w-md rounded-3xl shadow-2xl overflow-hidden border border-border animate-in zoom-in-95 duration-300">
+          <div className="bg-background w-full max-w-md rounded-2xl shadow-lg overflow-hidden border border-border animate-in zoom-in-95 duration-300">
             <div className="p-8">
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-foreground">
@@ -205,7 +205,7 @@ const BranchSettings: React.FC = () => {
                     name="name"
                     defaultValue={editingBranch?.name}
                     required
-                    className="w-full px-4 py-3 bg-muted/30 border border-muted focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl outline-none transition-all font-medium"
+                    className="w-full px-4 py-3 bg-slate-50/80 dark:bg-slate-800/60 border border-muted focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl outline-none transition-all font-medium"
                     placeholder={isRTL ? "مثال: فرع القاهرة" : "e.g. Cairo Branch"}
                   />
                 </div>
@@ -217,7 +217,7 @@ const BranchSettings: React.FC = () => {
                   <input
                     name="address"
                     defaultValue={editingBranch?.address}
-                    className="w-full px-4 py-3 bg-muted/30 border border-muted focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl outline-none transition-all font-medium"
+                    className="w-full px-4 py-3 bg-slate-50/80 dark:bg-slate-800/60 border border-muted focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl outline-none transition-all font-medium"
                     placeholder={isRTL ? "مثال: شارع النيل، المعادي" : "e.g. Nile St, Maadi"}
                   />
                 </div>
@@ -229,13 +229,13 @@ const BranchSettings: React.FC = () => {
                   <input
                     name="phone"
                     defaultValue={editingBranch?.phone}
-                    className="w-full px-4 py-3 bg-muted/30 border border-muted focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl outline-none transition-all font-medium"
+                    className="w-full px-4 py-3 bg-slate-50/80 dark:bg-slate-800/60 border border-muted focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl outline-none transition-all font-medium"
                     placeholder="+20 123 456 789"
                   />
                 </div>
 
                 <label className={`flex items-center gap-3 p-4 rounded-2xl border transition-all cursor-pointer ${
-                  editingBranch?.isMain ? 'bg-primary/5 border-primary/20 text-primary' : 'bg-muted/30 border-muted hover:border-primary/20'
+                  editingBranch?.isMain ? 'bg-primary/5 border-primary/20 text-primary' : 'bg-slate-50/80 dark:bg-slate-800/60 border-muted hover:border-primary/20'
                 }`}>
                   <input
                     type="checkbox"
@@ -259,14 +259,14 @@ const BranchSettings: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleCloseModal}
-                    className="flex-1 px-6 py-4 bg-muted hover:bg-muted/80 text-foreground font-bold rounded-2xl transition-all"
+                    className="flex-1 px-4 py-3 bg-muted hover:bg-muted/80 text-foreground font-bold rounded-2xl transition-all"
                   >
                     {isRTL ? "إلغاء" : "Cancel"}
                   </button>
                   <button
                     type="submit"
                     disabled={createBranchMutation.isPending || updateBranchMutation.isPending}
-                    className="flex-1 px-6 py-4 bg-primary text-primary-foreground font-bold rounded-2xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 disabled:opacity-50"
+                    className="flex-1 px-4 py-3 bg-primary text-primary-foreground font-bold rounded-2xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 disabled:opacity-50"
                   >
                     {createBranchMutation.isPending || updateBranchMutation.isPending ? (
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-foreground mx-auto" />

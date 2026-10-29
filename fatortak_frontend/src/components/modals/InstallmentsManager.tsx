@@ -121,7 +121,7 @@ const IntegratedInstallmentsManager: React.FC<
       case "overdue":
         return "bg-red-100 text-red-800 border-red-200 dark:bg-red-900/20 dark:text-red-400";
       default:
-        return "bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900/20 dark:text-gray-400";
+        return "bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-900/20 dark:text-slate-400";
     }
   };
 
@@ -210,9 +210,9 @@ const IntegratedInstallmentsManager: React.FC<
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-background rounded-2xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden">
+      <div className="bg-background rounded-2xl shadow-lg w-full max-w-6xl max-h-[90vh] overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white">
+        <div className="bg-brand-600 p-6 text-white">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-bold">{t("installmentsManager")}</h2>
@@ -234,18 +234,18 @@ const IntegratedInstallmentsManager: React.FC<
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
           {/* Progress Overview */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <Card className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/20 dark:to-purple-900/20 border-purple-200 dark:border-purple-800">
+            <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-purple-600 dark:text-purple-400 font-medium">
+                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("progress")}
                     </p>
-                    <p className="text-2xl font-bold text-purple-900 dark:text-purple-100">
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white">
                       {progress.paid}/{progress.total}
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-950/40">
                     <TrendingUp className="w-6 h-6 text-purple-600" />
                   </div>
                 </div>
@@ -263,56 +263,56 @@ const IntegratedInstallmentsManager: React.FC<
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/20 dark:to-emerald-900/20 border-emerald-200 dark:border-emerald-800">
+            <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
+                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("paidAmount")}
                     </p>
-                    <p className="text-xl font-bold text-emerald-900 dark:text-emerald-100">
+                    <p className="text-xl font-bold text-slate-900 dark:text-white">
                       {formatCurrency(progress.totalPaid)}
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/40">
                     <CheckCircle className="w-6 h-6 text-emerald-600" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20 border-blue-200 dark:border-blue-800">
+            <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("totalAmount")}
                     </p>
-                    <p className="text-xl font-bold text-blue-900 dark:text-blue-100">
+                    <p className="text-xl font-bold text-slate-900 dark:text-white">
                       {formatCurrency(progress.totalAmount)}
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50 dark:bg-sky-950/40">
                     <DollarSign className="w-6 h-6 text-blue-600" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950/20 dark:to-amber-900/20 border-amber-200 dark:border-amber-800">
+            <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
+                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                       {t("remaining")}
                     </p>
-                    <p className="text-xl font-bold text-amber-900 dark:text-amber-100">
+                    <p className="text-xl font-bold text-slate-900 dark:text-white">
                       {formatCurrency(
                         progress.totalAmount - progress.totalPaid
                       )}
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-950/40">
                     <Clock className="w-6 h-6 text-amber-600" />
                   </div>
                 </div>
@@ -323,7 +323,7 @@ const IntegratedInstallmentsManager: React.FC<
           {/* Filters */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
               <Input
                 placeholder={t("searchInstallments")}
                 value={searchTerm}
@@ -360,19 +360,19 @@ const IntegratedInstallmentsManager: React.FC<
           {isLoading ? (
             <div className="flex items-center justify-center py-12">
               <div className="animate-spin rounded-full h-8 w-8 border-2 border-purple-600 border-t-transparent"></div>
-              <span className="ml-3 text-gray-600">
+              <span className="ml-3 text-slate-600">
                 {t("loadingInstallments")}
               </span>
             </div>
           ) : filteredInstallments.length === 0 ? (
             <Card className="p-12 text-center">
-              <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calendar className="w-8 h-8 text-gray-400" />
+              <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-slate-400" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">
                 {t("noInstallmentsFound")}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-slate-600 dark:text-slate-400">
                 {searchTerm || statusFilter !== "all"
                   ? t("noInstallmentsMatchFilters")
                   : t("noInstallmentsForInvoice")}
@@ -388,11 +388,11 @@ const IntegratedInstallmentsManager: React.FC<
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-gray-100">
+                        <h4 className="font-semibold text-slate-900 dark:text-slate-100">
                           {t("installment")} #
                           {installment.installmentNumber || index + 1}
                         </h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-sm text-slate-600 dark:text-slate-400">
                           {t("due")}:{" "}
                           {formatDate(installment.dueDate)}
                         </p>
@@ -413,17 +413,17 @@ const IntegratedInstallmentsManager: React.FC<
 
                     <div className="space-y-2 mb-4">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                        <span className="text-sm text-slate-600 dark:text-slate-400">
                           {t("amount")}:
                         </span>
-                        <span className="font-semibold text-gray-900 dark:text-gray-100">
+                        <span className="font-semibold text-slate-900 dark:text-slate-100">
                           {formatCurrency(installment.amount)}{" "}
                           {invoice?.currency || "EGP"}
                         </span>
                       </div>
                       {installment.paidDate && (
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                          <span className="text-sm text-slate-600 dark:text-slate-400">
                             {t("paidDate")}:
                           </span>
                           <span className="text-sm text-emerald-600 dark:text-emerald-400">
@@ -452,7 +452,7 @@ const IntegratedInstallmentsManager: React.FC<
                             handlePayInstallment(installment, index + 1)
                           }
                           disabled={payInstallmentMutation.isPending}
-                          className="flex-1 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white"
+                          className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
                         >
                           <CreditCard className="w-4 h-4 mr-1" />
                           {t("pay")}
@@ -465,7 +465,7 @@ const IntegratedInstallmentsManager: React.FC<
                             handleUnPayInstallment(installment, index + 1)
                           }
                           disabled={unpayInstallmentMutation.isPending}
-                          className="flex-1 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white"
+                          className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
                         >
                           <CreditCard className="w-4 h-4 mr-1" />
                           {t("unPay")}

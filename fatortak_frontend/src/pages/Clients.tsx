@@ -177,7 +177,7 @@ const Clients: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      <div className="min-h-screen bg-canvas dark:bg-slate-950">
         <div className="flex items-center justify-center min-h-screen">
           <Card className="w-full max-w-md mx-4">
             <CardContent className="p-8 text-center">
@@ -203,17 +203,17 @@ const Clients: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950">
       <div className="container !max-w-full mx-auto p-4 space-y-6">
         {/* Enhanced Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 text-white shadow-2xl">
+        <div className="page-hero">
           <div
             className={`flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 ${
               isRTL ? "lg:flex-row-reverse" : ""
             }`}
           >
             <div className={`flex items-center space-x-4`}>
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg mx-3">
+              <div className="page-hero-icon mx-3">
                 <Users className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -231,7 +231,7 @@ const Clients: React.FC = () => {
             {roleAccess.canCreate() && (
               <Button
                 onClick={handleNewCustomer}
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                className="page-hero-action"
               >
                 <Plus className="w-5 h-5 mr-2" />
                 <span className="font-semibold">
@@ -244,72 +244,72 @@ const Clients: React.FC = () => {
 
         {/* Enhanced Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20 border-blue-200 dark:border-blue-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "إجمالي العملاء" : "Total Clients"}
                   </p>
-                  <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats?.total)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50 dark:bg-sky-950/40">
                   <Users className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/20 dark:to-emerald-900/20 border-emerald-200 dark:border-emerald-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "العملاء النشطون" : "Active Clients"}
                   </p>
-                  <p className="text-2xl font-bold text-emerald-900 dark:text-emerald-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.active)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/40">
                   <UserCheck className="w-6 h-6 text-emerald-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-950/20 dark:to-red-900/20 border-red-200 dark:border-red-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-red-600 dark:text-red-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "العملاء غير النشطين" : "Inactive Clients"}
                   </p>
-                  <p className="text-2xl font-bold text-red-900 dark:text-red-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.inactive)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-950/40">
                   <UserX className="w-6 h-6 text-red-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/20 dark:to-purple-900/20 border-purple-200 dark:border-purple-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-purple-600 dark:text-purple-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "عملاء جدد" : "New Clients"}
                   </p>
-                  <p className="text-2xl font-bold text-purple-900 dark:text-purple-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.recent)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-950/40">
                   <TrendingUp className="w-6 h-6 text-purple-600" />
                 </div>
               </div>
@@ -318,7 +318,7 @@ const Clients: React.FC = () => {
         </div>
 
         {/* Enhanced Search */}
-        <Card className="bg-card/60 backdrop-blur-sm border shadow-sm">
+        <Card className="border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900">
           <CardContent className="p-6">
             <div className="relative">
               <Search
@@ -334,7 +334,7 @@ const Clients: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className={`w-full py-3 px-4 ${
-                  isRTL ? "pr-12 text-right" : "pl-12"
+                  isRTL ? "pr-12 text-end" : "pl-12"
                 } border rounded-xl bg-background/60 backdrop-blur-sm focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200`}
               />
             </div>
@@ -343,52 +343,52 @@ const Clients: React.FC = () => {
 
         {/* Enhanced Customers Display */}
         {!isLoading && (
-          <Card className="bg-card/60 backdrop-blur-sm border shadow-sm">
+          <Card className="border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900">
             {/* Desktop Table */}
             <div className="hidden lg:block">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b bg-muted/30">
+                    <tr className="border-b bg-slate-50/80 dark:bg-slate-800/60">
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("customer")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("contact")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("address")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("status")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("joinedDate")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("actions")}
                       </th>
@@ -402,7 +402,7 @@ const Clients: React.FC = () => {
                           key={customer?.id}
                           className="hover:bg-muted/20 transition-colors"
                         >
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div className="flex items-center space-x-3">
                               <div
                                 className={`w-10 h-10 rounded-full ${avatar.color} flex items-center justify-center text-white font-semibold`}
@@ -419,7 +419,7 @@ const Clients: React.FC = () => {
                               </div>
                             </div>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div className="space-y-1">
                               {customer.phone && (
                                 <div className="flex items-center space-x-2 text-sm">
@@ -433,13 +433,13 @@ const Clients: React.FC = () => {
                               </div>
                             </div>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div className="flex items-center space-x-2 text-sm">
                               <MapPin className="w-4 h-4 text-muted-foreground" />
                               <span>{customer.address || t("noAddress")}</span>
                             </div>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div className="flex items-center space-x-3">
                               <div dir={isRTL ? "rtl" : "ltr"}>
                                 <Switch
@@ -470,10 +470,10 @@ const Clients: React.FC = () => {
                               </Badge>
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-sm text-muted-foreground">
+                          <td className="px-4 py-3 text-sm text-muted-foreground">
                             {formatDate(customer.createdAt)}
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div className="flex items-center space-x-1">
                               {roleAccess.canEdit() && (
                                 <Button
@@ -657,7 +657,7 @@ const Clients: React.FC = () => {
             </div>
 
             {/* Enhanced Pagination */}
-            <div className="border-t bg-muted/20 px-6 py-4">
+            <div className="border-t bg-muted/20 px-4 py-3">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-sm text-muted-foreground">
                   {isRTL
@@ -689,7 +689,7 @@ const Clients: React.FC = () => {
 
         {/* Enhanced Empty State */}
         {!isLoading && customers.length === 0 && (
-          <Card className="bg-card/60 backdrop-blur-sm">
+          <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-12 text-center">
               <div className="w-20 h-20 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <Users className="w-10 h-10 text-muted-foreground" />
@@ -704,7 +704,7 @@ const Clients: React.FC = () => {
               </p>
               <Button
                 onClick={handleNewCustomer}
-                className="bg-gradient-to-r from-primary to-primary/80"
+                className="bg-brand-600"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 {isRTL ? "إضافة أول عميل" : "Add First Client"}

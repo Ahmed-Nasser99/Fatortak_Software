@@ -87,9 +87,9 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
       className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
       dir={isRTL ? "rtl" : "ltr"}
     >
-      <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 relative">
+        <div className="bg-brand-600 p-6 relative">
           <button
             onClick={onClose}
             className={`absolute top-4 ${
@@ -107,7 +107,7 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
             <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
               <User className="w-6 h-6 text-white" />
             </div>
-            <div className={isRTL ? "text-right" : ""}>
+            <div className={isRTL ? "text-end" : ""}>
               <h2 className="text-2xl font-bold text-white">{modalTitle}</h2>
               <p className="text-white/80">
                 {isRTL ? "تحديث معلومات العميل" : "Update customer information"}
@@ -122,7 +122,7 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
           <div className="space-y-2">
             <label
               className={`block text-sm font-semibold text-slate-700 dark:text-slate-300 ${
-                isRTL ? "text-right" : ""
+                isRTL ? "text-end" : ""
               }`}
             >
               {isRTL ? "الاسم" : "Name"} <span className="text-red-500">*</span>
@@ -137,8 +137,8 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
                 type="text"
                 value={formData.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
-                className={`w-full h-12 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-slate-900 dark:text-white ${
-                  isRTL ? "pr-12 pl-4 text-right" : "pl-12 pr-4"
+                className={`w-full h-12 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl focus:border-brand-400 focus:ring-2 focus:ring-brand-100 transition-all text-slate-900 dark:text-white ${
+                  isRTL ? "pr-12 pl-4 text-end" : "pl-12 pr-4"
                 }`}
                 placeholder={isRTL ? "أدخل الاسم" : "Enter name"}
                 required
@@ -150,7 +150,7 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
           <div className="space-y-2">
             <label
               className={`block text-sm font-semibold text-slate-700 dark:text-slate-300 ${
-                isRTL ? "text-right" : ""
+                isRTL ? "text-end" : ""
               }`}
             >
               {isRTL ? "البريد الإلكتروني" : "Email"}
@@ -165,8 +165,8 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                className={`w-full h-12 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-slate-900 dark:text-white ${
-                  isRTL ? "pr-12 pl-4 text-right" : "pl-12 pr-4"
+                className={`w-full h-12 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl focus:border-brand-400 focus:ring-2 focus:ring-brand-100 transition-all text-slate-900 dark:text-white ${
+                  isRTL ? "pr-12 pl-4 text-end" : "pl-12 pr-4"
                 }`}
                 placeholder={
                   isRTL ? "أدخل البريد الإلكتروني" : "Enter email address"
@@ -179,7 +179,7 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
           <div className="space-y-2">
             <label
               className={`block text-sm font-semibold text-slate-700 dark:text-slate-300 ${
-                isRTL ? "text-right" : ""
+                isRTL ? "text-end" : ""
               }`}
             >
               {isRTL ? "رقم الهاتف" : "Phone Number"}
@@ -194,8 +194,8 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange("phone", e.target.value)}
-                className={`w-full h-12 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-slate-900 dark:text-white ${
-                  isRTL ? "pr-12 pl-4 text-right" : "pl-12 pr-4"
+                className={`w-full h-12 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl focus:border-brand-400 focus:ring-2 focus:ring-brand-100 transition-all text-slate-900 dark:text-white ${
+                  isRTL ? "pr-12 pl-4 text-end" : "pl-12 pr-4"
                 }`}
                 placeholder={isRTL ? "أدخل رقم الهاتف" : "Enter phone number"}
               />
@@ -206,7 +206,7 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
           <div className="space-y-2">
             <label
               className={`block text-sm font-semibold text-slate-700 dark:text-slate-300 ${
-                isRTL ? "text-right" : ""
+                isRTL ? "text-end" : ""
               }`}
             >
               {isRTL ? "العنوان" : "Address"}
@@ -221,8 +221,8 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
                 value={formData.address}
                 onChange={(e) => handleInputChange("address", e.target.value)}
                 rows={3}
-                className={`w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-slate-900 dark:text-white resize-none ${
-                  isRTL ? "pr-12 pl-4 text-right" : "pl-12 pr-4"
+                className={`w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl focus:border-brand-400 focus:ring-2 focus:ring-brand-100 transition-all text-slate-900 dark:text-white resize-none ${
+                  isRTL ? "pr-12 pl-4 text-end" : "pl-12 pr-4"
                 } pt-3`}
                 placeholder={
                   isRTL ? "أدخل العنوان الكامل" : "Enter full address"
@@ -240,13 +240,13 @@ const CustomerUpdateModal: React.FC<CustomerUpdateModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-6 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors font-medium"
+              className="flex-1 px-4 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors font-medium"
             >
               {isRTL ? "إلغاء" : "Cancel"}
             </button>
             <button
               type="submit"
-              className={`flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200 font-semibold flex items-center justify-center gap-2 ${
+              className={`flex-1 px-4 py-3 bg-brand-600 text-white rounded-xl hover:shadow-lg transform  transition-all duration-200 font-semibold flex items-center justify-center gap-2 ${
                 isRTL ? "flex-row-reverse" : ""
               }`}
             >

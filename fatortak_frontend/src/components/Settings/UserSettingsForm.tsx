@@ -118,15 +118,15 @@ const UserSettingsForm: React.FC = () => {
   };
 
   const SectionCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-    <div className={`bg-gradient-to-br from-background to-muted/30 rounded-xl border shadow-sm hover:shadow-md transition-shadow duration-300 p-6 ${className}`}>
+    <div className={`rounded-xl border border-slate-200/80 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 sm:p-6 ${className}`}>
       {children}
     </div>
   );
 
-  const SectionHeader = ({ title, color }: { title: string; color: string }) => (
-    <div className="flex items-center gap-3 mb-6">
-      <div className={`w-2 h-8 rounded-full bg-gradient-to-b ${color} shadow-sm`} />
-      <h3 className="text-lg font-bold text-foreground">{title}</h3>
+  const SectionHeader = ({ title }: { title: string; color?: string }) => (
+    <div className="mb-5 flex items-center gap-2.5">
+      <span className="h-4 w-1 rounded-full bg-brand-500" />
+      <h3 className="text-base font-semibold text-slate-900 dark:text-white">{title}</h3>
     </div>
   );
 
@@ -139,10 +139,10 @@ const UserSettingsForm: React.FC = () => {
     required?: boolean; 
     children: React.ReactNode 
   }) => (
-    <div className="space-y-2">
-      <label className="text-sm font-bold text-foreground flex items-center gap-1">
+    <div className="space-y-1.5">
+      <label className="flex items-center gap-1 text-[13px] font-medium text-slate-700 dark:text-slate-300">
         {label}
-        {required && <span className="text-destructive">*</span>}
+        {required && <span className="text-rose-500">*</span>}
       </label>
       <div className="relative">
         {children}
@@ -151,7 +151,7 @@ const UserSettingsForm: React.FC = () => {
   );
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5">
       {/* Profile Picture Section */}
       <SectionCard>
         <SectionHeader title={t("profilePicture")} color="from-violet-500 to-violet-600" />
@@ -184,7 +184,7 @@ const UserSettingsForm: React.FC = () => {
                     firstName: e.target.value,
                   }))
                 }
-                className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 disabled:bg-slate-50 disabled:text-slate-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
                 dir={isRTL ? "rtl" : "ltr"}
                 required
               />
@@ -197,7 +197,7 @@ const UserSettingsForm: React.FC = () => {
                 onChange={(e) =>
                   setUserSettings((prev) => ({ ...prev, lastName: e.target.value }))
                 }
-                className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 disabled:bg-slate-50 disabled:text-slate-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
                 dir={isRTL ? "rtl" : "ltr"}
                 required
               />
@@ -217,7 +217,7 @@ const UserSettingsForm: React.FC = () => {
               onChange={(e) =>
                 setUserSettings((prev) => ({ ...prev, email: e.target.value }))
               }
-              className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 disabled:bg-slate-50 disabled:text-slate-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
               dir={isRTL ? "rtl" : "ltr"}
               required
             />
@@ -233,7 +233,7 @@ const UserSettingsForm: React.FC = () => {
                   phoneNumber: e.target.value,
                 }))
               }
-              className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 disabled:bg-slate-50 disabled:text-slate-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
               dir={isRTL ? "rtl" : "ltr"}
             />
           </InputField>
@@ -246,7 +246,7 @@ const UserSettingsForm: React.FC = () => {
           type="button"
           onClick={handleSubmit}
           disabled={loading}
-          className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary disabled:opacity-50 text-primary-foreground font-bold rounded-2xl transition-all shadow-xl shadow-primary/25"
+          className="flex items-center gap-2 px-8 py-3 bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors shadow-sm"
         >
           {loading ? (
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-foreground"></div>

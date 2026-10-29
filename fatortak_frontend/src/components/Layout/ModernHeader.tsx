@@ -127,7 +127,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
           >
             <button
               onClick={onMenuClick}
-              className="p-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -136,9 +136,9 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
           {/* Center Section - Logo for mobile */}
           <div className="lg:hidden">
             <img
-              src="/lovable-uploads/8f24889c-d3d3-4842-a775-81f28f9af29a.png"
+              src="/lovable-uploads/fatortak-logo.png"
               alt="FATORTAK"
-              className="h-8 w-auto object-contain"
+              className="h-8 w-auto object-contain dark:brightness-0 dark:invert"
             />
           </div>
 
@@ -151,7 +151,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
               title={
                 theme === "dark"
                   ? isRTL
@@ -172,7 +172,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="p-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
               title={isRTL ? "English" : "العربية"}
             >
               <Globe className="w-5 h-5" />
@@ -182,7 +182,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
             {/* <div className="relative">
               <button
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="p-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 transition-colors relative"
+                className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors relative"
               >
                 <Bell className="w-5 h-5" />
                 {totalUnread > 0 && (
@@ -193,13 +193,13 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
               </button>
               {showNotifications && (
                 <div
-                  className={`absolute top-full mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 ${
+                  className={`absolute top-full mt-2 w-80 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 z-50 ${
                     isRTL ? "left-0" : "right-0"
                   }`}
                 >
-                  <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+                  <div className="p-4 border-b border-slate-200 dark:border-slate-700">
                     <div className="flex justify-between items-center">
-                      <h3 className="font-medium text-gray-900 dark:text-white">
+                      <h3 className="font-medium text-slate-900 dark:text-white">
                         {isRTL ? "الإشعارات" : "Notifications"}
                       </h3>
                       <Badge variant="secondary">
@@ -209,7 +209,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
                   </div>
                   <div className="max-h-96 overflow-y-auto">
                     {notifications.length === 0 ? (
-                      <div className="p-4 text-center text-gray-500 dark:text-gray-400">
+                      <div className="p-4 text-center text-slate-500 dark:text-slate-400">
                         {isRTL
                           ? "لا توجد إشعارات جديدة"
                           : "No new notifications"}
@@ -218,7 +218,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
                       notifications.map((notification) => (
                         <div
                           key={notification.id}
-                          className={`p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer ${
+                          className={`p-4 border-b border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer ${
                             !notification.isRead
                               ? "bg-blue-50/30 dark:bg-blue-900/10"
                               : ""
@@ -238,13 +238,13 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
                               )}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <h4 className="text-sm font-medium text-gray-900 dark:text-white">
+                              <h4 className="text-sm font-medium text-slate-900 dark:text-white">
                                 {notification.title}
                               </h4>
-                              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
                                 {notification.message}
                               </p>
-                              <div className="flex items-center mt-2 text-xs text-gray-500 dark:text-gray-400">
+                              <div className="flex items-center mt-2 text-xs text-slate-500 dark:text-slate-400">
                                 <Clock className="w-3 h-3 mr-1" />
                                 {formatDistanceToNow(
                                   new Date(notification.createdAt),
@@ -262,7 +262,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
                       ))
                     )}
                   </div>
-                  <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                  <div className="p-4 border-t border-slate-200 dark:border-slate-700">
                     <button
                       onClick={() => navigate("/notifications")}
                       className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
@@ -278,7 +278,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
             <div className="relative">
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className={`flex items-center space-x-3 p-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 transition-colors ${
+                className={`flex items-center space-x-3 p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors ${
                   isRTL ? "flex-row-reverse space-x-reverse" : ""
                 }`}
               >
@@ -289,7 +289,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
                       alt={userProfile.firstName}
                     />
                   ) : (
-                    <AvatarFallback className="bg-purple-100 text-purple-600 text-sm">
+                    <AvatarFallback className="bg-brand-100 text-brand-700 text-sm dark:bg-brand-950 dark:text-brand-300">
                       {getInitials(
                         userProfile?.firstName,
                         userProfile?.lastName,
@@ -299,15 +299,15 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
                 </Avatar>
                 <div
                   className={`hidden sm:block ${
-                    isRTL ? "text-right" : "text-left"
+                    isRTL ? "text-end" : "text-start"
                   }`}
                 >
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">
                     {userProfile
                       ? `${userProfile.firstName} ${userProfile.lastName}`
                       : "User"}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
                     {userProfile?.role || "User"}
                   </p>
                 </div>
@@ -317,17 +317,17 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
               {/* Profile Dropdown Menu */}
               {showProfileMenu && (
                 <div
-                  className={`absolute top-full mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 ${
+                  className={`absolute top-full mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 z-50 ${
                     isRTL ? "left-0" : "right-0"
                   }`}
                 >
                   <div className="py-2">
                     <button
                       onClick={handleProfileClick}
-                      className={`w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-3 ${
+                      className={`w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center space-x-3 ${
                         isRTL
-                          ? "flex-row-reverse space-x-reverse text-right"
-                          : "text-left"
+                          ? "flex-row-reverse space-x-reverse text-end"
+                          : "text-start"
                       }`}
                     >
                       <User className="w-4 h-4" />
@@ -335,22 +335,22 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
                     </button>
                     <button
                       onClick={() => navigate("/settings")}
-                      className={`w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-3 ${
+                      className={`w-full px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center space-x-3 ${
                         isRTL
-                          ? "flex-row-reverse space-x-reverse text-right"
-                          : "text-left"
+                          ? "flex-row-reverse space-x-reverse text-end"
+                          : "text-start"
                       }`}
                     >
                       <Settings className="w-4 h-4" />
                       <span>{isRTL ? "الإعدادات" : "Settings"}</span>
                     </button>
-                    <hr className="my-2 border-gray-200 dark:border-gray-700" />
+                    <hr className="my-2 border-slate-200 dark:border-slate-700" />
                     <button
                       onClick={handleLogout}
-                      className={`w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-3 ${
+                      className={`w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center space-x-3 ${
                         isRTL
-                          ? "flex-row-reverse space-x-reverse text-right"
-                          : "text-left"
+                          ? "flex-row-reverse space-x-reverse text-end"
+                          : "text-start"
                       }`}
                     >
                       <LogOut className="w-4 h-4" />

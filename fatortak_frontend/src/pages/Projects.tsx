@@ -25,6 +25,7 @@ import {
 import { PaginationDto, ProjectFilterDto, ProjectStatus } from "../types/api";
 import { toast } from "react-toastify";
 import { Badge } from "../components/ui/badge";
+import StatCard from "../components/ui/StatCard";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import {
@@ -175,7 +176,7 @@ const Projects: React.FC = () => {
       case ProjectStatus.Completed:
         return "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800";
       case ProjectStatus.NotStarted:
-        return "bg-gray-50 text-gray-700 border-gray-200 dark:bg-gray-900/20 dark:text-gray-400 dark:border-gray-800";
+        return "bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900/20 dark:text-slate-400 dark:border-slate-800";
       case ProjectStatus.OnHold:
         return "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-800";
       case ProjectStatus.Cancelled:
@@ -216,7 +217,7 @@ const Projects: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      <div className="min-h-screen bg-canvas dark:bg-slate-950">
         <div className="flex items-center justify-center min-h-screen">
           <Card className="w-full max-w-md mx-4">
             <CardContent className="p-8 text-center">
@@ -237,17 +238,17 @@ const Projects: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950">
       <div className="container !max-w-full mx-auto p-4 space-y-6">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 text-white shadow-2xl">
+        <div className="page-hero">
           <div
             className={`flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 ${
               isRTL ? "lg:flex-row-reverse" : ""
             }`}
           >
             <div className={`flex items-center space-x-4`}>
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg mx-3">
+              <div className="page-hero-icon mx-3">
                 <FolderKanban className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -264,11 +265,10 @@ const Projects: React.FC = () => {
 
             <div className="flex gap-2">
               <Button
-                variant="outline"
                 onClick={() => navigate("new-with-contract")}
-                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border-2 border-white/20 hover:border-white/40 px-6 py-3 rounded-xl shadow-lg transition-all duration-200"
+                className="page-hero-action"
               >
-                <Plus className="w-5 h-5 mr-2" />
+                <Plus className="w-4 h-4" />
                 <span className="font-semibold">
                   {isRTL ? "مشروع جديد" : "New Project"}
                 </span>
@@ -278,66 +278,33 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-white/50 backdrop-blur-sm border-gray-100 dark:border-gray-800 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group">
-            <CardContent className="p-6 relative">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider">
-                    {isRTL ? "إجمالي الميزانية" : "Total Budget"}
-                  </p>
-                  <p className="text-3xl font-black text-gray-900 dark:text-white mt-1">
-                    {formatNumber(projectStats.totalBudget)}
-                  </p>
-                </div>
-                <div className="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
-                  <DollarSign className="w-7 h-7 text-blue-600 group-hover:text-white transition-colors duration-300" />
-                </div>
-              </div>
-              <div className="absolute bottom-0 left-0 h-1 w-full bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/50 backdrop-blur-sm border-gray-100 dark:border-gray-800 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group">
-            <CardContent className="p-6 relative">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider">
-                    {isRTL ? "مشاريع نشطة" : "Active Projects"}
-                  </p>
-                  <p className="text-3xl font-black text-gray-900 dark:text-white mt-1">
-                    {formatNumber(projectStats.activeProjects)}
-                  </p>
-                </div>
-                <div className="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl flex items-center justify-center group-hover:bg-emerald-600 transition-colors duration-300">
-                  <TrendingUp className="w-7 h-7 text-emerald-600 group-hover:text-white transition-colors duration-300" />
-                </div>
-              </div>
-              <div className="absolute bottom-0 left-0 h-1 w-full bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/50 backdrop-blur-sm border-gray-100 dark:border-gray-800 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group">
-            <CardContent className="p-6 relative">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider">
-                    {isRTL ? "مشاريع مكتملة" : "Completed Projects"}
-                  </p>
-                  <p className="text-3xl font-black text-gray-900 dark:text-white mt-1">
-                    {formatNumber(projectStats.completedProjects)}
-                  </p>
-                </div>
-                <div className="w-14 h-14 bg-purple-50 dark:bg-purple-900/20 rounded-2xl flex items-center justify-center group-hover:bg-purple-600 transition-colors duration-300">
-                  <CheckCircle className="w-7 h-7 text-purple-600 group-hover:text-white transition-colors duration-300" />
-                </div>
-              </div>
-              <div className="absolute bottom-0 left-0 h-1 w-full bg-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <StatCard
+            title={isRTL ? "إجمالي الميزانية" : "Total Budget"}
+            value={formatNumber(projectStats.totalBudget)}
+            subtitle={isRTL ? "الميزانية المخططة" : "Planned budget across projects"}
+            icon={DollarSign}
+            tone="info"
+          />
+          <StatCard
+            title={isRTL ? "مشاريع نشطة" : "Active Projects"}
+            value={formatNumber(projectStats.activeProjects)}
+            subtitle={isRTL ? "قيد التنفيذ" : "Currently in progress"}
+            icon={TrendingUp}
+            tone="success"
+          />
+          <StatCard
+            title={isRTL ? "مشاريع مكتملة" : "Completed Projects"}
+            value={formatNumber(projectStats.completedProjects)}
+            subtitle={isRTL ? "تم تسليمها" : "Delivered and closed"}
+            icon={CheckCircle}
+            tone="brand"
+          />
         </div>
 
         {/* Search & Filter */}
-        <Card className="bg-card/60 backdrop-blur-sm border shadow-sm">
-          <CardContent className="p-6">
+        <Card className="border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900">
+          <CardContent className="p-5">
             <div
               className={`grid grid-cols-1 md:grid-cols-2 gap-4 ${isRTL ? "rtl" : "ltr"}`}
             >
@@ -355,8 +322,8 @@ const Projects: React.FC = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className={`w-full py-2.5 px-4 ${
-                    isRTL ? "pr-12 text-right" : "pl-12"
-                  } border rounded-xl bg-background/60 backdrop-blur-sm focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all duration-200`}
+                    isRTL ? "pr-12 text-end" : "pl-12"
+                  } border border-slate-200 bg-white shadow-sm outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900`}
                 />
               </div>
 
@@ -397,83 +364,83 @@ const Projects: React.FC = () => {
 
         {/* Projects List */}
         {!isLoading && (
-          <Card className="bg-card/60 backdrop-blur-sm border shadow-sm">
+          <Card className="border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900">
             <div className="hidden lg:block">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b bg-gray-50/50 dark:bg-gray-800/50">
+                    <tr className="border-b bg-slate-50/50 dark:bg-slate-800/50">
                       <th
-                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-gray-400 uppercase tracking-wider`}
+                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-slate-400 uppercase tracking-wider`}
                       >
                         {isRTL ? "المشروع" : "Project"}
                       </th>
                       <th
-                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-gray-400 uppercase tracking-wider`}
+                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-slate-400 uppercase tracking-wider`}
                       >
                         {isRTL ? "العميل" : "Client"}
                       </th>
                       <th
-                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-gray-400 uppercase tracking-wider`}
+                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-slate-400 uppercase tracking-wider`}
                       >
                         {isRTL ? "الميزانية" : "Budget"}
                       </th>
                       <th
-                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-gray-400 uppercase tracking-wider`}
+                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-slate-400 uppercase tracking-wider`}
                       >
                         {isRTL ? "المدفوع" : "Paid"}
                       </th>
                       <th
-                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-gray-400 uppercase tracking-wider`}
+                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-slate-400 uppercase tracking-wider`}
                       >
                         {isRTL ? "المتبقي" : "Remaining"}
                       </th>
                       <th
-                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-gray-400 uppercase tracking-wider`}
+                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-slate-400 uppercase tracking-wider`}
                       >
                         {isRTL ? "الحالة" : "Status"}
                       </th>
                       <th
-                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-gray-400 uppercase tracking-wider`}
+                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-slate-400 uppercase tracking-wider`}
                       >
                         {isRTL ? "التاريخ" : "Date"}
                       </th>
                       <th
-                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-gray-400 uppercase tracking-wider`}
+                        className={`px-6 py-5 text-${isRTL ? "right" : "left"} text-xs font-bold text-slate-400 uppercase tracking-wider`}
                       >
                         {isRTL ? "إجراءات" : "Actions"}
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {projects.map((project: any) => (
                       <tr
                         key={project.id}
                         className="hover:bg-muted/20 transition-colors"
                       >
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div className="font-semibold">{project.name}</div>
                           <div className="text-sm text-muted-foreground">
                             {project.description}
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-sm">
+                        <td className="px-4 py-3 text-sm">
                           {project.customerName || "-"}
                         </td>
-                        <td className="px-6 py-4 text-sm font-medium">
+                        <td className="px-4 py-3 text-sm font-medium">
                           {calculateProjectTotal(project) > 0
                             ? formatNumber(calculateProjectTotal(project))
                             : "-"}
                         </td>
-                        <td className="px-6 py-4 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                        <td className="px-4 py-3 text-sm font-medium text-emerald-600 dark:text-emerald-400">
                           {formatNumber(project.totalCollected || 0)}
                         </td>
-                        <td className="px-6 py-4 text-sm font-medium text-rose-600 dark:text-rose-400">
+                        <td className="px-4 py-3 text-sm font-medium text-rose-600 dark:text-rose-400">
                           {formatNumber(
                             Math.max(0, calculateProjectTotal(project) - (project.totalCollected || 0)),
                           )}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div className="w-[140px]">
                             <Select
                               value={project.status}
@@ -519,10 +486,10 @@ const Projects: React.FC = () => {
                             </Select>
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-sm text-muted-foreground">
+                        <td className="px-4 py-3 text-sm text-muted-foreground">
                           {formatDate(project.createdAt)}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div className="flex items-center space-x-1">
                             <Button
                               variant="ghost"
@@ -674,7 +641,7 @@ const Projects: React.FC = () => {
             </div>
 
             {/* Pagination */}
-            <div className="border-t bg-muted/20 px-6 py-4">
+            <div className="border-t bg-muted/20 px-4 py-3">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-sm text-muted-foreground">
                   {isRTL
@@ -706,7 +673,7 @@ const Projects: React.FC = () => {
 
         {/* Empty State */}
         {!isLoading && projects.length === 0 && (
-          <Card className="bg-card/60 backdrop-blur-sm">
+          <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-12 text-center">
               <div className="w-20 h-20 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <FolderKanban className="w-10 h-10 text-muted-foreground" />
@@ -716,7 +683,7 @@ const Projects: React.FC = () => {
               </h3>
               <Button
                 onClick={() => navigate("new-with-contract")}
-                className="bg-gradient-to-r from-purple-600 to-purple-500"
+                className="bg-brand-600 hover:bg-brand-700"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 {isRTL ? "إضافة أول مشروع" : "Add First Project"}

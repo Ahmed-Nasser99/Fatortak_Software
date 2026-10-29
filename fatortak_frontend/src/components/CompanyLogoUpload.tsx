@@ -100,14 +100,14 @@ const CompanyLogoUpload: React.FC<CompanyLogoUploadProps> = ({
 
   return (
     <div className={`space-y-4 ${className}`} dir={isRTL ? "rtl" : "ltr"}>
-      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
         {t("companyLogo") || (isRTL ? "شعار الشركة" : "Company Logo")}
       </label>
 
       <div className="flex items-center space-x-4 rtl:space-x-reverse">
         {/* Logo Preview */}
         <div className="relative">
-          <div className="w-20 h-20 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-gray-800">
+          <div className="w-20 h-20 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-600 flex items-center justify-center overflow-hidden bg-slate-50 dark:bg-slate-800">
             {previewUrl ? (
               <img
                 src={previewUrl}
@@ -115,7 +115,7 @@ const CompanyLogoUpload: React.FC<CompanyLogoUploadProps> = ({
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : (
-              <Camera className="w-8 h-8 text-gray-400" />
+              <Camera className="w-8 h-8 text-slate-400" />
             )}
           </div>
 
@@ -138,7 +138,7 @@ const CompanyLogoUpload: React.FC<CompanyLogoUploadProps> = ({
             type="button"
             onClick={handleUploadClick}
             disabled={uploadLogoMutation.isPending}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 rtl:space-x-reverse"
+            className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 rtl:space-x-reverse"
           >
             <Upload className="w-4 h-4" />
             <span>
@@ -152,7 +152,7 @@ const CompanyLogoUpload: React.FC<CompanyLogoUploadProps> = ({
             </span>
           </button>
 
-          <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
             {isRTL ? "PNG, JPG, GIF حتى 5 ميجابايت" : "PNG, JPG, GIF up to 5MB"}
           </p>
         </div>

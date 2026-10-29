@@ -33,13 +33,13 @@ export const EnhancedRecentInvoices = ({
       case "sent":
         return "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400";
       case "draft":
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
+        return "bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300";
       case "overdue":
         return "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400";
       case "pending":
         return "bg-amber-100 text-amber-800 dark:bg-amber-900/20 dark:text-amber-400";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
+        return "bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300";
     }
   };
 
@@ -50,7 +50,7 @@ export const EnhancedRecentInvoices = ({
   };
 
   return (
-    <Card className="border-0 shadow-xl bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/90 dark:to-gray-900/90 backdrop-blur-sm">
+    <Card className="bg-white dark:bg-slate-900">
       <CardHeader className="pb-4">
         <div
           className={`flex items-center justify-between ${
@@ -62,10 +62,10 @@ export const EnhancedRecentInvoices = ({
               <FileText className="w-5 h-5 text-white" />
             </div>
             <div>
-              <CardTitle className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+              <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">
                 {t("recentInvoices")}
               </CardTitle>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-slate-500 dark:text-slate-400">
                 Latest invoice activities
               </p>
             </div>
@@ -91,18 +91,18 @@ export const EnhancedRecentInvoices = ({
       <CardContent>
         {recentInvoices.length === 0 ? (
           <div className="text-center py-12">
-            <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-              <FileText className="w-8 h-8 text-gray-400" />
+            <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
+              <FileText className="w-8 h-8 text-slate-400" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
               No invoices yet
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-4">
+            <p className="text-slate-500 dark:text-slate-400 mb-4">
               {t("getStartedByCreatingNewInvoice")}
             </p>
             <Button
               onClick={() => navigate("/invoices")}
-              className="bg-gradient-to-r from-blue-600 to-indigo-600"
+              className="bg-brand-600"
             >
               Create Invoice
             </Button>
@@ -112,7 +112,7 @@ export const EnhancedRecentInvoices = ({
             {recentInvoices.map((invoice) => (
               <div
                 key={invoice.id}
-                className={`group p-4 bg-gradient-to-r from-white to-gray-50/50 dark:from-gray-700 dark:to-gray-800/50 rounded-xl border border-gray-200/60 dark:border-gray-600/60 hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-700 transition-all duration-300 ${
+                className={`group p-4 bg-gradient-to-r from-white to-slate-50/50 dark:from-slate-700 dark:to-slate-800/50 rounded-xl border border-slate-200/60 dark:border-slate-600/60 hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-700 transition-all duration-300 ${
                   isRTL ? "flex-row-reverse" : ""
                 }`}
               >
@@ -141,7 +141,7 @@ export const EnhancedRecentInvoices = ({
 
                     <div className="space-y-2">
                       <div className="flex items-center gap-3">
-                        <h4 className="font-semibold text-gray-900 dark:text-white">
+                        <h4 className="font-semibold text-slate-900 dark:text-white">
                           {invoice.invoiceNumber}
                         </h4>
                         <Badge className={getStatusColor(invoice.status)}>
@@ -150,7 +150,7 @@ export const EnhancedRecentInvoices = ({
                         </Badge>
                       </div>
 
-                      <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
                         <div className="flex items-center gap-1">
                           <User className="w-3 h-3" />
                           {invoice.customerName}
@@ -168,12 +168,12 @@ export const EnhancedRecentInvoices = ({
                       isRTL ? "flex-row-reverse" : ""
                     }`}
                   >
-                    <div className={`text-right ${isRTL ? "text-left" : ""}`}>
-                      <div className="flex items-center gap-1 text-lg font-bold text-gray-900 dark:text-white">
+                    <div className={`text-end ${isRTL ? "text-start" : ""}`}>
+                      <div className="flex items-center gap-1 text-lg font-bold text-slate-900 dark:text-white">
                         <DollarSign className="w-4 h-4" />
                         {formatCurrency(invoice.total)}
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
                         {isRTL ? "تاريخ الاستحقاق" : "Due Date"}:{" "}
                         {format(new Date(invoice.dueDate), "MMM dd")}
                       </p>

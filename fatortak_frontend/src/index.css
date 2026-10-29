@@ -8,6 +8,18 @@
   .input {
     @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-brand-500 dark:focus:ring-brand-900/40;
   }
+
+  .page-hero {
+    @apply rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900;
+  }
+
+  .page-hero-icon {
+    @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-white shadow-sm;
+  }
+
+  .page-hero-action {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-700 disabled:pointer-events-none disabled:opacity-50;
+  }
 }
 
 :root {
@@ -161,4 +173,40 @@ button:focus-visible {
 .dark .glass-effect {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  th {
+    text-align: start;
+  }
+}
+
+/* Calm, light page hero restored from legacy gradient headers */
+.page-hero h1,
+.page-hero h2 {
+  color: #1b1f2a !important;
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.page-hero p {
+  color: #5b6475 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+}
+
+.dark .page-hero h1,
+.dark .page-hero h2 {
+  color: #f8fafc !important;
+}
+
+.dark .page-hero p {
+  color: #94a3b8 !important;
+}
+
+.page-hero .page-hero-icon svg {
+  color: #ffffff !important;
 }

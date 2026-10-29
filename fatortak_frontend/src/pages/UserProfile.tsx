@@ -179,7 +179,7 @@ const UserProfile: React.FC = () => {
                     type="password"
                     value={passwordData.currentPassword}
                     onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
-                    className={isRTL ? 'text-right' : ''}
+                    className={isRTL ? 'text-end' : ''}
                   />
                 </div>
                 <div>
@@ -190,7 +190,7 @@ const UserProfile: React.FC = () => {
                     type="password"
                     value={passwordData.newPassword}
                     onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
-                    className={isRTL ? 'text-right' : ''}
+                    className={isRTL ? 'text-end' : ''}
                   />
                 </div>
               </div>
@@ -267,7 +267,7 @@ const UserProfile: React.FC = () => {
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                       disabled={!isEditing}
-                      className={isRTL ? 'text-right' : ''}
+                      className={isRTL ? 'text-end' : ''}
                     />
                   </div>
                   <div>
@@ -278,7 +278,7 @@ const UserProfile: React.FC = () => {
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                       disabled={!isEditing}
-                      className={isRTL ? 'text-right' : ''}
+                      className={isRTL ? 'text-end' : ''}
                     />
                   </div>
                 </div>
@@ -293,7 +293,7 @@ const UserProfile: React.FC = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       disabled={!isEditing}
-                      className={`flex-1 ${isRTL ? 'text-right' : ''}`}
+                      className={`flex-1 ${isRTL ? 'text-end' : ''}`}
                     />
                   </div>
                 </div>
@@ -308,7 +308,7 @@ const UserProfile: React.FC = () => {
                       value={formData.phoneNumber || ''}
                       onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
                       disabled={!isEditing}
-                      className={`flex-1 ${isRTL ? 'text-right' : ''}`}
+                      className={`flex-1 ${isRTL ? 'text-end' : ''}`}
                     />
                   </div>
                 </div>

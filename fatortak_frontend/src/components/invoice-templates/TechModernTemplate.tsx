@@ -65,7 +65,7 @@ const TechModernTemplate: React.FC<TemplateProps> = ({
             <div className={`font-mono text-xs ${colors.text} mb-2`}>
               {t("invoiceDetails")}
             </div>
-            <div className={`text-4xl font-bold ${colors.textLight} font-mono`}>
+            <div className={`text-3xl font-bold ${colors.textLight} font-mono`}>
               {invoice.invoiceNumber}
             </div>
             <div className="mt-3">
@@ -143,7 +143,7 @@ const TechModernTemplate: React.FC<TemplateProps> = ({
               className={`${colors.bg}/30 border-b border-${colors.primary}/50`}
             >
               <th
-                className={`text-left rtl:text-right py-4 px-6 ${colors.textLight} font-mono text-sm uppercase tracking-wider`}
+                className={`text-start rtl:text-end py-4 px-6 ${colors.textLight} font-mono text-sm uppercase tracking-wider`}
               >
                 {t("item")}
               </th>
@@ -158,7 +158,7 @@ const TechModernTemplate: React.FC<TemplateProps> = ({
                 {t("price")}
               </th>
               <th
-                className={`text-right rtl:text-left py-4 px-6 ${colors.textLight} font-mono text-sm uppercase tracking-wider`}
+                className={`text-end rtl:text-start py-4 px-6 ${colors.textLight} font-mono text-sm uppercase tracking-wider`}
               >
                 {t("amount")}
               </th>
@@ -191,7 +191,7 @@ const TechModernTemplate: React.FC<TemplateProps> = ({
                   {item.unitPrice?.toFixed(2)}
                 </td>
                 <td
-                  className={`py-4 px-6 text-right rtl:text-left ${colors.textLight} font-mono font-bold`}
+                  className={`py-4 px-6 text-end rtl:text-start ${colors.textLight} font-mono font-bold`}
                 >
                   {(item.quantity * item.unitPrice)?.toFixed(2)}
                 </td>
@@ -268,7 +268,7 @@ const TechModernTemplate: React.FC<TemplateProps> = ({
             </div>
             <button
               onClick={() => window.open(`${import.meta.env.VITE_API_URL || 'https://localhost:44338'}/${invoice.attachmentUrl}`, '_blank')}
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-mono uppercase tracking-widest rounded-lg transition-all border border-blue-400/50 shadow-[0_0_15px_rgba(37,99,235,0.3)]"
+              className="px-6 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-mono uppercase tracking-wide rounded-lg transition-all border border-blue-400/50 shadow-[0_0_15px_rgba(37,99,235,0.3)]"
             >
               {isRTL ? "فتح" : "Open"}
             </button>

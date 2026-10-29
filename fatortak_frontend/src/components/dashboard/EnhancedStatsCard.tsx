@@ -48,7 +48,7 @@ export const EnhancedStatsCard = ({
           isRTL ? "flex-row-reverse" : "flex-row"
         } items-center justify-between space-y-0 pb-3 relative z-10`}
       >
-        <div className={`space-y-1 ${isRTL ? "text-right" : ""}`}>
+        <div className={`space-y-1 ${isRTL ? "text-end" : ""}`}>
           <h3 className="text-sm font-medium text-slate-600 dark:text-slate-400">
             {title}
           </h3>
@@ -60,7 +60,7 @@ export const EnhancedStatsCard = ({
           className={`p-3 rounded-xl bg-white/80 dark:bg-slate-800/80 shadow-sm group-hover:shadow-md transition-shadow duration-300`}
         >
           <Icon
-            className={`w-5 h-5 ${iconColor} group-hover:scale-110 transition-transform duration-300`}
+            className={`w-5 h-5 ${iconColor} group- transition-transform duration-300`}
           />
         </div>
       </CardHeader>
@@ -87,7 +87,7 @@ export const EnhancedStatsCard = ({
           {subtitle && (
             <div
               className={`text-xs text-slate-500 dark:text-slate-400 ${
-                isRTL ? "text-right" : ""
+                isRTL ? "text-end" : ""
               }`}
             >
               {subtitle}

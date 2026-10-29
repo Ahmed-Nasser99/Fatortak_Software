@@ -32,15 +32,15 @@ const BranchSelector: React.FC<BranchSelectorProps> = ({
   return (
     <div className={`space-y-2 ${className}`}>
       {label && (
-        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
           {label} {required && <span className="text-red-500">*</span>}
         </label>
       )}
       <div className="relative">
         {isLoading ? (
-          <div className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center space-x-3">
+          <div className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center space-x-3">
             <Loader2 className="w-5 h-5 animate-spin text-primary" />
-            <span className="text-gray-600 dark:text-gray-400">
+            <span className="text-slate-600 dark:text-slate-400">
               {t("loading") || "Loading"}...
             </span>
           </div>

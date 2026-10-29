@@ -99,7 +99,7 @@ const Users: React.FC = () => {
       case "manager":
         return <Shield className="w-4 h-4 text-blue-500" />;
       default:
-        return <User className="w-4 h-4 text-gray-500" />;
+        return <User className="w-4 h-4 text-slate-500" />;
     }
   };
 
@@ -108,9 +108,9 @@ const Users: React.FC = () => {
       case "admin":
         return "bg-gradient-to-r from-red-500 to-pink-500 text-white";
       case "manager":
-        return "bg-gradient-to-r from-blue-500 to-indigo-500 text-white";
+        return "bg-brand-600 text-white";
       default:
-        return "bg-gradient-to-r from-gray-500 to-slate-500 text-white";
+        return "bg-gradient-to-r from-slate-500 to-slate-500 text-white";
     }
   };
 
@@ -125,14 +125,14 @@ const Users: React.FC = () => {
   };
 
   const getAvatarColor = (name: string) => {
-    if (!name) return "bg-gradient-to-r from-gray-500 to-slate-500";
+    if (!name) return "bg-gradient-to-r from-slate-500 to-slate-500";
     const colors = [
-      "bg-gradient-to-r from-purple-500 to-violet-500",
-      "bg-gradient-to-r from-blue-500 to-indigo-500",
-      "bg-gradient-to-r from-green-500 to-emerald-500",
+      "bg-brand-600",
+      "bg-brand-600",
+      "bg-emerald-600",
       "bg-gradient-to-r from-yellow-500 to-amber-500",
       "bg-gradient-to-r from-pink-500 to-rose-500",
-      "bg-gradient-to-r from-red-500 to-orange-500",
+      "bg-rose-500",
     ];
     return colors[name.length % colors.length];
   };
@@ -146,16 +146,16 @@ const Users: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6">
+      <div className="min-h-screen bg-canvas dark:bg-slate-950 p-4 sm:p-6">
         <Card className="max-w-md mx-auto">
           <CardContent className="p-8 text-center">
             <div className="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
               <User className="w-8 h-8 text-red-600 dark:text-red-400" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
               {isRTL ? "خطأ في تحميل المستخدمين" : "Error Loading Users"}
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
+            <p className="text-slate-600 dark:text-slate-400 mb-4">
               {error instanceof Error
                 ? error.message
                 : "Unknown error occurred"}
@@ -170,10 +170,10 @@ const Users: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950">
       <div className="mx-auto p-4 sm:p-6 lg:p-8" dir={isRTL ? "rtl" : "ltr"}>
         {/* Enhanced Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 mb-8 text-white shadow-2xl">
+        <div className="page-hero mb-6">
           <div
             className={`flex flex-col lg:flex-row lg:items-center lg:justify-between ${
               isRTL ? "lg:flex-row-reverse" : ""
@@ -185,11 +185,11 @@ const Users: React.FC = () => {
                   isRTL ? "flex-row-reverse space-x-reverse" : ""
                 }`}
               >
-                <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
+                <div className="page-hero-icon">
                   <User className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-4xl font-bold mb-2">
+                  <h1 className="text-3xl font-bold mb-2">
                     {t("users") || (isRTL ? "المستخدمون" : "Users")}
                   </h1>
                   <p className="text-blue-100 text-lg">
@@ -237,7 +237,7 @@ const Users: React.FC = () => {
 
             <Button
               size="lg"
-              className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+              className="page-hero-action h-11 px-6"
             >
               <Plus className="w-6 h-6 mr-2" />
               <span className="font-semibold text-lg">
@@ -248,7 +248,7 @@ const Users: React.FC = () => {
         </div>
 
         {/* Enhanced Filters */}
-        <Card className="mb-8 shadow-lg border-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+        <Card className="mb-8 shadow-lg border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
           <CardContent className="p-6">
             <div
               className={`flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-6 ${
@@ -261,7 +261,7 @@ const Users: React.FC = () => {
                   <Search
                     className={`absolute top-1/2 transform -translate-y-1/2 ${
                       isRTL ? "right-4" : "left-4"
-                    } w-5 h-5 text-gray-400`}
+                    } w-5 h-5 text-slate-400`}
                   />
                   <input
                     type="text"
@@ -271,19 +271,19 @@ const Users: React.FC = () => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className={`w-full ${
-                      isRTL ? "pr-12 pl-4 text-right" : "pl-12 pr-4"
-                    } py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-200`}
+                      isRTL ? "pr-12 pl-4 text-end" : "pl-12 pr-4"
+                    } py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white transition-all duration-200`}
                   />
                 </div>
               </div>
 
               {/* Role Filter */}
               <div className="flex items-center space-x-4">
-                <Filter className="w-5 h-5 text-gray-500" />
+                <Filter className="w-5 h-5 text-slate-500" />
                 <select
                   value={roleFilter}
                   onChange={(e) => setRoleFilter(e.target.value)}
-                  className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white min-w-[150px]"
+                  className="px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white min-w-[150px]"
                 >
                   <option value="all">
                     {isRTL ? "جميع الأدوار" : "All Roles"}
@@ -329,7 +329,7 @@ const Users: React.FC = () => {
             <CardContent className="p-12">
               <div className="flex items-center justify-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mr-4"></div>
-                <span className="text-lg text-gray-600 dark:text-gray-400">
+                <span className="text-lg text-slate-600 dark:text-slate-400">
                   {isRTL ? "جاري تحميل المستخدمين..." : "Loading users..."}
                 </span>
               </div>
@@ -345,7 +345,7 @@ const Users: React.FC = () => {
                 {users.map((user: UserDto) => (
                   <Card
                     key={user.id}
-                    className="group hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm"
+                    className="group hover:shadow-lg transition-all duration-300 transform  border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm"
                   >
                     <CardHeader className="pb-3">
                       <div
@@ -368,7 +368,7 @@ const Users: React.FC = () => {
                             </span>
                           </div>
                           <div className="flex-1">
-                            <CardTitle className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                            <CardTitle className="text-lg font-bold text-slate-900 dark:text-white mb-1">
                               {getFullName(user)}
                             </CardTitle>
                             <div
@@ -392,7 +392,7 @@ const Users: React.FC = () => {
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="opacity-0 group-hover:opacity-100 transition-opacity hover:bg-gray-100 dark:hover:bg-gray-700"
+                              className="opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-100 dark:hover:bg-slate-700"
                             >
                               <MoreHorizontal className="w-4 h-4" />
                             </Button>
@@ -420,8 +420,8 @@ const Users: React.FC = () => {
                             isRTL ? "flex-row-reverse space-x-reverse" : ""
                           }`}
                         >
-                          <Mail className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm text-gray-600 dark:text-gray-400 truncate">
+                          <Mail className="w-4 h-4 text-slate-400" />
+                          <span className="text-sm text-slate-600 dark:text-slate-400 truncate">
                             {user.email}
                           </span>
                         </div>
@@ -432,8 +432,8 @@ const Users: React.FC = () => {
                               isRTL ? "flex-row-reverse space-x-reverse" : ""
                             }`}
                           >
-                            <Phone className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                            <Phone className="w-4 h-4 text-slate-400" />
+                            <span className="text-sm text-slate-600 dark:text-slate-400">
                               {user.phoneNumber}
                             </span>
                           </div>
@@ -444,8 +444,8 @@ const Users: React.FC = () => {
                             isRTL ? "flex-row-reverse space-x-reverse" : ""
                           }`}
                         >
-                          <Calendar className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                          <Calendar className="w-4 h-4 text-slate-400" />
+                          <span className="text-sm text-slate-600 dark:text-slate-400">
                             {new Date(user.createdAt).toLocaleDateString(
                               isRTL ? "ar" : "en"
                             )}
@@ -453,11 +453,11 @@ const Users: React.FC = () => {
                         </div>
 
                         <div
-                          className={`flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-700 ${
+                          className={`flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-700 ${
                             isRTL ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="text-sm text-slate-500 dark:text-slate-400">
                             {isRTL ? "الحالة" : "Status"}
                           </span>
                           <Badge
@@ -479,66 +479,66 @@ const Users: React.FC = () => {
               </div>
             ) : (
               // Table View for larger screens
-              <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
+              <Card className="shadow-lg border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm">
                 <div className="hidden lg:block overflow-x-auto">
                   <table className="w-full">
-                    <thead className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600">
+                    <thead className="bg-slate-50 dark:bg-slate-800/60">
                       <tr>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "المستخدم" : "User"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "البريد الإلكتروني" : "Email"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "الدور" : "Role"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "الحالة" : "Status"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "تاريخ الإنشاء" : "Created"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {t("actions") || (isRTL ? "الإجراءات" : "Actions")}
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                    <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                       {users.map((user: UserDto, index) => (
                         <tr
                           key={user.id}
-                          className={`hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-blue-900/10 dark:hover:to-indigo-900/10 transition-all duration-200 ${
+                          className={`hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors duration-200 ${
                             index % 2 === 0
-                              ? "bg-white dark:bg-gray-800"
-                              : "bg-gray-50/50 dark:bg-gray-700/50"
+                              ? "bg-white dark:bg-slate-800"
+                              : "bg-slate-50/50 dark:bg-slate-700/50"
                           }`}
                         >
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div
                               className={`flex items-center space-x-3 ${
                                 isRTL ? "flex-row-reverse space-x-reverse" : ""
@@ -554,23 +554,23 @@ const Users: React.FC = () => {
                                 </span>
                               </div>
                               <div>
-                                <div className="font-semibold text-gray-900 dark:text-white">
+                                <div className="font-semibold text-slate-900 dark:text-white">
                                   {getFullName(user)}
                                 </div>
                                 {user.phoneNumber && (
-                                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                                  <div className="text-sm text-slate-500 dark:text-slate-400">
                                     {user.phoneNumber}
                                   </div>
                                 )}
                               </div>
                             </div>
                           </td>
-                          <td className="px-6 py-4">
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                          <td className="px-4 py-3">
+                            <span className="text-sm text-slate-600 dark:text-slate-400">
                               {user.email}
                             </span>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div
                               className={`flex items-center space-x-2 ${
                                 isRTL ? "flex-row-reverse space-x-reverse" : ""
@@ -586,7 +586,7 @@ const Users: React.FC = () => {
                               </Badge>
                             </div>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <Badge
                               variant={user.isActive ? "default" : "secondary"}
                             >
@@ -599,14 +599,14 @@ const Users: React.FC = () => {
                                 : "Inactive"}
                             </Badge>
                           </td>
-                          <td className="px-6 py-4">
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                          <td className="px-4 py-3">
+                            <span className="text-sm text-slate-600 dark:text-slate-400">
                               {new Date(user.createdAt).toLocaleDateString(
                                 isRTL ? "ar" : "en"
                               )}
                             </span>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div
                               className={`flex space-x-2 ${
                                 isRTL ? "flex-row-reverse space-x-reverse" : ""
@@ -640,7 +640,7 @@ const Users: React.FC = () => {
                   {users.map((user: UserDto) => (
                     <Card
                       key={user.id}
-                      className="border border-gray-200 dark:border-gray-700"
+                      className="border border-slate-200 dark:border-slate-700"
                     >
                       <CardContent className="p-4">
                         <div
@@ -663,7 +663,7 @@ const Users: React.FC = () => {
                               </span>
                             </div>
                             <div>
-                              <h3 className="font-semibold text-gray-900 dark:text-white">
+                              <h3 className="font-semibold text-slate-900 dark:text-white">
                                 {getFullName(user)}
                               </h3>
                               <div
@@ -703,8 +703,8 @@ const Users: React.FC = () => {
                               isRTL ? "flex-row-reverse space-x-reverse" : ""
                             }`}
                           >
-                            <Mail className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm text-gray-600 dark:text-gray-400 truncate">
+                            <Mail className="w-4 h-4 text-slate-400" />
+                            <span className="text-sm text-slate-600 dark:text-slate-400 truncate">
                               {user.email}
                             </span>
                           </div>
@@ -714,8 +714,8 @@ const Users: React.FC = () => {
                                 isRTL ? "flex-row-reverse space-x-reverse" : ""
                               }`}
                             >
-                              <Phone className="w-4 h-4 text-gray-400" />
-                              <span className="text-sm text-gray-600 dark:text-gray-400">
+                              <Phone className="w-4 h-4 text-slate-400" />
+                              <span className="text-sm text-slate-600 dark:text-slate-400">
                                 {user.phoneNumber}
                               </span>
                             </div>
@@ -725,8 +725,8 @@ const Users: React.FC = () => {
                               isRTL ? "flex-row-reverse space-x-reverse" : ""
                             }`}
                           >
-                            <Calendar className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                            <Calendar className="w-4 h-4 text-slate-400" />
+                            <span className="text-sm text-slate-600 dark:text-slate-400">
                               {new Date(user.createdAt).toLocaleDateString(
                                 isRTL ? "ar" : "en"
                               )}
@@ -767,13 +767,13 @@ const Users: React.FC = () => {
             {users.length === 0 && (
               <Card className="shadow-lg">
                 <CardContent className="p-12 text-center">
-                  <div className="w-24 h-24 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl">
+                  <div className="w-24 h-24 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                     <User className="w-12 h-12 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
                     {isRTL ? "لا يوجد مستخدمون" : "No users found"}
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400 mb-6 text-lg">
+                  <p className="text-slate-500 dark:text-slate-400 mb-6 text-lg">
                     {isRTL
                       ? "ابدأ بإضافة أول مستخدم"
                       : "Start by adding your first user"}
@@ -788,14 +788,14 @@ const Users: React.FC = () => {
 
             {/* Enhanced Pagination */}
             {totalCount > pagination.pageSize && (
-              <Card className="mt-8 shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
+              <Card className="mt-8 shadow-lg border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div
                     className={`flex items-center justify-between ${
                       isRTL ? "flex-row-reverse" : ""
                     }`}
                   >
-                    <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">
+                    <p className="text-sm text-slate-700 dark:text-slate-300 font-medium">
                       {isRTL
                         ? `عرض ${users.length} من أصل ${totalCount} مستخدم`
                         : `Showing ${users.length} of ${totalCount} users`}

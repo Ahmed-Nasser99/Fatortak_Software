@@ -143,15 +143,15 @@ const CompanySettingsForm: React.FC = () => {
   };
 
   const SectionCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-    <div className={`bg-gradient-to-br from-background to-muted/30 rounded-xl border shadow-sm hover:shadow-md transition-shadow duration-300 p-6 ${className}`}>
+    <div className={`rounded-xl border border-slate-200/80 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 sm:p-6 ${className}`}>
       {children}
     </div>
   );
 
-  const SectionHeader = ({ title, color }: { title: string; color: string }) => (
-    <div className="flex items-center gap-3 mb-6">
-      <div className={`w-2 h-8 rounded-full bg-gradient-to-b ${color} shadow-sm`} />
-      <h3 className="text-lg font-bold text-foreground">{title}</h3>
+  const SectionHeader = ({ title }: { title: string; color?: string }) => (
+    <div className="mb-5 flex items-center gap-2.5">
+      <span className="h-4 w-1 rounded-full bg-brand-500" />
+      <h3 className="text-base font-semibold text-slate-900 dark:text-white">{title}</h3>
     </div>
   );
 
@@ -164,10 +164,10 @@ const CompanySettingsForm: React.FC = () => {
     required?: boolean; 
     children: React.ReactNode 
   }) => (
-    <div className="space-y-2">
-      <label className="text-sm font-bold text-foreground flex items-center gap-1">
+    <div className="space-y-1.5">
+      <label className="flex items-center gap-1 text-[13px] font-medium text-slate-700 dark:text-slate-300">
         {label}
-        {required && <span className="text-destructive">*</span>}
+        {required && <span className="text-rose-500">*</span>}
       </label>
       <div className="relative">
         {children}
@@ -176,7 +176,7 @@ const CompanySettingsForm: React.FC = () => {
   );
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5">
       {/* Company Logo Section */}
       <SectionCard>
         <SectionHeader title={t("companyLogo")} color="from-blue-500 to-blue-600" />
@@ -204,7 +204,7 @@ const CompanySettingsForm: React.FC = () => {
                 type="text"
                 value={companySettings.name}
                 onChange={(e) => setCompanySettings((prev) => ({ ...prev, name: e.target.value }))}
-                className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
                 placeholder="Enter company name"
                 required
                 dir={isRTL ? "rtl" : "ltr"}
@@ -216,7 +216,7 @@ const CompanySettingsForm: React.FC = () => {
                 type="email"
                 value={companySettings.email}
                 onChange={(e) => setCompanySettings((prev) => ({ ...prev, email: e.target.value }))}
-                className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
                 placeholder="company@example.com"
                 dir={isRTL ? "rtl" : "ltr"}
               />
@@ -227,7 +227,7 @@ const CompanySettingsForm: React.FC = () => {
                 type="tel"
                 value={companySettings.phone}
                 onChange={(e) => setCompanySettings((prev) => ({ ...prev, phone: e.target.value }))}
-                className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
                 placeholder="+1 (555) 000-0000"
                 dir={isRTL ? "rtl" : "ltr"}
               />
@@ -238,7 +238,7 @@ const CompanySettingsForm: React.FC = () => {
                 <select
                   value={companySettings.currency}
                   onChange={(e) => setCompanySettings((prev) => ({ ...prev, currency: e.target.value }))}
-                  className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm appearance-none font-medium"
+                  className="w-full appearance-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
                 >
                   <option value="USD">USD - {t("usDollar")}</option>
                   <option value="EUR">EUR - {t("euro")}</option>
@@ -257,7 +257,7 @@ const CompanySettingsForm: React.FC = () => {
                 value={companySettings.address}
                 onChange={(e) => setCompanySettings((prev) => ({ ...prev, address: e.target.value }))}
                 rows={3}
-                className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm resize-none font-medium"
+                className="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
                 placeholder="Enter complete address"
                 dir={isRTL ? "rtl" : "ltr"}
               />
@@ -275,7 +275,7 @@ const CompanySettingsForm: React.FC = () => {
               type="text"
               value={companySettings.taxNumber}
               onChange={(e) => setCompanySettings((prev) => ({ ...prev, taxNumber: e.target.value }))}
-              className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
               dir={isRTL ? "rtl" : "ltr"}
             />
           </InputField>
@@ -285,7 +285,7 @@ const CompanySettingsForm: React.FC = () => {
               type="text"
               value={companySettings.vatNumber}
               onChange={(e) => setCompanySettings((prev) => ({ ...prev, vatNumber: e.target.value }))}
-              className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
               dir={isRTL ? "rtl" : "ltr"}
             />
           </InputField>
@@ -298,7 +298,7 @@ const CompanySettingsForm: React.FC = () => {
               step="0.01"
               value={companySettings.defaultVatRate}
               onChange={(e) => setCompanySettings((prev) => ({ ...prev, defaultVatRate: parseFloat(e.target.value) || 0 }))}
-              className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
             />
           </InputField>
 
@@ -307,7 +307,7 @@ const CompanySettingsForm: React.FC = () => {
               type="text"
               value={companySettings.invoicePrefix}
               onChange={(e) => setCompanySettings((prev) => ({ ...prev, invoicePrefix: e.target.value }))}
-              className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
               dir={isRTL ? "rtl" : "ltr"}
             />
           </InputField>
@@ -317,12 +317,12 @@ const CompanySettingsForm: React.FC = () => {
       {/* Feature Switches */}
       <SectionCard>
         <SectionHeader title={isRTL ? "المميزات الإضافية" : "Additional Features"} color="from-orange-500 to-orange-600" />
-        <div className="flex items-center justify-between p-4 rounded-xl bg-muted/50 border">
+        <div className="flex flex-col gap-3 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 sm:flex-row sm:items-center sm:justify-between dark:border-slate-800 dark:bg-slate-800/40">
           <div className="space-y-0.5">
-            <h4 className="font-bold text-foreground">
+            <h4 className="text-sm font-semibold text-slate-900 dark:text-white">
               {isRTL ? "دعم الفروع المتعددة" : "Multi-Branch Support"}
             </h4>
-            <p className="text-sm text-muted-foreground font-medium">
+            <p className="text-sm text-slate-500 dark:text-slate-400">
               {isRTL 
                 ? "تمكين إدارة مواقع عمل متعددة وفروع لشركتك" 
                 : "Enable managing multiple business locations and branches for your company"}
@@ -335,7 +335,7 @@ const CompanySettingsForm: React.FC = () => {
               checked={companySettings.enableMultipleBranches}
               onChange={(e) => setCompanySettings((prev) => ({ ...prev, enableMultipleBranches: e.target.checked }))}
             />
-            <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+            <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
           </label>
         </div>
       </SectionCard>
@@ -346,7 +346,7 @@ const CompanySettingsForm: React.FC = () => {
           type="button"
           onClick={handleSubmit}
           disabled={loading}
-          className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary disabled:opacity-50 text-primary-foreground font-bold rounded-2xl transition-all shadow-xl shadow-primary/25"
+          className="flex items-center gap-2 px-8 py-3 bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors shadow-sm"
         >
           {loading ? (
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-foreground"></div>

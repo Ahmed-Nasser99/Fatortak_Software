@@ -28,7 +28,7 @@ const SalesReport: React.FC = () => {
           </Button>
           <div>
             <h1 className="text-2xl font-bold">{isRTL ? "تقرير المبيعات" : "Sales Report"}</h1>
-            <p className="text-sm text-gray-500">{isRTL ? "ملخص المبيعات حسب العميل" : "Sales summary aggregated by customer"}</p>
+            <p className="text-sm text-slate-500">{isRTL ? "ملخص المبيعات حسب العميل" : "Sales summary aggregated by customer"}</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -48,36 +48,36 @@ const SalesReport: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-800/50 overflow-hidden">
-          <CardHeader className="py-1 px-4 border-b border-gray-200/50 dark:border-white/5">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "إجمالي المبيعات" : "Gross Sales"}</CardTitle>
+        <Card className="bg-white text-slate-900 border-slate-200/80 dark:bg-slate-900 dark:text-white dark:border-slate-800 overflow-hidden">
+          <CardHeader className="py-1 px-4 border-b border-slate-200/50 dark:border-white/5">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "إجمالي المبيعات" : "Gross Sales"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-4 pb-4">
             <div className="text-lg lg:text-xl font-bold font-mono">{formatCurrency(response?.totalAmount || 0)}</div>
           </CardContent>
         </Card>
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-800/50 overflow-hidden">
-          <CardHeader className="py-1 px-4 border-b border-gray-200/50 dark:border-white/5">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "إجمالي الضرائب" : "Total Tax"}</CardTitle>
+        <Card className="bg-white text-slate-900 border-slate-200/80 dark:bg-slate-900 dark:text-white dark:border-slate-800 overflow-hidden">
+          <CardHeader className="py-1 px-4 border-b border-slate-200/50 dark:border-white/5">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "إجمالي الضرائب" : "Total Tax"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-4 pb-4">
             <div className="text-lg lg:text-xl font-bold font-mono">{formatCurrency(response?.totalTax || 0)}</div>
           </CardContent>
         </Card>
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-800/50 overflow-hidden">
-          <CardHeader className="py-1 px-4 border-b border-gray-200/50 dark:border-white/5">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "إجمالي الخصم" : "Total Discount"}</CardTitle>
+        <Card className="bg-white text-slate-900 border-slate-200/80 dark:bg-slate-900 dark:text-white dark:border-slate-800 overflow-hidden">
+          <CardHeader className="py-1 px-4 border-b border-slate-200/50 dark:border-white/5">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "إجمالي الخصم" : "Total Discount"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-4 pb-4">
             <div className="text-lg lg:text-xl font-bold font-mono text-red-600 dark:text-red-400">{formatCurrency(response?.totalDiscount || 0)}</div>
           </CardContent>
         </Card>
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-800/50 overflow-hidden shadow-xl">
-          <CardHeader className="py-1 px-4 border-b border-gray-200/50 dark:border-white/10">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-300">{isRTL ? "صافي المبيعات" : "Net Sales"}</CardTitle>
+        <Card className="bg-white text-slate-900 border-slate-200/80 dark:bg-slate-900 dark:text-white dark:border-slate-800 overflow-hidden">
+          <CardHeader className="py-1 px-4 border-b border-slate-200/50 dark:border-white/10">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-300">{isRTL ? "صافي المبيعات" : "Net Sales"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-4 pb-4">
-            <div className="text-lg lg:text-xl font-bold font-mono text-blue-600 dark:text-blue-400">{formatCurrency(response?.netSales || 0)}</div>
+            <div className="text-lg lg:text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">{formatCurrency(response?.netSales || 0)}</div>
           </CardContent>
         </Card>
       </div>
@@ -90,9 +90,9 @@ const SalesReport: React.FC = () => {
                   <TableRow>
                     <TableHead>{isRTL ? "العميل" : "Customer"}</TableHead>
                     <TableHead className="text-center">{isRTL ? "عدد الفواتير" : "Invoices"}</TableHead>
-                    <TableHead className="text-right">{isRTL ? "إجمالي المبلغ" : "Total Amount"}</TableHead>
-                    <TableHead className="text-right">{isRTL ? "المحصل" : "Total Paid"}</TableHead>
-                    <TableHead className="text-right font-bold">{isRTL ? "المتبقي" : "Remaining"}</TableHead>
+                    <TableHead className="text-end">{isRTL ? "إجمالي المبلغ" : "Total Amount"}</TableHead>
+                    <TableHead className="text-end">{isRTL ? "المحصل" : "Total Paid"}</TableHead>
+                    <TableHead className="text-end font-bold">{isRTL ? "المتبقي" : "Remaining"}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -100,13 +100,13 @@ const SalesReport: React.FC = () => {
                     <TableRow key={idx}>
                       <TableCell className="font-medium">{item.customerName}</TableCell>
                       <TableCell className="text-center">{item.invoiceCount}</TableCell>
-                      <TableCell className="text-right font-mono">{formatCurrency(item.totalAmount)}</TableCell>
-                      <TableCell className="text-right font-mono text-green-600">{formatCurrency(item.totalPaid)}</TableCell>
-                      <TableCell className="text-right font-mono font-bold text-blue-600">{formatCurrency(item.totalRemaining)}</TableCell>
+                      <TableCell className="text-end font-mono">{formatCurrency(item.totalAmount)}</TableCell>
+                      <TableCell className="text-end font-mono text-green-600">{formatCurrency(item.totalPaid)}</TableCell>
+                      <TableCell className="text-end font-mono font-bold text-blue-600">{formatCurrency(item.totalRemaining)}</TableCell>
                     </TableRow>
                   ))}
                   {(!response?.items || response.items.length === 0) && (
-                    <TableRow><TableCell colSpan={5} className="text-center py-10 text-gray-500">No sales data found for this period</TableCell></TableRow>
+                    <TableRow><TableCell colSpan={5} className="text-center py-10 text-slate-500">No sales data found for this period</TableCell></TableRow>
                   )}
                 </TableBody>
               </Table>

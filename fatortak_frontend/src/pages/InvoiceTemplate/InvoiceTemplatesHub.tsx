@@ -17,7 +17,7 @@ const InvoiceTemplatesHub = () => {
   const { isRTL } = useLanguage();
 
   return (
-    <div className="space-y-6" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="min-h-screen space-y-6 bg-canvas p-4 sm:p-6 dark:bg-slate-950" dir={isRTL ? "rtl" : "ltr"}>
       <PageHeader
         eyebrow="Templates"
         title={isRTL ? "قوالب الفواتير" : "Invoice templates"}

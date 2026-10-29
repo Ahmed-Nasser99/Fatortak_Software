@@ -60,7 +60,7 @@ export const ExportButton = ({
           {isExporting ? t("loading") : t("reports.export.button")}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className={`${isRTL ? "text-right" : "text-left"}`}>
+      <DropdownMenuContent className={`${isRTL ? "text-end" : "text-start"}`}>
         <DropdownMenuItem
           onClick={handleExportPDF}
           className={`${isRTL ? "flex-row-reverse" : ""}`}

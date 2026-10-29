@@ -50,13 +50,13 @@ const EarlyPaymentConfirmModal: React.FC<EarlyPaymentConfirmModalProps> = ({
               <div className="bg-amber-50 dark:bg-amber-950/20 p-3 rounded-lg border border-amber-200 dark:border-amber-800">
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       {t("installment")}:
                     </span>
                     <span className="font-medium">#{installmentIndex}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       {t("amount")}:
                     </span>
                     <span className="font-medium">
@@ -65,7 +65,7 @@ const EarlyPaymentConfirmModal: React.FC<EarlyPaymentConfirmModalProps> = ({
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-slate-600 dark:text-slate-400">
                       {t("dueDate")}:
                     </span>
                     <span className="font-medium text-amber-600">

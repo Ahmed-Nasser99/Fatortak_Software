@@ -18,7 +18,7 @@ export const StatsCard = ({ stat }: { stat: StatItem }) => {
   const IconComponent = stat.icon;
 
   return (
-    <div className="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:shadow-gray-200/25 dark:hover:shadow-gray-900/25 transition-all duration-300 hover:-translate-y-1">
+    <div className="group relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:shadow-gray-200/25 dark:hover:shadow-gray-900/25 transition-all duration-300 hover:-translate-y-1">
       {stat.gradient && (
         <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
       )}
@@ -47,10 +47,10 @@ export const StatsCard = ({ stat }: { stat: StatItem }) => {
           )}
         </div>
         <div>
-          <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
+          <p className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
             {stat.title}
           </p>
-          <p className="text-2xl font-bold text-gray-900 dark:text-white">
+          <p className="text-2xl font-bold text-slate-900 dark:text-white">
             {stat.isCurrency
               ? `$${formatNumber(stat.value)}`
               : formatNumber(stat.value)}

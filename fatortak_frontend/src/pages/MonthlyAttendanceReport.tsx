@@ -136,7 +136,7 @@ const MonthlyAttendanceReport: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950">
       <div
         className="container !max-w-full mx-auto p-4 space-y-6"
         dir={isRTL ? "rtl" : "ltr"}
@@ -147,9 +147,9 @@ const MonthlyAttendanceReport: React.FC = () => {
           <div className="relative bg-card/40 backdrop-blur-sm border rounded-2xl p-6 shadow-lg">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
               <div
-                className={`space-y-2 ${isRTL ? "text-right" : "text-left"}`}
+                className={`space-y-2 ${isRTL ? "text-end" : "text-start"}`}
               >
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
                   {t("monthlyAttendanceReport")}
                 </h1>
                 <p className="text-muted-foreground text-lg">
@@ -166,7 +166,7 @@ const MonthlyAttendanceReport: React.FC = () => {
                   disabled={
                     exportMutation.isPending || filteredData.length === 0
                   }
-                  className="bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 gap-2"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 gap-2"
                 >
                   {exportMutation.isPending ? (
                     <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
@@ -187,18 +187,18 @@ const MonthlyAttendanceReport: React.FC = () => {
         {/* Enhanced Stats Grid - Like SellInvoices */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Total Records */}
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20 border-blue-200 dark:border-blue-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {t("totalRecords")}
                   </p>
-                  <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(filteredData.length)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50 dark:bg-sky-950/40">
                   <ClipboardList className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
@@ -206,18 +206,18 @@ const MonthlyAttendanceReport: React.FC = () => {
           </Card>
 
           {/* Total Delay Days */}
-          <Card className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-950/20 dark:to-red-900/20 border-red-200 dark:border-red-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-red-600 dark:text-red-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {t("totalDelayDays")}
                   </p>
-                  <p className="text-2xl font-bold text-red-900 dark:text-red-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(totalDelayDays)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-950/40">
                   <AlertCircle className="w-6 h-6 text-red-600" />
                 </div>
               </div>
@@ -225,18 +225,18 @@ const MonthlyAttendanceReport: React.FC = () => {
           </Card>
 
           {/* Total Overtime Days */}
-          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/20 dark:to-emerald-900/20 border-emerald-200 dark:border-emerald-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {t("totalOvertimeDays")}
                   </p>
-                  <p className="text-2xl font-bold text-emerald-900 dark:text-emerald-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(totalOvertimeDays)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/40">
                   <TrendingUp className="w-6 h-6 text-emerald-600" />
                 </div>
               </div>
@@ -348,45 +348,45 @@ const MonthlyAttendanceReport: React.FC = () => {
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600">
+                  <thead className="bg-slate-50 dark:bg-slate-800/60">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("employee")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("department")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("totalHours")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("expectedHours")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("delayHours")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("overtimeHours")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("delayDays")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("overtimeDays")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("presentDays")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("absentDays")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("vacationDays")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("salary")}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-slate-900 dark:text-white">
+                      <th className="px-4 py-3 text-start text-sm font-bold text-slate-900 dark:text-white">
                         {t("expectedSalary")}
                       </th>
                     </tr>
@@ -403,7 +403,7 @@ const MonthlyAttendanceReport: React.FC = () => {
                                 : "bg-slate-50/50 dark:bg-slate-700/50"
                             }`}
                           >
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <div className="flex items-center">
                                 <Users className="w-4 h-4 mr-2 text-slate-400" />
                                 <span className="font-medium text-slate-900 dark:text-white">
@@ -411,7 +411,7 @@ const MonthlyAttendanceReport: React.FC = () => {
                                 </span>
                               </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <div className="flex items-center">
                                 <Building2 className="w-4 h-4 mr-2 text-slate-400" />
                                 <span className="text-slate-700 dark:text-slate-300">
@@ -419,33 +419,33 @@ const MonthlyAttendanceReport: React.FC = () => {
                                 </span>
                               </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <span className="font-mono text-sm text-slate-700 dark:text-slate-300">
                                 {item.totalMonthlyWorkingHours
                                   ? item.totalMonthlyWorkingHours
                                   : "0h"}
                               </span>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <span className="font-mono text-sm text-slate-700 dark:text-slate-300">
                                 {item.expectedMonthlyWorkingHours}h
                               </span>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <span className="font-mono text-sm text-red-600 dark:text-red-400">
                                 {item.totalDelayHours
                                   ? item.totalDelayHours
                                   : "0h"}
                               </span>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <span className="font-mono text-sm text-green-600 dark:text-green-400">
                                 {item.totalOvertimeHours
                                   ? item.totalOvertimeHours
                                   : "0h"}
                               </span>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <Badge
                                 variant="outline"
                                 className="font-mono bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
@@ -453,7 +453,7 @@ const MonthlyAttendanceReport: React.FC = () => {
                                 {formatNumber(item.numberOfDelayDays)}
                               </Badge>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <Badge
                                 variant="outline"
                                 className="font-mono bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
@@ -461,7 +461,7 @@ const MonthlyAttendanceReport: React.FC = () => {
                                 {formatNumber(item.numberOfOvertimeDays)}
                               </Badge>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <div className="flex items-center">
                                 <CheckCircle className="w-4 h-4 mr-1 text-green-500" />
                                 <span className="font-medium text-green-700 dark:text-green-400">
@@ -469,7 +469,7 @@ const MonthlyAttendanceReport: React.FC = () => {
                                 </span>
                               </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <div className="flex items-center">
                                 <XCircle className="w-4 h-4 mr-1 text-red-500" />
                                 <span className="font-medium text-red-700 dark:text-red-400">
@@ -477,7 +477,7 @@ const MonthlyAttendanceReport: React.FC = () => {
                                 </span>
                               </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <div className="flex items-center">
                                 <XCircle className="w-4 h-4 mr-1 text-blue-500" />
                                 <span className="font-medium text-blue-700 dark:text-blue-400">
@@ -485,14 +485,14 @@ const MonthlyAttendanceReport: React.FC = () => {
                                 </span>
                               </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <div className="flex items-center">
                                 <span className="font-medium text-slate-900 dark:text-white">
                                   {formatNumber(item.salary)}
                                 </span>
                               </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-4 py-3">
                               <div className="flex items-center">
                                 <span className="font-medium text-slate-900 dark:text-white">
                                   {formatNumber(item.expectedSalary)}

@@ -38,7 +38,7 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-950 dark:to-indigo-950 flex items-center justify-center p-4"
+      className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 flex items-center justify-center p-4"
       style={{ minHeight: "100dvh" }}
     >
       {/* Background Pattern */}
@@ -71,8 +71,8 @@ const ForgotPassword: React.FC = () => {
         </button>
 
         {/* Forgot Password Card */}
-        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 p-8 space-y-6">
-          <div className={`text-center space-y-2 ${isRTL ? "text-right" : ""}`}>
+        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 p-8 space-y-6">
+          <div className={`text-center space-y-2 ${isRTL ? "text-end" : ""}`}>
             <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
               {t("forgotPassword")}
             </h2>
@@ -86,7 +86,7 @@ const ForgotPassword: React.FC = () => {
             <div className="space-y-2">
               <label
                 className={`block text-sm font-semibold text-slate-700 dark:text-slate-300 ${
-                  isRTL ? "text-right" : ""
+                  isRTL ? "text-end" : ""
                 }`}
               >
                 {t("email")}
@@ -101,8 +101,8 @@ const ForgotPassword: React.FC = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`w-full h-14 bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all duration-200 text-slate-800 dark:text-white ${
-                    isRTL ? "pr-12 pl-4 text-right" : "pl-12 pr-4"
+                  className={`w-full h-11 rounded-lg border border-slate-200 bg-white px-3 text-slate-800 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white ${
+                    isRTL ? "pr-12 pl-4 text-end" : "pl-12 pr-4"
                   }`}
                   placeholder={t("email")}
                   required
@@ -115,7 +115,7 @@ const ForgotPassword: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-200 flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none ${
+              className={`w-full h-14 flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-700 disabled:pointer-events-none disabled:opacity-50 ${
                 isRTL ? "flex-row-reverse space-x-reverse" : ""
               }`}
             >
@@ -133,14 +133,14 @@ const ForgotPassword: React.FC = () => {
           {/* Back to Login Link */}
           <div
             className={`text-center pt-4 border-t border-slate-200 dark:border-slate-700 ${
-              isRTL ? "text-right" : ""
+              isRTL ? "text-end" : ""
             }`}
           >
             <p className="text-slate-600 dark:text-slate-400">
               {t("rememberPassword")}{" "}
               <Link
                 to="/login"
-                className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                className="font-medium text-brand-600 transition-colors hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
               >
                 {t("backToLogin")}
               </Link>

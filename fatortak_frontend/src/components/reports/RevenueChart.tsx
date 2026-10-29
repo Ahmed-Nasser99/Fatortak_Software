@@ -20,12 +20,12 @@ export const RevenueChart = ({ data }: { data: RevenueDataPointDto[] }) => {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl p-4">
-          <p className="font-semibold text-gray-900 dark:text-white mb-2">{`Period: ${label}`}</p>
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl p-4">
+          <p className="font-semibold text-slate-900 dark:text-white mb-2">{`Period: ${label}`}</p>
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-sm text-slate-600 dark:text-slate-400">
                 {t("reports.revenue")}:{" "}
               </span>
               <span className="font-bold text-blue-600 dark:text-blue-400">
@@ -35,7 +35,7 @@ export const RevenueChart = ({ data }: { data: RevenueDataPointDto[] }) => {
             {payload[1] && (
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full"></div>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
+                <span className="text-sm text-slate-600 dark:text-slate-400">
                   {t("reports.orders")}:{" "}
                 </span>
                 <span className="font-bold text-emerald-600 dark:text-emerald-400">

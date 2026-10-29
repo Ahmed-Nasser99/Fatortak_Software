@@ -20,7 +20,7 @@ const SubscriptionRequiredModal: React.FC<SubscriptionRequiredModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50" dir={isRTL ? 'rtl' : 'ltr'}>
-      <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 w-full max-w-md mx-4 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 w-full max-w-md mx-4 overflow-hidden">
         {/* Header with Gradient */}
         <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6 relative">
           <button
@@ -34,7 +34,7 @@ const SubscriptionRequiredModal: React.FC<SubscriptionRequiredModalProps> = ({
             <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
               <Crown className="w-8 h-8 text-white" />
             </div>
-            <div className={isRTL ? 'text-right' : ''}>
+            <div className={isRTL ? 'text-end' : ''}>
               <h3 className="text-xl font-bold text-white mb-1">
                 {isRTL ? 'الاشتراك مطلوب' : 'Subscription Required'}
               </h3>
@@ -50,7 +50,7 @@ const SubscriptionRequiredModal: React.FC<SubscriptionRequiredModalProps> = ({
 
         {/* Content */}
         <div className="p-6 space-y-6">
-          <div className={`text-center space-y-4 ${isRTL ? 'text-right' : ''}`}>
+          <div className={`text-center space-y-4 ${isRTL ? 'text-end' : ''}`}>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
               {isRTL 
                 ? 'يبدو أنك لم تشترك في خطة مدفوعة بعد. للوصول إلى هذه الميزة المتقدمة، يرجى اختيار خطة اشتراك تناسب احتياجاتك.'
@@ -73,7 +73,7 @@ const SubscriptionRequiredModal: React.FC<SubscriptionRequiredModalProps> = ({
 
           {/* Benefits */}
           <div className="space-y-3">
-            <h4 className={`font-semibold text-slate-800 dark:text-white ${isRTL ? 'text-right' : ''}`}>
+            <h4 className={`font-semibold text-slate-800 dark:text-white ${isRTL ? 'text-end' : ''}`}>
               {isRTL ? 'مزايا الاشتراك:' : 'Subscription Benefits:'}
             </h4>
             <div className="space-y-2">
@@ -120,7 +120,7 @@ const SubscriptionRequiredModal: React.FC<SubscriptionRequiredModalProps> = ({
             </button>
             <button
               onClick={onViewPlans}
-              className="flex-1 px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200 font-semibold flex items-center justify-center gap-2"
+              className="flex-1 px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl hover:shadow-lg transform  transition-all duration-200 font-semibold flex items-center justify-center gap-2"
             >
               <Crown className="w-4 h-4" />
               <span>{isRTL ? 'عرض الخطط' : 'View Plans'}</span>

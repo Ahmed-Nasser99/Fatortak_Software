@@ -157,7 +157,7 @@ const Items: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      <div className="min-h-screen bg-canvas dark:bg-slate-950">
         <div className="flex items-center justify-center min-h-screen">
           <Card className="w-full max-w-md mx-4">
             <CardContent className="p-8 text-center">
@@ -183,20 +183,20 @@ const Items: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950">
       <div
         className="container !max-w-full mx-auto p-4 space-y-6"
         dir={isRTL ? "rtl" : "ltr"}
       >
         {/* Enhanced Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 text-white shadow-2xl">
+        <div className="page-hero">
           <div
             className={`flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 ${
               isRTL ? "lg:flex-row-reverse" : ""
             }`}
           >
             <div className={`flex items-center space-x-4`}>
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg mx-3">
+              <div className="page-hero-icon mx-3">
                 <Package className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -214,7 +214,7 @@ const Items: React.FC = () => {
             {roleAccess.canCreate() && (
               <Button
                 onClick={handleCreateItem}
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                className="page-hero-action"
               >
                 <Plus className="w-5 h-5 mr-2" />
                 <span className="font-semibold">
@@ -228,18 +228,18 @@ const Items: React.FC = () => {
         {/* Enhanced Stats Grid - Like SellInvoices */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Total Items */}
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20 border-blue-200 dark:border-blue-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "إجمالي الأصناف" : "Total Items"}
                   </p>
-                  <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.total)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50 dark:bg-sky-950/40">
                   <Package className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
@@ -247,18 +247,18 @@ const Items: React.FC = () => {
           </Card>
 
           {/* Products */}
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/20 dark:to-purple-900/20 border-purple-200 dark:border-purple-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-purple-600 dark:text-purple-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "منتجات" : "Products"}
                   </p>
-                  <p className="text-2xl font-bold text-purple-900 dark:text-purple-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.products)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-950/40">
                   <Box className="w-6 h-6 text-purple-600" />
                 </div>
               </div>
@@ -266,18 +266,18 @@ const Items: React.FC = () => {
           </Card>
 
           {/* Services */}
-          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/20 dark:to-emerald-900/20 border-emerald-200 dark:border-emerald-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "خدمات" : "Services"}
                   </p>
-                  <p className="text-2xl font-bold text-emerald-900 dark:text-emerald-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.services)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/40">
                   <Wrench className="w-6 h-6 text-emerald-600" />
                 </div>
               </div>
@@ -286,7 +286,7 @@ const Items: React.FC = () => {
         </div>
 
         {/* Enhanced Filters */}
-        <Card className="bg-card/60 backdrop-blur-sm border shadow-sm">
+        <Card className="border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900">
           <CardContent className="p-6">
             <div
               className={`flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-6 ${
@@ -299,7 +299,7 @@ const Items: React.FC = () => {
                   <Search
                     className={`absolute top-1/2 transform -translate-y-1/2 ${
                       isRTL ? "right-4" : "left-4"
-                    } w-5 h-5 text-gray-400`}
+                    } w-5 h-5 text-slate-400`}
                   />
                   <input
                     type="text"
@@ -309,8 +309,8 @@ const Items: React.FC = () => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className={`w-full ${
-                      isRTL ? "pr-12 pl-4 text-right" : "pl-12 pr-4"
-                    } py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-200`}
+                      isRTL ? "pr-12 pl-4 text-end" : "pl-12 pr-4"
+                    } py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white transition-all duration-200`}
                   />
                 </div>
               </div>
@@ -324,8 +324,8 @@ const Items: React.FC = () => {
                       e.target.value as "all" | "product" | "service"
                     )
                   }
-                  className={`px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white min-w-[150px] ${
-                    isRTL ? "text-right" : ""
+                  className={`px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white min-w-[150px] ${
+                    isRTL ? "text-end" : ""
                   }`}
                 >
                   <option value="all">
@@ -378,7 +378,7 @@ const Items: React.FC = () => {
 
         {/* Loading State */}
         {isLoading && (
-          <Card className="bg-card/60 backdrop-blur-sm">
+          <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-12">
               <div className="flex items-center justify-center space-x-3">
                 <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent"></div>
@@ -398,7 +398,7 @@ const Items: React.FC = () => {
                 {items.map((item) => (
                   <Card
                     key={item.id}
-                    className="group hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm"
+                    className="group hover:shadow-lg transition-all duration-300 transform  border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm"
                   >
                     <CardHeader className="pb-3">
                       {item.imageUrl && (
@@ -406,7 +406,7 @@ const Items: React.FC = () => {
                           <img
                             src={item.imageUrl}
                             alt={item.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-cover group- transition-transform duration-300"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span className="text-white text-sm truncate w-full">
@@ -421,7 +421,7 @@ const Items: React.FC = () => {
                         }`}
                       >
                         <div className="flex-1">
-                          <CardTitle className="text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-2">
+                          <CardTitle className="text-lg font-bold text-slate-900 dark:text-white mb-2 line-clamp-2">
                             {item.name}
                           </CardTitle>
                           <Badge
@@ -430,8 +430,8 @@ const Items: React.FC = () => {
                             }
                             className={`${
                               item.type === "product"
-                                ? "bg-gradient-to-r from-blue-500 to-indigo-500 text-white"
-                                : "bg-gradient-to-r from-green-500 to-emerald-500 text-white"
+                                ? "bg-brand-600 text-white"
+                                : "bg-emerald-600 text-white"
                             } font-medium`}
                           >
                             {item.type === "product"
@@ -478,10 +478,10 @@ const Items: React.FC = () => {
                             isRTL ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="text-sm text-slate-500 dark:text-slate-400">
                             {isRTL ? "الكود" : "Code"}
                           </span>
-                          <span className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                          <span className="font-mono text-sm bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">
                             {item.code}
                           </span>
                         </div>
@@ -491,7 +491,7 @@ const Items: React.FC = () => {
                             isRTL ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="text-sm text-slate-500 dark:text-slate-400">
                             {isRTL ? "سعر البيع" : "Sale Price"}
                           </span>
                           <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
@@ -505,7 +505,7 @@ const Items: React.FC = () => {
                             isRTL ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="text-sm text-slate-500 dark:text-slate-400">
                             {isRTL ? "سعر الشراء" : "Purchase Price"}
                           </span>
                           <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
@@ -518,7 +518,7 @@ const Items: React.FC = () => {
                             isRTL ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="text-sm text-slate-500 dark:text-slate-400">
                             {isRTL ? "الكمية" : "Quantity"}
                           </span>
                           <Badge variant="outline" className="font-medium">
@@ -531,7 +531,7 @@ const Items: React.FC = () => {
                             isRTL ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="text-sm text-slate-500 dark:text-slate-400">
                             {isRTL ? "ض.ق.م" : "VAT"}
                           </span>
                           <span className="text-sm font-medium">
@@ -541,11 +541,11 @@ const Items: React.FC = () => {
 
                         {/* Activation Toggle */}
                         <div
-                          className={`flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700 ${
+                          className={`flex items-center justify-between pt-3 border-t border-slate-200 dark:border-slate-700 ${
                             isRTL ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="text-sm text-slate-500 dark:text-slate-400">
                             {isRTL ? "الحالة" : "Status"}
                           </span>
                           <div className="flex items-center space-x-2">
@@ -577,8 +577,8 @@ const Items: React.FC = () => {
                         </div>
 
                         {item.description && (
-                          <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-                            <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                          <div className="pt-2 border-t border-slate-200 dark:border-slate-700">
+                            <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
                               {item.description}
                             </p>
                           </div>
@@ -590,102 +590,102 @@ const Items: React.FC = () => {
               </div>
             ) : (
               // Table View for larger screens
-              <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
+              <Card className="shadow-lg border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm">
                 <div className="hidden lg:block overflow-x-auto">
                   <table className="w-full">
-                    <thead className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600">
+                    <thead className="bg-slate-50 dark:bg-slate-800/60">
                       <tr>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "الكود" : "Code"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "الصورة" : "Image"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "الاسم" : "Name"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "النوع" : "Type"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "سعر البيع" : "Sale Price"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "سعر الشراء" : "Purchase Price"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "الكمية" : "Quantity"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "ض.ق.م %" : "VAT %"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {isRTL ? "الحالة" : "Status"}
                         </th>
                         <th
-                          className={`px-6 py-4 ${
-                            isRTL ? "text-right" : "text-left"
-                          } text-sm font-bold text-gray-900 dark:text-white`}
+                          className={`px-4 py-3 ${
+                            isRTL ? "text-end" : "text-start"
+                          } text-sm font-bold text-slate-900 dark:text-white`}
                         >
                           {t("actions")}
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                    <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                       {items.map((item, index) => (
                         <tr
                           key={item.id}
-                          className={`hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-blue-900/10 dark:hover:to-indigo-900/10 transition-all duration-200 ${
+                          className={`hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors duration-200 ${
                             index % 2 === 0
-                              ? "bg-white dark:bg-gray-800"
-                              : "bg-gray-50/50 dark:bg-gray-700/50"
+                              ? "bg-white dark:bg-slate-800"
+                              : "bg-slate-50/50 dark:bg-slate-700/50"
                           }`}
                         >
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div className="flex items-center">
-                              <Package className="w-5 h-5 text-gray-400 mr-3" />
-                              <span className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                              <Package className="w-5 h-5 text-slate-400 mr-3" />
+                              <span className="font-mono text-sm bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">
                                 {item.code}
                               </span>
                             </div>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             {item.imageUrl && (
                               <img
                                 src={item.imageUrl}
@@ -694,19 +694,19 @@ const Items: React.FC = () => {
                               />
                             )}
                           </td>
-                          <td className="px-6 py-4 text-start">
+                          <td className="px-4 py-3 text-start">
                             <div>
-                              <div className="font-semibold text-gray-900 dark:text-white">
+                              <div className="font-semibold text-slate-900 dark:text-white">
                                 {item.name}
                               </div>
                               {item.description && (
-                                <div className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">
+                                <div className="text-sm text-slate-500 dark:text-slate-400 truncate max-w-xs">
                                   {item.description}
                                 </div>
                               )}
                             </div>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <Badge
                               variant={
                                 item.type === "product"
@@ -715,8 +715,8 @@ const Items: React.FC = () => {
                               }
                               className={`${
                                 item.type === "product"
-                                  ? "bg-gradient-to-r from-blue-500 to-indigo-500 text-white"
-                                  : "bg-gradient-to-r from-green-500 to-emerald-500 text-white"
+                                  ? "bg-brand-600 text-white"
+                                  : "bg-emerald-600 text-white"
                               } font-medium`}
                             >
                               {item.type === "product"
@@ -728,25 +728,25 @@ const Items: React.FC = () => {
                                 : "Service"}
                             </Badge>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
                               {formatCurrency(item.unitPrice)}
                             </span>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
                               {formatCurrency(item.purchaseUnitPrice || 0)}
                             </span>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <Badge variant="outline" className="font-medium">
                               {formatNumber(item.quantity)}
                             </Badge>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <span className="font-medium">{formatNumber(item.vatRate)}%</span>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div className="flex items-center space-x-2">
                               <span
                                 className={`text-sm ${
@@ -774,7 +774,7 @@ const Items: React.FC = () => {
                               )}
                             </div>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-3">
                             <div
                               className={`flex space-x-2 ${
                                 isRTL ? "flex-row-reverse space-x-reverse" : ""
@@ -813,7 +813,7 @@ const Items: React.FC = () => {
                   {items.map((item) => (
                     <Card
                       key={item.id}
-                      className="border border-gray-200 dark:border-gray-700"
+                      className="border border-slate-200 dark:border-slate-700"
                     >
                       <CardContent className="p-4">
                         <div className="mb-3">
@@ -831,7 +831,7 @@ const Items: React.FC = () => {
                           }`}
                         >
                           <div className="flex-1">
-                            <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                            <h3 className="font-semibold text-slate-900 dark:text-white mb-1">
                               {item.name}
                             </h3>
                             <div
@@ -839,8 +839,8 @@ const Items: React.FC = () => {
                                 isRTL ? "flex-row-reverse space-x-reverse" : ""
                               }`}
                             >
-                              <Package className="w-4 h-4 text-gray-400" />
-                              <span className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                              <Package className="w-4 h-4 text-slate-400" />
+                              <span className="font-mono text-sm bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">
                                 {item.code}
                               </span>
                             </div>
@@ -851,8 +851,8 @@ const Items: React.FC = () => {
                             }
                             className={`${
                               item.type === "product"
-                                ? "bg-gradient-to-r from-blue-500 to-indigo-500 text-white"
-                                : "bg-gradient-to-r from-green-500 to-emerald-500 text-white"
+                                ? "bg-brand-600 text-white"
+                                : "bg-emerald-600 text-white"
                             } font-medium`}
                           >
                             {item.type === "product"
@@ -867,7 +867,7 @@ const Items: React.FC = () => {
 
                         <div className="grid grid-cols-3 gap-3 mb-4">
                           <div>
-                            <span className="text-xs text-gray-500 dark:text-gray-400 block">
+                            <span className="text-xs text-slate-500 dark:text-slate-400 block">
                               {isRTL ? "سعر البيع" : "Sale Price"}
                             </span>
                             <span className="font-bold text-purple-600 dark:text-purple-400">
@@ -876,7 +876,7 @@ const Items: React.FC = () => {
                             </span>
                           </div>
                           <div>
-                            <span className="text-xs text-gray-500 dark:text-gray-400 block">
+                            <span className="text-xs text-slate-500 dark:text-slate-400 block">
                               {isRTL ? "سعر الشراء" : "Purchase Price"}
                             </span>
                             <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
@@ -885,7 +885,7 @@ const Items: React.FC = () => {
                             </span>
                           </div>
                           <div>
-                            <span className="text-xs text-gray-500 dark:text-gray-400 block">
+                            <span className="text-xs text-slate-500 dark:text-slate-400 block">
                               {isRTL ? "الكمية" : "Quantity"}
                             </span>
                             <Badge variant="outline" className="font-medium">
@@ -895,18 +895,18 @@ const Items: React.FC = () => {
                         </div>
 
                         {item.description && (
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
+                          <p className="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">
                             {item.description}
                           </p>
                         )}
 
                         {/* Activation Toggle for Mobile */}
                         <div
-                          className={`flex items-center justify-between mb-3 pt-3 border-t border-gray-200 dark:border-gray-700 ${
+                          className={`flex items-center justify-between mb-3 pt-3 border-t border-slate-200 dark:border-slate-700 ${
                             isRTL ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="text-sm text-slate-500 dark:text-slate-400">
                             {isRTL ? "الحالة" : "Status"}
                           </span>
                           <div className="flex items-center space-x-2">
@@ -975,13 +975,13 @@ const Items: React.FC = () => {
             {items.length === 0 && (
               <Card className="shadow-lg">
                 <CardContent className="p-12 text-center">
-                  <div className="w-24 h-24 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl">
+                  <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-600">
                     <Package className="w-12 h-12 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
                     {isRTL ? "لا توجد أصناف" : "No items found"}
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400 mb-6 text-lg">
+                  <p className="text-slate-500 dark:text-slate-400 mb-6 text-lg">
                     {isRTL
                       ? "ابدأ بإضافة صنف جديد"
                       : "Start by adding your first item"}
@@ -996,14 +996,14 @@ const Items: React.FC = () => {
 
             {/* Enhanced Pagination */}
             {totalCount > pagination.pageSize && (
-              <Card className="mt-8 shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
+              <Card className="mt-8 shadow-lg border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div
                     className={`flex items-center justify-between ${
                       isRTL ? "flex-row-reverse" : ""
                     }`}
                   >
-                    <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">
+                    <p className="text-sm text-slate-700 dark:text-slate-300 font-medium">
                       {isRTL
                         ? `عرض ${items.length} من أصل ${totalCount} صنف`
                         : `Showing ${items.length} of ${totalCount} items`}

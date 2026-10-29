@@ -809,12 +809,12 @@ const AIChat: React.FC = () => {
               msg.sender === "user"
                 ? msg.status === "failed"
                   ? "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
-                  : "bg-white dark:bg-gray-800 border border-blue-100 dark:border-gray-700 rounded-tr-sm"
-                : "bg-white dark:bg-gray-800 border border-purple-100 dark:border-gray-700 rounded-tl-sm"
+                  : "bg-white dark:bg-slate-800 border border-blue-100 dark:border-slate-700 rounded-tr-sm"
+                : "bg-white dark:bg-slate-800 border border-purple-100 dark:border-slate-700 rounded-tl-sm"
             }`}
           >
             <div className={`text-sm sm:text-base leading-relaxed ${
-              msg.sender === "user" ? "text-gray-800 dark:text-gray-200" : "text-gray-800 dark:text-gray-200"
+              msg.sender === "user" ? "text-slate-800 dark:text-slate-200" : "text-slate-800 dark:text-slate-200"
             }`}>
               {msg.sender === "user" ? (
                 <p className="whitespace-pre-wrap">{msg.content}</p>
@@ -827,8 +827,8 @@ const AIChat: React.FC = () => {
               <AiVisualization data={msg.visualizationData} />
             )}
 
-            <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-100 dark:border-gray-700/50">
-              <span className="text-xs text-gray-400 dark:text-gray-500">
+            <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-100 dark:border-slate-700/50">
+              <span className="text-xs text-slate-400 dark:text-slate-500">
                 {formatTimestamp(msg.timestamp)}
                 {msg.status === "sending" &&
                   (isRTL ? " (جاري الإرسال...)" : " (Sending...)")}
@@ -841,20 +841,20 @@ const AIChat: React.FC = () => {
                   <>
                     <button
                       onClick={() => handleExportMessageToPdf(msg.id)}
-                      className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors text-gray-400 hover:text-purple-600"
+                      className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-md transition-colors text-slate-400 hover:text-purple-600"
                       title={isRTL ? "تصدير PDF" : "Export PDF"}
                     >
                       <FileDown className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => copyToClipboard(msg.content, msg.id)}
-                      className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                      className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-md transition-colors"
                       title={isRTL ? "نسخ" : "Copy"}
                     >
                       {copiedId === msg.id ? (
                         <CheckCircle className="w-3.5 h-3.5 text-green-500" />
                       ) : (
-                        <Copy className="w-3.5 h-3.5 text-gray-400" />
+                        <Copy className="w-3.5 h-3.5 text-slate-400" />
                       )}
                     </button>
                   </>
@@ -879,7 +879,7 @@ const AIChat: React.FC = () => {
 
   return (
     <div
-      className="flex h-screen bg-slate-50 dark:bg-gray-900 overflow-hidden"
+      className="flex h-screen bg-slate-50 dark:bg-slate-900 overflow-hidden"
       dir={isRTL ? "rtl" : "ltr"}
     >
       <>
@@ -887,10 +887,10 @@ const AIChat: React.FC = () => {
           ref={sidebarRef}
           className={`
       fixed lg:relative z-50 lg:z-auto
-      h-full bg-white dark:bg-gray-800
+      h-full bg-white dark:bg-slate-800
       ${isSidebarOpen ? "w-72 sm:w-80" : "w-20"}
       ${isRTL ? "border-l right-0" : "border-r left-0"} 
-      border-gray-200 dark:border-gray-700
+      border-slate-200 dark:border-slate-700
       flex flex-col transition-all duration-300 ease-in-out shadow-lg lg:shadow-none
     `}
         >
@@ -920,16 +920,16 @@ const AIChat: React.FC = () => {
           </button>
 
           {/* Header */}
-          <div className="flex-shrink-0 p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+          <div className="flex-shrink-0 p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
             <div className="flex items-center justify-between mb-4">
               {isSidebarOpen && (
-                <h2 className="text-lg font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
                   {t("chats")}
                 </h2>
               )}
               <button
                 onClick={() => setIsSidebarOpen(false)}
-                className="lg:hidden p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500"
+                className="lg:hidden p-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -938,7 +938,7 @@ const AIChat: React.FC = () => {
             {/* New Chat Button */}
             <button
               onClick={handleNewChat}
-              className={`w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 
+              className={`w-full bg-brand-600 hover:from-purple-700 hover:to-indigo-700 
           text-white mb-4 h-10 rounded-xl flex items-center justify-center gap-2 text-sm font-medium shadow-md hover:shadow-lg
           transition-all duration-300 transform hover:-translate-y-0.5`}
               title={!isSidebarOpen ? t("newChat") : undefined}
@@ -955,15 +955,15 @@ const AIChat: React.FC = () => {
                 <Search
                   className={`absolute ${
                     isRTL ? "right-3" : "left-3"
-                  } top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-purple-500 transition-colors`}
+                  } top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-purple-500 transition-colors`}
                 />
                 <input
                   placeholder={t("search")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={`w-full ${isRTL ? "pr-10 pl-3" : "pl-10 pr-3"} 
-              h-9 text-sm border border-gray-200 dark:border-gray-600 
-              rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
+              h-9 text-sm border border-slate-200 dark:border-slate-600 
+              rounded-xl bg-white dark:bg-slate-700 text-slate-900 dark:text-white 
               focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all`}
                 />
               </div>
@@ -983,16 +983,16 @@ const AIChat: React.FC = () => {
                     ([groupName, groupSessions]) => (
                       <div key={groupName}>
                         <button
-                          className={`flex items-center justify-between w-full px-3 py-2 rounded-lg mb-1 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors group`}
+                          className={`flex items-center justify-between w-full px-3 py-2 rounded-lg mb-1 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors group`}
                           onClick={() => toggleGroup(groupName)}
                         >
                           <div className="flex items-center gap-2 min-w-0 flex-1">
-                            <Calendar className="w-4 h-4 text-gray-400 group-hover:text-purple-500 transition-colors" />
-                            <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                            <Calendar className="w-4 h-4 text-slate-400 group-hover:text-purple-500 transition-colors" />
+                            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                               {groupName}
                             </span>
                           </div>
-                          <span className="text-xs text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded-full">
+                          <span className="text-xs text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
                             {groupSessions.length}
                           </span>
                         </button>
@@ -1011,7 +1011,7 @@ const AIChat: React.FC = () => {
                                   className={`group relative p-3 rounded-xl cursor-pointer transition-all duration-200 ${
                                     currentSession === session.id
                                       ? "bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 shadow-sm"
-                                      : "hover:bg-gray-50 dark:hover:bg-gray-700 border border-transparent"
+                                      : "hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent"
                                   }`}
                                   onClick={() => {
                                     setCurrentSession(session.id);
@@ -1021,11 +1021,11 @@ const AIChat: React.FC = () => {
                                   <div className="flex items-start justify-between gap-2">
                                     <div className="min-w-0 flex-1">
                                       <div className={`font-medium text-sm line-clamp-1 mb-1 ${
-                                        currentSession === session.id ? "text-purple-700 dark:text-purple-300" : "text-gray-700 dark:text-gray-300"
+                                        currentSession === session.id ? "text-purple-700 dark:text-purple-300" : "text-slate-700 dark:text-slate-300"
                                       }`}>
                                         {session.title}
                                       </div>
-                                      <div className="text-xs text-gray-400">
+                                      <div className="text-xs text-slate-400">
                                         {new Date(session.updatedAt).toLocaleTimeString([], {
                                           hour: "2-digit",
                                           minute: "2-digit",
@@ -1044,7 +1044,7 @@ const AIChat: React.FC = () => {
                                         className={`p-1 rounded-md transition-all ${
                                           currentSession === session.id 
                                             ? "opacity-100 hover:bg-purple-100 dark:hover:bg-purple-800/50 text-purple-600" 
-                                            : "opacity-0 group-hover:opacity-100 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-500"
+                                            : "opacity-0 group-hover:opacity-100 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-500"
                                         }`}
                                       >
                                         <MoreVertical className="w-4 h-4" />
@@ -1054,7 +1054,7 @@ const AIChat: React.FC = () => {
                                         <div
                                           className={`absolute ${
                                             isRTL ? "left-0" : "right-0"
-                                          } top-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl py-1 z-20 min-w-[120px] animate-in fade-in zoom-in-95 duration-100`}
+                                          } top-8 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl py-1 z-20 min-w-[120px] animate-in fade-in zoom-in-95 duration-100`}
                                         >
                                           <button
                                             onClick={(e) => {
@@ -1085,11 +1085,11 @@ const AIChat: React.FC = () => {
           
           {/* Footer Actions (Export/Import) */}
           {isSidebarOpen && (
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+            <div className="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
               <div className="flex gap-2">
                 <button
                   onClick={handleExportChat}
-                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors"
                   title={isRTL ? "تصدير المحادثة" : "Export Chat"}
                 >
                   <Download className="w-4 h-4" />
@@ -1097,7 +1097,7 @@ const AIChat: React.FC = () => {
                 </button>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors"
                   title={isRTL ? "استيراد محادثة" : "Import Chat"}
                 >
                   <Upload className="w-4 h-4" />
@@ -1118,14 +1118,14 @@ const AIChat: React.FC = () => {
 
       <main className="flex-1 flex flex-col items-center justify-center relative min-h-0 w-full h-[85dvh] px-4 text-center">
         {/* Top Bar for Mobile */}
-        <div className="lg:hidden w-full p-4 flex items-center justify-between bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 z-10">
+        <div className="lg:hidden w-full p-4 flex items-center justify-between bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 z-10">
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"
           >
-            <Menu className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+            <Menu className="w-6 h-6 text-slate-600 dark:text-slate-300" />
           </button>
-          <span className="font-semibold text-gray-900 dark:text-white">Fatortak AI</span>
+          <span className="font-semibold text-slate-900 dark:text-white">Fatortak AI</span>
           <div className="w-10" /> {/* Spacer */}
         </div>
 
@@ -1136,13 +1136,13 @@ const AIChat: React.FC = () => {
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
-            <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-3xl flex items-center justify-center shadow-xl mb-6 mx-auto transform rotate-3">
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-600">
               <Sparkles className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+            <h1 className="text-3xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">
               {isRTL ? "مرحباً بك في مساعد فاتورتك" : "Welcome to Fatortak AI"}
             </h1>
-            <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto text-lg">
+            <p className="text-slate-500 dark:text-slate-400 max-w-md mx-auto text-lg">
               {isRTL
                 ? "كيف يمكنني مساعدتك في إدارة أعمالك اليوم؟"
                 : "How can I help you manage your business today?"}
@@ -1163,13 +1163,13 @@ const AIChat: React.FC = () => {
                     <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-violet-600 rounded-full flex items-center justify-center shadow-sm">
                       <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </div>
-                    <div className="flex items-center gap-3 px-5 py-4 bg-white dark:bg-gray-800 rounded-2xl rounded-tl-sm border border-purple-100 dark:border-gray-700 shadow-sm">
+                    <div className="flex items-center gap-3 px-5 py-4 bg-white dark:bg-slate-800 rounded-2xl rounded-tl-sm border border-purple-100 dark:border-slate-700 shadow-sm">
                       <div className="flex gap-1">
                         <span className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
                         <span className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
                         <span className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
                       </div>
-                      <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                      <span className="text-sm font-medium text-slate-600 dark:text-slate-300">
                         {t("thinking")}
                       </span>
                     </div>
@@ -1186,10 +1186,10 @@ const AIChat: React.FC = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className={`w-full sm:w-[70%] bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out ${
+          className={`w-full sm:w-[70%] bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out ${
             inputMessage.includes("\n") ||
             (textareaRef.current && textareaRef.current.scrollHeight > 44)
-              ? "rounded-3xl"
+              ? "rounded-2xl"
               : "rounded-full"
           }`}
         >
@@ -1201,11 +1201,11 @@ const AIChat: React.FC = () => {
               <canvas
                 ref={canvasRef}
                 height="60"
-                className="rounded-xl w-full max-w-md bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-700"
+                className="rounded-xl w-full max-w-md bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700"
               />
               <button 
                 onClick={() => setIsListening(false)}
-                className="mt-2 text-xs text-gray-500 hover:text-red-500"
+                className="mt-2 text-xs text-slate-500 hover:text-red-500"
               >
                 {isRTL ? "إلغاء" : "Cancel"}
               </button>
@@ -1223,7 +1223,7 @@ const AIChat: React.FC = () => {
                       ? "اكتب سؤالك أو استخدم الميكروفون للتحدث..."
                       : "Type your question or use the mic to speak..."
                   }
-                  className="w-full max-h-32 bg-transparent border-none focus:ring-0 resize-none py-3 px-4 text-gray-900 dark:text-white placeholder-gray-400 text-base leading-relaxed scrollbar-hide"
+                  className="w-full max-h-32 bg-transparent border-none focus:ring-0 resize-none py-3 px-4 text-slate-900 dark:text-white placeholder-gray-400 text-base leading-relaxed scrollbar-hide"
                   disabled={isLoading}
                   rows={1}
                   dir={isRTL ? "rtl" : "ltr"}
@@ -1237,7 +1237,7 @@ const AIChat: React.FC = () => {
                   className={`p-3 rounded-full transition-all duration-200 ${
                     isListening 
                       ? "bg-red-100 text-red-600 animate-pulse" 
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                      : "hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400"
                   }`}
                   title={isRTL ? "الإدخال الصوتي" : "Voice Input"}
                 >
@@ -1253,8 +1253,8 @@ const AIChat: React.FC = () => {
                   disabled={!inputMessage.trim() || isLoading}
                   className={`p-3 rounded-full transition-all duration-300 transform ${
                     !inputMessage.trim() || isLoading
-                      ? "bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-not-allowed"
-                      : "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
+                      ? "bg-slate-100 dark:bg-slate-700 text-slate-400 cursor-not-allowed"
+                      : "bg-brand-600 text-white shadow-md hover:shadow-lg  active:scale-95"
                   }`}
                 >
                   {isLoading ? (
@@ -1283,7 +1283,7 @@ const AIChat: React.FC = () => {
                     target: { value: isRTL ? action.query : action.queryEn },
                   } as any)
                 }
-                className="px-3 py-1.5 text-sm bg-gradient-to-r from-purple-50 to-blue-50 dark:from-gray-700 dark:to-gray-800 border border-purple-200 dark:border-gray-600 text-purple-700 dark:text-purple-300 rounded-full hover:shadow-md hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                className="px-3 py-1.5 text-sm bg-brand-50/70 dark:bg-brand-950/20 border border-purple-200 dark:border-slate-600 text-purple-700 dark:text-purple-300 rounded-full hover:shadow-md  transition-all duration-300 flex items-center gap-2"
               >
                 {action.icon}
                 <span>{isRTL ? action.label : action.labelEn}</span>

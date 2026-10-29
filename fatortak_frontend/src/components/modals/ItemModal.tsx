@@ -196,17 +196,17 @@ const ItemModal: React.FC<ItemModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div
-          className={`flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700`}
+          className={`flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700`}
         >
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
             {item ? t("editItem") : t("newItem")}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
           >
             <X className="w-6 h-6" />
           </button>
@@ -216,7 +216,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {/* Image Upload */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               {t("itemImage")}
             </label>
 
@@ -226,7 +226,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
                   <img
                     src={imagePreview}
                     alt="Item preview"
-                    className="w-32 h-32 object-cover rounded-lg border border-gray-300"
+                    className="w-32 h-32 object-cover rounded-lg border border-slate-300"
                   />
                   <button
                     type="button"
@@ -237,8 +237,8 @@ const ItemModal: React.FC<ItemModalProps> = ({
                   </button>
                 </div>
               ) : (
-                <div className="border-2 border-dashed border-gray-300 rounded-lg w-32 h-32 flex items-center justify-center bg-gray-50 dark:bg-gray-700">
-                  <Image className="w-8 h-8 text-gray-400" />
+                <div className="border-2 border-dashed border-slate-300 rounded-lg w-32 h-32 flex items-center justify-center bg-slate-50 dark:bg-slate-700">
+                  <Image className="w-8 h-8 text-slate-400" />
                 </div>
               )}
 
@@ -253,7 +253,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
                 />
                 <label
                   htmlFor="itemImage"
-                  className="cursor-pointer inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+                  className="cursor-pointer inline-flex items-center px-4 py-2 bg-slate-100 dark:bg-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600"
                 >
                   <Image className="w-4 h-4 mr-2" />
                   {imagePreview
@@ -264,7 +264,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
                     ? "اختر صورة"
                     : "Choose Image"}
                 </label>
-                <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                   {isRTL
                     ? "JPG, PNG أو GIF (الحد الأقصى 5 ميجابايت)"
                     : "JPG, PNG or GIF (Max 5MB)"}
@@ -276,7 +276,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Code */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t("itemCode")} *
               </label>
               <input
@@ -284,8 +284,8 @@ const ItemModal: React.FC<ItemModalProps> = ({
                 required
                 value={formData.code}
                 onChange={(e) => handleInputChange("code", e.target.value)}
-                className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  isRTL ? "text-right" : "text-left"
+                className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  isRTL ? "text-end" : "text-start"
                 }`}
                 placeholder={t("enterItemCode")}
               />
@@ -293,7 +293,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
 
             {/* Type */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t("type")} *
               </label>
               <select
@@ -304,8 +304,8 @@ const ItemModal: React.FC<ItemModalProps> = ({
                     e.target.value as "product" | "service"
                   )
                 }
-                className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  isRTL ? "text-right" : "text-left"
+                className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  isRTL ? "text-end" : "text-start"
                 }`}
               >
                 <option value="product">{t("product")}</option>
@@ -316,7 +316,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
 
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               {t("itemName")} *
             </label>
             <input
@@ -324,8 +324,8 @@ const ItemModal: React.FC<ItemModalProps> = ({
               required
               value={formData.name}
               onChange={(e) => handleInputChange("name", e.target.value)}
-              className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                isRTL ? "text-right" : "text-left"
+              className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                isRTL ? "text-end" : "text-start"
               }`}
               placeholder={t("enterItemName")}
             />
@@ -333,15 +333,15 @@ const ItemModal: React.FC<ItemModalProps> = ({
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               {t("description")}
             </label>
             <textarea
               rows={3}
               value={formData.description}
               onChange={(e) => handleInputChange("description", e.target.value)}
-              className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                isRTL ? "text-right" : "text-left"
+              className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                isRTL ? "text-end" : "text-start"
               }`}
               placeholder={t("optionalItemDescription")}
             />
@@ -350,7 +350,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Purchase Price */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t("purchasePrice")} *
               </label>
               <input
@@ -369,15 +369,15 @@ const ItemModal: React.FC<ItemModalProps> = ({
                     e.target.value === "" ? 0 : parseFloat(e.target.value)
                   )
                 }
-                className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  isRTL ? "text-right" : "text-left"
+                className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  isRTL ? "text-end" : "text-start"
                 }`}
                 placeholder="0.00"
               />
             </div>
             {/* Sales Price */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t("salesPrice")} *
               </label>
               <input
@@ -394,8 +394,8 @@ const ItemModal: React.FC<ItemModalProps> = ({
                     e.target.value === "" ? 0 : parseFloat(e.target.value)
                   )
                 }
-                className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  isRTL ? "text-right" : "text-left"
+                className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  isRTL ? "text-end" : "text-start"
                 }`}
                 placeholder="0.00"
               />
@@ -404,7 +404,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
             {/* Quantity */}
             {formData.type === "product" && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   {t("quantity")}
                 </label>
                 <input
@@ -419,8 +419,8 @@ const ItemModal: React.FC<ItemModalProps> = ({
                       e.target.value === "" ? 0 : parseInt(e.target.value)
                     )
                   }
-                  className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                    isRTL ? "text-right" : "text-left"
+                  className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                    isRTL ? "text-end" : "text-start"
                   }`}
                   placeholder="0"
                 />
@@ -429,14 +429,14 @@ const ItemModal: React.FC<ItemModalProps> = ({
 
             {/* VAT Rate */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {isRTL ? "معدل ض.ق.م %" : "VAT Rate %"} *
               </label>
               <select
                 value={formData.vatRate}
                 onChange={(e) => handleInputChange("vatRate", e.target.value)}
-                className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  isRTL ? "text-right" : "text-left"
+                className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-200 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  isRTL ? "text-end" : "text-start"
                 }`}
               >
                 <option value={0}>0%</option>
@@ -465,7 +465,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              className="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
             >
               {t("cancel")}
             </button>
@@ -474,7 +474,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
               disabled={
                 createItemMutation.isPending || updateItemMutation.isPending
               }
-              className={`flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 ${
+              className={`flex items-center space-x-2 px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition-colors disabled:opacity-50 ${
                 isRTL ? "flex-row-reverse space-x-reverse" : ""
               }`}
             >

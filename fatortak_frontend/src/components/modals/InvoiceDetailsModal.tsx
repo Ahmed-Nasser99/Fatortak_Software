@@ -69,13 +69,13 @@ const InvoiceDetailsModal: React.FC<InvoiceDetailsModalProps> = ({
       case "pending":
         return "bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800";
       case "draft":
-        return "bg-gray-50 text-gray-700 border-gray-200 dark:bg-gray-900/20 dark:text-gray-400 dark:border-gray-800";
+        return "bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900/20 dark:text-slate-400 dark:border-slate-800";
       case "overdue":
         return "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800";
       case "cancelled":
         return "bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-900/20 dark:text-orange-400 dark:border-orange-800";
       default:
-        return "bg-gray-50 text-gray-700 border-gray-200 dark:bg-gray-900/20 dark:text-gray-400 dark:border-gray-800";
+        return "bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900/20 dark:text-slate-400 dark:border-slate-800";
     }
   };
 
@@ -86,7 +86,7 @@ const InvoiceDetailsModal: React.FC<InvoiceDetailsModalProps> = ({
       case "sell":
         return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400";
+        return "bg-slate-100 text-slate-800 dark:bg-slate-900/20 dark:text-slate-400";
     }
   };
 
@@ -137,7 +137,7 @@ const InvoiceDetailsModal: React.FC<InvoiceDetailsModalProps> = ({
             .notes-section { margin-top: 40px; padding: 20px; background: #F3F4F6; border-radius: 8px; }
             .notes-section h3 { margin: 0 0 12px 0; font-size: 16px; font-weight: 600; color: #1F2937; }
             .text-center { text-align: center; }
-            .text-right { text-align: right; }
+            .text-end { text-align: right; }
             .footer { margin-top: 60px; text-align: center; font-size: 12px; color: #6B7280; }
           </style>
         </head>
@@ -182,24 +182,24 @@ const InvoiceDetailsModal: React.FC<InvoiceDetailsModalProps> = ({
   }
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-y-auto border border-gray-200 dark:border-gray-700">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg w-full max-w-5xl max-h-[95vh] overflow-y-auto border border-slate-200 dark:border-slate-700">
         {/* Header */}
         <div
-          className={`flex items-center justify-between p-8 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20`}
+          className={`flex items-center justify-between p-8 border-b border-slate-200 dark:border-slate-700 bg-brand-50/60 dark:bg-brand-950/20`}
         >
           <div className="flex items-center space-x-4">
-            <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-violet-600 rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-14 h-14 bg-brand-600 rounded-2xl flex items-center justify-center shadow-lg">
               <FileText className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                 {t("invoiceDetails")}
               </h2>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-3 rounded-xl hover:bg-white/50 dark:hover:bg-gray-800/50 transition-all duration-200"
+            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-3 rounded-xl hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all duration-200"
           >
             <X className="w-6 h-6" />
           </button>
@@ -231,17 +231,17 @@ const InvoiceDetailsModal: React.FC<InvoiceDetailsModalProps> = ({
         {/* Payment History & Installments Section */}
         {invoice.installments && invoice.installments.length > 0 && (
           <div className="px-8 pb-8">
-            <div className="bg-gray-50 dark:bg-gray-800/40 rounded-3xl p-6 border border-gray-200 dark:border-gray-700">
+            <div className="bg-slate-50 dark:bg-slate-800/40 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                   <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center">
                     <DollarSign className="w-6 h-6 text-green-600 dark:text-green-400" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                       {isRTL ? "سجل المدفوعات والأقساط" : "Payment & Installment History"}
                     </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-slate-500 dark:text-slate-400">
                       {isRTL ? `إجمالي ${invoice.installments.length} أقساط` : `Total of ${invoice.installments.length} installments`}
                     </p>
                   </div>
@@ -252,7 +252,7 @@ const InvoiceDetailsModal: React.FC<InvoiceDetailsModalProps> = ({
                 {invoice.installments.map((installment: any, index: number) => (
                   <div 
                     key={installment.id || index}
-                    className="flex flex-col md:flex-row md:items-center justify-between p-4 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow"
+                    className="flex flex-col md:flex-row md:items-center justify-between p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow"
                   >
                     <div className="flex items-center space-x-4 rtl:space-x-reverse mb-3 md:mb-0">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
@@ -263,10 +263,10 @@ const InvoiceDetailsModal: React.FC<InvoiceDetailsModalProps> = ({
                         {installment.status === 'Paid' ? <CheckCircle2 className="w-5 h-5" /> : <Clock className="w-5 h-5" />}
                       </div>
                       <div>
-                        <div className="font-bold text-gray-900 dark:text-white">
+                        <div className="font-bold text-slate-900 dark:text-white">
                           {formatCurrency(installment.amount)}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                        <div className="text-xs text-slate-500 dark:text-slate-400">
                           {isRTL ? "تاريخ الاستحقاق:" : "Due Date:"} {formatDate(installment.dueDate)}
                         </div>
                       </div>
@@ -297,7 +297,7 @@ const InvoiceDetailsModal: React.FC<InvoiceDetailsModalProps> = ({
         )}
 
         {/* Actions Footer */}
-        <div className="border-t border-gray-200 dark:border-gray-700 p-6 bg-gray-50 dark:bg-gray-800/50">
+        <div className="border-t border-slate-200 dark:border-slate-700 p-6 bg-slate-50 dark:bg-slate-800/50">
           <div
             className={`flex flex-wrap gap-4 justify-center ${
               isRTL ? "flex-row-reverse" : ""
@@ -305,14 +305,14 @@ const InvoiceDetailsModal: React.FC<InvoiceDetailsModalProps> = ({
           >
             <button
               onClick={handlePrint}
-              className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-violet-600 text-white rounded-xl hover:from-purple-700 hover:to-violet-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex items-center space-x-2 px-4 py-3 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition-colors shadow-sm "
             >
               <Printer className="w-5 h-5" />
               <span>{t("print")}</span>
             </button>
             <button
               onClick={handleDownloadPDF}
-              className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex items-center space-x-2 px-4 py-3 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition-colors shadow-sm "
             >
               <Download className="w-5 h-5" />
               <span>{t("download")}</span>
@@ -320,7 +320,7 @@ const InvoiceDetailsModal: React.FC<InvoiceDetailsModalProps> = ({
             {invoice.attachmentUrl && (
               <button
                 onClick={() => window.open(`${import.meta.env.VITE_API_URL || 'https://localhost:44338'}/${invoice.attachmentUrl}`, '_blank')}
-                className="flex items-center space-x-2 px-6 py-3 bg-white text-indigo-600 border border-indigo-200 rounded-xl hover:bg-indigo-50 transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-105"
+                className="flex items-center space-x-2 px-4 py-3 bg-white text-indigo-600 border border-indigo-200 rounded-xl hover:bg-indigo-50 transition-all duration-200 shadow-sm hover:shadow-md transform "
               >
                 <Paperclip className="w-5 h-5" />
                 <span>{isRTL ? "عرض المرفق" : "View Attachment"}</span>

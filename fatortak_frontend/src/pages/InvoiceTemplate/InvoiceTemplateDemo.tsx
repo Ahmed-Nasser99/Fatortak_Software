@@ -175,7 +175,7 @@ const InvoiceTemplateDemo: React.FC = () => {
     invoiceTemplates[selectedTemplate as keyof typeof invoiceTemplates];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950 p-8">
       <div className="max-w-5xl mx-auto">
         <div className="mb-6 flex justify-between items-center">
           <Button
@@ -203,16 +203,16 @@ const InvoiceTemplateDemo: React.FC = () => {
           </Button>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8">
-          <div className="mb-6 flex items-center gap-3 pb-4 border-b border-gray-200 dark:border-gray-700">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-violet-600 rounded-xl flex items-center justify-center">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-8">
+          <div className="mb-6 flex items-center gap-3 pb-4 border-b border-slate-200 dark:border-slate-700">
+            <div className="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center">
               <FileText className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                 {isRTL ? "معاينة القالب" : "Template Preview"}
               </h2>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-slate-600 dark:text-slate-400">
                 {selectedTemplate}
               </p>
             </div>

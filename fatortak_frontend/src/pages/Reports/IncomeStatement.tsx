@@ -28,7 +28,7 @@ const IncomeStatement: React.FC = () => {
           </Button>
           <div>
             <h1 className="text-2xl font-bold">{isRTL ? "قائمة الدخل" : "Income Statement"}</h1>
-            <p className="text-sm text-gray-500">{isRTL ? "الأرباح والخسائر عن الفترة" : "Profit and Loss for the period"}</p>
+            <p className="text-sm text-slate-500">{isRTL ? "الأرباح والخسائر عن الفترة" : "Profit and Loss for the period"}</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -48,28 +48,28 @@ const IncomeStatement: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-800/50 overflow-hidden">
-          <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/5">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "الإيرادات" : "Revenue"}</CardTitle>
+        <Card className="bg-white text-slate-900 border-slate-200/80 dark:bg-slate-900 dark:text-white dark:border-slate-800 overflow-hidden">
+          <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/5">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "الإيرادات" : "Revenue"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-6 pb-6">
             <div className="text-2xl lg:text-3xl font-bold font-mono">{formatCurrency(response?.totalRevenue || 0)}</div>
           </CardContent>
         </Card>
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-800/50 overflow-hidden">
-          <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/5">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "المصروفات" : "Expenses"}</CardTitle>
+        <Card className="bg-white text-slate-900 border-slate-200/80 dark:bg-slate-900 dark:text-white dark:border-slate-800 overflow-hidden">
+          <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/5">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "المصروفات" : "Expenses"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-6 pb-6">
             <div className="text-2xl lg:text-3xl font-bold font-mono">{formatCurrency(response?.totalExpenses || 0)}</div>
           </CardContent>
         </Card>
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-800/50 overflow-hidden shadow-xl">
-          <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/10">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-300">{isRTL ? "صافي الدخل" : "Net Income"}</CardTitle>
+        <Card className="bg-white text-slate-900 border-slate-200/80 dark:bg-slate-900 dark:text-white dark:border-slate-800 overflow-hidden">
+          <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/10">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-300">{isRTL ? "صافي الدخل" : "Net Income"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-6 pb-6">
-            <div className="text-2xl lg:text-3xl font-bold font-mono text-blue-600 dark:text-blue-400">{formatCurrency(response?.netIncome || 0)}</div>
+            <div className={`text-2xl font-bold font-mono lg:text-3xl ${(response?.netIncome || 0) >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>{formatCurrency(response?.netIncome || 0)}</div>
           </CardContent>
         </Card>
       </div>
@@ -77,8 +77,8 @@ const IncomeStatement: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Revenue Breakdown */}
         <Card>
-          <CardHeader className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
-            <CardTitle className="text-sm font-bold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{isRTL ? "تفاصيل الإيرادات" : "Revenue Breakdown"}</CardTitle>
+          <CardHeader className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700">
+            <CardTitle className="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">{isRTL ? "تفاصيل الإيرادات" : "Revenue Breakdown"}</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
              {isLoading ? <div className="p-10 text-center"><Loader2 className="w-8 h-8 animate-spin mx-auto text-blue-600" /></div> : (
@@ -86,14 +86,14 @@ const IncomeStatement: React.FC = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead>{isRTL ? "الحساب" : "Account"}</TableHead>
-                    <TableHead className="text-right">{isRTL ? "المبلغ" : "Amount"}</TableHead>
+                    <TableHead className="text-end">{isRTL ? "المبلغ" : "Amount"}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {response?.revenueItems?.map((item: any) => (
                     <TableRow key={item.accountId}>
                       <TableCell className="text-sm">{item.accountName}</TableCell>
-                      <TableCell className="text-right font-mono font-medium">{formatCurrency(item.amount)}</TableCell>
+                      <TableCell className="text-end font-mono font-medium">{formatCurrency(item.amount)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -104,8 +104,8 @@ const IncomeStatement: React.FC = () => {
 
         {/* Expenses Breakdown */}
         <Card>
-          <CardHeader className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
-            <CardTitle className="text-sm font-bold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{isRTL ? "تفاصيل المصروفات" : "Expenses Breakdown"}</CardTitle>
+          <CardHeader className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700">
+            <CardTitle className="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">{isRTL ? "تفاصيل المصروفات" : "Expenses Breakdown"}</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
              {isLoading ? <div className="p-10 text-center"><Loader2 className="w-8 h-8 animate-spin mx-auto text-blue-600" /></div> : (
@@ -113,14 +113,14 @@ const IncomeStatement: React.FC = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead>{isRTL ? "الحساب" : "Account"}</TableHead>
-                    <TableHead className="text-right">{isRTL ? "المبلغ" : "Amount"}</TableHead>
+                    <TableHead className="text-end">{isRTL ? "المبلغ" : "Amount"}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {response?.expenseItems?.map((item: any) => (
                     <TableRow key={item.accountId}>
                       <TableCell className="text-sm">{item.accountName}</TableCell>
-                      <TableCell className="text-right font-mono font-medium">{formatCurrency(item.amount)}</TableCell>
+                      <TableCell className="text-end font-mono font-medium">{formatCurrency(item.amount)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

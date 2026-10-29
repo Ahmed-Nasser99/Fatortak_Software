@@ -28,7 +28,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className={`${className} ${isRTL ? "text-right" : "text-left"}`}>
+      <SelectTrigger className={`${className} ${isRTL ? "text-end" : "text-start"}`}>
         <SelectValue placeholder={placeholder || (isRTL ? "اختر التصنيف" : "Select Category")} />
       </SelectTrigger>
       <SelectContent>
@@ -38,7 +38,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           </SelectItem>
         ))}
         {categories.length === 0 && !isLoading && (
-          <div className="p-2 text-sm text-gray-500 text-center">
+          <div className="p-2 text-sm text-slate-500 text-center">
             {isRTL ? "لا يوجد تصنيفات" : "No categories found"}
           </div>
         )}

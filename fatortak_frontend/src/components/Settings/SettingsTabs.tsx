@@ -1,16 +1,7 @@
 "use client";
 
 import type React from "react";
-import {
-  Building,
-  User,
-  Bell,
-  Shield,
-  CreditCard,
-  Users,
-  MapPin,
-  ChevronRight,
-} from "lucide-react";
+import { Building, User } from "lucide-react";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 interface SettingsTabsProps {
@@ -27,33 +18,33 @@ const SettingsTabs: React.FC<SettingsTabsProps> = ({
   const { isRTL, t } = useLanguage();
 
   const tabs = [
-    { id: "company", nameKey: "companySettings" },
-    ...(showBranches ? [{ id: "branches", nameKey: "branches" }] : []),
-    { id: "user", nameKey: "userSettings" },
-    //{ id: "hr", nameKey: "hrSettings" },
-    //{ id: "quota", nameKey: "quotaUsage" },
-    //{ id: "notifications", nameKey: "notifications" },
-    //{ id: "security", nameKey: "security" },
+    { id: "company", nameKey: "companySettings", icon: Building },
+    ...(showBranches
+      ? [{ id: "branches", nameKey: "branches", icon: Building }]
+      : []),
+    { id: "user", nameKey: "userSettings", icon: User },
   ];
 
   return (
-    <nav className="space-y-1">
+    <nav className="space-y-0.5">
       {tabs.map((tab) => {
         const isActive = activeTab === tab.id;
+        const Icon = tab.icon;
         return (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             className={`
-              w-full flex items-center px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200
+              flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors
               ${
                 isActive
-                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  ? "bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300"
+                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800/70 dark:hover:text-white"
               }
-              ${isRTL ? "text-right" : "text-left"}
+              ${isRTL ? "text-end" : "text-start"}
             `}
           >
+            <Icon className={`h-4 w-4 shrink-0 ${isActive ? "" : "text-slate-400"}`} />
             <span className="flex-1 truncate">{t(tab.nameKey)}</span>
           </button>
         );

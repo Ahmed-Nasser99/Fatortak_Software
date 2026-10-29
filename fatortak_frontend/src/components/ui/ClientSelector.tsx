@@ -34,7 +34,7 @@ const ClientSelector: React.FC<ClientSelectorProps> = ({
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className={`${className} ${isRTL ? "text-right" : "text-left"}`}>
+      <SelectTrigger className={`${className} ${isRTL ? "text-end" : "text-start"}`}>
         <SelectValue placeholder={placeholder || (isRTL ? "اختر العميل" : "Select Client")} />
       </SelectTrigger>
       <SelectContent>
@@ -44,7 +44,7 @@ const ClientSelector: React.FC<ClientSelectorProps> = ({
           </SelectItem>
         ))}
         {clients.length === 0 && !isLoading && (
-            <div className="p-2 text-sm text-gray-500 text-center">
+            <div className="p-2 text-sm text-slate-500 text-center">
                 {isRTL ? "لا يوجد عملاء" : "No clients found"}
             </div>
         )}

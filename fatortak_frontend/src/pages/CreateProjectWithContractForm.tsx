@@ -250,12 +250,12 @@ const CreateProjectWithContractForm = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto my-8 bg-white shadow-2xl border border-gray-200 min-h-[1100px] flex flex-col font-sans text-gray-800">
+    <div className="max-w-5xl mx-auto my-8 bg-white shadow-lg border border-slate-200 min-h-[1100px] flex flex-col font-sans text-slate-800">
       {/* Top Floating Actions (Not part of the document) */}
-      <div className="sticky top-0 z-50 bg-gray-50/90 backdrop-blur-md p-4 border-b flex justify-between items-center no-print">
+      <div className="sticky top-0 z-50 bg-slate-50/90 backdrop-blur-md p-4 border-b flex justify-between items-center no-print">
         <button
           onClick={() => navigate("/projects")}
-          className="flex items-center gap-2 text-gray-600 hover:text-indigo-600 font-medium transition-colors"
+          className="flex items-center gap-2 text-slate-600 hover:text-indigo-600 font-medium transition-colors"
         >
           <ChevronLeft className="w-5 h-5" />
           Back to Projects
@@ -264,7 +264,7 @@ const CreateProjectWithContractForm = () => {
           <button
             onClick={() => handleSubmit(false)}
             disabled={loading}
-            className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all font-medium disabled:opacity-50 text-sm"
+            className="flex items-center gap-2 px-4 py-2 text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-all font-medium disabled:opacity-50 text-sm"
           >
             <Save className="w-4 h-4" />
             Save Draft
@@ -300,19 +300,19 @@ const CreateProjectWithContractForm = () => {
           {/* Metadata Table */}
           <div className="w-72 text-sm">
             <div className="grid grid-cols-2 gap-y-1">
-              <span className="text-gray-500">Date</span>
+              <span className="text-slate-500">Date</span>
               <input
                 type="date"
                 value={quotationDate}
                 onChange={(e) => setQuotationDate(e.target.value)}
-                className="font-semibold border-b border-transparent hover:border-gray-200 focus:border-indigo-500 outline-none"
+                className="font-semibold border-b border-transparent hover:border-slate-200 focus:border-brand-400 outline-none"
               />
 
-              <span className="text-gray-500">Client Name</span>
+              <span className="text-slate-500">Client Name</span>
               <select
                 value={clientId}
                 onChange={(e) => handleCustomerChange(e.target.value)}
-                className="font-semibold border-b border-gray-300 hover:border-indigo-500 outline-none truncate w-full"
+                className="font-semibold border-b border-slate-300 hover:border-indigo-500 outline-none truncate w-full"
               >
                 <option value="">Select Client</option>
                 {customers.map((c) => (
@@ -322,23 +322,23 @@ const CreateProjectWithContractForm = () => {
                 ))}
               </select>
 
-              <span className="text-gray-500">Project</span>
+              <span className="text-slate-500">Project</span>
               <input
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
                 placeholder="Project Name..."
-                className="font-semibold border-b border-gray-300 hover:border-indigo-500 outline-none"
+                className="font-semibold border-b border-slate-300 hover:border-indigo-500 outline-none"
               />
 
-              <span className="text-gray-500">email</span>
+              <span className="text-slate-500">email</span>
               <span className="font-semibold truncate text-[11px] py-1">
                 {clientEmail || "---"}
               </span>
 
-              <span className="text-gray-500">Cell Phone NO.</span>
+              <span className="text-slate-500">Cell Phone NO.</span>
               <span className="font-semibold py-1">{clientPhone || "---"}</span>
 
-              <span className="text-gray-500 no-print">Tax inclusion</span>
+              <span className="text-slate-500 no-print">Tax inclusion</span>
               <div className="pt-1 no-print">
                 <label className="relative inline-flex items-center cursor-pointer scale-75 origin-left">
                   <input
@@ -347,7 +347,7 @@ const CreateProjectWithContractForm = () => {
                     checked={includeVat}
                     onChange={(e) => setIncludeVat(e.target.checked)}
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                  <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
                 </label>
               </div>
             </div>
@@ -361,7 +361,7 @@ const CreateProjectWithContractForm = () => {
                 <th className="border border-black px-2 py-2 text-xs w-10">
                   Sr.
                 </th>
-                <th className="border border-black px-4 py-2 text-xs text-left">
+                <th className="border border-black px-4 py-2 text-xs text-start">
                   Description
                 </th>
                 <th className="border border-black px-2 py-2 text-xs w-16">
@@ -385,7 +385,7 @@ const CreateProjectWithContractForm = () => {
                   <tr className="bg-[#cbd5e1] text-[#1e293b] font-bold text-sm group">
                     <td
                       colSpan={6}
-                      className="border border-black px-4 py-1 text-center tracking-widest uppercase"
+                      className="border border-black px-4 py-1 text-center tracking-wide uppercase"
                     >
                       <input
                         value={section.sectionName}
@@ -398,7 +398,7 @@ const CreateProjectWithContractForm = () => {
                       {sections.length > 1 && (
                         <button
                           onClick={() => removeSection(secIdx)}
-                          className="text-gray-500 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                          className="text-slate-500 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
                           title="Remove Section"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -445,23 +445,23 @@ const CreateProjectWithContractForm = () => {
                           className="w-full bg-transparent border-none focus:ring-0 p-0 text-sm text-center font-medium"
                         />
                       </td>
-                      <td className="border border-black px-4 py-4 text-right align-middle font-medium">
+                      <td className="border border-black px-4 py-4 text-end align-middle font-medium">
                         <input
                           type="number"
                           value={line.unitPrice}
                           onChange={(e) =>
                             updateLine(secIdx, idx, "unitPrice", parseFloat(e.target.value) || 0)
                           }
-                          className="w-full bg-transparent border-none focus:ring-0 p-0 text-sm text-right font-medium"
+                          className="w-full bg-transparent border-none focus:ring-0 p-0 text-sm text-end font-medium"
                         />
                       </td>
-                      <td className="border border-black px-4 py-4 text-right align-middle text-sm font-bold bg-[#f8fafc]">
+                      <td className="border border-black px-4 py-4 text-end align-middle text-sm font-bold bg-[#f8fafc]">
                         {(line.quantity * line.unitPrice).toLocaleString(undefined, { minimumFractionDigits: 0 })}
                       </td>
                       <td className="border border-black px-1 py-1 text-center align-middle no-print">
                         <button
                           onClick={() => removeLine(secIdx, idx)}
-                          className="text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                          className="text-slate-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -470,10 +470,10 @@ const CreateProjectWithContractForm = () => {
                   ))}
                   {/* Section Total Row */}
                   <tr className="bg-[#1e293b] text-white font-bold text-sm">
-                    <td colSpan={5} className="border border-black px-4 py-1 text-right uppercase tracking-wider">
+                    <td colSpan={5} className="border border-black px-4 py-1 text-end uppercase tracking-wider">
                       Section Total
                     </td>
-                    <td className="border border-black px-4 py-1 text-right bg-[#0f172a]">
+                    <td className="border border-black px-4 py-1 text-end bg-[#0f172a]">
                       {section.lines
                         .reduce((acc, l) => acc + l.quantity * l.unitPrice, 0)
                         .toLocaleString(undefined, { minimumFractionDigits: 0 })}
@@ -504,7 +504,7 @@ const CreateProjectWithContractForm = () => {
                 >
                   <button
                     onClick={addSection}
-                    className="w-full py-2 border-2 border-dashed border-gray-300 text-gray-400 hover:text-indigo-600 hover:border-indigo-400 rounded-lg flex items-center justify-center gap-2 transition-all font-medium"
+                    className="w-full py-2 border-2 border-dashed border-slate-300 text-slate-400 hover:text-indigo-600 hover:border-indigo-400 rounded-lg flex items-center justify-center gap-2 transition-all font-medium"
                   >
                     <Plus className="w-4 h-4" />
                     Add Work Section
@@ -513,13 +513,13 @@ const CreateProjectWithContractForm = () => {
               </tr>
 
               {/* Totals Section */}
-              <tr className="border-t border-gray-200">
-                <td colSpan={5} className="py-4 px-4 text-right align-middle">
-                  <span className="text-sm font-bold text-gray-500 uppercase">
+              <tr className="border-t border-slate-200">
+                <td colSpan={5} className="py-4 px-4 text-end align-middle">
+                  <span className="text-sm font-bold text-slate-500 uppercase">
                     Sub Total
                   </span>
                 </td>
-                <td className="py-4 px-4 text-right align-middle">
+                <td className="py-4 px-4 text-end align-middle">
                   <span className="font-bold text-lg">
                     {subtotal.toLocaleString(undefined, {
                       minimumFractionDigits: 2,
@@ -531,13 +531,13 @@ const CreateProjectWithContractForm = () => {
               </tr>
 
               <tr>
-                <td colSpan={5} className="py-2 px-4 text-right align-middle">
+                <td colSpan={5} className="py-2 px-4 text-end align-middle">
                   <div className="flex items-center justify-end gap-3">
                     <select
                       value={vatRate}
                       onChange={(e) => setVatRate(parseFloat(e.target.value))}
                       disabled={!includeVat}
-                      className="no-print text-xs border border-gray-200 rounded px-2 py-1 bg-white text-gray-500 font-medium outline-none focus:border-indigo-500 transition-all w-32 disabled:opacity-30"
+                      className="no-print text-xs border border-slate-200 rounded px-2 py-1 bg-white text-slate-500 font-medium outline-none focus:border-brand-400 transition-all w-32 disabled:opacity-30"
                     >
                       <option value="" disabled>
                         Select Tax
@@ -549,16 +549,16 @@ const CreateProjectWithContractForm = () => {
                       ))}
                     </select>
                     {!includeVat && (
-                      <span className="text-gray-300 italic text-[10px] no-print">
+                      <span className="text-slate-300 italic text-[10px] no-print">
                         Tax Disabled
                       </span>
                     )}
-                    <span className="text-sm font-bold text-gray-500 uppercase whitespace-nowrap">
+                    <span className="text-sm font-bold text-slate-500 uppercase whitespace-nowrap">
                       Tax ({(vatRate * 100).toFixed(0)}%)
                     </span>
                   </div>
                 </td>
-                <td className="py-2 px-4 text-right align-middle">
+                <td className="py-2 px-4 text-end align-middle">
                   <span
                     className={`font-bold transition-opacity ${includeVat ? "opacity-100" : "opacity-20"}`}
                   >
@@ -572,21 +572,21 @@ const CreateProjectWithContractForm = () => {
               </tr>
 
               <tr>
-                <td colSpan={5} className="py-2 px-4 text-right align-middle">
+                <td colSpan={5} className="py-2 px-4 text-end align-middle">
                   <div className="flex items-center justify-end gap-3">
-                    <span className="text-sm font-bold text-gray-500 uppercase whitespace-nowrap">
+                    <span className="text-sm font-bold text-slate-500 uppercase whitespace-nowrap">
                       Discount
                     </span>
                   </div>
                 </td>
-                <td className="py-2 px-4 text-right align-middle">
+                <td className="py-2 px-4 text-end align-middle">
                   <input
                     type="number"
                     value={discount}
                     onChange={(e) =>
                       setDiscount(parseFloat(e.target.value) || 0)
                     }
-                    className="w-full bg-[#fef2f2] border border-rose-100 rounded px-2 py-1 text-sm text-right font-bold text-rose-600 outline-none focus:border-rose-400 no-print"
+                    className="w-full bg-[#fef2f2] border border-rose-100 rounded px-2 py-1 text-sm text-end font-bold text-rose-600 outline-none focus:border-rose-400 no-print"
                     placeholder="0.00"
                   />
                   <span className="hidden print:inline font-bold text-rose-600">
@@ -600,14 +600,14 @@ const CreateProjectWithContractForm = () => {
                 <td className="no-print"></td>
               </tr>
 
-              <tr className="bg-gray-50/50">
-                <td colSpan={5} className="py-4 px-4 text-right align-middle">
-                  <span className="text-base font-black uppercase tracking-wider text-gray-900">
+              <tr className="bg-slate-50/50">
+                <td colSpan={5} className="py-4 px-4 text-end align-middle">
+                  <span className="text-base font-bold uppercase tracking-wider text-slate-900">
                     Total
                   </span>
                 </td>
-                <td className="py-4 px-4 text-right align-middle">
-                  <span className="font-black text-xl text-black">
+                <td className="py-4 px-4 text-end align-middle">
+                  <span className="font-bold text-xl text-black">
                     {total.toLocaleString(undefined, {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
@@ -629,7 +629,7 @@ const CreateProjectWithContractForm = () => {
               </h3>
               <button
                 onClick={addCondition}
-                className="no-print text-[10px] bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded border font-bold flex items-center gap-1 transition-colors"
+                className="no-print text-[10px] bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded border font-bold flex items-center gap-1 transition-colors"
               >
                 <Plus className="w-3 h-3" /> Add Condition
               </button>
@@ -644,7 +644,7 @@ const CreateProjectWithContractForm = () => {
                   <input
                     value={paymentTerms}
                     onChange={(e) => setPaymentTerms(e.target.value)}
-                    className="flex-grow border-b border-transparent hover:border-gray-300 focus:border-indigo-500 outline-none bg-transparent h-5 font-medium transition-all"
+                    className="flex-grow border-b border-transparent hover:border-slate-300 focus:border-brand-400 outline-none bg-transparent h-5 font-medium transition-all"
                   />
                 </div>
               </div>
@@ -657,7 +657,7 @@ const CreateProjectWithContractForm = () => {
                     value={condition}
                     onChange={(e) => updateCondition(idx, e.target.value)}
                     rows={1}
-                    className="flex-grow border-b border-transparent hover:border-gray-200 focus:border-indigo-500 outline-none bg-transparent py-0 h-auto min-h-[1.2rem] resize-none overflow-hidden transition-all"
+                    className="flex-grow border-b border-transparent hover:border-slate-200 focus:border-brand-400 outline-none bg-transparent py-0 h-auto min-h-[1.2rem] resize-none overflow-hidden transition-all"
                     onInput={(e) => {
                       const target = e.target as HTMLTextAreaElement;
                       target.style.height = "auto";
@@ -666,7 +666,7 @@ const CreateProjectWithContractForm = () => {
                   />
                   <button
                     onClick={() => removeCondition(idx)}
-                    className="no-print opacity-0 group-hover:opacity-100 text-gray-300 hover:text-red-500 transition-all"
+                    className="no-print opacity-0 group-hover:opacity-100 text-slate-300 hover:text-red-500 transition-all"
                   >
                     <Trash2 className="w-3 h-3" />
                   </button>

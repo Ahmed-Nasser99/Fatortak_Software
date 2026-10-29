@@ -30,9 +30,9 @@ const getColorClasses = (selectedColor: string) => {
       text: "text-slate-600",
     },
     "royal-blue": {
-      bg: "bg-blue-600",
+      bg: "bg-brand-600",
       gradient: "from-blue-600 to-blue-700",
-      border: "border-blue-600",
+      border: "border-brand-600",
       text: "text-blue-600",
     },
     "deep-navy": {
@@ -71,8 +71,8 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
               )}
             </div>
             <div className="p-2 space-y-1">
-              <div className="h-1 bg-gray-200 w-3/4"></div>
-              <div className="h-1 bg-gray-200 w-1/2"></div>
+              <div className="h-1 bg-slate-200 w-3/4"></div>
+              <div className="h-1 bg-slate-200 w-1/2"></div>
               <div className={`h-1 ${colors.bg}/20 w-full mt-2`}></div>
               <div className={`h-1 ${colors.bg}/20 w-full`}></div>
             </div>
@@ -96,25 +96,25 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
                 <div className="h-6 bg-blue-50 rounded"></div>
                 <div className="h-6 bg-blue-50 rounded"></div>
               </div>
-              <div className="h-1 bg-gray-200 w-full"></div>
-              <div className="h-1 bg-gray-200 w-4/5"></div>
+              <div className="h-1 bg-slate-200 w-full"></div>
+              <div className="h-1 bg-slate-200 w-4/5"></div>
             </div>
           </div>
         );
 
       case "minimalist-clean":
         return (
-          <div className="w-full h-full bg-white rounded-lg overflow-hidden shadow-sm border border-gray-900">
+          <div className="w-full h-full bg-white rounded-lg overflow-hidden shadow-sm border border-slate-900">
             <div className="p-2">
               {companyLogo && (
-                <div className="w-3 h-3 bg-gray-200 rounded mb-2"></div>
+                <div className="w-3 h-3 bg-slate-200 rounded mb-2"></div>
               )}
-              <div className="h-px bg-gray-900 mb-2"></div>
+              <div className="h-px bg-slate-900 mb-2"></div>
               <div className="space-y-1">
-                <div className="h-1 bg-gray-300 w-2/3"></div>
-                <div className="h-1 bg-gray-300 w-1/2"></div>
-                <div className="h-1 bg-gray-300 w-full mt-2"></div>
-                <div className="h-1 bg-gray-300 w-full"></div>
+                <div className="h-1 bg-slate-300 w-2/3"></div>
+                <div className="h-1 bg-slate-300 w-1/2"></div>
+                <div className="h-1 bg-slate-300 w-full mt-2"></div>
+                <div className="h-1 bg-slate-300 w-full"></div>
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
                   className={`h-8 bg-orange-50 rounded-lg border-l-2 ${colors.border}`}
                 ></div>
               </div>
-              <div className="h-1 bg-gray-200 w-full"></div>
+              <div className="h-1 bg-slate-200 w-full"></div>
             </div>
           </div>
         );
@@ -148,7 +148,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
       case "elegant-script":
         return (
           <div
-            className={`w-full h-full bg-gray-50 rounded-lg overflow-hidden shadow-sm`}
+            className={`w-full h-full bg-slate-50 rounded-lg overflow-hidden shadow-sm`}
           >
             <div className="p-2 text-center">
               {companyLogo && (

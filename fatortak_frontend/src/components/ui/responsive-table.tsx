@@ -13,7 +13,7 @@ const ResponsiveTable = React.forwardRef<
     <div 
       ref={ref}
       className={cn(
-        "w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm",
+        "w-full overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm",
         isRTL ? 'rtl' : 'ltr',
         className
       )}
@@ -38,7 +38,7 @@ const ResponsiveTableHeader = React.forwardRef<
   <thead 
     ref={ref} 
     className={cn(
-      "bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 [&_tr]:border-b", 
+      "bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-700 dark:to-slate-600 [&_tr]:border-b", 
       className
     )} 
     {...props} 
@@ -53,7 +53,7 @@ const ResponsiveTableBody = React.forwardRef<
   <tbody
     ref={ref}
     className={cn(
-      "[&_tr:last-child]:border-0 [&_tr:hover]:bg-gray-50 dark:[&_tr:hover]:bg-gray-700", 
+      "[&_tr:last-child]:border-0 [&_tr:hover]:bg-slate-50 dark:[&_tr:hover]:bg-slate-700", 
       className
     )}
     {...props}
@@ -68,7 +68,7 @@ const ResponsiveTableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "border-b border-gray-200 dark:border-gray-700 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700",
+      "border-b border-slate-200 dark:border-slate-700 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700",
       className
     )}
     {...props}
@@ -86,7 +86,7 @@ const ResponsiveTableHead = React.forwardRef<
     <th
       ref={ref}
       className={cn(
-        `h-12 px-6 ${isRTL ? 'text-right' : 'text-left'} align-middle font-bold text-gray-900 dark:text-white`,
+        `h-12 px-6 ${isRTL ? 'text-end' : 'text-start'} align-middle font-bold text-slate-900 dark:text-white`,
         className
       )}
       {...props}
@@ -105,7 +105,7 @@ const ResponsiveTableCell = React.forwardRef<
     <td
       ref={ref}
       className={cn(
-        `p-6 align-middle ${isRTL ? 'text-right' : 'text-left'}`,
+        `p-6 align-middle ${isRTL ? 'text-end' : 'text-start'}`,
         className
       )}
       {...props}
@@ -122,7 +122,7 @@ const MobileCard = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "lg:hidden bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-4 shadow-sm",
+      "lg:hidden bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 mb-4 shadow-sm",
       className
     )}
     {...props}

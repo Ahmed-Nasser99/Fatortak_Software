@@ -32,15 +32,15 @@ export const OptimizedStatsCard = ({
   if (isLoading) {
     return (
       <Card className="relative overflow-hidden h-32 animate-pulse">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800" />
         <div className="relative p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-xl animate-pulse" />
-            <div className="w-16 h-6 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
+            <div className="w-12 h-12 bg-slate-300 dark:bg-slate-600 rounded-xl animate-pulse" />
+            <div className="w-16 h-6 bg-slate-300 dark:bg-slate-600 rounded animate-pulse" />
           </div>
           <div className="space-y-2">
-            <div className="w-24 h-4 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
-            <div className="w-32 h-8 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
+            <div className="w-24 h-4 bg-slate-300 dark:bg-slate-600 rounded animate-pulse" />
+            <div className="w-32 h-8 bg-slate-300 dark:bg-slate-600 rounded animate-pulse" />
           </div>
         </div>
       </Card>
@@ -48,7 +48,7 @@ export const OptimizedStatsCard = ({
   }
 
   return (
-    <Card className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 border-0 shadow-lg">
+    <Card className="group relative overflow-hidden hover:shadow-lg transition-all duration-500 hover:-translate-y-2  border-0 shadow-lg">
       {/* Gradient Background */}
       <div
         className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-90 group-hover:opacity-100 transition-opacity duration-300`}
@@ -92,11 +92,11 @@ export const OptimizedStatsCard = ({
           )}
         </div>
 
-        <div className={`space-y-2 ${isRTL ? "text-right" : "text-left"}`}>
+        <div className={`space-y-2 ${isRTL ? "text-end" : "text-start"}`}>
           <h3 className="text-sm font-semibold text-white/90 tracking-wide uppercase">
             {title}
           </h3>
-          <p className="text-3xl font-black text-white drop-shadow-lg tracking-tight">
+          <p className="text-3xl font-bold text-white drop-shadow-lg tracking-tight">
             {displayValue}
           </p>
         </div>

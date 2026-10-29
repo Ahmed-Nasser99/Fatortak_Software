@@ -94,7 +94,7 @@ const DataSourceSelector: React.FC<DataSourceSelectorProps> = ({
         onValueChange={handleParentSelect}
       >
         <SelectTrigger
-          className={`${className} ${isRTL ? "text-right" : "text-left"}`}
+          className={`${className} ${isRTL ? "text-end" : "text-start"}`}
         >
           {value ? (
             <span>{getDisplayLabel(value)}</span>

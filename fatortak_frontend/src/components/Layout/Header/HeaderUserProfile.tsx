@@ -45,7 +45,7 @@ const HeaderUserProfile: React.FC = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className={`flex items-center space-x-3 px-3 py-2 rounded-xl hover:bg-gray-100/80 dark:hover:bg-gray-800/80 transition-all duration-200 cursor-pointer group ${
+          className={`flex items-center space-x-3 px-3 py-2 rounded-xl hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer group ${
             isRTL ? "flex-row-reverse space-x-reverse" : ""
           }`}
         >
@@ -59,51 +59,51 @@ const HeaderUserProfile: React.FC = () => {
                 {user?.firstName?.charAt(0) || user?.email?.charAt(0) || "U"}
               </span>
             </div>
-            <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-400 rounded-full border-2 border-white dark:border-gray-800 shadow-sm"></div>
+            <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-400 rounded-full border-2 border-white dark:border-slate-800 shadow-sm"></div>
           </div>
-          <div className="hidden md:block text-left">
-            <p className="text-sm font-semibold text-gray-900 dark:text-white">
+          <div className="hidden md:block text-start">
+            <p className="text-sm font-semibold text-slate-900 dark:text-white">
               {user?.firstName && user?.lastName
                 ? `${user.firstName} ${user.lastName}`
                 : user?.email?.split("@")[0] || (isRTL ? "المستخدم" : "User")}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               {user?.role || (isRTL ? "مدير" : "Admin")}
             </p>
           </div>
-          <ChevronDown className="w-4 h-4 text-gray-500 dark:text-gray-400 hidden md:block" />
+          <ChevronDown className="w-4 h-4 text-slate-500 dark:text-slate-400 hidden md:block" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-56 bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-gray-200/70 dark:border-gray-700/70 shadow-xl rounded-2xl p-2"
+        className="w-56 bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl border border-slate-200/70 dark:border-slate-700/70 shadow-xl rounded-2xl p-2"
       >
         <DropdownMenuItem
           onClick={handleProfileClick}
-          className="flex items-center space-x-3 px-4 py-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-blue-900/20 dark:hover:to-indigo-900/20 rounded-xl cursor-pointer transition-all duration-200"
+          className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-xl cursor-pointer transition-colors duration-200"
         >
-          <User className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+          <User className="w-4 h-4 text-slate-600 dark:text-slate-400" />
           <span className="font-medium">
             {isRTL ? "الملف الشخصي" : "Profile"}
           </span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={handleSettingsClick}
-          className="flex items-center space-x-3 px-4 py-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-blue-900/20 dark:hover:to-indigo-900/20 rounded-xl cursor-pointer transition-all duration-200"
+          className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-xl cursor-pointer transition-colors duration-200"
         >
-          <Settings className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+          <Settings className="w-4 h-4 text-slate-600 dark:text-slate-400" />
           <span className="font-medium">
             {isRTL ? "الإعدادات" : "Settings"}
           </span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={handleSupportClick}
-          className="flex items-center space-x-3 px-4 py-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-blue-900/20 dark:hover:to-indigo-900/20 rounded-xl cursor-pointer transition-all duration-200"
+          className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-xl cursor-pointer transition-colors duration-200"
         >
-          <MessageSquare className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+          <MessageSquare className="w-4 h-4 text-slate-600 dark:text-slate-400" />
           <span className="font-medium">{isRTL ? "الدعم" : "Support"}</span>
         </DropdownMenuItem>
-        <DropdownMenuSeparator className="my-2 bg-gray-200 dark:bg-gray-700" />
+        <DropdownMenuSeparator className="my-2 bg-slate-200 dark:bg-slate-700" />
         <DropdownMenuItem
           onClick={handleLogoutClick}
           className="flex items-center space-x-3 px-4 py-3 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 dark:hover:from-red-900/20 dark:hover:to-pink-900/20 rounded-xl cursor-pointer transition-all duration-200 text-red-600 dark:text-red-400"

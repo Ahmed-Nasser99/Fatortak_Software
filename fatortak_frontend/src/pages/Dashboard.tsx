@@ -41,6 +41,14 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useDashboardReport } from "../hooks/useDashboardReport";
 import EnhancedInvoiceModal from "../components/modals/EnhancedInvoiceModal";
 import CustomerModal from "../components/modals/CustomerModal";
@@ -55,6 +63,20 @@ import { formatNumber, formatDate } from "@/Helpers/localization";
 import { useCurrentUserProfile } from "@/hooks/useUserProfile";
 import ProfitGrowthChart from "@/components/dashboard/ProfitGrowthChart";
 import StatCard from "@/components/ui/StatCard";
+
+const healthToneStyles: Record<string, string> = {
+  brand:
+    "bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300",
+  success:
+    "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300",
+  info: "bg-sky-50 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300",
+  warning:
+    "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300",
+  danger:
+    "bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300",
+  neutral:
+    "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300",
+};
 
 const Dashboard: React.FC = () => {
   const roleAccess = useRoleAccess();
@@ -167,18 +189,14 @@ const Dashboard: React.FC = () => {
           title: t("totalCashAvailable"),
           value: `${formatCurrency(stats.totalCashAvailable)}`,
           icon: Wallet,
-          bgColor: "bg-green-50",
-          iconBg: "bg-green-500",
-          iconColor: "text-white",
+          tone: "success" as const,
           tooltip: t("tooltips.totalCashAvailable"),
         },
         {
           title: isRTL ? "إجمالي الرصيد البنكي" : "Total Bank Available",
           value: `${formatCurrency(stats.totalBankAvailable)}`,
           icon: Landmark,
-          bgColor: "bg-blue-50",
-          iconBg: "bg-blue-500",
-          iconColor: "text-white",
+          tone: "info" as const,
           tooltip: isRTL
             ? "إجمالي الأرصدة المتوفرة في البنوك"
             : "Total balances available in all bank accounts",
@@ -187,27 +205,21 @@ const Dashboard: React.FC = () => {
           title: t("totalReceivables"),
           value: `${formatCurrency(stats.totalReceivables)}`,
           icon: DollarSign,
-          bgColor: "bg-orange-50",
-          iconBg: "bg-orange-400",
-          iconColor: "text-white",
+          tone: "warning" as const,
           tooltip: t("tooltips.totalReceivables"),
         },
         {
           title: t("totalPayables"),
           value: `${formatCurrency(stats.totalPayables)}`,
           icon: DollarSign,
-          bgColor: "bg-red-50",
-          iconBg: "bg-red-400",
-          iconColor: "text-white",
+          tone: "danger" as const,
           tooltip: t("tooltips.totalPayables"),
         },
         {
           title: isRTL ? "إجمالي العهد المالية" : "Total Custody",
           value: `${formatCurrency(stats.totalCustody)}`,
           icon: Users,
-          bgColor: "bg-purple-50",
-          iconBg: "bg-purple-500",
-          iconColor: "text-white",
+          tone: "brand" as const,
           tooltip: isRTL
             ? "إجمالي العهد المالية للموظفين"
             : "Total employee custody",
@@ -216,9 +228,7 @@ const Dashboard: React.FC = () => {
           title: isRTL ? "شيكات تحت التحصيل" : "Cheques Under Collection",
           value: `${formatCurrency(stats.totalChequesUnderCollection)}`,
           icon: CreditCard,
-          bgColor: "bg-teal-50",
-          iconBg: "bg-teal-500",
-          iconColor: "text-white",
+          tone: "neutral" as const,
           tooltip: isRTL
             ? "إجمالي الشيكات تحت التحصيل"
             : "Total cheques waiting for collection",
@@ -231,17 +241,17 @@ const Dashboard: React.FC = () => {
   const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {
       case "paid":
-        return "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-400";
+        return "border-emerald-100 bg-emerald-50 text-emerald-700 dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300";
       case "sent":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400";
+        return "border-sky-100 bg-sky-50 text-sky-700 dark:border-sky-900 dark:bg-sky-950/40 dark:text-sky-300";
       case "draft":
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
+        return "border-slate-200 bg-slate-50 text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300";
       case "overdue":
-        return "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400";
+        return "border-rose-100 bg-rose-50 text-rose-700 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-300";
       case "pending":
-        return "bg-amber-100 text-amber-800 dark:bg-amber-900/20 dark:text-amber-400";
+        return "border-amber-100 bg-amber-50 text-amber-700 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-300";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
+        return "border-slate-200 bg-slate-50 text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300";
     }
   };
 
@@ -276,15 +286,15 @@ const Dashboard: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-canvas dark:bg-slate-950 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-canvas dark:bg-slate-950 flex items-center justify-center">
         <div className="text-center">
           <p className="text-red-600 mb-4">
             {error instanceof Error ? error.message : String(error)}
@@ -296,7 +306,7 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-canvas p-4 sm:p-6">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950 p-4 sm:p-6">
       <div className="mx-auto max-w-[1440px] space-y-6">
         {/* Header Section */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -318,7 +328,7 @@ const Dashboard: React.FC = () => {
 
           <div className="flex flex-wrap items-center gap-3">
             <Select value={period} onValueChange={setPeriod}>
-              <SelectTrigger className="w-40 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-xl">
+              <SelectTrigger className="w-full sm:w-40">
                 <SelectValue placeholder={t("selectPeriod")} />
               </SelectTrigger>
               <SelectContent>
@@ -334,13 +344,13 @@ const Dashboard: React.FC = () => {
             <BranchSelector
               value={filterBranchId}
               onChange={setFilterBranchId}
-              className="w-48"
+              className="w-full sm:w-48"
             />
 
             <ProjectSelector
               value={filterProjectId}
               onChange={setFilterProjectId}
-              className="w-48"
+              className="w-full sm:w-48"
             />
 
             {filterProjectId !== "all" && (
@@ -348,7 +358,7 @@ const Dashboard: React.FC = () => {
                 <Button
                   variant="outline"
                   onClick={() => setShowExpenseModal(true)}
-                  className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-xl gap-2 h-10 shadow-sm"
+                  className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl gap-2 h-10 shadow-sm"
                 >
                   <DollarSign className="w-4 h-4 text-rose-500" />
                   <span className="hidden md:inline">
@@ -359,7 +369,7 @@ const Dashboard: React.FC = () => {
                   variant="outline"
                   disabled={!salesInvoice || salesInvoice.status === "Paid"}
                   onClick={() => setShowRecordPaymentModal(true)}
-                  className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-xl gap-2 h-10 shadow-sm"
+                  className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl gap-2 h-10 shadow-sm"
                 >
                   <CreditCard className="w-4 h-4 text-emerald-500" />
                   <span className="hidden md:inline">
@@ -372,7 +382,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Top Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
           {mainStats.map((stat, index) => {
             const Icon = stat.icon;
             return (
@@ -391,14 +401,14 @@ const Dashboard: React.FC = () => {
                     </div>
                   </TooltipTrigger>
                   <TooltipContent className="p-0 border-0 bg-transparent shadow-none">
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 p-4 min-w-[280px]">
+                    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-slate-200 dark:border-slate-700 p-4 min-w-[280px]">
                       <div className="space-y-3">
                         {/* Header with title and date range */}
-                        <div className="border-b border-gray-200 dark:border-gray-700 pb-2">
-                          <h4 className="font-semibold text-gray-900 dark:text-white mb-1">
+                        <div className="border-b border-slate-200 dark:border-slate-700 pb-2">
+                          <h4 className="font-semibold text-slate-900 dark:text-white mb-1">
                             {stat.title}
                           </h4>
-                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                          <p className="text-xs text-slate-500 dark:text-slate-400">
                             {stats?.startDate && stats?.endDate
                               ? `${formatDate(stats.startDate)} - ${formatDate(stats.endDate)}`
                               : t("thisMonth")}
@@ -406,8 +416,8 @@ const Dashboard: React.FC = () => {
                         </div>
 
                         {/* Total Amount */}
-                        <div className="flex items-center justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <div className="flex items-center justify-between py-2 border-b border-slate-200 dark:border-slate-700">
+                          <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                             {t("total")}
                           </span>
                           <span className={`font-bold ${stat.iconColor}`}>
@@ -421,7 +431,7 @@ const Dashboard: React.FC = () => {
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                <span className="text-sm text-slate-600 dark:text-slate-400">
                                   {t("paidStatus")}
                                 </span>
                               </div>
@@ -432,7 +442,7 @@ const Dashboard: React.FC = () => {
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                <span className="text-sm text-slate-600 dark:text-slate-400">
                                   {t("partialPaidStatus")}
                                 </span>
                               </div>
@@ -445,7 +455,7 @@ const Dashboard: React.FC = () => {
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                <span className="text-sm text-slate-600 dark:text-slate-400">
                                   {t("pendingStatus")}
                                 </span>
                               </div>
@@ -461,7 +471,7 @@ const Dashboard: React.FC = () => {
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                <span className="text-sm text-slate-600 dark:text-slate-400">
                                   {t("paidStatus")}
                                 </span>
                               </div>
@@ -472,7 +482,7 @@ const Dashboard: React.FC = () => {
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                <span className="text-sm text-slate-600 dark:text-slate-400">
                                   {t("partialPaidStatus")}
                                 </span>
                               </div>
@@ -485,7 +495,7 @@ const Dashboard: React.FC = () => {
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                <span className="text-sm text-slate-600 dark:text-slate-400">
                                   {t("pendingStatus")}
                                 </span>
                               </div>
@@ -509,104 +519,32 @@ const Dashboard: React.FC = () => {
           {/* Left Column - Business Health & Transactions */}
           <div className="lg:col-span-4 space-y-6">
             {/* Business Health */}
-            <Card className="border-0 shadow-lg bg-white dark:bg-slate-800">
+            <Card className="overflow-hidden">
               <CardHeader>
-                <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
+                <CardTitle>
                   {t("businessHealth")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {/* Cash & Stock */}
-                <div className="grid grid-cols-2 gap-4">
-                  {businessHealthStats.slice(0, 2).map((stat, index) => {
+                {/* Cash, bank, receivables, payables, custody and cheques */}
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {businessHealthStats.map((stat, index) => {
                     const Icon = stat.icon;
                     return (
                       <TooltipProvider key={index}>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <div
-                              className={`flex items-start gap-3 p-3 ${stat.bgColor} dark:bg-slate-700/50 rounded-lg cursor-help`}
-                            >
+                            <div className="flex cursor-help items-start gap-3 rounded-xl border border-slate-100 bg-slate-50/50 p-3 transition-colors hover:border-slate-200 dark:border-slate-800 dark:bg-slate-800/40">
                               <div
-                                className={`w-10 h-10 ${stat.iconBg} rounded-full flex items-center justify-center flex-shrink-0`}
+                                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${healthToneStyles[stat.tone]}`}
                               >
-                                <Icon className={`w-5 h-5 ${stat.iconColor}`} />
+                                <Icon className="h-4 w-4" />
                               </div>
-                              <div>
-                                <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                              <div className="min-w-0">
+                                <div className="mb-0.5 truncate text-xs text-slate-500 dark:text-slate-400">
                                   {stat.title}
                                 </div>
-                                <div className="text-lg font-bold text-gray-900 dark:text-white">
-                                  {stat.value}
-                                </div>
-                              </div>
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{stat.tooltip}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    );
-                  })}
-                </div>
-
-                {/* Receivables & Payables */}
-                <div className="grid grid-cols-2 gap-4">
-                  {businessHealthStats.slice(2, 4).map((stat, index) => {
-                    const Icon = stat.icon;
-                    return (
-                      <TooltipProvider key={index}>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div
-                              className={`flex items-start gap-3 p-3 ${stat.bgColor} dark:bg-slate-700/50 rounded-lg cursor-help`}
-                            >
-                              <div
-                                className={`w-10 h-10 ${stat.iconBg} rounded-full flex items-center justify-center flex-shrink-0`}
-                              >
-                                <Icon className={`w-5 h-5 ${stat.iconColor}`} />
-                              </div>
-                              <div>
-                                <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
-                                  {stat.title}
-                                </div>
-                                <div className="text-lg font-bold text-gray-900 dark:text-white">
-                                  {stat.value}
-                                </div>
-                              </div>
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{stat.tooltip}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    );
-                  })}
-                </div>
-
-                {/* Final Row: Custody & Cheques */}
-                <div className="grid grid-cols-2 gap-4">
-                  {businessHealthStats.slice(4, 6).map((stat, index) => {
-                    const Icon = stat.icon;
-                    return (
-                      <TooltipProvider key={index}>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div
-                              className={`flex items-start gap-3 p-3 ${stat.bgColor} dark:bg-slate-700/50 rounded-lg cursor-help`}
-                            >
-                              <div
-                                className={`w-10 h-10 ${stat.iconBg} rounded-full flex items-center justify-center flex-shrink-0`}
-                              >
-                                <Icon className={`w-5 h-5 ${stat.iconColor}`} />
-                              </div>
-                              <div>
-                                <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
-                                  {stat.title}
-                                </div>
-                                <div className="text-lg font-bold text-gray-900 dark:text-white">
+                                <div className="text-[15px] font-semibold tabular-nums text-slate-900 dark:text-white">
                                   {stat.value}
                                 </div>
                               </div>
@@ -624,67 +562,58 @@ const Dashboard: React.FC = () => {
             </Card>
 
             {/* Recent Transactions */}
-            <Card className="border-0 shadow-lg bg-white dark:bg-slate-800">
+            <Card className="overflow-hidden">
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <CardTitle>
                     {t("recentTransactions")}
                   </CardTitle>
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead className="border-b dark:border-gray-700">
-                      <tr className="text-left text-gray-600 dark:text-gray-400">
-                        <th className="pb-2 font-medium">{t("date")}</th>
-                        <th className="pb-2 font-medium">{t("type")}</th>
-                        <th className="pb-2 font-medium">{t("reference")}</th>
-                        <th className="pb-2 font-medium">{t("amount")}</th>
-                        <th className="pb-2 font-medium">{t("paid")}</th>
-                        <th className="pb-2 font-medium">{t("remaining")}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {recentTransactions.length === 0 ? (
-                        <tr>
-                          <td
-                            colSpan={6}
-                            className="py-8 !text-center text-gray-500 dark:text-gray-400"
-                          >
-                            {t("noTransactionsFound")}
-                          </td>
-                        </tr>
-                      ) : (
-                        recentTransactions.map((tx, idx) => (
-                          <tr
-                            key={idx}
-                            className="border-b last:border-0 dark:border-gray-700"
-                          >
-                            <td className="py-3 text-start text-gray-900 dark:text-gray-200">
-                              {formatDate(tx.date)}
-                            </td>
-                            <td className="py-3 text-start text-gray-900 dark:text-gray-200">
-                              {formatTypeText(tx.type)}
-                            </td>
-                            <td className="py-3 text-start text-gray-900 dark:text-gray-200">
-                              {tx.reference}
-                            </td>
-                            <td className="py-3 text-start text-gray-900 dark:text-gray-200">
-                              {formatCurrency(tx.amount)}
-                            </td>
-                            <td className="py-3 text-start text-gray-900 dark:text-gray-200">
-                              {formatCurrency(tx.paid)}
-                            </td>
-                            <td className="py-3 text-start text-gray-900 dark:text-gray-200">
-                              {formatCurrency(tx.remaining)}
-                            </td>
-                          </tr>
-                        ))
-                      )}
-                    </tbody>
-                  </table>
-                </div>
+              <CardContent className="px-0 pb-0">
+                <Table className="[&_th]:px-3 [&_td]:px-3 [&_th]:text-[10px] [&_td]:text-xs">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>{t("date")}</TableHead>
+                      <TableHead>{t("type")}</TableHead>
+                      <TableHead>{t("reference")}</TableHead>
+                      <TableHead>{t("amount")}</TableHead>
+                      <TableHead>{t("remaining")}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {recentTransactions.length === 0 ? (
+                      <TableRow>
+                        <TableCell
+                          colSpan={5}
+                          className="py-10 text-center text-slate-500 dark:text-slate-400"
+                        >
+                          {t("noTransactionsFound")}
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      recentTransactions.map((tx, idx) => (
+                        <TableRow key={idx}>
+                          <TableCell className="whitespace-nowrap text-slate-600 dark:text-slate-300">
+                            {formatDate(tx.date)}
+                          </TableCell>
+                          <TableCell className="whitespace-nowrap text-slate-600 dark:text-slate-300">
+                            {formatTypeText(tx.type)}
+                          </TableCell>
+                          <TableCell className="max-w-[210px] truncate text-slate-900 dark:text-slate-100">
+                            {tx.reference}
+                          </TableCell>
+                          <TableCell className="whitespace-nowrap font-medium tabular-nums text-slate-900 dark:text-white">
+                            {formatCurrency(tx.amount)}
+                          </TableCell>
+                          <TableCell className="whitespace-nowrap tabular-nums text-slate-600 dark:text-slate-300">
+                            {formatCurrency(tx.remaining)}
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
               </CardContent>
             </Card>
           </div>
@@ -694,71 +623,60 @@ const Dashboard: React.FC = () => {
             {/* Profit & Growth Chart */}
             <ProfitGrowthChart monthlyData={monthlyFinancials} t={t} />
             {/* Recent Invoices */}
-            <Card className="border-0 shadow-lg bg-white dark:bg-slate-800">
+            <Card className="overflow-hidden">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <FileText className="w-5 h-5 text-blue-600" />
-                    <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <FileText className="w-5 h-5 text-brand-600" />
+                    <CardTitle>
                       {t("recentInvoices")}
                     </CardTitle>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead className="border-b dark:border-gray-700">
-                      <tr className="text-left text-gray-600 dark:text-gray-400">
-                        <th className="pb-2 font-medium">
-                          {t("invoiceNumber")}
-                        </th>
-                        <th className="pb-2 font-medium">{t("customer")}</th>
-                        <th className="pb-2 font-medium ">{t("date")}</th>
-                        <th className="pb-2 font-medium">{t("amount")}</th>
-                        <th className="pb-2 font-medium">{t("status")}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {recentInvoices.length === 0 ? (
-                        <tr>
-                          <td
-                            colSpan={5}
-                            className="py-8 text-center text-gray-500 dark:text-gray-400"
-                          >
-                            <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                            <p>{t("noInvoicesFound")}</p>
-                          </td>
-                        </tr>
-                      ) : (
-                        recentInvoices.map((invoice) => (
-                          <tr
-                            key={invoice.id}
-                            className="border-b last:border-0 hover:bg-gray-50 dark:hover:bg-slate-700/50 text-start dark:border-gray-700"
-                          >
-                            <td className="py-3 text-gray-900 dark:text-gray-200 font-medium">
-                              {invoice.invoiceNumber}
-                            </td>
-                            <td className="py-3 text-gray-900 dark:text-gray-200">
-                              {invoice.customerName}
-                            </td>
-                            <td className="py-3 text-gray-900 dark:text-gray-200">
-                              {formatDate(invoice.issueDate)}
-                            </td>
-                            <td className="py-3 text-gray-900 dark:text-gray-200 font-semibold">
-                              {formatCurrency(invoice.total)}
-                            </td>
-                            <td className="py-3">
-                              <Badge className={getStatusColor(invoice.status)}>
-                                {getStatusLabel(invoice.status)}
-                              </Badge>
-                            </td>
-                          </tr>
-                        ))
-                      )}
-                    </tbody>
-                  </table>
-                </div>
+              <CardContent className="px-0 pb-0">
+                <Table className="[&_th]:px-3 [&_td]:px-3 [&_th]:text-[10px] [&_td]:text-xs">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>{t("invoiceNumber")}</TableHead>
+                      <TableHead>{t("customer")}</TableHead>
+                      <TableHead>{t("amount")}</TableHead>
+                      <TableHead>{t("status")}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {recentInvoices.length === 0 ? (
+                      <TableRow>
+                        <TableCell
+                          colSpan={4}
+                          className="py-12 text-center text-slate-500 dark:text-slate-400"
+                        >
+                          <FileText className="mx-auto mb-3 h-10 w-10 text-slate-300 dark:text-slate-600" />
+                          <p>{t("noInvoicesFound")}</p>
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      recentInvoices.map((invoice) => (
+                        <TableRow key={invoice.id}>
+                          <TableCell className="font-medium text-slate-900 dark:text-white">
+                            {invoice.invoiceNumber}
+                          </TableCell>
+                          <TableCell className="max-w-[140px] truncate text-slate-600 dark:text-slate-300">
+                            {invoice.customerName}
+                          </TableCell>
+                          <TableCell className="whitespace-nowrap font-semibold tabular-nums text-slate-900 dark:text-white">
+                            {formatCurrency(invoice.total)}
+                          </TableCell>
+                          <TableCell>
+                            <Badge className={getStatusColor(invoice.status)}>
+                              {getStatusLabel(invoice.status)}
+                            </Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
               </CardContent>
             </Card>
           </div>

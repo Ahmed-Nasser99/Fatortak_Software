@@ -33,7 +33,7 @@ const EmployeeSelector: React.FC<EmployeeSelectorProps> = ({
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className={`${className} ${isRTL ? "text-right" : "text-left"}`}>
+      <SelectTrigger className={`${className} ${isRTL ? "text-end" : "text-start"}`}>
         <SelectValue placeholder={placeholder || (isRTL ? "اختر الموظف" : "Select Employee")} />
       </SelectTrigger>
       <SelectContent>
@@ -43,7 +43,7 @@ const EmployeeSelector: React.FC<EmployeeSelectorProps> = ({
           </SelectItem>
         ))}
         {users.length === 0 && !isLoading && (
-            <div className="p-2 text-sm text-gray-500 text-center">
+            <div className="p-2 text-sm text-slate-500 text-center">
                 {isRTL ? "لا يوجد موظفين" : "No employees found"}
             </div>
         )}

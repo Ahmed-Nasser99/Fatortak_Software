@@ -61,26 +61,26 @@ const StatCard: React.FC<StatCardProps> = ({
     <div
       title={tooltip}
       className={cn(
-        "group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900",
+        "group rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-colors hover:border-brand-200 sm:p-5 dark:border-slate-800 dark:bg-slate-900",
         className
       )}
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="truncate text-[13px] font-medium text-slate-500 dark:text-slate-400">
+          <p className="text-xs font-medium leading-snug text-slate-500 sm:text-[13px] dark:text-slate-400">
             {title}
           </p>
-          <p className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 tabular-nums dark:text-white">
+          <p className="mt-1.5 text-xl font-semibold tracking-tight text-slate-900 tabular-nums sm:mt-2 sm:text-2xl dark:text-white">
             {value}
           </p>
         </div>
-        <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-xl", styles.icon)}>
-          <Icon className="h-5 w-5" />
+        <div className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-xl sm:h-10 sm:w-10", styles.icon)}>
+          <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
         </div>
       </div>
 
-      <div className="mt-4 flex min-h-5 items-center justify-between gap-3">
-        <p className="truncate text-xs text-slate-500 dark:text-slate-400">
+      <div className="mt-3 flex min-h-5 items-center justify-between gap-3 sm:mt-4">
+        <p className="truncate text-[11px] text-slate-500 sm:text-xs dark:text-slate-400">
           {subtitle}
         </p>
         {trend !== undefined && (

@@ -7,6 +7,7 @@ import SettingsTabs from "../components/Settings/SettingsTabs";
 import HRSettingsForm from "@/components/Settings/HRSettingsForm";
 import { useCurrentCompany } from "../hooks/useCompanies";
 import BranchSettings from "@/components/Settings/BranchSettings";
+import PageHeader from "@/components/ui/PageHeader";
 import { Bell, Shield, Settings2 } from "lucide-react";
 
 const Settings: React.FC = () => {
@@ -33,7 +34,7 @@ const Settings: React.FC = () => {
       // case "security":
       //   return (
       //     <div className="flex flex-col items-center justify-center py-20 px-4">
-      //       <h3 className="text-2xl font-black text-foreground mb-3 text-center uppercase tracking-widest">
+      //       <h3 className="text-2xl font-bold text-foreground mb-3 text-center uppercase tracking-wide">
       //         {activeTab === "notifications"
       //           ? isRTL
       //             ? "إعدادات الإشعارات"
@@ -55,30 +56,23 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {/* Simplified Header */}
-        <div className="mb-12">
-          <div className="flex items-center gap-4">
-            <div className="w-1.5 h-12 rounded-full bg-gradient-to-b from-primary to-primary/50" />
-            <div>
-              <h1 className="text-4xl font-black text-foreground uppercase tracking-tight">
-                {isRTL ? "الإعدادات" : "Settings"}
-              </h1>
-              <p className="text-muted-foreground font-bold italic">
-                {isRTL
-                  ? "إدارة إعدادات حسابك والشركة"
-                  : "Manage your account and company settings"}
-              </p>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-canvas dark:bg-slate-950 p-4 sm:p-6">
+      <div className="mx-auto max-w-7xl space-y-6">
+        <PageHeader
+          eyebrow={isRTL ? "الإعدادات" : "Settings"}
+          title={isRTL ? "إعدادات الحساب والشركة" : "Account & company settings"}
+          description={
+            isRTL
+              ? "حافظ على بيانات شركتك وسياسات الفوترة ومعلومات المستخدم محدثة."
+              : "Keep your company profile, billing preferences and user details up to date."
+          }
+        />
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col gap-6 lg:flex-row">
           {/* Sidebar */}
-          <aside className="lg:w-72 shrink-0">
-            <div className="sticky top-8">
-              <div className="bg-card/80 backdrop-blur-sm rounded-2xl border shadow-xl shadow-black/5 p-4">
+          <aside className="shrink-0 lg:w-64">
+            <div className="sticky top-6">
+              <div className="rounded-2xl border border-slate-200/80 bg-white p-2 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900">
                 <SettingsTabs
                   activeTab={activeTab}
                   onTabChange={setActiveTab}
@@ -89,10 +83,8 @@ const Settings: React.FC = () => {
           </aside>
 
           {/* Main Content */}
-          <main className="flex-1 min-w-0">
-            <div className="bg-card/80 backdrop-blur-sm rounded-2xl border shadow-xl shadow-black/5 p-6 lg:p-8">
-              {renderTabContent()}
-            </div>
+          <main className="min-w-0 flex-1 space-y-4">
+            {renderTabContent()}
           </main>
         </div>
       </div>

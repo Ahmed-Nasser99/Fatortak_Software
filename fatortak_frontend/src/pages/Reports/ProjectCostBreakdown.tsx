@@ -25,7 +25,7 @@ const ProjectCostBreakdown: React.FC = () => {
           </Button>
           <div>
             <h1 className="text-2xl font-bold">{isRTL ? "تحليل تكاليف المشروع" : "Project Cost Breakdown"}</h1>
-            <p className="text-sm text-gray-50">{response?.projectName}</p>
+            <p className="text-sm text-slate-50">{response?.projectName}</p>
           </div>
         </div>
         <Button variant="outline">
@@ -35,9 +35,9 @@ const ProjectCostBreakdown: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-950 dark:text-white dark:border-gray-800/50 overflow-hidden shadow-xl">
-          <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/10">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "إجمالي تكاليف المشروع" : "Total Project Cost"}</CardTitle>
+        <Card className="bg-slate-100 text-slate-900 border-slate-200 dark:bg-slate-950 dark:text-white dark:border-slate-800/50 overflow-hidden">
+          <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/10">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "إجمالي تكاليف المشروع" : "Total Project Cost"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-6 pb-4">
             <div className="text-2xl lg:text-3xl font-bold font-mono">
@@ -45,18 +45,18 @@ const ProjectCostBreakdown: React.FC = () => {
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-gray-900/40 text-white dark:bg-gray-900/40 border-gray-800 dark:border-gray-800/50 overflow-hidden flex items-center justify-center p-4">
+        <Card className="bg-slate-900/40 text-white dark:bg-slate-900/40 border-slate-800 dark:border-slate-800/50 overflow-hidden flex items-center justify-center p-4">
            <div className="flex items-center gap-3">
               <PieChart className="w-10 h-10 text-blue-400" />
-              <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Distribution Analysis Active</div>
+              <div className="text-[10px] font-bold uppercase tracking-wide text-slate-400">Distribution Analysis Active</div>
            </div>
         </Card>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card>
-          <CardHeader className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
-             <CardTitle className="text-sm font-bold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{isRTL ? "التكاليف حسب الفئة" : "Costs by Category"}</CardTitle>
+          <CardHeader className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700">
+             <CardTitle className="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">{isRTL ? "التكاليف حسب الفئة" : "Costs by Category"}</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
              {isLoading ? <div className="p-20 text-center"><Loader2 className="w-8 h-8 animate-spin mx-auto text-blue-600" /></div> : (
@@ -64,7 +64,7 @@ const ProjectCostBreakdown: React.FC = () => {
                  <TableHeader>
                    <TableRow>
                      <TableHead>{isRTL ? "الفئة" : "Category"}</TableHead>
-                     <TableHead className="text-right">{isRTL ? "المبلغ" : "Amount"}</TableHead>
+                     <TableHead className="text-end">{isRTL ? "المبلغ" : "Amount"}</TableHead>
                      <TableHead className="text-center">{isRTL ? "النسبة" : "Percentage"}</TableHead>
                    </TableRow>
                  </TableHeader>
@@ -72,20 +72,20 @@ const ProjectCostBreakdown: React.FC = () => {
                    {response?.categories?.map((cat: any, idx: number) => (
                      <TableRow key={idx}>
                        <TableCell className="font-medium">{cat.categoryName}</TableCell>
-                       <TableCell className="text-right font-mono">{formatCurrency(cat.amount)}</TableCell>
+                       <TableCell className="text-end font-mono">{formatCurrency(cat.amount)}</TableCell>
                        <TableCell className="text-center">
                          <div className="flex items-center gap-2 justify-center">
-                           <div className="w-24 h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
-                             <div className="h-full bg-blue-600" style={{ width: `${cat.percentage}%` }} />
+                           <div className="w-24 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                             <div className="h-full bg-brand-600" style={{ width: `${cat.percentage}%` }} />
                            </div>
                            <span className="text-xs font-bold w-10">{cat.percentage.toFixed(1)}%</span>
                          </div>
                        </TableCell>
                      </TableRow>
                    ))}
-                   <TableRow className="font-bold bg-gray-50 dark:bg-gray-800/50">
+                   <TableRow className="font-bold bg-slate-50 dark:bg-slate-800/50">
                      <TableCell>{isRTL ? "الإجمالي" : "Total Cost"}</TableCell>
-                     <TableCell className="text-right font-mono text-lg">{formatCurrency(response?.totalCost || 0)}</TableCell>
+                     <TableCell className="text-end font-mono text-lg">{formatCurrency(response?.totalCost || 0)}</TableCell>
                      <TableCell className="text-center">100%</TableCell>
                    </TableRow>
                  </TableBody>
@@ -94,10 +94,10 @@ const ProjectCostBreakdown: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className="flex items-center justify-center p-8 bg-gray-50 dark:bg-gray-800/30 border-dashed border-2">
+        <Card className="flex items-center justify-center p-8 bg-slate-50 dark:bg-slate-800/30 border-dashed border-2">
            <div className="text-center space-y-4">
               <PieChart className="w-20 h-20 text-blue-200 mx-auto" />
-              <p className="text-sm text-gray-500 max-w-xs">{isRTL ? "سيظهر الرسم البياني لتوزيع التكاليف هنا عند توفر بيانات كافية" : "Visual cost distribution chart will appear here when more data is available"}</p>
+              <p className="text-sm text-slate-500 max-w-xs">{isRTL ? "سيظهر الرسم البياني لتوزيع التكاليف هنا عند توفر بيانات كافية" : "Visual cost distribution chart will appear here when more data is available"}</p>
            </div>
         </Card>
       </div>

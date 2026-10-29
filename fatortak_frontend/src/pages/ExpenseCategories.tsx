@@ -83,7 +83,7 @@ const ExpenseCategories: React.FC = () => {
           </div>
           <Button
             onClick={() => setIsCreateModalOpen(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 px-6"
+            className="bg-brand-600 hover:bg-brand-700 text-white shadow-lg shadow-blue-500/20 px-6"
           >
             <Plus className="w-4 h-4 mr-2" />
             {isRTL ? "إضافة تصنيف" : "Add Category"}

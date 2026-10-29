@@ -53,7 +53,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-background rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-background rounded-xl shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div
           className={`flex items-center justify-between p-6 border-b border-border ${
@@ -87,7 +87,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
             <div>
               <label
                 className={`block text-sm font-medium text-foreground mb-2 ${
-                  isRTL ? "text-right" : "text-left"
+                  isRTL ? "text-end" : "text-start"
                 }`}
               >
                 {t("firstName")} *
@@ -103,7 +103,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
                   }))
                 }
                 className={`w-full px-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground ${
-                  isRTL ? "text-right" : "text-left"
+                  isRTL ? "text-end" : "text-start"
                 }`}
                 placeholder={t("enterFirstName")}
               />
@@ -111,7 +111,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
             <div>
               <label
                 className={`block text-sm font-medium text-foreground mb-2 ${
-                  isRTL ? "text-right" : "text-left"
+                  isRTL ? "text-end" : "text-start"
                 }`}
               >
                 {t("lastName")} *
@@ -124,7 +124,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
                   setFormData((prev) => ({ ...prev, lastName: e.target.value }))
                 }
                 className={`w-full px-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground ${
-                  isRTL ? "text-right" : "text-left"
+                  isRTL ? "text-end" : "text-start"
                 }`}
                 placeholder={t("enterLastName")}
               />
@@ -135,7 +135,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
           <div>
             <label
               className={`block text-sm font-medium text-foreground mb-2 ${
-                isRTL ? "text-right" : "text-left"
+                isRTL ? "text-end" : "text-start"
               }`}
             >
               {t("phoneNumber")}
@@ -156,7 +156,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
                   }))
                 }
                 className={`w-full py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground ${
-                  isRTL ? "pr-12 pl-4 text-right" : "pl-12 pr-4 text-left"
+                  isRTL ? "pr-12 pl-4 text-end" : "pl-12 pr-4 text-start"
                 }`}
                 placeholder={t("enterPhoneNumber")}
               />
@@ -167,7 +167,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
           <div>
             <label
               className={`block text-sm font-medium text-foreground mb-2 ${
-                isRTL ? "text-right" : "text-left"
+                isRTL ? "text-end" : "text-start"
               }`}
             >
               {t("role")} *
@@ -179,7 +179,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
                 setFormData((prev) => ({ ...prev, role: e.target.value }))
               }
               className={`w-full px-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground ${
-                isRTL ? "text-right" : "text-left"
+                isRTL ? "text-end" : "text-start"
               }`}
             >
               <option value="Admin">{t("admin")}</option>
@@ -197,14 +197,14 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-3 border border-input text-foreground rounded-lg hover:bg-accent transition-colors"
+              className="px-4 py-3 border border-input text-foreground rounded-lg hover:bg-accent transition-colors"
             >
               {t("cancel")}
             </button>
             <button
               type="submit"
               disabled={updateUserMutation.isPending}
-              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {updateUserMutation.isPending ? t("saving") : t("saveChanges")}
             </button>

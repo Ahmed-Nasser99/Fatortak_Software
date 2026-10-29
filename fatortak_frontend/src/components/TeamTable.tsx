@@ -48,7 +48,7 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
       case 'manager':
         return <Shield className="w-4 h-4 text-blue-500" />;
       default:
-        return <User className="w-4 h-4 text-gray-500" />;
+        return <User className="w-4 h-4 text-slate-500" />;
     }
   };
 
@@ -59,14 +59,14 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
       case 'manager':
         return 'bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 border-blue-200 dark:from-blue-900/30 dark:to-indigo-900/30 dark:text-blue-400 dark:border-blue-700';
       default:
-        return 'bg-gradient-to-r from-gray-100 to-slate-100 text-gray-800 border-gray-200 dark:from-gray-800 dark:to-slate-800 dark:text-gray-400 dark:border-gray-600';
+        return 'bg-slate-100 text-slate-800 border-slate-200 dark:from-slate-800 dark:to-slate-800 dark:text-slate-400 dark:border-slate-600';
     }
   };
 
   const getStatusBadgeColor = (status: string) => {
     return status === 'active'
       ? 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border-green-200 dark:from-green-900/30 dark:to-emerald-900/30 dark:text-green-400 dark:border-green-700'
-      : 'bg-gradient-to-r from-gray-100 to-slate-100 text-gray-800 border-gray-200 dark:from-gray-800 dark:to-slate-800 dark:text-gray-400 dark:border-gray-600';
+      : 'bg-slate-100 text-slate-800 border-slate-200 dark:from-slate-800 dark:to-slate-800 dark:text-slate-400 dark:border-slate-600';
   };
 
   const getInitials = (name: string) => {
@@ -75,12 +75,12 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
 
   const getAvatarColor = (name: string) => {
     const colors = [
-      'bg-gradient-to-r from-purple-500 to-violet-500',
-      'bg-gradient-to-r from-blue-500 to-indigo-500',
-      'bg-gradient-to-r from-green-500 to-emerald-500',
+      'bg-brand-600',
+      'bg-brand-600',
+      'bg-emerald-600',
       'bg-gradient-to-r from-yellow-500 to-amber-500',
       'bg-gradient-to-r from-pink-500 to-rose-500',
-      'bg-gradient-to-r from-red-500 to-orange-500',
+      'bg-rose-500',
     ];
     return colors[name.length % colors.length];
   };
@@ -88,10 +88,10 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
   return (
     <div className="space-y-6 animate-fade-in" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Enhanced Header */}
-      <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 text-white shadow-2xl">
+      <div className="page-hero">
         <div className={`flex justify-between items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
           <div className={`flex items-center space-x-4 ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}>
-            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="page-hero-icon">
               <Users className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -105,7 +105,7 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
           </div>
           <Button 
             onClick={onAdd} 
-            className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+            className="page-hero-action"
           >
             <Plus className="w-5 h-5 mr-2" />
             <span className="font-semibold">{t('addMember') || (isRTL ? 'إضافة عضو' : 'Add Member')}</span>
@@ -115,13 +115,13 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 border border-green-200 dark:border-green-700 shadow-lg">
+        <div className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-6 dark:border-emerald-900 dark:bg-emerald-950/30">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
               <Users className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-sm text-green-600 dark:text-green-400 font-medium">Active Members</p>
+              <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Active Members</p>
               <p className="text-2xl font-bold text-green-700 dark:text-green-300">
                 {data.filter(member => member.status === 'active').length}
               </p>
@@ -129,13 +129,13 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
           </div>
         </div>
         
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-6 border border-blue-200 dark:border-blue-700 shadow-lg">
+        <div className="rounded-2xl border border-brand-100 bg-brand-50/60 p-6 dark:border-brand-900 dark:bg-brand-950/30">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center shadow-lg">
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">Managers</p>
+              <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Managers</p>
               <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">
                 {data.filter(member => member.role.toLowerCase() === 'manager').length}
               </p>
@@ -149,7 +149,7 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
               <Crown className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-sm text-red-600 dark:text-red-400 font-medium">Admins</p>
+              <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Admins</p>
               <p className="text-2xl font-bold text-red-700 dark:text-red-300">
                 {data.filter(member => member.role.toLowerCase() === 'admin').length}
               </p>
@@ -160,25 +160,25 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
 
       {/* Desktop Table */}
       <div className="hidden lg:block">
-        <ResponsiveTable className="bg-white dark:bg-gray-900 shadow-2xl border-0 overflow-hidden">
+        <ResponsiveTable className="bg-white dark:bg-slate-900 shadow-lg border-0 overflow-hidden">
           <ResponsiveTableHeader>
-            <ResponsiveTableRow className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 border-0">
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6">
+            <ResponsiveTableRow className="bg-slate-50 dark:bg-slate-800/60 border-0">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6">
                 {t('name') || (isRTL ? 'الاسم' : 'Name')}
               </ResponsiveTableHead>
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6">
                 {t('email') || (isRTL ? 'البريد الإلكتروني' : 'Email')}
               </ResponsiveTableHead>
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6">
                 {t('role') || (isRTL ? 'الدور' : 'Role')}
               </ResponsiveTableHead>
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6">
                 {t('status') || (isRTL ? 'الحالة' : 'Status')}
               </ResponsiveTableHead>
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6">
                 {t('joinedAt') || (isRTL ? 'تاريخ الانضمام' : 'Joined')}
               </ResponsiveTableHead>
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6 w-[100px]">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6 w-[100px]">
                 {t('actions') || (isRTL ? 'الإجراءات' : 'Actions')}
               </ResponsiveTableHead>
             </ResponsiveTableRow>
@@ -187,8 +187,8 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
             {data.map((member, index) => (
               <ResponsiveTableRow 
                 key={member.id} 
-                className={`border-0 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-blue-900/10 dark:hover:to-indigo-900/10 transition-all duration-200 ${
-                  index % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50/50 dark:bg-gray-800/50'
+                className={`border-0 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors duration-200 ${
+                  index % 2 === 0 ? 'bg-white dark:bg-slate-900' : 'bg-slate-50/50 dark:bg-slate-800/50'
                 }`}
               >
                 <ResponsiveTableCell className="py-6">
@@ -199,14 +199,14 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
                       </span>
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900 dark:text-white text-lg">{member.name}</div>
+                      <div className="font-bold text-slate-900 dark:text-white text-lg">{member.name}</div>
                     </div>
                   </div>
                 </ResponsiveTableCell>
                 <ResponsiveTableCell className="py-6">
                   <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                    <Mail className="w-4 h-4 text-gray-400" />
-                    <span className="text-gray-600 dark:text-gray-400">{member.email}</span>
+                    <Mail className="w-4 h-4 text-slate-400" />
+                    <span className="text-slate-600 dark:text-slate-400">{member.email}</span>
                   </div>
                 </ResponsiveTableCell>
                 <ResponsiveTableCell className="py-6">
@@ -224,7 +224,7 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
                   </Badge>
                 </ResponsiveTableCell>
                 <ResponsiveTableCell className="py-6">
-                  <span className="text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="text-slate-600 dark:text-slate-400 font-medium">
                     {formatDate(member.joinedAt)}
                   </span>
                 </ResponsiveTableCell>
@@ -235,7 +235,7 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
                         <MoreHorizontal className="w-5 h-5" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align={isRTL ? 'start' : 'end'} className="rounded-xl shadow-xl border-0 bg-white dark:bg-gray-800">
+                    <DropdownMenuContent align={isRTL ? 'start' : 'end'} className="rounded-xl shadow-xl border-0 bg-white dark:bg-slate-800">
                       <DropdownMenuItem onClick={() => onEdit(member)} className="rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20">
                         <Edit className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2 text-blue-600" />
                         <span className="font-medium">{t('edit') || (isRTL ? 'تعديل' : 'Edit')}</span>
@@ -259,7 +259,7 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
       {/* Mobile Cards */}
       <div className="lg:hidden space-y-4">
         {data.map((member) => (
-          <div key={member.id} className="bg-white dark:bg-gray-900 rounded-3xl p-6 border border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
+          <div key={member.id} className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-xl hover:shadow-lg transition-all duration-300 transform ">
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center space-x-4 rtl:space-x-reverse flex-1">
                 <div className={`w-16 h-16 ${getAvatarColor(member.name)} rounded-2xl flex items-center justify-center shadow-lg`}>
@@ -268,10 +268,10 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
                   </span>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{member.name}</h3>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">{member.name}</h3>
                   <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                    <Mail className="w-4 h-4 text-gray-400" />
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{member.email}</p>
+                    <Mail className="w-4 h-4 text-slate-400" />
+                    <p className="text-sm text-slate-600 dark:text-slate-400">{member.email}</p>
                   </div>
                 </div>
               </div>
@@ -281,7 +281,7 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
                     <MoreHorizontal className="w-6 h-6" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align={isRTL ? 'start' : 'end'} className="rounded-xl shadow-xl border-0 bg-white dark:bg-gray-800">
+                <DropdownMenuContent align={isRTL ? 'start' : 'end'} className="rounded-xl shadow-xl border-0 bg-white dark:bg-slate-800">
                   <DropdownMenuItem onClick={() => onEdit(member)} className="rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20">
                     <Edit className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2 text-blue-600" />
                     <span className="font-medium">{t('edit') || (isRTL ? 'تعديل' : 'Edit')}</span>
@@ -298,8 +298,8 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
             </div>
             
             <div className="grid grid-cols-2 gap-4 mb-4">
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4">
-                <span className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">
+              <div className="rounded-xl border border-brand-100 bg-brand-50/70 p-4 dark:border-brand-900 dark:bg-brand-950/30">
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-2">
                   {t('role') || (isRTL ? 'الدور' : 'Role')}
                 </span>
                 <Badge className={`${getRoleBadgeColor(member.role)} border font-semibold flex items-center space-x-1 rtl:space-x-reverse w-fit`}>
@@ -307,8 +307,8 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
                   <span>{member.role}</span>
                 </Badge>
               </div>
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-4">
-                <span className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">
+              <div className="rounded-xl border border-emerald-100 bg-emerald-50/70 p-4 dark:border-emerald-900 dark:bg-emerald-950/30">
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-2">
                   {t('status') || (isRTL ? 'الحالة' : 'Status')}
                 </span>
                 <Badge className={`${getStatusBadgeColor(member.status)} border font-semibold w-fit`}>
@@ -320,8 +320,8 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
               </div>
             </div>
             
-            <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-              <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+            <div className="pt-4 border-t border-slate-200 dark:border-slate-700">
+              <span className="text-sm text-slate-500 dark:text-slate-400 font-medium">
                 {t('joinedAt') || (isRTL ? 'انضم في' : 'Joined')}: {formatDate(member.joinedAt)}
               </span>
             </div>
@@ -330,19 +330,19 @@ const TeamTable: React.FC<TeamTableProps> = ({ data, onEdit, onDelete, onAdd }) 
       </div>
 
       {data.length === 0 && (
-        <div className="text-center py-16 bg-white dark:bg-gray-900 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-700">
-          <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl">
+        <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700">
+          <div className="w-24 h-24 bg-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
             <Users className="w-12 h-12 text-white" />
           </div>
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
             {t('noTeamMembers') || (isRTL ? 'لا يوجد أعضاء فريق' : 'No team members found')}
           </h3>
-          <p className="text-gray-500 dark:text-gray-400 mb-6 text-lg">
+          <p className="text-slate-500 dark:text-slate-400 mb-6 text-lg">
             {t('noTeamMembersDescription') || (isRTL ? 'ابدأ ببناء فريق العمل' : 'Start building your team')}
           </p>
           <Button 
             onClick={onAdd}
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+            className="bg-brand-600 hover:bg-brand-700 text-white px-4 py-3 rounded-lg shadow-sm transition-colors "
           >
             <Plus className="w-5 h-5 mr-2" />
             <span className="font-semibold">{t('addFirstMember') || (isRTL ? 'إضافة أول عضو' : 'Add First Member')}</span>

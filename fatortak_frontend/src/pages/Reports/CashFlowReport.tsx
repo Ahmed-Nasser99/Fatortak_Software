@@ -28,7 +28,7 @@ const CashFlowReport: React.FC = () => {
           </Button>
           <div>
             <h1 className="text-2xl font-bold">{isRTL ? "قائمة التدفقات النقدية" : "Cash Flow Report"}</h1>
-            <p className="text-sm text-gray-500">{isRTL ? "حركة النقدية الواردة والصادرة" : "Cash inflows and outflows analysis"}</p>
+            <p className="text-sm text-slate-500">{isRTL ? "حركة النقدية الواردة والصادرة" : "Cash inflows and outflows analysis"}</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -48,17 +48,17 @@ const CashFlowReport: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-800/50 overflow-hidden">
-          <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/5">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "النقدية في بداية الفترة" : "Beginning Cash"}</CardTitle>
+        <Card className="bg-white text-slate-900 border-slate-200/80 dark:bg-slate-900 dark:text-white dark:border-slate-800 overflow-hidden">
+          <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/5">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "النقدية في بداية الفترة" : "Beginning Cash"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-6 pb-6">
             <div className="text-2xl lg:text-3xl font-bold font-mono">{formatCurrency(response?.startingCash || 0)}</div>
           </CardContent>
         </Card>
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-800/50 overflow-hidden">
-          <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/5">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "صافي التغير في النقدية" : "Net Cash Change"}</CardTitle>
+        <Card className="bg-white text-slate-900 border-slate-200/80 dark:bg-slate-900 dark:text-white dark:border-slate-800 overflow-hidden">
+          <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/5">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "صافي التغير في النقدية" : "Net Cash Change"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-6 pb-6">
             <div className={`text-2xl lg:text-3xl font-bold font-mono flex items-center gap-2 ${ (response?.netCashChange || 0) >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400' }`}>
@@ -67,9 +67,9 @@ const CashFlowReport: React.FC = () => {
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-800/50 overflow-hidden shadow-xl">
-          <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/10">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-300">{isRTL ? "النقدية في نهاية الفترة" : "Ending Cash"}</CardTitle>
+        <Card className="bg-white text-slate-900 border-slate-200/80 dark:bg-slate-900 dark:text-white dark:border-slate-800 overflow-hidden">
+          <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/10">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-300">{isRTL ? "النقدية في نهاية الفترة" : "Ending Cash"}</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-6 pb-6">
             <div className="text-2xl lg:text-3xl font-bold font-mono">{formatCurrency(response?.endingCash || 0)}</div>
@@ -78,8 +78,8 @@ const CashFlowReport: React.FC = () => {
       </div>
 
       <Card>
-        <CardHeader className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
-          <CardTitle className="text-sm font-bold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{isRTL ? "تفاصيل التدفقات" : "Cash Flow Detail"}</CardTitle>
+        <CardHeader className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700">
+          <CardTitle className="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">{isRTL ? "تفاصيل التدفقات" : "Cash Flow Detail"}</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
            {isLoading ? (
@@ -89,24 +89,24 @@ const CashFlowReport: React.FC = () => {
                <TableHeader>
                  <TableRow>
                    <TableHead className="px-6">{isRTL ? "البند" : "Description"}</TableHead>
-                   <TableHead className="px-6 text-right">{isRTL ? "المبلغ" : "Amount"}</TableHead>
+                   <TableHead className="px-6 text-end">{isRTL ? "المبلغ" : "Amount"}</TableHead>
                  </TableRow>
                </TableHeader>
                <TableBody>
                  {response?.sections?.map((section: any, idx: number) => (
                    <React.Fragment key={idx}>
-                     <TableRow className="bg-gray-100 dark:bg-gray-800/80 hover:bg-gray-100 font-bold">
-                       <TableCell colSpan={2} className="px-6 py-2 uppercase text-xs tracking-widest text-blue-600">{section.sectionName}</TableCell>
+                     <TableRow className="bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-100 font-bold">
+                       <TableCell colSpan={2} className="px-6 py-2 uppercase text-xs tracking-wide text-blue-600">{section.sectionName}</TableCell>
                      </TableRow>
                      {section.items.map((item: any, iidx: number) => (
                        <TableRow key={iidx}>
                          <TableCell className="px-8 text-sm italic">{item.name}</TableCell>
-                         <TableCell className="px-8 text-right font-mono">{formatCurrency(item.amount)}</TableCell>
+                         <TableCell className="px-8 text-end font-mono">{formatCurrency(item.amount)}</TableCell>
                        </TableRow>
                      ))}
-                     <TableRow className="bg-gray-50/50 dark:bg-gray-800/30 font-bold">
-                       <TableCell className="px-6 text-right italic">{isRTL ? "إجمالي" : "Total"} {section.sectionName}</TableCell>
-                       <TableCell className="px-6 text-right font-mono text-lg">{formatCurrency(section.total)}</TableCell>
+                     <TableRow className="bg-slate-50/50 dark:bg-slate-800/30 font-bold">
+                       <TableCell className="px-6 text-end italic">{isRTL ? "إجمالي" : "Total"} {section.sectionName}</TableCell>
+                       <TableCell className="px-6 text-end font-mono text-lg">{formatCurrency(section.total)}</TableCell>
                      </TableRow>
                    </React.Fragment>
                  ))}

@@ -33,7 +33,7 @@ const SupplierSelector: React.FC<SupplierSelectorProps> = ({
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className={`${className} ${isRTL ? "text-right" : "text-left"}`}>
+      <SelectTrigger className={`${className} ${isRTL ? "text-end" : "text-start"}`}>
         <SelectValue placeholder={placeholder || (isRTL ? "اختر المورد" : "Select Supplier")} />
       </SelectTrigger>
       <SelectContent>
@@ -43,7 +43,7 @@ const SupplierSelector: React.FC<SupplierSelectorProps> = ({
           </SelectItem>
         ))}
         {suppliers.length === 0 && !isLoading && (
-            <div className="p-2 text-sm text-gray-500 text-center">
+            <div className="p-2 text-sm text-slate-500 text-center">
                 {isRTL ? "لا يوجد موردين" : "No suppliers found"}
             </div>
         )}

@@ -94,14 +94,14 @@ const Notifications: React.FC = () => {
       dir={isRTL ? "rtl" : "ltr"}
     >
       {/* Enhanced Header */}
-      <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 text-white shadow-2xl">
+      <div className="page-hero">
         <div
           className={`flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 ${
             isRTL ? "lg:flex-row-reverse" : ""
           }`}
         >
           <div className={`flex items-center space-x-4`}>
-            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg mx-3">
+            <div className="page-hero-icon mx-3">
               <Bell className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -120,7 +120,7 @@ const Notifications: React.FC = () => {
             <Button
               onClick={handleMarkAllAsRead}
               disabled={isLoading}
-              className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+              className="page-hero-action"
             >
               <Check className="w-5 h-5 mr-2" />
               <span className="font-semibold">
@@ -138,7 +138,7 @@ const Notifications: React.FC = () => {
             <Search
               className={`absolute top-1/2 transform -translate-y-1/2 ${
                 isRTL ? "right-3" : "left-3"
-              } w-5 h-5 text-gray-400`}
+              } w-5 h-5 text-slate-400`}
             />
             <Input
               type="text"
@@ -198,7 +198,7 @@ const Notifications: React.FC = () => {
               >
                 <Bell className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
                 {isRTL ? "جاري التحميل..." : "Loading..."}
               </h3>
             </div>
@@ -212,10 +212,10 @@ const Notifications: React.FC = () => {
             >
               <Bell className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
               {isRTL ? "لا توجد إشعارات" : "No notifications found"}
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-slate-600 dark:text-slate-400">
               {isRTL
                 ? "لا توجد إشعارات تطابق البحث الحالي"
                 : "No notifications match your current search"}
@@ -244,7 +244,7 @@ const Notifications: React.FC = () => {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-gray-900 dark:text-white">
+                        <h3 className="font-semibold text-slate-900 dark:text-white">
                           {notification.title}
                         </h3>
                         {!notification.isRead && (
@@ -256,11 +256,11 @@ const Notifications: React.FC = () => {
                           </Badge>
                         )}
                       </div>
-                      <p className="text-gray-600 dark:text-gray-400 mt-1">
+                      <p className="text-slate-600 dark:text-slate-400 mt-1">
                         {notification.message}
                       </p>
                       <div className="flex items-center space-x-4 mt-3">
-                        <div className="flex items-center space-x-1 text-sm text-gray-500">
+                        <div className="flex items-center space-x-1 text-sm text-slate-500">
                           <Clock className="w-4 h-4" />
                           <span>{formatTimeAgo(notification.createdAt)}</span>
                         </div>

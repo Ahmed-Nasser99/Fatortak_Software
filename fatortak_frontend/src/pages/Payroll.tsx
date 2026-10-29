@@ -162,18 +162,18 @@ const Payroll: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950">
       <div className="container !max-w-full mx-auto p-4 space-y-6" dir={isRTL ? "rtl" : "ltr"}>
         
         {/* Enhanced Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 text-white shadow-2xl">
+        <div className="page-hero">
           <div
             className={`flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 ${
               isRTL ? "lg:flex-row-reverse" : ""
             }`}
           >
             <div className={`flex items-center space-x-4`}>
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg mx-3">
+              <div className="page-hero-icon mx-3">
                 <DollarSign className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -188,7 +188,7 @@ const Payroll: React.FC = () => {
 
             <Button
               onClick={() => setIsGenerateModalOpen(true)}
-              className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+              className="page-hero-action"
             >
               <Plus className="w-5 h-5 mr-2" />
               <span className="font-semibold">
@@ -199,7 +199,7 @@ const Payroll: React.FC = () => {
         </div>
 
         {/* Payrolls List */}
-        <Card className="bg-card/60 backdrop-blur-sm border shadow-sm">
+        <Card className="border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900">
           <CardContent className="p-6">
             {isLoading ? (
               <div className="flex justify-center p-8">
@@ -376,13 +376,13 @@ const Payroll: React.FC = () => {
               <div className="p-6 space-y-8">
                 {/* Summary Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border-blue-100 dark:border-blue-900">
+                  <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
                     <CardContent className="p-6 flex items-center justify-between">
                       <div>
                         <p className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-1">
                           {isRTL ? "إجمالي الرواتب" : "Total Salaries"}
                         </p>
-                        <p className="text-3xl font-bold text-blue-900 dark:text-blue-100">
+                        <p className="text-3xl font-bold text-slate-900 dark:text-white">
                           {formatCurrency(selectedPayroll.totalAmount)}
                         </p>
                       </div>
@@ -392,13 +392,13 @@ const Payroll: React.FC = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border-purple-100 dark:border-purple-900">
+                  <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
                     <CardContent className="p-6 flex items-center justify-between">
                       <div>
                         <p className="text-sm font-medium text-purple-600 dark:text-purple-400 mb-1">
                           {isRTL ? "عدد الموظفين" : "Employees Count"}
                         </p>
-                        <p className="text-3xl font-bold text-purple-900 dark:text-purple-100">
+                        <p className="text-3xl font-bold text-slate-900 dark:text-white">
                           {formatNumber(selectedPayroll.payrollItems.length)}
                         </p>
                       </div>
@@ -409,7 +409,7 @@ const Payroll: React.FC = () => {
                   </Card>
 
                   {selectedPayroll.status !== "Submitted" && (
-                     <Card className="bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/20 dark:to-green-950/20 border-emerald-100 dark:border-emerald-900 flex items-center justify-center">
+                     <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900 flex items-center justify-center">
                       <CardContent className="p-6 w-full">
                         <Button 
                           onClick={() => confirmSubmitPayroll(selectedPayroll)} 
@@ -433,7 +433,7 @@ const Payroll: React.FC = () => {
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                      <thead className="bg-muted/30">
+                      <thead className="bg-slate-50/80 dark:bg-slate-800/60">
                         <tr>
                           <th className="p-4 text-start font-semibold text-muted-foreground">{isRTL ? "الموظف" : "Employee"}</th>
                           <th className="p-4 text-start font-semibold text-muted-foreground">{isRTL ? "الراتب الأساسي" : "Base Salary"}</th>
@@ -468,7 +468,7 @@ const Payroll: React.FC = () => {
                           </tr>
                         ))}
                       </tbody>
-                      <tfoot className="bg-muted/30 font-semibold">
+                      <tfoot className="bg-slate-50/80 dark:bg-slate-800/60 font-semibold">
                         <tr>
                           <td colSpan={3} className="p-4 text-end">{isRTL ? "الإجمالي الكلي" : "Grand Total"}</td>
                           <td className="p-4 text-end text-lg text-primary">

@@ -130,7 +130,7 @@ const QuotaSettingsForm: React.FC = () => {
       </CardHeader>
       <CardContent>
         <div className="flex items-baseline gap-1 mb-4">
-          <span className="text-3xl font-black text-foreground">{used}</span>
+          <span className="text-3xl font-bold text-foreground">{used}</span>
           <span className="text-sm text-muted-foreground font-bold">/ {limit}</span>
         </div>
         <Progress 
@@ -142,7 +142,7 @@ const QuotaSettingsForm: React.FC = () => {
             `bg-gradient-to-r ${color}`
           }
         />
-        <div className="flex justify-between items-center text-[10px] uppercase tracking-widest font-black text-muted-foreground/60 mt-2">
+        <div className="flex justify-between items-center text-[10px] uppercase tracking-wide font-bold text-muted-foreground/60 mt-2">
           <span>{percentage.toFixed(0)}% {isRTL ? "مستخدم" : "Used"}</span>
           <span>{limit} {isRTL ? "الإجمالي" : "Limit"}</span>
         </div>
@@ -159,8 +159,8 @@ const QuotaSettingsForm: React.FC = () => {
           <div className="flex items-center gap-6">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-3xl font-black text-foreground tracking-tight">{plan}</h2>
-                <Badge className="bg-primary/20 text-primary hover:bg-primary/30 border-none px-3 py-1 text-[10px] uppercase font-black tracking-widest">
+                <h2 className="text-3xl font-bold text-foreground tracking-tight">{plan}</h2>
+                <Badge className="bg-primary/20 text-primary hover:bg-primary/30 border-none px-3 py-1 text-[10px] uppercase font-bold tracking-wide">
                   {isYearly ? (isRTL ? "سنوي" : "Yearly") : (isRTL ? "شهري" : "Monthly")}
                 </Badge>
               </div>
@@ -169,7 +169,7 @@ const QuotaSettingsForm: React.FC = () => {
               </p>
             </div>
           </div>
-          <button className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-black rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/30 text-sm uppercase tracking-widest">
+          <button className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-bold rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/30 text-sm uppercase tracking-wide">
             <span>{isRTL ? "ترقية الخطة" : "Upgrade Plan"}</span>
             <ArrowUpRight className="w-5 h-5" />
           </button>
@@ -207,26 +207,26 @@ const QuotaSettingsForm: React.FC = () => {
       {/* Plan Details Summary */}
       <Card className="rounded-[2rem] border bg-muted/20 border-muted overflow-hidden">
         <CardHeader className="pb-4 bg-background/50 border-b border-muted/50 p-8">
-          <CardTitle className="text-lg font-black uppercase tracking-widest text-foreground">
+          <CardTitle className="text-lg font-bold uppercase tracking-wide text-foreground">
             {isRTL ? "تفاصيل باقتك الحالية" : "Current Plan Overview"}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            <div className="p-6 rounded-3xl bg-background border border-muted shadow-sm hover:shadow-lg transition-all">
-              <div className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-3">{isRTL ? "طلبات AI" : "AI Requests"}</div>
-              <div className="text-4xl font-black text-foreground">{aiLimit}</div>
-              <div className="text-[10px] text-muted-foreground uppercase tracking-widest mt-2 font-bold">Per Month</div>
+            <div className="p-6 rounded-2xl bg-background border border-muted shadow-sm hover:shadow-lg transition-all">
+              <div className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-3">{isRTL ? "طلبات AI" : "AI Requests"}</div>
+              <div className="text-3xl font-bold text-foreground">{aiLimit}</div>
+              <div className="text-[10px] text-muted-foreground uppercase tracking-wide mt-2 font-bold">Per Month</div>
             </div>
-            <div className="p-6 rounded-3xl bg-background border border-muted shadow-sm hover:shadow-lg transition-all">
-              <div className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-3">{isRTL ? "فواتير" : "Invoices"}</div>
-              <div className="text-4xl font-black text-foreground">{invoiceLimit}</div>
-              <div className="text-[10px] text-muted-foreground uppercase tracking-widest mt-2 font-bold">Monthly Quota</div>
+            <div className="p-6 rounded-2xl bg-background border border-muted shadow-sm hover:shadow-lg transition-all">
+              <div className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-3">{isRTL ? "فواتير" : "Invoices"}</div>
+              <div className="text-3xl font-bold text-foreground">{invoiceLimit}</div>
+              <div className="text-[10px] text-muted-foreground uppercase tracking-wide mt-2 font-bold">Monthly Quota</div>
             </div>
-            <div className="p-6 rounded-3xl bg-background border border-muted shadow-sm hover:shadow-lg transition-all">
-              <div className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-3">{isRTL ? "مستخدمين" : "Users"}</div>
-              <div className="text-4xl font-black text-foreground">{userLimit}</div>
-              <div className="text-[10px] text-muted-foreground uppercase tracking-widest mt-2 font-bold">Team Capacity</div>
+            <div className="p-6 rounded-2xl bg-background border border-muted shadow-sm hover:shadow-lg transition-all">
+              <div className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-3">{isRTL ? "مستخدمين" : "Users"}</div>
+              <div className="text-3xl font-bold text-foreground">{userLimit}</div>
+              <div className="text-[10px] text-muted-foreground uppercase tracking-wide mt-2 font-bold">Team Capacity</div>
             </div>
           </div>
         </CardContent>

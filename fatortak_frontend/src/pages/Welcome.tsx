@@ -83,7 +83,7 @@ const Welcome = () => {
               exit={{ opacity: 0 }}
               className="space-y-4"
             >
-              <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mb-4">
+              <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-none mb-4">
                 {t("welcomeToFatortak")}
               </h1>
             </motion.div>
@@ -110,13 +110,13 @@ const Welcome = () => {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-12"
             >
-              <h1 className="text-5xl md:text-7xl font-black text-slate-950 tracking-tighter mb-4">
+              <h1 className="text-5xl md:text-7xl font-bold text-slate-950 tracking-tighter mb-4">
                 {t("readyToStart")}
               </h1>
               
               <button
                 onClick={handleStart}
-                className={`inline-flex items-center justify-center px-12 py-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-black text-2xl transition-all shadow-xl hover:scale-105 active:scale-95 focus-visible:outline-none ${isRTL ? "font-secondary" : ""}`}
+                className={`inline-flex items-center justify-center px-12 py-6 bg-brand-600 hover:bg-brand-700 text-white rounded-full font-bold text-2xl transition-all shadow-xl  active:scale-95 focus-visible:outline-none ${isRTL ? "font-secondary" : ""}`}
               >
                 {t("goToDashboard")}
               </button>
@@ -126,7 +126,7 @@ const Welcome = () => {
       </motion.div>
 
       {/* Footer Branding - Adaptive */}
-      <div className={`absolute bottom-8 text-[11px] font-black tracking-[0.4em] uppercase transition-colors duration-1000 ${isWhiteBg ? "text-slate-200" : "text-white/10"}`}>
+      <div className={`absolute bottom-8 text-[11px] font-bold tracking-[0.4em] uppercase transition-colors duration-1000 ${isWhiteBg ? "text-slate-200" : "text-white/10"}`}>
         Fatortak Enterprise &bull; {t("businessManagement")}
       </div>
     </div>

@@ -27,7 +27,7 @@ export const ModernStatsGrid = ({ stats, statCards }: ModernStatsGridProps) => {
       {statCards.map((card, index) => (
         <Card 
           key={index}
-          className="group relative overflow-hidden border-0 bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+          className="group relative overflow-hidden border-0 bg-gradient-to-br from-white/80 to-slate-50/80 dark:from-slate-800/80 dark:to-slate-900/80 backdrop-blur-sm shadow-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-2"
         >
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity">
@@ -37,22 +37,22 @@ export const ModernStatsGrid = ({ stats, statCards }: ModernStatsGridProps) => {
           <CardContent className="relative p-6">
             <div className={`flex items-start justify-between ${isRTL ? "flex-row-reverse" : ""}`}>
               <div className="space-y-2">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 uppercase tracking-wide">
                   {card.title}
                 </p>
                 <div className="space-y-1">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
                     {card.value}
                   </h3>
                   {card.description && (
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       {card.description}
                     </p>
                   )}
                 </div>
               </div>
               
-              <div className={`relative ${card.color} bg-gradient-to-br p-3 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`relative ${card.color} bg-gradient-to-br p-3 rounded-xl shadow-lg group- transition-transform duration-300`}>
                 <card.icon className="w-6 h-6 text-white" />
               </div>
             </div>
@@ -71,7 +71,7 @@ export const ModernStatsGrid = ({ stats, statCards }: ModernStatsGridProps) => {
                   )}
                   {card.change}
                 </div>
-                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                <span className="text-xs text-slate-500 dark:text-slate-400 ml-2">
                   {t("vsLastMonth")}
                 </span>
               </div>

@@ -15,7 +15,7 @@ const CurrencyCell: React.FC<{ value: string }> = ({ value }) => {
   if (Number.isFinite(num)) {
     const hasDecimals = /\.\d+/.test(value);
     return (
-      <div className="text-right font-mono font-semibold whitespace-nowrap">
+      <div className="text-end font-mono font-semibold whitespace-nowrap">
         {num.toLocaleString(undefined, {
           minimumFractionDigits: hasDecimals ? 2 : 0,
           maximumFractionDigits: 2,
@@ -49,7 +49,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
     th: ({ node, ...props }: any) => (
       <th
         {...props}
-        className="px-4 py-2 font-semibold text-gray-900 dark:text-white text-sm border-b border-purple-200/30"
+        className="px-4 py-2 font-semibold text-slate-900 dark:text-white text-sm border-b border-purple-200/30"
       />
     ),
     td: ({ node, children, ...props }: any) => {
@@ -62,7 +62,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       return /^\d+(\.\d+)?$/.test(cleaned) ? (
         <td
           {...props}
-          className="px-4 py-3 border-b border-purple-100/40 text-right"
+          className="px-4 py-3 border-b border-purple-100/40 text-end"
         >
           <CurrencyCell value={String(text)} />
         </td>
@@ -75,19 +75,19 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
     p: ({ node, ...props }: any) => (
       <p
         {...props}
-        className="text-gray-700 dark:text-gray-300 leading-relaxed mb-2"
+        className="text-slate-700 dark:text-slate-300 leading-relaxed mb-2"
       />
     ),
     code: ({ inline, ...props }: any) =>
       inline ? (
         <code
           {...props}
-          className="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-sm font-mono"
+          className="px-1 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-sm font-mono"
         />
       ) : (
         <pre
           {...props}
-          className="p-3 bg-gray-100 dark:bg-gray-800 rounded overflow-x-auto text-sm"
+          className="p-3 bg-slate-100 dark:bg-slate-800 rounded overflow-x-auto text-sm"
         />
       ),
     strong: ({ node, ...props }: any) => (

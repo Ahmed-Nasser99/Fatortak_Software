@@ -248,19 +248,19 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       dir={isRTL ? "rtl" : "ltr"}
     >
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div
-          className={`flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 ${
+          className={`flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700 ${
             isRTL ? "flex-row-reverse" : ""
           }`}
         >
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">
             {expense ? t("editExpense") : t("newExpense")}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"
           >
             <X className="w-6 h-6" />
           </button>
@@ -271,7 +271,7 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t("date")} *
               </label>
               <DatePicker
@@ -287,7 +287,7 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
 
             {/* Amount */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t("amount")} *
               </label>
               <input
@@ -302,8 +302,8 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
                     e.target.value === "" ? 0 : parseFloat(e.target.value) || 0
                   )
                 }
-                className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  isRTL ? "text-right" : "text-left"
+                className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  isRTL ? "text-end" : "text-start"
                 }`}
                 placeholder="0.00"
               />
@@ -317,7 +317,7 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
               label={isRTL ? "الفرع" : "Branch"}
             />
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {isRTL ? "المشروع" : "Project"}
               </label>
               <ProjectSelector
@@ -327,7 +327,7 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
             </div>
             <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   {isRTL ? "التصنيف" : "Category"} *
                 </label>
                 <CategorySelector
@@ -336,7 +336,7 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   {isRTL ? "مصدر الدفع" : "Payment Source"} *
                 </label>
                 <DataSourceSelector
@@ -349,15 +349,15 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               {t("notes")}
             </label>
             <textarea
               rows={3}
               value={formData.notes}
               onChange={(e) => handleInputChange("notes", e.target.value)}
-              className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                isRTL ? "text-right" : "text-left"
+              className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                isRTL ? "text-end" : "text-start"
               }`}
               placeholder={t("expenseNotesPlaceholder")}
             />
@@ -365,7 +365,7 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
 
           {/* File Upload */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               {isRTL ? "مرفق" : "Attachment"}
             </label>
 
@@ -381,18 +381,18 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
                 />
                 <label
                   htmlFor="file-upload"
-                  className={`flex items-center justify-center space-x-2 px-4 py-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:border-purple-500 dark:hover:border-purple-400 transition-colors ${
+                  className={`flex items-center justify-center space-x-2 px-4 py-3 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg cursor-pointer hover:border-purple-500 dark:hover:border-purple-400 transition-colors ${
                     isRTL ? "flex-row-reverse space-x-reverse" : ""
                   }`}
                 >
-                  <Upload className="w-5 h-5 text-gray-400" />
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                  <Upload className="w-5 h-5 text-slate-400" />
+                  <span className="text-sm text-slate-600 dark:text-slate-400">
                     {isRTL
                       ? "انقر لتحميل ملف (PDF, صور, مستندات)"
                       : "Click to upload file (PDF, Images, Documents)"}
                   </span>
                 </label>
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                   {isRTL
                     ? "الحد الأقصى لحجم الملف: 10 ميجابايت"
                     : "Maximum file size: 10MB"}
@@ -410,10 +410,10 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
                 }`}>
                   <FileText className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                   <div>
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    <p className="text-sm font-medium text-slate-900 dark:text-white">
                       {selectedFile.name}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       {(selectedFile.size / 1024).toFixed(2)} KB
                     </p>
                   </div>
@@ -446,7 +446,7 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
                     >
                       {existingFile.name}
                     </a>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       {isRTL ? "ملف موجود" : "Existing file"}
                     </p>
                   </div>
@@ -471,7 +471,7 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              className="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
             >
               {t("cancel")}
             </button>

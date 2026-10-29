@@ -96,15 +96,15 @@ const DepartmentModal: React.FC<DepartmentModalProps> = ({
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       dir={isRTL ? "rtl" : "ltr"}
     >
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+        <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">
             {department ? t("editDepartment") : t("newDepartment")}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"
           >
             <X className="w-6 h-6" />
           </button>
@@ -122,16 +122,16 @@ const DepartmentModal: React.FC<DepartmentModalProps> = ({
               <div className="grid grid-cols-1 gap-6">
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     {t("name")} *
                   </label>
                   <Field
                     type="text"
                     name="name"
-                    className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
+                    className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg 
                       focus:ring-2 focus:ring-purple-500 focus:border-transparent 
-                      bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
-                      ${isRTL ? "text-right" : "text-left"}`}
+                      bg-white dark:bg-slate-700 text-slate-900 dark:text-white 
+                      ${isRTL ? "text-end" : "text-start"}`}
                     placeholder={t("departmentNamePlaceholder")}
                   />
                   <ErrorMessage
@@ -143,17 +143,17 @@ const DepartmentModal: React.FC<DepartmentModalProps> = ({
 
                 {/* Description */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     {t("description")}
                   </label>
                   <Field
                     as="textarea"
                     name="description"
                     rows={3}
-                    className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
+                    className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg 
                       focus:ring-2 focus:ring-purple-500 focus:border-transparent 
-                      bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
-                      ${isRTL ? "text-right" : "text-left"}`}
+                      bg-white dark:bg-slate-700 text-slate-900 dark:text-white 
+                      ${isRTL ? "text-end" : "text-start"}`}
                     placeholder={t("departmentDescriptionPlaceholder")}
                   />
                   <ErrorMessage
@@ -173,9 +173,9 @@ const DepartmentModal: React.FC<DepartmentModalProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-6 py-2 border border-gray-300 dark:border-gray-600 
-                    text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 
-                    dark:hover:bg-gray-700 transition-colors"
+                  className="px-6 py-2 border border-slate-300 dark:border-slate-600 
+                    text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 
+                    dark:hover:bg-slate-700 transition-colors"
                 >
                   {t("cancel")}
                 </button>

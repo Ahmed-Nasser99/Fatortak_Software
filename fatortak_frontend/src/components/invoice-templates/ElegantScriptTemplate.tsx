@@ -30,7 +30,7 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
     <div
       className={`${isRTL ? "rtl" : "ltr"} ${
         colors.bgLight
-      } dark:from-gray-900 dark:via-${colors.primary}/20 dark:to-${
+      } dark:from-slate-900 dark:via-${colors.primary}/20 dark:to-${
         colors.primaryDark
       }/20 p-12`}
     >
@@ -65,9 +65,9 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
 
       {/* Elegant Invoice Number */}
       <div className="text-center mb-10">
-        <div className="inline-block px-8 py-4 bg-white dark:bg-gray-800 rounded-full shadow-xl">
+        <div className="inline-block px-8 py-4 bg-white dark:bg-slate-800 rounded-full shadow-xl">
           <span
-            className={`text-sm ${colors.text} font-semibold uppercase tracking-widest`}
+            className={`text-sm ${colors.text} font-semibold uppercase tracking-wide`}
           >
             {t("invoice") || "Invoice"}
           </span>
@@ -82,41 +82,41 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
       {/* Elegant Info Cards */}
       <div className="grid grid-cols-2 gap-8 mb-10">
         <div
-          className={`bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg border-t-4 border-${colors.primary}`}
+          className={`bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-t-4 border-${colors.primary}`}
         >
           <div className={`text-sm ${colors.text} font-serif italic mb-4`}>
             {t("billingDetails") || "Billing Details"}
           </div>
           <div className="space-y-2">
-            <p className="text-gray-900 dark:text-white font-serif text-lg">
+            <p className="text-slate-900 dark:text-white font-serif text-lg">
               {invoice.customerName}
             </p>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-slate-600 dark:text-slate-400">
               {invoice.customerEmail}
             </p>
           </div>
         </div>
 
         <div
-          className={`bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg border-t-4 border-${colors.primaryDark}`}
+          className={`bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-t-4 border-${colors.primaryDark}`}
         >
           <div className={`text-sm ${colors.text} font-serif italic mb-4`}>
             {t("invoiceDates") || "Invoice Dates"}
           </div>
           <div className="space-y-2">
             <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">
+              <span className="text-slate-600 dark:text-slate-400">
                 {t("issued")}
               </span>
-              <span className="text-gray-900 dark:text-white font-serif">
+              <span className="text-slate-900 dark:text-white font-serif">
                 {formatDate(invoice.issueDate)}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">
+              <span className="text-slate-600 dark:text-slate-400">
                 {t("due")}
               </span>
-              <span className="text-gray-900 dark:text-white font-serif">
+              <span className="text-slate-900 dark:text-white font-serif">
                 {formatDate(invoice.dueDate)}
               </span>
             </div>
@@ -125,7 +125,7 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
       </div>
 
       {/* Elegant Items */}
-      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-8 mb-8">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-8 mb-8">
         <h3
           className={`text-2xl font-serif text-transparent bg-clip-text bg-gradient-to-r ${colors.gradient} mb-6 text-center`}
         >
@@ -138,11 +138,11 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
               className={`flex justify-between items-start p-4 ${colors.bgLight} dark:${colors.bg}/10 rounded-2xl`}
             >
               <div className="flex-1">
-                <div className="font-serif text-lg text-gray-900 dark:text-white mb-1">
+                <div className="font-serif text-lg text-slate-900 dark:text-white mb-1">
                   {item.itemName || item.name}
                 </div>
                 {item.description && (
-                  <div className="text-sm text-gray-600 dark:text-gray-400 italic">
+                  <div className="text-sm text-slate-600 dark:text-slate-400 italic">
                     {item.description}
                   </div>
                 )}
@@ -150,7 +150,7 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
                   {item.quantity} × {item.unitPrice?.toFixed(2)}
                 </div>
               </div>
-              <div className="text-xl font-serif text-gray-900 dark:text-white">
+              <div className="text-xl font-serif text-slate-900 dark:text-white">
                 {(item.quantity * item.unitPrice)?.toFixed(2)}
               </div>
             </div>
@@ -160,7 +160,7 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
 
       {/* Elegant Totals */}
       <div
-        className={`bg-gradient-to-r ${colors.gradient} rounded-3xl shadow-2xl p-8 text-white`}
+        className={`bg-gradient-to-r ${colors.gradient} rounded-2xl shadow-lg p-8 text-white`}
       >
         <div className="space-y-3 mb-4">
           <div
@@ -196,8 +196,8 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
 
       {/* Elegant Notes */}
       {invoice.notes && (
-        <div className="mt-8 text-center pb-8 border-b border-gray-100 dark:border-gray-800">
-          <p className="text-gray-600 dark:text-gray-400 font-serif italic leading-relaxed">
+        <div className="mt-8 text-center pb-8 border-b border-slate-100 dark:border-slate-800">
+          <p className="text-slate-600 dark:text-slate-400 font-serif italic leading-relaxed">
             {invoice.notes}
           </p>
         </div>
@@ -207,7 +207,7 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
       {invoice.attachmentUrl && (
         <div className="mt-12 text-center">
           <div className={`inline-flex items-center justify-center p-1 rounded-full bg-gradient-to-r ${colors.gradient} mb-6`}>
-            <div className="px-6 py-2 bg-white dark:bg-gray-900 rounded-full flex items-center space-x-3 rtl:space-x-reverse">
+            <div className="px-6 py-2 bg-white dark:bg-slate-900 rounded-full flex items-center space-x-3 rtl:space-x-reverse">
               <Paperclip className={`w-5 h-5 ${colors.text}`} />
               <span className={`text-sm font-serif italic ${colors.text}`}>
                 {isRTL ? "تم إرفاق مستند" : "Document Attached"}
@@ -215,20 +215,20 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
             </div>
           </div>
           
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 max-w-lg mx-auto transform hover:scale-[1.02] transition-transform">
+          <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 max-w-lg mx-auto transform  transition-transform">
             <div className="flex flex-col items-center">
               <div className={`p-4 ${colors.bgLight} dark:${colors.bg}/20 rounded-2xl mb-4`}>
                 <FileText className={`w-10 h-10 ${colors.text}`} />
               </div>
-              <h4 className="text-lg font-serif text-gray-900 dark:text-white mb-2">
+              <h4 className="text-lg font-serif text-slate-900 dark:text-white mb-2">
                 {isRTL ? "معاينة الملف" : "File Preview"}
               </h4>
-              <p className="text-sm text-gray-500 mb-6 font-mono">
+              <p className="text-sm text-slate-500 mb-6 font-mono">
                 {invoice.attachmentUrl.split('/').pop()}
               </p>
               <button
                 onClick={() => window.open(`${import.meta.env.VITE_API_URL || 'https://localhost:44338'}/${invoice.attachmentUrl}`, '_blank')}
-                className={`w-full py-3 bg-gradient-to-r ${colors.gradient} text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all uppercase tracking-widest text-sm`}
+                className={`w-full py-3 bg-gradient-to-r ${colors.gradient} text-white font-bold rounded-2xl shadow-xl hover:shadow-lg transition-all uppercase tracking-wide text-sm`}
               >
                 {isRTL ? "عرض الملف" : "Review File"}
               </button>

@@ -74,10 +74,10 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl">
+      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg w-full max-w-2xl">
         {/* Header */}
         <div
-          className={`flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 ${
+          className={`flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700 ${
             isRTL ? "flex-row-reverse" : ""
           }`}
         >
@@ -87,13 +87,13 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
             }`}
           >
             <Filter className="w-6 h-6 text-purple-600" />
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">
               {t("filterInvoices")}
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"
           >
             <X className="w-6 h-6" />
           </button>
@@ -104,7 +104,7 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
           {/* Status and Customer */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t("status")}
               </label>
               <select
@@ -112,8 +112,8 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
                 onChange={(e) =>
                   setFilters((prev) => ({ ...prev, status: e.target.value }))
                 }
-                className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  isRTL ? "text-right" : "text-left"
+                className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  isRTL ? "text-end" : "text-start"
                 }`}
               >
                 <option value="">{t("allStatus")}</option>
@@ -126,7 +126,7 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {isSell ? t("client") : t("supplier")}
               </label>
               <SearchableDropdown
@@ -161,7 +161,7 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
             />
             
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                 {isRTL ? "المشروع" : "Project"}
               </label>
               <ProjectSelector
@@ -174,13 +174,13 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
 
           {/* Date Range */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3 flex items-center">
               <Calendar className="w-4 h-4 mr-2" />
               {t("dateRange")}
             </label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+                <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1">
                   {t("from")}
                 </label>
                 <input
@@ -192,13 +192,13 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
                       fromDate: e.target.value,
                     }))
                   }
-                  className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                    isRTL ? "text-right" : "text-left"
+                  className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                    isRTL ? "text-end" : "text-start"
                   }`}
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+                <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1">
                   {t("to")}
                 </label>
                 <input
@@ -207,8 +207,8 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
                   onChange={(e) =>
                     setFilters((prev) => ({ ...prev, toDate: e.target.value }))
                   }
-                  className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                    isRTL ? "text-right" : "text-left"
+                  className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                    isRTL ? "text-end" : "text-start"
                   }`}
                 />
               </div>
@@ -217,13 +217,13 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
 
           {/* Amount Range */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3 flex items-center">
               <DollarSign className="w-4 h-4 mr-2" />
               {t("amountRange")}
             </label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+                <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1">
                   {t("minimum")}
                 </label>
                 <input
@@ -237,14 +237,14 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
                       minimumPrice: e.target.value,
                     }))
                   }
-                  className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                    isRTL ? "text-right" : "text-left"
+                  className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                    isRTL ? "text-end" : "text-start"
                   }`}
                   placeholder="0.00"
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+                <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1">
                   {t("maximum")}
                 </label>
                 <input
@@ -258,8 +258,8 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
                       maximumPrice: e.target.value,
                     }))
                   }
-                  className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                    isRTL ? "text-right" : "text-left"
+                  className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                    isRTL ? "text-end" : "text-start"
                   }`}
                   placeholder="0.00"
                 />
@@ -270,19 +270,19 @@ const InvoiceFilterModal: React.FC<InvoiceFilterModalProps> = ({
 
         {/* Footer */}
         <div
-          className={`flex justify-end space-x-4 p-6 border-t border-gray-200 dark:border-gray-700 ${
+          className={`flex justify-end space-x-4 p-6 border-t border-slate-200 dark:border-slate-700 ${
             isRTL ? "flex-row-reverse space-x-reverse" : ""
           }`}
         >
           <button
             onClick={handleReset}
-            className="px-6 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+            className="px-6 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
           >
             {t("reset")}
           </button>
           <button
             onClick={onClose}
-            className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            className="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
           >
             {t("cancel")}
           </button>

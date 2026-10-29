@@ -50,11 +50,11 @@ const InvoicesTable: React.FC<InvoicesTableProps> = ({ data, type, onView, onEdi
       case 'overdue':
         return 'bg-gradient-to-r from-red-100 to-rose-100 text-red-800 border-red-200 dark:from-red-900/30 dark:to-rose-900/30 dark:text-red-400 dark:border-red-700';
       case 'draft':
-        return 'bg-gradient-to-r from-gray-100 to-slate-100 text-gray-800 border-gray-200 dark:from-gray-800 dark:to-slate-800 dark:text-gray-400 dark:border-gray-600';
+        return 'bg-slate-100 text-slate-800 border-slate-200 dark:from-slate-800 dark:to-slate-800 dark:text-slate-400 dark:border-slate-600';
       case 'cancelled':
         return 'bg-gradient-to-r from-orange-100 to-amber-100 text-orange-800 border-orange-200 dark:from-orange-900/30 dark:to-orange-800/30 dark:text-orange-400 dark:border-orange-700';
       default:
-        return 'bg-gradient-to-r from-gray-100 to-slate-100 text-gray-800 border-gray-200 dark:from-gray-800 dark:to-slate-800 dark:text-gray-400 dark:border-gray-600';
+        return 'bg-slate-100 text-slate-800 border-slate-200 dark:from-slate-800 dark:to-slate-800 dark:text-slate-400 dark:border-slate-600';
     }
   };
 
@@ -90,28 +90,28 @@ const InvoicesTable: React.FC<InvoicesTableProps> = ({ data, type, onView, onEdi
     <div className="space-y-6" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Desktop Table */}
       <div className="hidden lg:block">
-        <ResponsiveTable className="bg-white dark:bg-gray-900 shadow-2xl border-0 overflow-hidden rounded-2xl">
+        <ResponsiveTable className="bg-white dark:bg-slate-900 shadow-lg border-0 overflow-hidden rounded-2xl">
           <ResponsiveTableHeader>
-            <ResponsiveTableRow className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 border-0">
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6">
+            <ResponsiveTableRow className="bg-slate-50 dark:bg-slate-800/60 border-0">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6">
                 {t('invoiceNumber') || (isRTL ? 'رقم الفاتورة' : 'Invoice #')}
               </ResponsiveTableHead>
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6">
                 {type === 'buy' 
                   ? (t('supplierName') || (isRTL ? 'المورد' : 'Supplier'))
                   : (t('clientName') || (isRTL ? 'العميل' : 'Client'))
                 }
               </ResponsiveTableHead>
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6">
                 {t('amount') || (isRTL ? 'المبلغ' : 'Amount')}
               </ResponsiveTableHead>
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6">
                 {t('status') || (isRTL ? 'الحالة' : 'Status')}
               </ResponsiveTableHead>
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6">
                 {t('dueDate') || (isRTL ? 'تاريخ الاستحقاق' : 'Due Date')}
               </ResponsiveTableHead>
-              <ResponsiveTableHead className="font-bold text-gray-900 dark:text-white py-6 w-[100px]">
+              <ResponsiveTableHead className="font-bold text-slate-900 dark:text-white py-6 w-[100px]">
                 {t('actions') || (isRTL ? 'الإجراءات' : 'Actions')}
               </ResponsiveTableHead>
             </ResponsiveTableRow>
@@ -120,20 +120,20 @@ const InvoicesTable: React.FC<InvoicesTableProps> = ({ data, type, onView, onEdi
             {data.map((invoice, index) => (
               <ResponsiveTableRow 
                 key={invoice.id} 
-                className={`border-0 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-blue-900/10 dark:hover:to-indigo-900/10 transition-all duration-200 ${
-                  index % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50/50 dark:bg-gray-800/50'
+                className={`border-0 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors duration-200 ${
+                  index % 2 === 0 ? 'bg-white dark:bg-slate-900' : 'bg-slate-50/50 dark:bg-slate-800/50'
                 }`}
               >
                 <ResponsiveTableCell className="py-6">
                   <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-lg">
                       <FileText className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900 dark:text-white text-base">
+                      <div className="font-bold text-slate-900 dark:text-white text-base">
                         {invoice.invoiceNumber}
                       </div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
                         {formatDate(invoice.createdAt)}
                       </p>
                     </div>
@@ -144,7 +144,7 @@ const InvoicesTable: React.FC<InvoicesTableProps> = ({ data, type, onView, onEdi
                     <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                       <User className="w-4 h-4 text-white" />
                     </div>
-                    <span className="font-semibold text-gray-900 dark:text-white">
+                    <span className="font-semibold text-slate-900 dark:text-white">
                       {invoice.clientName}
                     </span>
                   </div>
@@ -164,8 +164,8 @@ const InvoicesTable: React.FC<InvoicesTableProps> = ({ data, type, onView, onEdi
                 </ResponsiveTableCell>
                 <ResponsiveTableCell className="py-6">
                   <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                    <Calendar className="w-4 h-4 text-gray-400" />
-                    <span className="text-gray-900 dark:text-white font-medium">
+                    <Calendar className="w-4 h-4 text-slate-400" />
+                    <span className="text-slate-900 dark:text-white font-medium">
                       {formatDate(invoice.dueDate)}
                     </span>
                   </div>
@@ -177,7 +177,7 @@ const InvoicesTable: React.FC<InvoicesTableProps> = ({ data, type, onView, onEdi
                         <MoreHorizontal className="w-5 h-5" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align={isRTL ? 'start' : 'end'} className="rounded-xl shadow-xl border-0 bg-white dark:bg-gray-800">
+                    <DropdownMenuContent align={isRTL ? 'start' : 'end'} className="rounded-xl shadow-xl border-0 bg-white dark:bg-slate-800">
                       <DropdownMenuItem onClick={() => onView(invoice)} className="rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20">
                         <Eye className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2 text-blue-600" />
                         <span className="font-medium">{t('view') || (isRTL ? 'عرض' : 'View')}</span>
@@ -210,17 +210,17 @@ const InvoicesTable: React.FC<InvoicesTableProps> = ({ data, type, onView, onEdi
       {/* Mobile Cards */}
       <div className="lg:hidden space-y-4">
         {data.map((invoice) => (
-          <div key={invoice.id} className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+          <div key={invoice.id} className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-xl transition-all duration-300 transform ">
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center space-x-3 rtl:space-x-reverse flex-1">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center shadow-lg">
                   <FileText className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">
                     {invoice.invoiceNumber}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
                     {formatDate(invoice.createdAt)}
                   </p>
                 </div>
@@ -231,7 +231,7 @@ const InvoicesTable: React.FC<InvoicesTableProps> = ({ data, type, onView, onEdi
                     <MoreHorizontal className="w-5 h-5" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align={isRTL ? 'start' : 'end'} className="rounded-xl shadow-xl border-0 bg-white dark:bg-gray-800">
+                <DropdownMenuContent align={isRTL ? 'start' : 'end'} className="rounded-xl shadow-xl border-0 bg-white dark:bg-slate-800">
                   <DropdownMenuItem onClick={() => onView(invoice)} className="rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20">
                     <Eye className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2 text-blue-600" />
                     <span className="font-medium">{t('view') || (isRTL ? 'عرض' : 'View')}</span>
@@ -252,35 +252,35 @@ const InvoicesTable: React.FC<InvoicesTableProps> = ({ data, type, onView, onEdi
             </div>
             
             <div className="grid grid-cols-2 gap-4 mb-4">
-              <div className="bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-800 dark:to-slate-800 rounded-xl p-4">
-                <span className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 dark:border-slate-800 dark:bg-slate-800/40">
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-1">
                   {type === 'buy' 
                     ? (t('supplierName') || (isRTL ? 'المورد' : 'Supplier'))
                     : (t('clientName') || (isRTL ? 'العميل' : 'Client'))
                   }
                 </span>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                <span className="text-sm font-semibold text-slate-900 dark:text-white">
                   {invoice.clientName}
                 </span>
               </div>
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-4">
-                <span className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+              <div className="rounded-xl border border-emerald-100 bg-emerald-50/70 p-4 dark:border-emerald-900 dark:bg-emerald-950/30">
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-1">
                   {t('amount') || (isRTL ? 'المبلغ' : 'Amount')}
                 </span>
                 <span className="text-sm font-bold text-green-600 dark:text-green-400">
                   {formatCurrency(invoice.amount)}
                 </span>
               </div>
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4">
-                <span className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+              <div className="rounded-xl border border-brand-100 bg-brand-50/70 p-4 dark:border-brand-900 dark:bg-brand-950/30">
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-1">
                   {t('dueDate') || (isRTL ? 'تاريخ الاستحقاق' : 'Due Date')}
                 </span>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                <span className="text-sm font-semibold text-slate-900 dark:text-white">
                   {formatDate(invoice.dueDate)}
                 </span>
               </div>
-              <div className="bg-gradient-to-r from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 rounded-xl p-4">
-                <span className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+              <div className="rounded-xl border border-brand-100 bg-brand-50/70 p-4 dark:border-brand-900 dark:bg-brand-950/30">
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-1">
                   {t('status') || (isRTL ? 'الحالة' : 'Status')}
                 </span>
                 <Badge className={`${getStatusBadgeColor(invoice.status)} border font-semibold text-xs`}>
@@ -293,14 +293,14 @@ const InvoicesTable: React.FC<InvoicesTableProps> = ({ data, type, onView, onEdi
       </div>
 
       {data.length === 0 && (
-        <div className="text-center py-16 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-          <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+        <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700">
+          <div className="w-20 h-20 bg-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
             <FileText className="w-10 h-10 text-white" />
           </div>
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
             {t('noInvoices') || (isRTL ? 'لا توجد فواتير' : 'No invoices found')}
           </h3>
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="text-slate-500 dark:text-slate-400">
             {t('noInvoicesDescription') || (isRTL ? 'ابدأ بإنشاء فاتورتك الأولى' : 'Start by creating your first invoice')}
           </p>
         </div>

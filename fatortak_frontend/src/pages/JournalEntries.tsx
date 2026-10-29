@@ -113,7 +113,7 @@ const JournalEntries: React.FC = () => {
   };
 
   const referenceTypeColors: Record<JournalEntryReferenceType, string> = {
-    [JournalEntryReferenceType.Manual]: "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200",
+    [JournalEntryReferenceType.Manual]: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200",
     [JournalEntryReferenceType.Invoice]: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
     [JournalEntryReferenceType.Expense]: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
     [JournalEntryReferenceType.Payment]: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
@@ -168,7 +168,7 @@ const JournalEntries: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <Card>
@@ -182,7 +182,7 @@ const JournalEntries: React.FC = () => {
                   <CardTitle className="text-2xl">
                     {isRTL ? "قيود اليومية" : "Journal Entries"}
                   </CardTitle>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
                     {isRTL
                       ? "إدارة القيود المحاسبية"
                       : "Manage accounting journal entries"}
@@ -202,7 +202,7 @@ const JournalEntries: React.FC = () => {
           <CardContent className="p-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                 <Input
                   placeholder={
                     isRTL ? "بحث برقم القيد..." : "Search by entry number..."
@@ -311,10 +311,10 @@ const JournalEntries: React.FC = () => {
                         <TableHead>{isRTL ? "التاريخ" : "Date"}</TableHead>
                         <TableHead>{isRTL ? "النوع" : "Type"}</TableHead>
                         <TableHead>{isRTL ? "الوصف" : "Description"}</TableHead>
-                        <TableHead className="text-right">
+                        <TableHead className="text-end">
                           {isRTL ? "مدين" : "Debit"}
                         </TableHead>
-                        <TableHead className="text-right">
+                        <TableHead className="text-end">
                           {isRTL ? "دائن" : "Credit"}
                         </TableHead>
                         <TableHead>{isRTL ? "الحالة" : "Status"}</TableHead>
@@ -343,10 +343,10 @@ const JournalEntries: React.FC = () => {
                             <TableCell className="max-w-xs truncate">
                               {entry.description || "-"}
                             </TableCell>
-                            <TableCell className="text-right font-mono">
+                            <TableCell className="text-end font-mono">
                               {formatCurrency(entry.totalDebit)}
                             </TableCell>
-                            <TableCell className="text-right font-mono">
+                            <TableCell className="text-end font-mono">
                               {formatCurrency(entry.totalCredit)}
                             </TableCell>
                             <TableCell>
@@ -399,7 +399,7 @@ const JournalEntries: React.FC = () => {
                         <TableRow>
                           <TableCell
                             colSpan={8}
-                            className="text-center py-12 text-gray-500"
+                            className="text-center py-12 text-slate-500"
                           >
                             {isRTL ? "لا توجد قيود" : "No entries found"}
                           </TableCell>
@@ -412,7 +412,7 @@ const JournalEntries: React.FC = () => {
                 {/* Pagination */}
                 {totalPages > 1 && (
                   <div className="flex items-center justify-between mt-6 border-t pt-4">
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-slate-500">
                       {isRTL
                         ? `عرض ${entries.length} من ${totalCount} قيد`
                         : `Showing ${entries.length} of ${totalCount} entries`}
@@ -781,7 +781,7 @@ const CreateJournalEntryModal: React.FC<CreateJournalEntryModalProps> = ({
              </div>
           </div>
 
-          <div className="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+          <div className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
             <div>
               <span className="text-sm font-semibold">
                 {isRTL ? "إجمالي المدين:" : "Total Debit:"}{" "}
@@ -859,32 +859,32 @@ const JournalEntryDetailModal: React.FC<JournalEntryDetailModalProps> = ({
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label className="text-sm text-gray-500">
+              <Label className="text-sm text-slate-500">
                 {isRTL ? "رقم القيد" : "Entry Number"}
               </Label>
               <p className="font-mono font-semibold">{entry.entryNumber}</p>
             </div>
             <div>
-              <Label className="text-sm text-gray-500">
+              <Label className="text-sm text-slate-500">
                 {isRTL ? "التاريخ" : "Date"}
               </Label>
               <p>{formatDate(new Date(entry.date))}</p>
             </div>
             <div>
-              <Label className="text-sm text-gray-500">
+              <Label className="text-sm text-slate-500">
                 {isRTL ? "النوع" : "Type"}
               </Label>
               <p>{entry.referenceTypeName}</p>
             </div>
             <div>
-              <Label className="text-sm text-gray-500">
+              <Label className="text-sm text-slate-500">
                 {isRTL ? "الحالة" : "Status"}
               </Label>
               <Badge
                 className={
                   entry.isPosted
                     ? "bg-green-100 text-green-800"
-                    : "bg-gray-100 text-gray-800"
+                    : "bg-slate-100 text-slate-800"
                 }
               >
                 {entry.isPosted
@@ -918,7 +918,7 @@ const JournalEntryDetailModal: React.FC<JournalEntryDetailModalProps> = ({
             )}
             {entry.description && (
               <div className="col-span-2">
-                <Label className="text-sm text-gray-500">
+                <Label className="text-sm text-slate-500">
                   {isRTL ? "الوصف" : "Description"}
                 </Label>
                 <p>{entry.description}</p>
@@ -934,10 +934,10 @@ const JournalEntryDetailModal: React.FC<JournalEntryDetailModalProps> = ({
               <TableHeader>
                 <TableRow>
                   <TableHead>{isRTL ? "الحساب" : "Account"}</TableHead>
-                  <TableHead className="text-right">
+                  <TableHead className="text-end">
                     {isRTL ? "مدين" : "Debit"}
                   </TableHead>
-                  <TableHead className="text-right">
+                  <TableHead className="text-end">
                     {isRTL ? "دائن" : "Credit"}
                   </TableHead>
                   <TableHead>{isRTL ? "الوصف" : "Description"}</TableHead>
@@ -951,18 +951,18 @@ const JournalEntryDetailModal: React.FC<JournalEntryDetailModalProps> = ({
                         <div className="font-mono text-sm">
                           {line.accountCode}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-sm text-slate-500">
                           {line.accountName}
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="text-right font-mono">
+                    <TableCell className="text-end font-mono">
                       {line.debit > 0 ? formatCurrency(line.debit) : "-"}
                     </TableCell>
-                    <TableCell className="text-right font-mono">
+                    <TableCell className="text-end font-mono">
                       {line.credit > 0 ? formatCurrency(line.credit) : "-"}
                     </TableCell>
-                    <TableCell className="text-sm text-gray-500">
+                    <TableCell className="text-sm text-slate-500">
                       {line.description || "-"}
                     </TableCell>
                   </TableRow>
@@ -971,10 +971,10 @@ const JournalEntryDetailModal: React.FC<JournalEntryDetailModalProps> = ({
                   <TableCell>
                     {isRTL ? "الإجمالي" : "Total"}
                   </TableCell>
-                  <TableCell className="text-right font-mono">
+                  <TableCell className="text-end font-mono">
                     {formatCurrency(entry.totalDebit)}
                   </TableCell>
-                  <TableCell className="text-right font-mono">
+                  <TableCell className="text-end font-mono">
                     {formatCurrency(entry.totalCredit)}
                   </TableCell>
                   <TableCell></TableCell>

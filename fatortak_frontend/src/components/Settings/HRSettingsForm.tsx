@@ -205,7 +205,7 @@ const HRSettingsForm: React.FC = () => {
   };
 
   const SectionCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-    <div className={`bg-gradient-to-br from-background to-muted/30 rounded-xl border shadow-sm hover:shadow-md transition-shadow duration-300 p-6 ${className}`}>
+    <div className={`rounded-xl border border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] hover:shadow-md transition-shadow duration-300 p-6 dark:border-slate-800 dark:bg-slate-900 ${className}`}>
       {children}
     </div>
   );
@@ -269,7 +269,7 @@ const HRSettingsForm: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsWeekendDropdownOpen(!isWeekendDropdownOpen)}
-                  className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm flex items-center justify-between text-left font-medium"
+                  className="w-full px-4 py-2.5 border rounded-lg bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm flex items-center justify-between text-start font-medium"
                 >
                   <span className="truncate">
                     {selectedWeekendDays.length > 0
@@ -450,7 +450,7 @@ const HRSettingsForm: React.FC = () => {
             ))}
 
             {workSettings.generalVacations.length === 0 && !showVacationForm && (
-              <div className="col-span-full py-16 text-center border-2 border-dashed rounded-3xl border-muted">
+              <div className="col-span-full py-16 text-center border-2 border-dashed rounded-2xl border-muted">
                 <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-muted-foreground/50 text-2xl">?</div>
                 <h5 className="font-semibold text-foreground">{t("noVacationsConfigured")}</h5>
                 <p className="text-sm text-muted-foreground max-w-[240px] mx-auto mt-1">{t("addVacationToGetStarted")}</p>
@@ -466,7 +466,7 @@ const HRSettingsForm: React.FC = () => {
           type="button"
           onClick={handleSubmit}
           disabled={loading}
-          className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary disabled:opacity-50 text-primary-foreground font-bold rounded-2xl transition-all shadow-xl shadow-primary/25"
+          className="flex items-center gap-2 px-8 py-3 bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors shadow-sm"
         >
           {loading ? (
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-foreground"></div>

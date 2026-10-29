@@ -65,13 +65,13 @@ const PublicInvoicePage = () => {
       case "pending":
         return "bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800";
       case "draft":
-        return "bg-gray-50 text-gray-700 border-gray-200 dark:bg-gray-900/20 dark:text-gray-400 dark:border-gray-800";
+        return "bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900/20 dark:text-slate-400 dark:border-slate-800";
       case "overdue":
         return "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800";
       case "cancelled":
         return "bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-900/20 dark:text-orange-400 dark:border-orange-800";
       default:
-        return "bg-gray-50 text-gray-700 border-gray-200 dark:bg-gray-900/20 dark:text-gray-400 dark:border-gray-800";
+        return "bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900/20 dark:text-slate-400 dark:border-slate-800";
     }
   };
 
@@ -82,7 +82,7 @@ const PublicInvoicePage = () => {
       case "sell":
         return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400";
+        return "bg-slate-100 text-slate-800 dark:bg-slate-900/20 dark:text-slate-400";
     }
   };
 
@@ -149,7 +149,7 @@ const PublicInvoicePage = () => {
             .terms-section { margin-top: 20px; padding: 20px; background: #F3F4F6; border-radius: 8px; }
             .terms-section h3 { margin: 0 0 12px 0; font-size: 16px; font-weight: 600; color: #1F2937; }
             .text-center { text-align: center; }
-            .text-right { text-align: right; }
+            .text-end { text-align: right; }
             .footer { margin-top: 60px; text-align: center; font-size: 12px; color: #6B7280; }
           </style>
         </head>
@@ -228,9 +228,9 @@ const PublicInvoicePage = () => {
   if (isLoading) {
     return (
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-        <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 p-8 max-w-md text-center">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 p-8 max-w-md text-center">
           <Loader2 className="w-12 h-12 animate-spin text-purple-600 mx-auto" />
-          <p className="mt-4 text-gray-600 dark:text-gray-400">
+          <p className="mt-4 text-slate-600 dark:text-slate-400">
             {t("loadingInvoice")}
           </p>
         </div>
@@ -241,12 +241,12 @@ const PublicInvoicePage = () => {
   if (!invoice) {
     return (
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-        <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 p-8 max-w-md text-center">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 p-8 max-w-md text-center">
           <X className="w-16 h-16 mx-auto text-red-500 mb-4" />
-          <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+          <h2 className="text-2xl font-bold mb-2 text-slate-900 dark:text-white">
             {t("invoiceNotFound")}
           </h2>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-slate-600 dark:text-slate-400">
             {t("invoiceExpiredOrDeleted")}
           </p>
         </div>
@@ -256,18 +256,18 @@ const PublicInvoicePage = () => {
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-y-auto border border-gray-200 dark:border-gray-700">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg w-full max-w-5xl max-h-[95vh] overflow-y-auto border border-slate-200 dark:border-slate-700">
         {/* Header */}
-        <div className="flex items-center justify-between p-8 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20">
+        <div className="flex items-center justify-between p-8 border-b border-slate-200 dark:border-slate-700 bg-brand-50/60 dark:bg-brand-950/20">
           <div className="flex items-center space-x-4">
-            <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-violet-600 rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-14 h-14 bg-brand-600 rounded-2xl flex items-center justify-center shadow-lg">
               <FileText className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                 {t("invoiceDetails")}
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
+              <p className="text-slate-600 dark:text-slate-400 mt-1">
                 {invoice.invoiceNumber}
               </p>
             </div>
@@ -275,24 +275,24 @@ const PublicInvoicePage = () => {
           <div className="flex space-x-3">
             <button
               onClick={handlePrint}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 hover:scale-110"
+              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 "
               title={t("print")}
             >
-              <Printer className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+              <Printer className="w-6 h-6 text-slate-700 dark:text-slate-300" />
             </button>
             <button
               onClick={handleDownloadPDF}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 hover:scale-110"
+              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 "
               title={t("downloadPDF")}
             >
-              <Download className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+              <Download className="w-6 h-6 text-slate-700 dark:text-slate-300" />
             </button>
             <button
               onClick={handleShare}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 hover:scale-110"
+              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 "
               title={t("shareViaWhatsApp")}
             >
-              <Share2 className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+              <Share2 className="w-6 h-6 text-slate-700 dark:text-slate-300" />
             </button>
           </div>
         </div>
@@ -321,7 +321,7 @@ const PublicInvoicePage = () => {
         </div>
 
         {/* Actions Footer */}
-        <div className="border-t border-gray-200 dark:border-gray-700 p-6 bg-gray-50 dark:bg-gray-800/50">
+        <div className="border-t border-slate-200 dark:border-slate-700 p-6 bg-slate-50 dark:bg-slate-800/50">
           <div
             className={`flex flex-wrap gap-4 justify-center ${
               isRTL ? "flex-row-reverse" : ""
@@ -329,21 +329,21 @@ const PublicInvoicePage = () => {
           >
             <button
               onClick={handlePrint}
-              className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-violet-600 text-white rounded-xl hover:from-purple-700 hover:to-violet-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex items-center space-x-2 px-4 py-3 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition-colors shadow-sm "
             >
               <Printer className="w-5 h-5" />
               <span>{t("print")}</span>
             </button>
             <button
               onClick={handleDownloadPDF}
-              className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex items-center space-x-2 px-4 py-3 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition-colors shadow-sm "
             >
               <Download className="w-5 h-5" />
               <span>{t("downloadPDF")}</span>
             </button>
             <button
               onClick={handleShare}
-              className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex items-center space-x-2 px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-200 shadow-lg hover:shadow-xl transform "
             >
               <Share2 className="w-5 h-5" />
               <span>{t("share")}</span>
@@ -351,7 +351,7 @@ const PublicInvoicePage = () => {
             {invoice?.attachmentUrl && (
               <button
                 onClick={() => window.open(`${import.meta.env.VITE_API_URL || 'https://localhost:44338'}/${invoice.attachmentUrl}`, '_blank')}
-                className="flex items-center space-x-2 px-6 py-3 bg-white text-indigo-600 border border-indigo-200 rounded-xl hover:bg-indigo-50 transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-105"
+                className="flex items-center space-x-2 px-4 py-3 bg-white text-indigo-600 border border-indigo-200 rounded-xl hover:bg-indigo-50 transition-all duration-200 shadow-sm hover:shadow-md transform "
               >
                 <Paperclip className="w-5 h-5" />
                 <span>{isRTL ? "عرض المرفق" : "View Attachment"}</span>

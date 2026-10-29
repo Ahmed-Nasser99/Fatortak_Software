@@ -346,7 +346,7 @@ const SellInvoices: React.FC = () => {
       case "sent":
         return "bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400";
       case "draft":
-        return "bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900/20 dark:text-gray-400";
+        return "bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-900/20 dark:text-slate-400";
       case "pending":
         return "bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-400";
       case "cancelled":
@@ -354,7 +354,7 @@ const SellInvoices: React.FC = () => {
       case "overdue":
         return "bg-red-100 text-red-800 border-red-200 dark:bg-red-900/20 dark:text-red-400";
       default:
-        return "bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900/20 dark:text-gray-400";
+        return "bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-900/20 dark:text-slate-400";
     }
   };
 
@@ -383,7 +383,7 @@ const SellInvoices: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      <div className="min-h-screen bg-canvas dark:bg-slate-950">
         <div className="flex items-center justify-center min-h-screen">
           <Card className="w-full max-w-md mx-4">
             <CardContent className="p-8 text-center">
@@ -411,17 +411,17 @@ const SellInvoices: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950">
       <div className="container !max-w-full mx-auto p-4 space-y-6">
         {/* Enhanced Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 text-white shadow-2xl">
+        <div className="page-hero">
           <div
             className={`flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 ${
               isRTL ? "lg:flex-row-reverse" : ""
             }`}
           >
             <div className={`flex items-center space-x-4`}>
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg mx-3">
+              <div className="page-hero-icon mx-3">
                 <FileText className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -439,7 +439,7 @@ const SellInvoices: React.FC = () => {
             {roleAccess.canCreate() && (
               <Button
                 onClick={handleNewInvoice}
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                className="page-hero-action"
               >
                 <Plus className="w-5 h-5 mr-2" />
                 <span className="font-semibold">
@@ -452,50 +452,50 @@ const SellInvoices: React.FC = () => {
 
         {/* Enhanced Stats Grid - Updated with new structure */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20 border-blue-200 dark:border-blue-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                  <p className="whitespace-nowrap text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "إجمالي الفواتير" : "Total Invoices"}
                   </p>
-                  <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.total)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50 dark:bg-sky-950/40">
                   <FileText className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-950/20 dark:to-gray-900/20 border-gray-200 dark:border-gray-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">
                     {isRTL ? "مسودة" : "Draft"}
                   </p>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                     {formatNumber(stats.draft)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-gray-500/20 rounded-xl flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-gray-600" />
+                <div className="w-12 h-12 bg-slate-500/20 rounded-xl flex items-center justify-center">
+                  <Clock className="w-6 h-6 text-slate-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-950/20 dark:to-yellow-900/20 border-yellow-200 dark:border-yellow-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-yellow-600 dark:text-yellow-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "معلقة" : "Pending"}
                   </p>
-                  <p className="text-2xl font-bold text-yellow-900 dark:text-yellow-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.pending)}
                   </p>
                 </div>
@@ -506,54 +506,54 @@ const SellInvoices: React.FC = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/20 dark:to-emerald-900/20 border-emerald-200 dark:border-emerald-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "مدفوعة" : "Paid"}
                   </p>
-                  <p className="text-2xl font-bold text-emerald-900 dark:text-emerald-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.paid)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/40">
                   <CheckCircle className="w-6 h-6 text-emerald-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-950/20 dark:to-red-900/20 border-red-200 dark:border-red-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-red-600 dark:text-red-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "متأخرة" : "Overdue"}
                   </p>
-                  <p className="text-2xl font-bold text-red-900 dark:text-red-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.overdue)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-950/40">
                   <AlertCircle className="w-6 h-6 text-red-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-950/20 dark:to-red-900/20 border-red-200 dark:border-red-800 hover:shadow-lg transition-all duration-300">
+          <Card className="border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-red-600 dark:text-red-400 font-medium">
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {isRTL ? "ملغية" : "Cancelled"}
                   </p>
-                  <p className="text-2xl font-bold text-red-900 dark:text-red-100">
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {formatNumber(stats.cancelled)}
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-950/40">
                   <XCircle className="w-6 h-6 text-red-600" />
                 </div>
               </div>
@@ -562,7 +562,7 @@ const SellInvoices: React.FC = () => {
         </div>
 
         {/* Enhanced Filters */}
-        <Card className="bg-card/60 backdrop-blur-sm border shadow-sm">
+        <Card className="border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900">
           <CardContent className="p-6">
             <div className="flex flex-col xl:flex-row gap-4">
               <div className="flex-1 relative">
@@ -581,7 +581,7 @@ const SellInvoices: React.FC = () => {
                     setFilters((prev) => ({ ...prev, search: e.target.value }));
                   }}
                   className={`w-full py-3 px-4 ${
-                    isRTL ? "pr-12 text-right" : "pl-12"
+                    isRTL ? "pr-12 text-end" : "pl-12"
                   } border rounded-xl bg-background/60 backdrop-blur-sm focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200`}
                 />
               </div>
@@ -594,7 +594,7 @@ const SellInvoices: React.FC = () => {
                     setFilters((prev) => ({ ...prev, status: newStatus }));
                   }}
                   className={`w-full py-3 px-4 border rounded-xl bg-background/60 backdrop-blur-sm focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 ${
-                    isRTL ? "text-right" : ""
+                    isRTL ? "text-end" : ""
                   }`}
                 >
                   <option value="">{t("allStatus")}</option>
@@ -608,7 +608,7 @@ const SellInvoices: React.FC = () => {
                 <Button
                   variant="outline"
                   onClick={() => setIsFilterModalOpen(true)}
-                  className="bg-background/60 backdrop-blur-sm hover:bg-background/80"
+                  className="bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800"
                 >
                   <Filter className="w-4 h-4 mr-2" />
                   {t("moreFilters")}
@@ -620,7 +620,7 @@ const SellInvoices: React.FC = () => {
 
         {/* Loading State */}
         {isLoading && (
-          <Card className="bg-card/60 backdrop-blur-sm">
+          <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-12">
               <div className="flex items-center justify-center space-x-3">
                 <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent"></div>
@@ -632,81 +632,81 @@ const SellInvoices: React.FC = () => {
           </Card>
         )}
 
-        {!isLoading && (
-          <Card className="bg-card/60 backdrop-blur-sm border shadow-sm">
+        {!isLoading && invoices.length > 0 && (
+          <Card className="border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900">
             {/* Desktop Table */}
             <div className="hidden lg:block">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b bg-muted/30">
+                    <tr className="border-b bg-slate-50/80 dark:bg-slate-800/60">
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("invoiceNumber")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("customer")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {isRTL ? "المشروع" : "Project"}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("amount")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {isRTL ? "المدفوع" : "Paid"}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {isRTL ? "المتبقي" : "Remaining"}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("status")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("date")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("dueDate")}
                       </th>
                       <th
-                        className={`px-6 py-4 text-${
+                        className={`px-4 py-3 text-${
                           isRTL ? "right" : "left"
-                        } text-sm font-semibold text-muted-foreground`}
+                        } text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400`}
                       >
                         {t("actions")}
                       </th>
@@ -718,17 +718,17 @@ const SellInvoices: React.FC = () => {
                         key={invoice.id}
                         className="hover:bg-muted/20 transition-colors"
                       >
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div className="flex items-center space-x-2">
                             <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
                               <FileText className="w-4 h-4 text-primary" />
                             </div>
-                            <span className="font-medium">
+                            <span className="whitespace-nowrap font-medium">
                               {invoice.invoiceNumber}
                             </span>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div className="flex items-center space-x-2">
                             <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
                               <Users className="w-4 h-4 text-muted-foreground" />
@@ -736,44 +736,40 @@ const SellInvoices: React.FC = () => {
                             <span>{invoice.customerName}</span>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div className="flex items-center space-x-2 text-sm">
                             <span className="text-muted-foreground">
                               {invoice.projectName || "-"}
                             </span>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div>
-                            <div className="font-semibold">
+                            <div className="whitespace-nowrap font-semibold text-slate-900 dark:text-white">
                               {formatCurrency(invoice.total)}{" "}
                               {invoice.currency || "EGP"}
                             </div>
-                            <div className="text-sm text-muted-foreground">
+                            <div className="whitespace-nowrap text-[11px] text-slate-400">
                               {t("vatLabel")}:{" "}
-                              {formatCurrency(invoice.vatAmount)}{" "}
-                              {invoice.currency || "EGP"}
+                              {formatCurrency(invoice.vatAmount)}
                             </div>
-                            <div className="text-sm text-muted-foreground">
+                            <div className="whitespace-nowrap text-[11px] text-slate-400">
                               {t("discountLabel")}:{" "}
-                              {formatCurrency(invoice.totalDiscount)}{" "}
-                              {invoice.currency || "EGP"}
+                              {formatCurrency(invoice.totalDiscount)}
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
-                          <div className="font-medium text-emerald-600 dark:text-emerald-400">
-                            {formatCurrency(invoice.amountPaid || 0)}{" "}
-                            {invoice.currency || "EGP"}
+                        <td className="px-4 py-3">
+                          <div className="whitespace-nowrap font-medium text-emerald-600 dark:text-emerald-400">
+                            {formatCurrency(invoice.amountPaid || 0)}
                           </div>
                         </td>
-                        <td className="px-6 py-4">
-                          <div className="font-medium text-rose-600 dark:text-rose-400">
-                            {formatCurrency(invoice.remainingAmount)}{" "}
-                            {invoice.currency || "EGP"}
+                        <td className="px-4 py-3">
+                          <div className="whitespace-nowrap font-medium text-rose-600 dark:text-rose-400">
+                            {formatCurrency(invoice.remainingAmount)}
                           </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <div className="relative">
                             <DropdownMenu>
                               <DropdownMenuTrigger asChild>
@@ -818,19 +814,19 @@ const SellInvoices: React.FC = () => {
                             </DropdownMenu>
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-sm text-muted-foreground">
+                        <td className="whitespace-nowrap px-4 py-3 text-xs text-muted-foreground">
                           {formatDate(invoice.issueDate)}
                         </td>
-                        <td className="px-6 py-4 text-sm text-muted-foreground">
+                        <td className="whitespace-nowrap px-4 py-3 text-xs text-muted-foreground">
                           {formatDate(invoice.dueDate)}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3">
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className="text-gray-600 hover:text-gray-800"
+                                className="text-slate-600 hover:text-slate-800"
                               >
                                 <MoreHorizontal className="w-5 h-5" />
                               </Button>
@@ -1001,7 +997,7 @@ const SellInvoices: React.FC = () => {
             </div>
 
             {/* Enhanced Pagination */}
-            <div className="border-t bg-muted/20 px-6 py-4">
+            <div className="border-t bg-muted/20 px-4 py-3">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-sm text-muted-foreground">
                   {isRTL
@@ -1033,7 +1029,7 @@ const SellInvoices: React.FC = () => {
 
         {/* Enhanced Empty State */}
         {!isLoading && invoices.length === 0 && (
-          <Card className="bg-card/60 backdrop-blur-sm">
+          <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-12 text-center">
               <div className="w-20 h-20 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <FileText className="w-10 h-10 text-muted-foreground" />
@@ -1046,7 +1042,7 @@ const SellInvoices: React.FC = () => {
               </p>
               <Button
                 onClick={handleNewInvoice}
-                className="bg-gradient-to-r from-primary to-primary/80"
+                className="bg-brand-600"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 {t("createFirstInvoice")}

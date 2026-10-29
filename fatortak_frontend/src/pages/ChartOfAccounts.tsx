@@ -173,8 +173,8 @@ const ChartOfAccounts: React.FC = () => {
       return (
         <div key={account.id} className="group">
           <div
-            className={`flex items-center gap-2 p-2 rounded-lg transition-all duration-200 hover:bg-white hover:shadow-sm dark:hover:bg-gray-800 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 ${
-              level > 0 ? "" : "font-semibold bg-gray-50/50 dark:bg-gray-900/30"
+            className={`flex items-center gap-2 p-2 rounded-lg transition-all duration-200 hover:bg-white hover:shadow-sm dark:hover:bg-slate-800 border border-transparent hover:border-slate-200 dark:hover:border-slate-700 ${
+              level > 0 ? "" : "font-semibold bg-slate-50/50 dark:bg-slate-900/30"
             }`}
             style={{ marginLeft: `${level * 1.5}rem` }}
           >
@@ -182,23 +182,23 @@ const ChartOfAccounts: React.FC = () => {
               {hasChildren ? (
                 <button
                   onClick={() => toggleExpand(account.id)}
-                  className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                  className="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors"
                 >
                   {isExpanded ? (
-                    <ChevronDown className="w-4 h-4 text-gray-600" />
+                    <ChevronDown className="w-4 h-4 text-slate-600" />
                   ) : (
-                    <ChevronRight className="w-4 h-4 text-gray-600" />
+                    <ChevronRight className="w-4 h-4 text-slate-600" />
                   )}
                 </button>
               ) : (
                 <div className="w-6 h-6 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600" />
                 </div>
               )}
             </div>
 
             <div className="flex-1 flex items-center gap-3">
-              <span className="font-mono text-xs px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-gray-600 dark:text-gray-400">
+              <span className="font-mono text-xs px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">
                 {account.accountCode}
               </span>
               <span className="flex-1 truncate text-sm lg:text-base">
@@ -266,7 +266,7 @@ const ChartOfAccounts: React.FC = () => {
           {hasChildren && isExpanded && account.childAccounts && (
             <div className="relative">
                 {/* Connecting Line */}
-                <div className="absolute left-[11px] top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-700 ml-[-0px]" style={{ marginLeft: `${level * 1.5}rem` }} />
+                <div className="absolute left-[11px] top-0 bottom-0 w-px bg-slate-200 dark:bg-slate-700 ml-[-0px]" style={{ marginLeft: `${level * 1.5}rem` }} />
                 <div className="">
                 {renderAccountTree(account.childAccounts, level + 1)}
                 </div>
@@ -314,7 +314,7 @@ const ChartOfAccounts: React.FC = () => {
           </div>
           <Button 
             onClick={handleCreateAccount}
-            className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 px-6"
+            className="bg-brand-600 hover:bg-brand-700 text-white shadow-lg shadow-blue-500/20 px-6"
           >
             <Plus className="w-4 h-4 mr-2" />
             {isRTL ? "إضافة حساب رئيسي" : "Add Root Account"}
@@ -382,7 +382,7 @@ const ChartOfAccounts: React.FC = () => {
                                 type === AccountType.Equity.toString() ? 'bg-emerald-500' :
                                 type === AccountType.Revenue.toString() ? 'bg-purple-500' : 'bg-orange-500'
                             }`} />
-                            <h2 className="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                            <h2 className="text-sm font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                                 {accountTypeNames[parseInt(type)]}
                             </h2>
                             <Badge variant="secondary" className="ml-auto rounded-full px-2.5">

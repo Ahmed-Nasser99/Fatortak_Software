@@ -26,7 +26,7 @@ const HeaderSearch: React.FC = () => {
         <Search
           className={`absolute top-1/2 transform -translate-y-1/2 ${
             isRTL ? "right-4" : "left-4"
-          } w-5 h-5 text-gray-400 z-10 transition-colors duration-200 group-focus-within:text-blue-500`}
+          } w-5 h-5 text-slate-400 z-10 transition-colors duration-200 group-focus-within:text-blue-500`}
         />
         <input
           type="text"
@@ -35,12 +35,12 @@ const HeaderSearch: React.FC = () => {
           placeholder={t("search")}
           className={`
             relative z-10 w-72 lg:w-96 py-3.5 text-sm font-medium
-            ${isRTL ? "pr-12 pl-6 text-right" : "pl-12 pr-6"} 
-            border-2 border-gray-200/60 dark:border-gray-700/60 rounded-2xl
-            bg-gray-50/80 dark:bg-gray-800/80 backdrop-blur-sm
-            focus:ring-4 focus:ring-blue-500/20 focus:border-blue-400 focus:bg-white dark:focus:bg-gray-800
-            dark:text-white placeholder:text-gray-400
-            transition-all duration-300 hover:shadow-lg focus:shadow-xl hover:border-gray-300 dark:hover:border-gray-600
+            ${isRTL ? "pr-12 pl-6 text-end" : "pl-12 pr-6"} 
+            border-2 border-slate-200/60 dark:border-slate-700/60 rounded-2xl
+            bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-sm
+            focus:ring-4 focus:ring-brand-100 focus:border-blue-400 focus:bg-white dark:focus:bg-slate-800
+            dark:text-white placeholder:text-slate-400
+            transition-all duration-300 hover:shadow-lg focus:shadow-xl hover:border-slate-300 dark:hover:border-slate-600
           `}
         />
       </div>

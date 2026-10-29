@@ -235,19 +235,19 @@ const OcrInvoicePage: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800"
+      className="min-h-screen bg-canvas dark:bg-slate-950"
       dir={isRTL ? "rtl" : "ltr"}
     >
       <div className="mx-auto p-4 sm:p-6 lg:p-8">
         {/* Enhanced Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-8 mb-8 text-white shadow-2xl">
+        <div className="page-hero mb-6">
           <div className={`flex items-center justify-between relative z-10 `}>
             <div className={`flex items-center space-x-4`}>
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg mx-3">
+              <div className="page-hero-icon mx-3">
                 <Scan className="w-8 h-8 text-white" />
               </div>
-              <div className={isRTL ? "text-right" : "text-left"}>
-                <h1 className="text-4xl font-bold mb-2">
+              <div className={isRTL ? "text-end" : "text-start"}>
+                <h1 className="text-3xl font-bold mb-2">
                   {t("ocrInvoiceProcessing")}
                 </h1>
                 <p className="text-blue-100 text-lg">
@@ -262,7 +262,7 @@ const OcrInvoicePage: React.FC = () => {
           {/* Left Panel - File Upload & Preview */}
           <div className="xl:w-1/2 space-y-6">
             {/* Upload Card */}
-            <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
+            <Card className="shadow-lg border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm">
               <CardHeader>
                 <div
                   className={`flex items-center justify-between ${
@@ -282,7 +282,7 @@ const OcrInvoicePage: React.FC = () => {
                       variant="ghost"
                       size="sm"
                       onClick={handleReset}
-                      className="text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200"
+                      className="text-slate-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200"
                     >
                       <RotateCcw className="w-4 h-4 mr-2" />
                       {t("reset")}
@@ -292,14 +292,14 @@ const OcrInvoicePage: React.FC = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 {!selectedFile ? (
-                  <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-2xl p-12 text-center hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-all duration-300">
-                    <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl p-12 text-center hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-all duration-300">
+                    <div className="w-20 h-20 bg-brand-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                       <Upload className="w-10 h-10 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
                       {t("dragDropFile")}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-6 text-lg">
+                    <p className="text-slate-600 dark:text-slate-400 mb-6 text-lg">
                       {t("supportedFormats")}
                     </p>
                     <input
@@ -347,11 +347,11 @@ const OcrInvoicePage: React.FC = () => {
                               <File className="w-6 h-6 text-green-600" />
                             )}
                           </div>
-                          <div className={isRTL ? "text-right" : "text-left"}>
-                            <p className="font-semibold text-gray-900 dark:text-white">
+                          <div className={isRTL ? "text-end" : "text-start"}>
+                            <p className="font-semibold text-slate-900 dark:text-white">
                               {selectedFile.name}
                             </p>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <p className="text-sm text-slate-500 dark:text-slate-400">
                               {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
                             </p>
                           </div>
@@ -373,7 +373,7 @@ const OcrInvoicePage: React.FC = () => {
                         onClick={processFileWithOcr}
                         disabled={isProcessing}
                         size="lg"
-                        className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 disabled:transform-none py-4"
+                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 transform  disabled:transform-none py-4"
                       >
                         {isProcessing ? (
                           <Loader2 className="w-6 h-6 mr-3 animate-spin" />
@@ -387,10 +387,10 @@ const OcrInvoicePage: React.FC = () => {
                     )}
 
                     {/* Preview */}
-                    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 overflow-hidden shadow-inner">
-                      <div className="p-4 bg-gray-100 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 className="font-semibold text-gray-900 dark:text-white flex items-center">
-                          <Eye className="w-5 h-5 mr-2 text-gray-600" />
+                    <div className="bg-slate-50 dark:bg-slate-800 rounded-2xl border-2 border-slate-200 dark:border-slate-700 overflow-hidden shadow-inner">
+                      <div className="p-4 bg-slate-100 dark:bg-slate-700 border-b border-slate-200 dark:border-slate-600">
+                        <h4 className="font-semibold text-slate-900 dark:text-white flex items-center">
+                          <Eye className="w-5 h-5 mr-2 text-slate-600" />
                           {t("documentPreview") || "Document Preview"}
                         </h4>
                       </div>
@@ -403,10 +403,10 @@ const OcrInvoicePage: React.FC = () => {
                           />
                         ) : selectedFile ? (
                           <div className="text-center">
-                            <div className="w-16 h-16 bg-gray-200 dark:bg-gray-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-                              <FileText className="w-8 h-8 text-gray-500" />
+                            <div className="w-16 h-16 bg-slate-200 dark:bg-slate-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                              <FileText className="w-8 h-8 text-slate-500" />
                             </div>
-                            <p className="text-gray-600 dark:text-gray-400 text-lg">
+                            <p className="text-slate-600 dark:text-slate-400 text-lg">
                               {selectedFile.type === "application/pdf"
                                 ? t("pdfDocumentPreview")
                                 : t("documentPreview")}
@@ -414,10 +414,10 @@ const OcrInvoicePage: React.FC = () => {
                           </div>
                         ) : (
                           <div className="text-center">
-                            <div className="w-16 h-16 bg-gray-200 dark:bg-gray-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-                              <Eye className="w-8 h-8 text-gray-500" />
+                            <div className="w-16 h-16 bg-slate-200 dark:bg-slate-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                              <Eye className="w-8 h-8 text-slate-500" />
                             </div>
-                            <p className="text-gray-600 dark:text-gray-400 text-lg">
+                            <p className="text-slate-600 dark:text-slate-400 text-lg">
                               {t("filePreviewWillAppearHere")}
                             </p>
                           </div>
@@ -438,7 +438,7 @@ const OcrInvoicePage: React.FC = () => {
                 isRTL ? "flex-row-reverse" : ""
               }`}
             >
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                 {t("extractedData")}
               </h2>
               {extractedData && (
@@ -453,15 +453,15 @@ const OcrInvoicePage: React.FC = () => {
             </div>
 
             {!extractedData ? (
-              <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
+              <Card className="shadow-lg border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm">
                 <CardContent className="p-16 text-center">
-                  <div className="w-20 h-20 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-60">
+                  <div className="w-20 h-20 bg-gradient-to-r from-slate-400 to-slate-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-60">
                     <Scan className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
                     {t("readyToProcess")}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-lg">
+                  <p className="text-slate-600 dark:text-slate-400 text-lg">
                     {t("uploadAndProcessFile")}
                   </p>
                 </CardContent>
@@ -469,9 +469,9 @@ const OcrInvoicePage: React.FC = () => {
             ) : (
               <div className="space-y-6 max-h-[80vh] overflow-y-auto pr-2">
                 {/* Seller Information */}
-                <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
+                <Card className="shadow-lg border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm">
                   <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-t-lg">
-                    <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">
+                    <CardTitle className="text-lg font-bold text-slate-900 dark:text-white">
                       {t("sellerInformation")}
                     </CardTitle>
                   </CardHeader>
@@ -511,9 +511,9 @@ const OcrInvoicePage: React.FC = () => {
                 </Card>
 
                 {/* Buyer Information */}
-                <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
+                <Card className="shadow-lg border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm">
                   <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-t-lg">
-                    <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">
+                    <CardTitle className="text-lg font-bold text-slate-900 dark:text-white">
                       {t("buyerInformation")}
                     </CardTitle>
                   </CardHeader>
@@ -546,9 +546,9 @@ const OcrInvoicePage: React.FC = () => {
                 </Card>
 
                 {/* Invoice Details */}
-                <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
-                  <CardHeader className="bg-gradient-to-r from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 rounded-t-lg">
-                    <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">
+                <Card className="shadow-lg border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm">
+                  <CardHeader className="bg-brand-50/60 dark:bg-brand-950/20 rounded-t-lg">
+                    <CardTitle className="text-lg font-bold text-slate-900 dark:text-white">
                       {t("invoiceDetails")}
                     </CardTitle>
                   </CardHeader>
@@ -567,7 +567,7 @@ const OcrInvoicePage: React.FC = () => {
                         type="date"
                       />
                       <div className="space-y-2">
-                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                           {t("invoiceType") || "Invoice Type"}
                         </label>
                         <select
@@ -575,7 +575,7 @@ const OcrInvoicePage: React.FC = () => {
                           onChange={(e) =>
                             updateField("invoiceType", e.target.value)
                           }
-                          className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm transition-all duration-200"
+                          className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all duration-200"
                         >
                           {invoiceTypeOptions.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -585,7 +585,7 @@ const OcrInvoicePage: React.FC = () => {
                         </select>
                       </div>
                       <div className="space-y-2">
-                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                           {t("status") || "Status"}
                         </label>
                         <select
@@ -593,7 +593,7 @@ const OcrInvoicePage: React.FC = () => {
                           onChange={(e) =>
                             updateField("status", e.target.value)
                           }
-                          className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm transition-all duration-200"
+                          className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all duration-200"
                         >
                           {statusOptions.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -603,7 +603,7 @@ const OcrInvoicePage: React.FC = () => {
                         </select>
                       </div>
                       <div className="space-y-2">
-                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                           {t("purchaseType") || "Purchase Type"}
                         </label>
                         <select
@@ -611,7 +611,7 @@ const OcrInvoicePage: React.FC = () => {
                           onChange={(e) =>
                             updateField("purchaseType", e.target.value)
                           }
-                          className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm transition-all duration-200"
+                          className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all duration-200"
                         >
                           {invoicePurchaseOptions.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -625,14 +625,14 @@ const OcrInvoicePage: React.FC = () => {
                 </Card>
 
                 {/* Items */}
-                <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
+                <Card className="shadow-lg border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm">
                   <CardHeader className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-t-lg">
                     <div
                       className={`flex items-center justify-between ${
                         isRTL ? "flex-row-reverse" : ""
                       }`}
                     >
-                      <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">
+                      <CardTitle className="text-lg font-bold text-slate-900 dark:text-white">
                         {t("items")} ({extractedData.items.length})
                       </CardTitle>
                       <Button
@@ -650,7 +650,7 @@ const OcrInvoicePage: React.FC = () => {
                     {extractedData.items.map((item, index) => (
                       <div
                         key={index}
-                        className="bg-gradient-to-r from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-600 shadow-sm"
+                        className="bg-gradient-to-r from-slate-50 to-white dark:from-slate-700 dark:to-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-600 shadow-sm"
                       >
                         <div
                           className={`flex items-center justify-between mb-4 ${
@@ -740,8 +740,8 @@ const OcrInvoicePage: React.FC = () => {
                         </div>
 
                         <div
-                          className={`pt-4 border-t border-gray-200 dark:border-gray-600 ${
-                            isRTL ? "text-left" : "text-right"
+                          className={`pt-4 border-t border-slate-200 dark:border-slate-600 ${
+                            isRTL ? "text-start" : "text-end"
                           }`}
                         >
                           <span className="text-lg font-bold text-blue-600 dark:text-blue-400">
@@ -754,7 +754,7 @@ const OcrInvoicePage: React.FC = () => {
                 </Card>
 
                 {/* Summary */}
-                <Card className="shadow-lg border-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white">
+                <Card className="shadow-lg border-0 bg-brand-600 text-white">
                   <CardHeader>
                     <CardTitle className="text-xl font-bold text-white">
                       {t("invoiceSummary")}
@@ -804,7 +804,7 @@ const OcrInvoicePage: React.FC = () => {
                   onClick={handleSaveInvoice}
                   disabled={createOcrInvoiceMutation.isPending}
                   size="lg"
-                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 disabled:transform-none py-4"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 transform  disabled:transform-none py-4"
                 >
                   {createOcrInvoiceMutation.isPending ? (
                     <Loader2 className="w-6 h-6 mr-3 animate-spin" />
@@ -844,14 +844,14 @@ const EditableField: React.FC<EditableFieldProps> = ({
 }) => {
   return (
     <div className="space-y-2">
-      <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+      <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">
         {label}
       </Label>
       {multiline ? (
         <textarea
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none shadow-sm transition-all duration-200"
+          className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-200 focus:border-transparent resize-none shadow-sm transition-all duration-200"
           rows={3}
         />
       ) : (
@@ -859,7 +859,7 @@ const EditableField: React.FC<EditableFieldProps> = ({
           type={type}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition-all duration-200"
+          className="px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-200 focus:border-transparent shadow-sm transition-all duration-200"
         />
       )}
     </div>

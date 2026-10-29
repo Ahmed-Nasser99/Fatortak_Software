@@ -50,20 +50,20 @@ const ProgressBar = ({
   return (
     <div className="mb-6">
       <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
           {label}
         </span>
-        <span className="text-sm font-medium text-gray-900 dark:text-white">
+        <span className="text-sm font-medium text-slate-900 dark:text-white">
           {formatNumber(current)} / ${formatNumber(total)}
         </span>
       </div>
-      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+      <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-3 overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-purple-500 to-purple-600 transition-all duration-500 ease-out"
+          className="h-full bg-brand-600 transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
         />
       </div>
-      <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+      <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mt-1">
         <span>{formatNumber(percentage, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}% Complete</span>
         <span>${formatNumber(total - current)} Remaining</span>
       </div>
@@ -108,12 +108,12 @@ const InstallmentCard = ({
           ? "bg-green-50 border-green-200 dark:bg-green-900/10 dark:border-green-800"
           : isOverdue
           ? "bg-red-50 border-red-200 dark:bg-red-900/10 dark:border-red-800"
-          : "bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+          : "bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-700"
       }`}
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-3">
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+          <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
             {t("installment")} #{index + 1}
           </span>
           <div
@@ -134,11 +134,11 @@ const InstallmentCard = ({
             </span>
           )}
         </div>
-        <div className="text-right">
-          <div className="text-lg font-bold text-gray-900 dark:text-white">
+        <div className="text-end">
+          <div className="text-lg font-bold text-slate-900 dark:text-white">
             {formatNumber(installment.amount)}
           </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400">
+          <div className="text-xs text-slate-500 dark:text-slate-400">
             {t("due")}: {formatDate(installment.dueDate)}
           </div>
         </div>
@@ -197,7 +197,7 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 w-full max-w-4xl max-h-[90vh] overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 w-full max-w-4xl max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-purple-600 to-violet-600 p-6 text-white">
           <div className="flex items-center justify-between">
@@ -237,7 +237,7 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
 
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
+            <div className="rounded-xl border border-brand-100 bg-brand-50/70 p-4 dark:border-brand-900 dark:bg-brand-950/30 border border-blue-200 dark:border-blue-800">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                   <Calculator className="w-5 h-5 text-blue-600 dark:text-blue-400" />
@@ -246,14 +246,14 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
                   <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                     {formatNumber(adjustedTotal)}
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                  <div className="text-sm text-slate-600 dark:text-slate-400">
                     {t("totalAmount")}
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-4 border border-green-200 dark:border-green-800">
+            <div className="rounded-xl border border-emerald-100 bg-emerald-50/70 p-4 dark:border-emerald-900 dark:bg-emerald-950/30 border border-green-200 dark:border-green-800">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
                   <DollarSign className="w-5 h-5 text-green-600 dark:text-green-400" />
@@ -262,7 +262,7 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
                   <div className="text-2xl font-bold text-green-600 dark:text-green-400">
                     {formatNumber(downPayment)}
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                  <div className="text-sm text-slate-600 dark:text-slate-400">
                     {t("downPayment")}
                   </div>
                 </div>
@@ -278,7 +278,7 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
                   <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
                     {formatNumber(remainingAmount)}
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                  <div className="text-sm text-slate-600 dark:text-slate-400">
                     {t("remaining")}
                   </div>
                 </div>
@@ -287,7 +287,7 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
           </div>
 
           {/* Progress Section */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+          <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 mb-6">
             {/* <ProgressBar
               current={downPayment}
               total={adjustedTotal}
@@ -296,11 +296,11 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
 
             {/* Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-                <div className="text-xl font-bold text-gray-900 dark:text-white">
+              <div className="text-center p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
+                <div className="text-xl font-bold text-slate-900 dark:text-white">
                   {formatNumber(stats.total)}
                 </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
+                <div className="text-xs text-slate-600 dark:text-slate-400">
                   {t("total")}
                 </div>
               </div>
@@ -308,7 +308,7 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
                 <div className="text-xl font-bold text-green-600 dark:text-green-400">
                   {formatNumber(stats.paid)}
                 </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
+                <div className="text-xs text-slate-600 dark:text-slate-400">
                   {t("paid")}
                 </div>
               </div>
@@ -316,7 +316,7 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
                 <div className="text-xl font-bold text-yellow-600 dark:text-yellow-400">
                   {formatNumber(stats.pending)}
                 </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
+                <div className="text-xs text-slate-600 dark:text-slate-400">
                   {t("pending")}
                 </div>
               </div>
@@ -324,7 +324,7 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
                 <div className="text-xl font-bold text-red-600 dark:text-red-400">
                   {formatNumber(stats.overdue)}
                 </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
+                <div className="text-xs text-slate-600 dark:text-slate-400">
                   {t("overdue")}
                 </div>
               </div>
@@ -332,23 +332,23 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
           </div>
 
           {/* Financial Breakdown */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+          <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 mb-6">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center">
               <PieChart className="w-5 h-5 mr-2 text-purple-600" />
               {t("financialBreakdown")}
             </h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-400">
+                <span className="text-slate-600 dark:text-slate-400">
                   {t("originalTotal")}:
                 </span>
-                <span className="font-semibold text-gray-900 dark:text-white">
+                <span className="font-semibold text-slate-900 dark:text-white">
                   {formatNumber(invoiceData.originalTotal, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
               </div>
               {benefits > 0 && (
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-slate-600 dark:text-slate-400">
                     {t("benefitsInterest")}:
                   </span>
                   <span className="font-semibold text-green-600 dark:text-green-400">
@@ -357,7 +357,7 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
                 </div>
               )}
               <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-400">
+                <span className="text-slate-600 dark:text-slate-400">
                   {t("downPayment")}:
                 </span>
                 <span className="font-semibold text-blue-600 dark:text-blue-400">
@@ -365,15 +365,15 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-400">
+                <span className="text-slate-600 dark:text-slate-400">
                   {t("installmentsTotal")}:
                 </span>
                 <span className="font-semibold text-orange-600 dark:text-orange-400">
                   {formatNumber(installmentsTotal, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
               </div>
-              <div className="flex justify-between items-center border-t border-gray-200 dark:border-gray-700 pt-3">
-                <span className="text-lg font-bold text-gray-900 dark:text-white">
+              <div className="flex justify-between items-center border-t border-slate-200 dark:border-slate-700 pt-3">
+                <span className="text-lg font-bold text-slate-900 dark:text-white">
                   {t("adjustedTotal")}:
                 </span>
                 <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
@@ -385,7 +385,7 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
 
           {/* Installments List */}
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
               {t("paymentSchedule")} ({installments.length} {t("installments")})
             </h3>
             {installments.map((installment, index) => (
@@ -400,11 +400,11 @@ const PartialPaymentPreviewModal: React.FC<PartialPaymentPreviewModalProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="bg-gray-50 dark:bg-gray-800 px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="bg-slate-50 dark:bg-slate-800 px-4 py-3 border-t border-slate-200 dark:border-slate-700">
           <div className="flex justify-end space-x-3">
             <button
               onClick={onClose}
-              className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
             >
               {t("cancel")}
             </button>

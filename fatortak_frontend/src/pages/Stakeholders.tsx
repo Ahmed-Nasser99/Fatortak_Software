@@ -232,7 +232,7 @@ const Stakeholders = () => {
   ];
 
   return (
-    <div className="space-y-6" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="min-h-screen space-y-6 bg-canvas p-4 sm:p-6 dark:bg-slate-950" dir={isRTL ? "rtl" : "ltr"}>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
@@ -247,7 +247,7 @@ const Stakeholders = () => {
         {roleAccess.canCreate() && (
           <button
             onClick={openCreate}
-            className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+            className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-700"
           >
             <Plus className="h-4 w-4" />
             {isRTL ? "إضافة صاحب مصلحة" : "Add stakeholder"}
@@ -266,7 +266,7 @@ const Stakeholders = () => {
                 {card.label}
               </p>
               <div
-                className={`rounded-xl bg-gradient-to-br ${card.color} p-2 text-white`}
+                className="rounded-lg bg-brand-50 p-2 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300"
               >
                 <card.icon className="h-4 w-4" />
               </div>
@@ -307,16 +307,16 @@ const Stakeholders = () => {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500 dark:bg-slate-800/60 dark:text-slate-400">
+              <thead className="bg-slate-50 text-start text-xs uppercase tracking-wide text-slate-500 dark:bg-slate-800/60 dark:text-slate-400">
                 <tr>
                   <th className="px-5 py-3">Name</th>
                   <th className="px-5 py-3">Type</th>
-                  <th className="px-5 py-3 text-right">Ownership</th>
-                  <th className="px-5 py-3 text-right">Capital</th>
-                  <th className="px-5 py-3 text-right">Loans</th>
-                  <th className="px-5 py-3 text-right">Net position</th>
+                  <th className="px-5 py-3 text-end">Ownership</th>
+                  <th className="px-5 py-3 text-end">Capital</th>
+                  <th className="px-5 py-3 text-end">Loans</th>
+                  <th className="px-5 py-3 text-end">Net position</th>
                   <th className="px-5 py-3">Status</th>
-                  <th className="px-5 py-3 text-right">Actions</th>
+                  <th className="px-5 py-3 text-end">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -336,16 +336,16 @@ const Stakeholders = () => {
                     <td className="px-5 py-4 text-slate-600 dark:text-slate-300">
                       {item.type}
                     </td>
-                    <td className="px-5 py-4 text-right font-medium">
+                    <td className="px-5 py-4 text-end font-medium">
                       {item.ownershipPercent.toFixed(2)}%
                     </td>
-                    <td className="px-5 py-4 text-right">
+                    <td className="px-5 py-4 text-end">
                       {formatCurrency(item.capitalBalance)}
                     </td>
-                    <td className="px-5 py-4 text-right">
+                    <td className="px-5 py-4 text-end">
                       {formatCurrency(item.loanBalance)}
                     </td>
-                    <td className="px-5 py-4 text-right font-semibold">
+                    <td className="px-5 py-4 text-end font-semibold">
                       {formatCurrency(item.netPosition)}
                     </td>
                     <td className="px-5 py-4">
@@ -682,7 +682,7 @@ const Modal = ({
 }) => (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm">
     <div
-      className={`max-h-[92vh] w-full overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl dark:bg-slate-900 ${
+      className={`max-h-[92vh] w-full overflow-y-auto rounded-2xl bg-white p-6 shadow-lg dark:bg-slate-900 ${
         wide ? "max-w-4xl" : "max-w-2xl"
       }`}
     >

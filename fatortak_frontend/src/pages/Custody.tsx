@@ -219,13 +219,13 @@ const Custody: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 p-6">
+    <div className="min-h-screen bg-canvas dark:bg-slate-950 p-6">
       <div className="max-w-7xl mx-auto space-y-6" dir={isRTL ? "rtl" : "ltr"}>
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 rounded-3xl p-8 text-white shadow-2xl">
+        <div className="page-hero">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
             <div className="flex items-center space-x-4 space-x-reverse">
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg mx-3">
+              <div className="page-hero-icon mx-3">
                 <Wallet className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -259,7 +259,7 @@ const Custody: React.FC = () => {
             <CardHeader className="pb-3 border-b">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg font-bold flex items-center gap-2">
-                  <Wallet className="w-5 h-5 text-orange-600" />
+                  <Wallet className="w-5 h-5 text-brand-600" />
                   {isRTL ? "حسابات العهد" : "Custody Accounts"}
                 </CardTitle>
                 <div className="relative w-64">
@@ -356,14 +356,14 @@ const Custody: React.FC = () => {
           <Card>
             <CardHeader className="pb-3 border-b">
               <CardTitle className="text-lg font-bold flex items-center gap-2">
-                <History className="w-5 h-5 text-blue-600" />
+                <History className="w-5 h-5 text-brand-600" />
                 {isRTL ? "سجل الحساب" : "Account Record"}
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               {selectedAccount ? (
                 <div className="space-y-6">
-                  <div className="flex items-center gap-3 p-4 bg-muted/30 rounded-2xl border">
+                  <div className="flex items-center gap-3 p-4 bg-slate-50/80 dark:bg-slate-800/60 rounded-2xl border">
                     <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
                       <Wallet className="w-6 h-6 text-blue-600" />
                     </div>
@@ -389,7 +389,7 @@ const Custody: React.FC = () => {
                   </div>
 
                   <Button 
-                    className="w-full bg-blue-600 hover:bg-blue-700" 
+                    className="w-full bg-brand-600 hover:bg-brand-700" 
                     onClick={() => {
                         setIsReplenishModalOpen(true);
                     }}
@@ -678,7 +678,7 @@ const Custody: React.FC = () => {
               </Button>
               <Button 
                 onClick={handleReplenish} 
-                className="bg-blue-600 hover:bg-blue-700"
+                className="bg-brand-600 hover:bg-brand-700"
                 disabled={replenishCustodyMutation.isPending}
               >
                 {replenishCustodyMutation.isPending && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
@@ -732,7 +732,7 @@ const Custody: React.FC = () => {
               <Button
                 onClick={handleCreateAccount}
                 disabled={createAccountMutation.isPending}
-                className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg shadow-blue-500/20"
+                className="bg-brand-600 hover:bg-brand-700 text-white rounded-xl shadow-lg shadow-blue-500/20"
               >
                 {createAccountMutation.isPending && (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />

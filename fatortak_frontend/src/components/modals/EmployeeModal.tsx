@@ -106,19 +106,19 @@ const EmployeeModal: React.FC<EmployeeModalProps> = ({
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       dir={isRTL ? "rtl" : "ltr"}
     >
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div
-          className={`flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 ${
+          className={`flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700 ${
             isRTL ? "flex-row-reverse" : ""
           }`}
         >
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">
             {employee ? t("editEmployee") : t("newEmployee")}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"
           >
             <X className="w-6 h-6" />
           </button>
@@ -136,16 +136,16 @@ const EmployeeModal: React.FC<EmployeeModalProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Full Name */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     {t("fullName")} *
                   </label>
                   <Field
                     name="fullName"
                     type="text"
-                    className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
-                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 
-                      text-gray-900 dark:text-white ${
-                        isRTL ? "text-right" : "text-left"
+                    className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg 
+                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 
+                      text-slate-900 dark:text-white ${
+                        isRTL ? "text-end" : "text-start"
                       }`}
                     placeholder={t("employeeNamePlaceholder")}
                   />
@@ -158,16 +158,16 @@ const EmployeeModal: React.FC<EmployeeModalProps> = ({
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     {t("email")}
                   </label>
                   <Field
                     name="email"
                     type="email"
-                    className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
-                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 
-                      text-gray-900 dark:text-white ${
-                        isRTL ? "text-right" : "text-left"
+                    className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg 
+                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 
+                      text-slate-900 dark:text-white ${
+                        isRTL ? "text-end" : "text-start"
                       }`}
                     placeholder={t("emailPlaceholder")}
                   />
@@ -192,16 +192,16 @@ const EmployeeModal: React.FC<EmployeeModalProps> = ({
 
                 {/* Position */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     {t("position")}
                   </label>
                   <Field
                     name="position"
                     type="text"
-                    className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
-                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 
-                      text-gray-900 dark:text-white ${
-                        isRTL ? "text-right" : "text-left"
+                    className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg 
+                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 
+                      text-slate-900 dark:text-white ${
+                        isRTL ? "text-end" : "text-start"
                       }`}
                     placeholder={t("positionPlaceholder")}
                   />
@@ -214,16 +214,16 @@ const EmployeeModal: React.FC<EmployeeModalProps> = ({
 
                 {/* Department */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     {t("department")} *
                   </label>
                   <Field
                     as="select"
                     name="departmentId"
-                    className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
-                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 
-                      text-gray-900 dark:text-white ${
-                        isRTL ? "text-right" : "text-left"
+                    className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg 
+                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 
+                      text-slate-900 dark:text-white ${
+                        isRTL ? "text-end" : "text-start"
                       }`}
                   >
                     <option value="">{t("selectDepartment")}</option>
@@ -242,7 +242,7 @@ const EmployeeModal: React.FC<EmployeeModalProps> = ({
 
                 {/* Salary */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     {t("salary")}
                   </label>
                   <Field
@@ -250,10 +250,10 @@ const EmployeeModal: React.FC<EmployeeModalProps> = ({
                     type="number"
                     step="0.01"
                     min="0"
-                    className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
-                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 
-                      text-gray-900 dark:text-white ${
-                        isRTL ? "text-right" : "text-left"
+                    className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg 
+                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 
+                      text-slate-900 dark:text-white ${
+                        isRTL ? "text-end" : "text-start"
                       }`}
                     placeholder={t("salaryPlaceholder")}
                   />
@@ -266,7 +266,7 @@ const EmployeeModal: React.FC<EmployeeModalProps> = ({
 
                 {/* Hire Date */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     {t("hireDate")}
                   </label>
                   <Field
@@ -283,10 +283,10 @@ const EmployeeModal: React.FC<EmployeeModalProps> = ({
                         e.target.value ? new Date(e.target.value) : undefined
                       )
                     }
-                    className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
-                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 
-                      text-gray-900 dark:text-white ${
-                        isRTL ? "text-right" : "text-left"
+                    className={`w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg 
+                      focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-slate-700 
+                      text-slate-900 dark:text-white ${
+                        isRTL ? "text-end" : "text-start"
                       }`}
                   />
                   <ErrorMessage
@@ -306,7 +306,7 @@ const EmployeeModal: React.FC<EmployeeModalProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  className="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
                 >
                   {t("cancel")}
                 </button>

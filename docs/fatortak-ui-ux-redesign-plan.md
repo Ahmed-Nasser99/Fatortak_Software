@@ -1,9 +1,33 @@
 # Fatortak UI/UX Redesign Plan
 
-**Status:** Proposal for approval  
+**Status:** In implementation — foundation and core modules shipped  
 **Scope:** Visual system, interaction patterns, page templates, accessibility and rollout  
 **Constraint:** Keep Fatortak’s identity and brand recognition. Move from heavy gradients and saturated blues/purples to a calmer, lighter, more professional product UI.  
-**Implementation:** None. This document is a plan only.
+**Implementation:** Shared tokens and primitives are live. Shell, dashboard, lists, forms, reports and settings are migrated. Specialist pages, public/print surfaces, accessibility QA and the quotation workspace remain.
+
+---
+
+## 0. Implementation progress
+
+Shipped in the current rollout:
+
+- Soft brand palette (`#6A4FD8`, hover `#583DBE`, tint `#F6F4FF`) and light canvas `#F7F8FC`.
+- Inter + IBM Plex Sans Arabic, logical `start/end` spacing and RTL-safe table/cell alignment.
+- Shared primitives: `Button`, `Card`, `Input`, `Textarea`, `Label`, `Select`, `Badge`, `Table`, `Dialog`, `Tabs`, `Alert`, `StatCard`, `PageHeader`.
+- Light `page-hero` template replacing saturated gradient headers across core pages.
+- Calm dashboard: KPI cards, business-health tiles, Recharts profit/growth chart and compact transaction/recent-invoice tables.
+- List pages: clients, suppliers, sales/purchase invoices, items, projects, employees, team, stakeholders and expense categories.
+- Settings: light tab navigation, company/user forms, image upload and consistent field styling.
+- Auth: login, register, forgot/reset password aligned to the new system.
+- Dark theme persists across reloads; dark surfaces, cards, tables, dialogs and chart grids are covered.
+- Modal footers, compact table density, consistent status tinting and mobile 2-column KPI cards.
+
+Still to do:
+
+- Specialist surfaces: AI chat, OCR workspace, subscription/payment, public invoice and print templates.
+- A full accessibility audit (focus order, labels, contrast, keyboard traps).
+- Storybook/visual regression for the shared primitives.
+- Quotation and the wider commercial document chain, as planned below.
 
 ---
 
@@ -681,4 +705,4 @@ Build/standardize in `src/components/ui`:
 - No page uses a one-off gradient, button, table or modal unless documented.
 - Dashboard, invoice, report and settings task completion improves in usability testing.
 
-No implementation should begin until the palette, typography and component inventory are approved.
+Implementation status: foundation and core rollout are in place; the remaining specialist pages, accessibility pass and quotation workspace are tracked in section 0 and in `IMPLEMENTATION_PLAN.md`.

@@ -27,7 +27,7 @@ const BalanceSheet: React.FC = () => {
           </Button>
           <div>
             <h1 className="text-2xl font-bold">{isRTL ? "الميزانية العمومية" : "Balance Sheet"}</h1>
-            <p className="text-sm text-gray-500">{isRTL ? "قائمة المركز المالي" : "Financial position statement"}</p>
+            <p className="text-sm text-slate-500">{isRTL ? "قائمة المركز المالي" : "Financial position statement"}</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -51,10 +51,10 @@ const BalanceSheet: React.FC = () => {
           {/* Assets Column */}
           <div className="space-y-6">
             <Card className="border-none shadow-sm overflow-hidden">
-              <CardHeader className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
+              <CardHeader className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{isRTL ? "الأصول" : "Assets"}</CardTitle>
-                  <Building2 className="w-5 h-5 text-gray-400" />
+                  <CardTitle className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">{isRTL ? "الأصول" : "Assets"}</CardTitle>
+                  <Building2 className="w-5 h-5 text-slate-400" />
                 </div>
               </CardHeader>
               <CardContent className="p-0">
@@ -63,7 +63,7 @@ const BalanceSheet: React.FC = () => {
                     {response?.assets?.map((item: any) => (
                       <TableRow key={item.accountId} className="hover:bg-transparent">
                         <TableCell className="py-3 px-6 text-sm">{item.accountName}</TableCell>
-                        <TableCell className="py-3 px-6 text-right font-mono font-medium">{formatCurrency(item.balance)}</TableCell>
+                        <TableCell className="py-3 px-6 text-end font-mono font-medium">{formatCurrency(item.balance)}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -71,9 +71,9 @@ const BalanceSheet: React.FC = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-950 dark:text-white dark:border-gray-800/50 overflow-hidden shadow-sm">
-              <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/5">
-                <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "إجمالي الأصول" : "Total Assets"}</CardTitle>
+            <Card className="bg-slate-100 text-slate-900 border-slate-200 dark:bg-slate-950 dark:text-white dark:border-slate-800/50 overflow-hidden shadow-sm">
+              <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/5">
+                <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "إجمالي الأصول" : "Total Assets"}</CardTitle>
               </CardHeader>
               <CardContent className="pt-4 px-6 pb-6">
                 <div className="text-2xl lg:text-3xl font-bold font-mono">{formatCurrency(response?.totalAssets || 0)}</div>
@@ -85,8 +85,8 @@ const BalanceSheet: React.FC = () => {
           <div className="space-y-6">
              {/* Liabilities */}
              <Card className="border-none shadow-sm overflow-hidden">
-              <CardHeader className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700 py-3">
-                <CardTitle className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{isRTL ? "الالتزامات" : "Liabilities"}</CardTitle>
+              <CardHeader className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700 py-3">
+                <CardTitle className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">{isRTL ? "الالتزامات" : "Liabilities"}</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <Table>
@@ -94,22 +94,22 @@ const BalanceSheet: React.FC = () => {
                     {response?.liabilities?.map((item: any) => (
                       <TableRow key={item.accountId} className="hover:bg-transparent">
                         <TableCell className="py-2 px-6 text-sm italic">{item.accountName}</TableCell>
-                        <TableCell className="py-2 px-6 text-right font-mono text-gray-600 dark:text-gray-400">{formatCurrency(item.balance)}</TableCell>
+                        <TableCell className="py-2 px-6 text-end font-mono text-slate-600 dark:text-slate-400">{formatCurrency(item.balance)}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
               </CardContent>
-              <div className="bg-gray-100 text-gray-900 border-t border-gray-200 dark:bg-gray-950 dark:text-white dark:border-white/5 px-6 py-4 flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "إجمالي الالتزامات" : "Total Liabilities"}</span>
+              <div className="bg-slate-100 text-slate-900 border-t border-slate-200 dark:bg-slate-950 dark:text-white dark:border-white/5 px-4 py-3 flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "إجمالي الالتزامات" : "Total Liabilities"}</span>
                 <span className="text-xl font-bold font-mono">{formatCurrency(response?.totalLiabilities || 0)}</span>
               </div>
             </Card>
 
             {/* Equity */}
             <Card className="border-none shadow-sm overflow-hidden">
-              <CardHeader className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700 py-3">
-                <CardTitle className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{isRTL ? "حقوق الملكية" : "Equity"}</CardTitle>
+              <CardHeader className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700 py-3">
+                <CardTitle className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">{isRTL ? "حقوق الملكية" : "Equity"}</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <Table>
@@ -117,22 +117,22 @@ const BalanceSheet: React.FC = () => {
                     {response?.equity?.map((item: any) => (
                       <TableRow key={item.accountId} className="hover:bg-transparent">
                         <TableCell className="py-2 px-6 text-sm italic">{item.accountName}</TableCell>
-                        <TableCell className="py-2 px-6 text-right font-mono text-gray-600 dark:text-gray-400">{formatCurrency(item.balance)}</TableCell>
+                        <TableCell className="py-2 px-6 text-end font-mono text-slate-600 dark:text-slate-400">{formatCurrency(item.balance)}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
               </CardContent>
-              <div className="bg-gray-100 text-gray-900 border-t border-gray-200 dark:bg-gray-950 dark:text-white dark:border-white/5 px-6 py-4 flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{isRTL ? "إجمالي حقوق الملكية" : "Total Equity"}</span>
+              <div className="bg-slate-100 text-slate-900 border-t border-slate-200 dark:bg-slate-950 dark:text-white dark:border-white/5 px-4 py-3 flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{isRTL ? "إجمالي حقوق الملكية" : "Total Equity"}</span>
                 <span className="text-xl font-bold font-mono">{formatCurrency(response?.totalEquity || 0)}</span>
               </div>
             </Card>
 
             {/* L + E Summary */}
-            <Card className="bg-gray-100 text-gray-900 border-gray-200 dark:bg-gray-950 dark:text-white dark:border-gray-800/50 overflow-hidden shadow-xl">
-              <CardHeader className="py-2 px-6 border-b border-gray-200/50 dark:border-white/10">
-                <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
+            <Card className="bg-slate-100 text-slate-900 border-slate-200 dark:bg-slate-950 dark:text-white dark:border-slate-800/50 overflow-hidden">
+              <CardHeader className="py-2 px-6 border-b border-slate-200/50 dark:border-white/10">
+                <CardTitle className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                   {isRTL ? "إجمالي الالتزامات وحقوق الملكية" : "Total Liabilities & Equity"}
                 </CardTitle>
               </CardHeader>
