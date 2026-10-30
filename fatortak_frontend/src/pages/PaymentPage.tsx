@@ -93,7 +93,7 @@ export default function PaymentPage() {
 
   return (
     <div className="min-h-screen bg-canvas dark:bg-slate-950">
-      <div className="container  mx-auto px-4 py-8 max-w-4xl">
+      <div className="mx-auto max-w-4xl space-y-6 p-4 sm:p-6">
         {/* Header with Back Button */}
         <div className="flex items-center gap-4 mb-8">
           <Button
@@ -151,8 +151,8 @@ export default function PaymentPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-between p-4 bg-purple-50 dark:bg-purple-950/20 rounded-xl">
-                <div className="text-2xl font-bold text-purple-600">
+              <div className="flex items-center justify-between rounded-xl bg-brand-50 p-4 dark:bg-brand-950/30">
+                <div className="text-xl font-bold tabular-nums text-brand-700 dark:text-brand-300">
                   +201102941029
                 </div>
                 <Button
@@ -188,8 +188,8 @@ export default function PaymentPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-between p-4 bg-red-50 dark:bg-red-950/20 rounded-xl">
-                <div className="text-2xl font-bold text-red-600">
+              <div className="flex items-center justify-between rounded-xl bg-rose-50 p-4 dark:bg-rose-950/20">
+                <div className="text-xl font-bold tabular-nums text-rose-700 dark:text-rose-300">
                   +201004139772
                 </div>
                 <Button
@@ -205,7 +205,7 @@ export default function PaymentPage() {
         </div>
 
         {/* Instructions */}
-        <Card className="border-0 shadow-xl bg-emerald-50/60 dark:bg-emerald-950/20 mb-8">
+        <Card className="mb-8 border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
           <CardHeader>
             <CardTitle className="text-slate-900 dark:text-white">
               {isRTL ? "تعليمات الدفع" : "Payment Instructions"}
@@ -246,12 +246,12 @@ export default function PaymentPage() {
         </Card>
 
         {/* WhatsApp Send Button */}
-        <Card className="border-0 shadow-xl bg-emerald-50/60 dark:bg-emerald-950/20">
+        <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
           <CardContent className="p-8 text-center">
-            <div className="w-20 h-20 mx-auto mb-6 bg-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
-              <MessageSquare className="w-10 h-10 text-white" />
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
+              <MessageSquare className="h-8 w-8" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+            <h3 className="mb-3 text-xl font-semibold text-slate-900 dark:text-white">
               {isRTL ? "إرسال إثبات الدفع" : "Send Payment Proof"}
             </h3>
             <p className="text-slate-600 dark:text-slate-300 mb-6 max-w-md mx-auto">
@@ -262,7 +262,7 @@ export default function PaymentPage() {
             <Button
               onClick={sendToWhatsApp}
               size="lg"
-              className="bg-emerald-600 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 group"
+              className="bg-emerald-600 px-6 text-white hover:bg-emerald-700"
             >
               <MessageSquare className="w-5 h-5 mr-2" />
               {isRTL

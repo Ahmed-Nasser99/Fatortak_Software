@@ -21,10 +21,11 @@ Shipped in the current rollout:
 - Auth: login, register, forgot/reset password aligned to the new system.
 - Dark theme persists across reloads; dark surfaces, cards, tables, dialogs and chart grids are covered.
 - Modal footers, compact table density, consistent status tinting and mobile 2-column KPI cards.
+- Notification, profile, AI chat, OCR, subscription-plan and payment surfaces aligned to the same system.
 
 Still to do:
 
-- Specialist surfaces: AI chat, OCR workspace, subscription/payment, public invoice and print templates.
+- Public invoice and print templates need a dedicated print/PDF review.
 - A full accessibility audit (focus order, labels, contrast, keyboard traps).
 - Storybook/visual regression for the shared primitives.
 - Quotation and the wider commercial document chain, as planned below.

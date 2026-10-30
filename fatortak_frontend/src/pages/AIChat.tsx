@@ -149,7 +149,9 @@ const AIChat: React.FC = () => {
   const [isLoadingSessions, setIsLoadingSessions] = useState(true);
   const [sessions, setSessions] = useState<ChatSession[]>([]);
   const [currentSession, setCurrentSession] = useState<string | null>(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(() =>
+    typeof window === "undefined" ? false : window.innerWidth >= 1024
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(
     new Set()
@@ -879,7 +881,7 @@ const AIChat: React.FC = () => {
 
   return (
     <div
-      className="flex h-screen bg-slate-50 dark:bg-slate-900 overflow-hidden"
+      className="flex h-[calc(100vh-4rem)] overflow-hidden bg-canvas dark:bg-slate-950"
       dir={isRTL ? "rtl" : "ltr"}
     >
       <>

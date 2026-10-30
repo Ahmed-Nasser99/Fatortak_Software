@@ -53,7 +53,7 @@ Last updated: 2026-10-27
 | P1-34 | UI pilot: shared StatCard and dashboard header/cards | DONE | Typecheck/lint/build, browser smoke |
 | P1-35 | Roll out redesigned tables, forms, modals and page templates to all modules | DONE | Shared primitives, page hero, dashboard, lists, forms, reports, settings, auth and dark mode migrated; typecheck/lint/build/browser checks pass |
 | P1-36 | Add quotations, sales orders, purchase orders, GRN, credit/debit notes and approval flows | TODO | Commercial document chain in plan |
-| P1-37 | Polish specialist surfaces: AI chat, OCR, subscription/payment, public invoice, print templates and accessibility QA | TODO | Tracked in UI plan section 0 |
+| P1-37 | Polish specialist surfaces: public invoice, print templates and accessibility QA | TODO | Tracked in UI plan section 0 |
 | P1-17 | Remove/move stray root `package.json`; align env examples | DONE | Removed generated root file |
 | P1-18 | Stakeholder module: CRUD for stakeholders, linked chart-of-accounts account, ownership/type metadata | DONE | API + UI + migration |
 | P1-19 | Stakeholder transactions: capital contribution, dividend, loan, repayment, withdrawal; accounting postings | DONE | API + ledger postings |

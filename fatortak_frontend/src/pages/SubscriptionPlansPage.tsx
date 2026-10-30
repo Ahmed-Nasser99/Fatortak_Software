@@ -139,8 +139,8 @@ export default function SubscriptionPlansPage() {
   const currentPlan = getCurrentPlan();
 
   return (
-    <div className="min-h-screen bg-canvas dark:bg-slate-950">
-      <div className="container !max-w-full mx-auto px-4 py-8 max-w-7xl">
+    <div className="min-h-screen bg-canvas p-4 sm:p-6 dark:bg-slate-950">
+      <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white mb-3">
@@ -155,16 +155,14 @@ export default function SubscriptionPlansPage() {
 
         {/* Current Usage Card */}
         {currentPlan && !quotaLoading && (
-          <Card className="mb-8 border-0 shadow-lg bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
+          <Card className="mb-8 border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900">
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
-                <div
-                  className={`p-2 rounded-lg bg-gradient-to-r ${currentPlan.color} text-white`}
-                >
-                  <currentPlan.icon className="w-5 h-5" />
+                <div className="rounded-lg bg-brand-50 p-2 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300">
+                  <currentPlan.icon className="h-5 w-5" />
                 </div>
                 {isRTL ? "باقتك الحالية" : "Your Current Plan"}
-                <Badge variant="secondary" className="ml-auto">
+                <Badge variant="brand" className="ms-auto">
                   {isRTL ? currentPlan.nameAr : currentPlan.name}
                 </Badge>
               </CardTitle>
@@ -196,10 +194,10 @@ export default function SubscriptionPlansPage() {
 
         {/* Billing Toggle */}
         <div className="flex justify-center mb-8">
-          <div className="flex items-center gap-4 p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-slate-200/60 dark:border-slate-700/60">
+          <div className="flex items-center gap-4 rounded-xl border border-slate-200/80 bg-white p-2 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-slate-800 dark:bg-slate-900">
             <span
               className={`text-sm font-medium ${
-                !isYearly ? "text-blue-600" : "text-slate-500"
+                !isYearly ? "text-brand-700 dark:text-brand-300" : "text-slate-500"
               }`}
             >
               {isRTL ? "شهري" : "Monthly"}
@@ -218,11 +216,11 @@ export default function SubscriptionPlansPage() {
             </button>
             <span
               className={`text-sm font-medium ${
-                isYearly ? "text-blue-600" : "text-slate-500"
+                isYearly ? "text-brand-700 dark:text-brand-300" : "text-slate-500"
               }`}
             >
               {isRTL ? "سنوي" : "Yearly"}
-              <Badge variant="secondary" className="ml-1 text-xs">
+              <Badge variant="success" className="ms-1 text-xs">
                 {isRTL ? "وفر 3 شهور" : "Save 3 months"}
               </Badge>
             </span>
@@ -238,39 +236,35 @@ export default function SubscriptionPlansPage() {
             return (
               <Card
                 key={plan.id}
-                className={`relative overflow-hidden border-0 shadow-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 ${
-                  plan.popular ? "ring-2 ring-purple-500 ring-offset-4" : ""
+                className={`relative overflow-hidden border border-slate-200/80 bg-white transition-colors hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900 ${
+                  plan.popular ? "ring-2 ring-brand-500 ring-offset-2 dark:ring-offset-slate-950" : ""
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                  <div className="absolute end-0 top-0 rounded-se-lg bg-brand-600 px-3 py-1 text-xs font-semibold text-white">
                     {isRTL ? "الأكثر شعبية" : "Most Popular"}
                   </div>
                 )}
 
                 {isCurrent && (
-                  <div className="absolute top-0 left-0 bg-gradient-to-r from-emerald-500 to-green-500 text-white text-xs font-bold px-3 py-1 rounded-br-lg">
+                  <div className="absolute start-0 top-0 rounded-ss-lg bg-emerald-600 px-3 py-1 text-xs font-semibold text-white">
                     {isRTL ? "الباقة الحالية" : "Current Plan"}
                   </div>
                 )}
 
-                <div className={`h-2 bg-gradient-to-r ${plan.color}`} />
+                <div className="h-1.5 bg-brand-600" />
 
-                <CardHeader className="text-center space-y-4">
-                  <div
-                    className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-r ${plan.color} flex items-center justify-center shadow-lg`}
-                  >
-                    <Icon className="w-8 h-8 text-white" />
+                <CardHeader className="space-y-4 text-center">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300">
+                    <Icon className="h-7 w-7" />
                   </div>
 
                   <div>
                     <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
                       {isRTL ? plan.nameAr : plan.name}
                     </h3>
-                    <div className="text-3xl font-bold mt-2">
-                      <span
-                        className={`bg-gradient-to-r ${plan.color} bg-clip-text text-transparent`}
-                      >
+                    <div className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">
+                      <span>
                         {isYearly ? plan.yearly : plan.price} EGP
                       </span>
                       <span className="text-sm text-slate-500 font-normal">
@@ -304,10 +298,8 @@ export default function SubscriptionPlansPage() {
                       const FeatureIcon = feature.icon;
                       return (
                         <li key={index} className="flex items-center gap-3">
-                          <div
-                            className={`p-1 rounded-md bg-gradient-to-r ${plan.color} bg-opacity-10`}
-                          >
-                            <FeatureIcon className={`w-4 h-4  text-white`} />
+                          <div className="rounded-md bg-brand-50 p-1 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300">
+                            <FeatureIcon className="h-4 w-4" />
                           </div>
                           <span className="text-sm text-slate-700 dark:text-slate-300">
                             {isRTL ? feature.textAr : feature.text}
@@ -319,7 +311,7 @@ export default function SubscriptionPlansPage() {
 
                   <Button
                     onClick={() => handleChoosePlan(plan.id)}
-                    className={`w-full mt-6 bg-gradient-to-r ${plan.color} hover:opacity-90 text-white shadow-lg hover:shadow-xl transition-all duration-200 group`}
+                    className="group mt-6 w-full bg-brand-600 text-white hover:bg-brand-700"
                     size="lg"
                   >
                     {isRTL ? "اختر هذه الباقة" : "Choose Plan"}

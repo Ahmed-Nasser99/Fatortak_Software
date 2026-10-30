@@ -123,12 +123,12 @@ const UserProfile: React.FC = () => {
   }
 
   return (
-    <div className={`min-h-screen bg-background p-4 sm:p-6 ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className={`min-h-screen bg-canvas p-4 sm:p-6 dark:bg-slate-950 ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
               {t('userProfile')}
             </h1>
             <p className="text-muted-foreground text-sm">
@@ -243,7 +243,7 @@ const UserProfile: React.FC = () => {
             <Card>
               <CardHeader>
                 <div className={`flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <CardTitle className="text-lg">{t('personalInfo')}</CardTitle>
+                  <CardTitle className="text-lg">{isRTL ? 'المعلومات الشخصية' : 'Personal information'}</CardTitle>
                   {isEditing && (
                     <Button
                       variant="outline"
@@ -327,9 +327,9 @@ const UserProfile: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">
-                      {t('username')}
+                      {isRTL ? 'اسم المستخدم' : 'Username'}
                     </label>
-                    <p className="text-sm text-muted-foreground bg-muted p-2 rounded">
+                    <p className="break-all rounded-lg bg-slate-50 p-2.5 text-sm text-slate-600 dark:bg-slate-800/60 dark:text-slate-300">
                       {profile?.userName || 'N/A'}
                     </p>
                   </div>
@@ -337,13 +337,13 @@ const UserProfile: React.FC = () => {
                     <label className="block text-sm font-medium mb-1">
                       {t('role')}
                     </label>
-                    <p className="text-sm text-muted-foreground bg-muted p-2 rounded">
+                    <p className="rounded-lg bg-slate-50 p-2.5 text-sm text-slate-600 dark:bg-slate-800/60 dark:text-slate-300">
                       {profile?.role || t('user')}
                     </p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">
-                      {t('createdAt')}
+                      {isRTL ? 'تاريخ الإنشاء' : 'Created'}
                     </label>
                     <p className="text-sm text-muted-foreground bg-muted p-2 rounded">
                       {profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : 'N/A'}
@@ -351,7 +351,7 @@ const UserProfile: React.FC = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">
-                      {t('lastLogin')}
+                      {isRTL ? 'آخر دخول' : 'Last login'}
                     </label>
                     <p className="text-sm text-muted-foreground bg-muted p-2 rounded">
                       {profile?.lastLoginAt ? new Date(profile.lastLoginAt).toLocaleDateString() : 'N/A'}
@@ -360,7 +360,7 @@ const UserProfile: React.FC = () => {
                   {profile?.tenantName && (
                     <div className="sm:col-span-2">
                       <label className="block text-sm font-medium mb-1">
-                        {t('organization')}
+                        {isRTL ? 'المؤسسة' : 'Organization'}
                       </label>
                       <p className="text-sm text-muted-foreground bg-muted p-2 rounded">
                         {profile.tenantName}

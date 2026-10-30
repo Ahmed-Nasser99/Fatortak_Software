@@ -90,7 +90,7 @@ const Notifications: React.FC = () => {
 
   return (
     <div
-      className={`space-y-6 ${isRTL ? "rtl" : "ltr"}`}
+      className={`min-h-screen space-y-6 bg-canvas p-4 sm:p-6 dark:bg-slate-950 ${isRTL ? "rtl" : "ltr"}`}
       dir={isRTL ? "rtl" : "ltr"}
     >
       {/* Enhanced Header */}
@@ -116,7 +116,7 @@ const Notifications: React.FC = () => {
             </div>
           </div>
 
-          {unreadCount?.data && unreadCount?.data > 0 && (
+          {(unreadCount?.data ?? 0) > 0 && (
             <Button
               onClick={handleMarkAllAsRead}
               disabled={isLoading}
@@ -205,12 +205,8 @@ const Notifications: React.FC = () => {
           </Card>
         ) : filteredNotifications.length === 0 ? (
           <Card className="p-12 text-center">
-            <div
-              className={`w-16 h-16 ${getIconBackground(
-                "secondary"
-              )} rounded-2xl flex items-center justify-center mx-auto mb-4`}
-            >
-              <Bell className="w-8 h-8 text-white" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-300">
+              <Bell className="h-8 w-8" />
             </div>
             <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
               {isRTL ? "لا توجد إشعارات" : "No notifications found"}
