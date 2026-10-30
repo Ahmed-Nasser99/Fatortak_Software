@@ -75,6 +75,12 @@ const MainLayout: React.FC = () => {
       className={`min-h-screen flex ${isRTL ? "rtl" : "ltr"} relative`}
       dir={isRTL ? "rtl" : "ltr"}
     >
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+      >
+        {isRTL ? "انتقل إلى المحتوى" : "Skip to content"}
+      </a>
       {/* Sidebar Container */}
       {isMobile ? (
         // Mobile Sidebar - Rendered conditionally for better performance
@@ -132,6 +138,8 @@ const MainLayout: React.FC = () => {
 
         {/* Main Content Area */}
         <main
+          id="main-content"
+          tabIndex={-1}
           className={`
             flex-1 bg-canvas dark:bg-slate-950
             min-h-[calc(100vh-4rem)] relative

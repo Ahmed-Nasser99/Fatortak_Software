@@ -22,13 +22,15 @@ Shipped in the current rollout:
 - Dark theme persists across reloads; dark surfaces, cards, tables, dialogs and chart grids are covered.
 - Modal footers, compact table density, consistent status tinting and mobile 2-column KPI cards.
 - Notification, profile, AI chat, OCR, subscription-plan and payment surfaces aligned to the same system.
+- Quotations: list, builder, status flow, duplicate, details/print and conversion to a draft sales invoice.
 
 Still to do:
 
-- Public invoice and print templates need a dedicated print/PDF review.
-- A full accessibility audit (focus order, labels, contrast, keyboard traps).
+- Public invoice and print templates: final production logo/large-list spot check and cross-browser PDF check.
+- A full accessibility audit: screen-reader certification and automated axe checks.
 - Storybook/visual regression for the shared primitives.
-- Quotation and the wider commercial document chain, as planned below.
+- The remaining commercial document chain: sales orders, delivery notes, purchasing documents, credit/debit notes and approvals.
+- Quotations themselves are implemented end to end.
 
 ---
 

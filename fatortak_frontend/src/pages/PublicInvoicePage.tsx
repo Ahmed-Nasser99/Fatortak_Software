@@ -104,67 +104,37 @@ const PublicInvoicePage = () => {
     const printContent = document.getElementById("invoice-print-content");
     if (!printContent) return;
 
-    const printWindow = window.open("", "", "height=800,width=900");
+    const printWindow = window.open("", "", "height=900,width=1000");
     if (!printWindow) return;
 
+    const styles = Array.from(
+      document.querySelectorAll('link[rel="stylesheet"], style')
+    )
+      .map((node) => node.outerHTML)
+      .join("\n");
+
     printWindow.document.write(`
-      <html>
+      <!doctype html>
+      <html dir="${isRTL ? "rtl" : "ltr"}">
         <head>
-          <title>${t("print")} - ${invoice?.invoiceNumber}</title>
+          <meta charset="utf-8" />
+          <title>${t("print")} - ${invoice?.invoiceNumber || ""}</title>
+          ${styles}
           <style>
-            @media print { 
-              body { margin: 0; font-size: 12px; }
-              .no-print { display: none; }
-            }
-            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; line-height: 1.6; color: #333; }
-            .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid #8B5CF6; }
-            .company-section { display: flex; align-items: center; gap: 20px; }
-            .company-logo { max-height: 80px; max-width: 200px; object-fit: contain; }
-            .company-info h1 { margin: 0; font-size: 28px; font-weight: bold; color: #1F2937; }
-            .company-info p { margin: 4px 0; color: #6B7280; font-size: 14px; }
-            .invoice-header { text-align: right; }
-            .invoice-number { font-size: 32px; font-weight: bold; color: #8B5CF6; margin: 0; }
-            .status-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-top: 10px; }
-            .invoice-details { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 40px 0; }
-            .detail-section { background: #F9FAFB; padding: 24px; border-radius: 12px; border-left: 4px solid #8B5CF6; }
-            .detail-section h3 { margin: 0 0 16px 0; font-size: 16px; font-weight: 600; color: #1F2937; display: flex; align-items: center; gap: 8px; }
-            .detail-item { margin-bottom: 12px; }
-            .detail-label { font-size: 12px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
-            .detail-value { font-size: 15px; font-weight: 600; color: #1F2937; }
-            .items-section { margin: 40px 0; }
-            .items-section h3 { font-size: 18px; font-weight: 600; color: #1F2937; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-            .items-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
-            .items-table th { background: #8B5CF6; color: white; padding: 16px; text-align: left; font-weight: 600; font-size: 14px; }
-            .items-table td { padding: 16px; border-bottom: 1px solid #E5E7EB; }
-            .items-table tbody tr:hover { background: #F9FAFB; }
-            .items-table tbody tr:last-child td { border-bottom: none; }
-            .item-name { font-weight: 600; color: #1F2937; }
-            .item-description { color: #6B7280; font-size: 13px; margin-top: 4px; }
-            .totals-section { background: linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%); color: white; padding: 24px; border-radius: 12px; margin-top: 40px; }
-            .totals-section h3 { margin: 0 0 16px 0; font-size: 18px; display: flex; align-items: center; gap: 8px; }
-            .totals-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
-            .totals-row.total { font-size: 24px; font-weight: bold; border-top: 2px solid rgba(255,255,255,0.3); padding-top: 12px; margin-top: 12px; }
-            .notes-section { margin-top: 40px; padding: 20px; background: #F3F4F6; border-radius: 8px; }
-            .notes-section h3 { margin: 0 0 12px 0; font-size: 16px; font-weight: 600; color: #1F2937; }
-            .terms-section { margin-top: 20px; padding: 20px; background: #F3F4F6; border-radius: 8px; }
-            .terms-section h3 { margin: 0 0 12px 0; font-size: 16px; font-weight: 600; color: #1F2937; }
-            .text-center { text-align: center; }
-            .text-end { text-align: right; }
-            .footer { margin-top: 60px; text-align: center; font-size: 12px; color: #6B7280; }
+            @page { size: A4; margin: 12mm; }
+            html, body { margin: 0; background: #fff; color: #111827; }
+            body { font-family: Inter, 'IBM Plex Sans Arabic', sans-serif; }
+            .no-print { display: none !important; }
           </style>
         </head>
-        <body>
-          ${printContent.innerHTML}
-          <div class="footer">
-            <p>${t("thankYouBusiness")}</p>
-          </div>
-        </body>
+        <body>${printContent.innerHTML}</body>
       </html>
     `);
-
     printWindow.document.close();
-    printWindow.print();
-    setTimeout(() => printWindow.close(), 100);
+    setTimeout(() => {
+      printWindow.focus();
+      printWindow.print();
+    }, 400);
   };
 
   const handleShare = () => {
@@ -275,22 +245,22 @@ const PublicInvoicePage = () => {
           <div className="flex space-x-3">
             <button
               onClick={handlePrint}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 "
-              title={t("print")}
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
+              title={t("print")} aria-label={t("print")}
             >
               <Printer className="w-6 h-6 text-slate-700 dark:text-slate-300" />
             </button>
             <button
               onClick={handleDownloadPDF}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 "
-              title={t("downloadPDF")}
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
+              title={t("downloadPDF")} aria-label={t("downloadPDF")}
             >
               <Download className="w-6 h-6 text-slate-700 dark:text-slate-300" />
             </button>
             <button
               onClick={handleShare}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all duration-200 "
-              title={t("shareViaWhatsApp")}
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
+              title={t("shareViaWhatsApp")} aria-label={t("shareViaWhatsApp")}
             >
               <Share2 className="w-6 h-6 text-slate-700 dark:text-slate-300" />
             </button>
@@ -343,7 +313,7 @@ const PublicInvoicePage = () => {
             </button>
             <button
               onClick={handleShare}
-              className="flex items-center space-x-2 px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-200 shadow-lg hover:shadow-xl transform "
+              className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-white transition-colors hover:bg-emerald-700"
             >
               <Share2 className="w-5 h-5" />
               <span>{t("share")}</span>
@@ -351,7 +321,7 @@ const PublicInvoicePage = () => {
             {invoice?.attachmentUrl && (
               <button
                 onClick={() => window.open(`${import.meta.env.VITE_API_URL || 'https://localhost:44338'}/${invoice.attachmentUrl}`, '_blank')}
-                className="flex items-center space-x-2 px-4 py-3 bg-white text-indigo-600 border border-indigo-200 rounded-xl hover:bg-indigo-50 transition-all duration-200 shadow-sm hover:shadow-md transform "
+                className="flex items-center gap-2 rounded-lg border border-brand-200 bg-white px-4 py-2.5 text-brand-700 transition-colors hover:bg-brand-50 dark:border-brand-800 dark:bg-slate-900 dark:text-brand-300"
               >
                 <Paperclip className="w-5 h-5" />
                 <span>{isRTL ? "عرض المرفق" : "View Attachment"}</span>

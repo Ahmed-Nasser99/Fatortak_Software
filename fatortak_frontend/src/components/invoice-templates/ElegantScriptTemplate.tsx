@@ -151,7 +151,7 @@ const ElegantScriptTemplate: React.FC<TemplateProps> = ({
                 </div>
               </div>
               <div className="text-xl font-serif text-slate-900 dark:text-white">
-                {(item.quantity * item.unitPrice)?.toFixed(2)}
+                {Number(item.lineTotal ?? item.quantity * item.unitPrice).toFixed(2)}
               </div>
             </div>
           ))}

@@ -162,7 +162,7 @@ const BoldCorporateTemplate: React.FC<TemplateProps> = ({
                     {item.unitPrice?.toFixed(2)}
                   </td>
                   <td className="py-4 px-6 text-end rtl:text-start font-bold text-slate-900 dark:text-white text-lg">
-                    {(item.quantity * item.unitPrice)?.toFixed(2)}
+                    {Number(item.lineTotal ?? item.quantity * item.unitPrice).toFixed(2)}
                   </td>
                 </tr>
               ))}

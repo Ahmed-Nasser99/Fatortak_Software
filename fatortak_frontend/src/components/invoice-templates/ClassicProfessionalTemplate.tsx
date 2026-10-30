@@ -182,7 +182,7 @@ const ClassicProfessionalTemplate: React.FC<TemplateProps> = ({
                   {item.unitPrice?.toFixed(2)}
                 </td>
                 <td className="py-4 text-end rtl:text-start font-semibold text-slate-900 dark:text-white">
-                  {(item.quantity * item.unitPrice)?.toFixed(2)}{" "}
+                  {Number(item.lineTotal ?? item.quantity * item.unitPrice).toFixed(2)}{" "}
                   {company?.currency || t("defaultCurrency")}
                 </td>
               </tr>

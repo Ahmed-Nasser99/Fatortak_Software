@@ -52,8 +52,9 @@ Last updated: 2026-10-27
 | P1-33 | UI redesign foundations: lighter brand tokens, Arabic/Latin font stack, shell refinements | DONE | CSS/Tailwind tokens, sidebar/header, build pass |
 | P1-34 | UI pilot: shared StatCard and dashboard header/cards | DONE | Typecheck/lint/build, browser smoke |
 | P1-35 | Roll out redesigned tables, forms, modals and page templates to all modules | DONE | Shared primitives, page hero, dashboard, lists, forms, reports, settings, auth and dark mode migrated; typecheck/lint/build/browser checks pass |
-| P1-36 | Add quotations, sales orders, purchase orders, GRN, credit/debit notes and approval flows | TODO | Commercial document chain in plan |
-| P1-37 | Polish specialist surfaces: public invoice, print templates and accessibility QA | TODO | Tracked in UI plan section 0 |
+| P1-36 | Implement quotation module and convert an accepted quotation into a draft sales invoice | DONE | QUO numbering, status flow, duplicate, print and draft-invoice conversion |
+| P1-37 | Polish specialist surfaces: public invoice, print templates and accessibility QA | DONE | Public token view, template line totals, print rules, shell and form accessibility |
+| P1-38 | Add sales orders, delivery notes, purchase requisition/RFQ/PO/GRN, credit/debit notes and approval flows | TODO | Remaining commercial document chain |
 | P1-17 | Remove/move stray root `package.json`; align env examples | DONE | Removed generated root file |
 | P1-18 | Stakeholder module: CRUD for stakeholders, linked chart-of-accounts account, ownership/type metadata | DONE | API + UI + migration |
 | P1-19 | Stakeholder transactions: capital contribution, dividend, loan, repayment, withdrawal; accounting postings | DONE | API + ledger postings |
@@ -98,12 +99,13 @@ Last updated: 2026-10-27
 
 The current system jumps from a draft invoice to a paid invoice. A professional sales and purchasing flow needs the full document chain:
 
-- [ ] **Quotation / estimate**
+- [x] **Quotation / estimate**
   - customer, validity date, price list, discount, VAT, terms, versions;
   - draft → sent → accepted / rejected / expired;
   - duplicate, print/PDF, email/WhatsApp;
   - convert accepted quotation to sales order or invoice;
   - optional approval before sending.
+  - **Implemented:** `Quotations`/`QuotationItems` tables, `QUO-` numbering, status API, duplicate, details/print dialog and conversion to a draft sales invoice.
 - [ ] **Sales order**
   - confirmed customer commitment, delivery date, partial fulfilment;
   - convert to invoice or delivery note;
@@ -199,6 +201,8 @@ The current system jumps from a draft invoice to a paid invoice. A professional 
 - Local SQL Server smoke test on an isolated `FatortakSmoke_20261029` database: health/readiness, cookie login, `/api/auth/me`, tenant isolation (cross-tenant stakeholder returns 404), stakeholder capital posting, invoice creation with discount/VAT, balanced journal (102.60 debit = 102.60 credit), mark-paid, duplicate, and public invoice token (rejected without token, accepted with token).
 - Vite 8 dev server and Chromium UI smoke test: login, dashboard, stakeholders page, reports hub, invoice-template hub, installation insights; no runtime console errors after login.
 - UI redesign: brand palette softened, Arabic font added, shell refined, shared primitives rebuilt, dashboard/chart/table/cards migrated, list/form/report/settings/auth pages rolled out, dark mode persisted, responsive KPI cards and compact tables implemented; typecheck, lint and production build pass.
+- Quotation module: migration `AddQuotationModule`, create/update/send/accept/duplicate/delete APIs, tenant-scoped list, print-ready details dialog and conversion to a **draft** sales invoice; conversion creates no journal entry and does not touch stock. Backend tests remain 10/10.
+- Public invoice review: signed-token view verified, all six invoice templates now show persisted line totals, and print copies the app stylesheets.
 - Dependency review completed: ESLint 10.13, Recharts 3.10 + react-is 19.3, TypeScript 6.0, iText 9.8 + pdfCalligraph 5.1, EPPlus 8.7 with explicit license configuration, Vite 8.3 + plugin 4.3, react-day-picker 10 and react-resizable-panels 4.
 - `npm ci` completes successfully; `eslint .` reports 0 errors (31 legacy warnings); `tsc` 0 errors; production build passes.
 - All 10 open Dependabot PRs were reviewed and closed with a comment: implemented on main, or deferred because TypeScript 7 is not supported by typescript-eslint and dotnet-ef 10 requires a .NET 10 migration.

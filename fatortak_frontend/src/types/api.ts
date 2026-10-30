@@ -866,3 +866,93 @@ export interface SetInitialBalanceDto {
   description?: string;
   sourceAccountId?: string;
 }
+
+// Quotation / sales document DTOs
+export interface QuotationItemDto {
+  id: string;
+  itemId?: string;
+  itemName?: string;
+  description?: string;
+  quantity: number;
+  unitPrice: number;
+  vatRate?: number;
+  discount: number;
+  lineTotal: number;
+}
+
+export interface QuotationDto {
+  id: string;
+  quotationNumber: string;
+  customerId: string;
+  customerName?: string;
+  customerPhoneNumber?: string;
+  branchId?: string;
+  projectId?: string;
+  projectName?: string;
+  issueDate: string;
+  validUntil: string;
+  status: string;
+  subtotal: number;
+  vatAmount: number;
+  totalDiscount: number;
+  total: number;
+  currency?: string;
+  notes?: string;
+  terms?: string;
+  attachmentUrl?: string;
+  createdAt: string;
+  sentAt?: string;
+  acceptedAt?: string;
+  convertedAt?: string;
+  convertedInvoiceId?: string;
+  daysUntilExpiry: number;
+  isExpired: boolean;
+  items: QuotationItemDto[];
+}
+
+export interface QuotationItemCreateDto {
+  itemId?: string;
+  description?: string;
+  quantity: number;
+  unitPrice: number;
+  vatRate?: number;
+  discount: number;
+}
+
+export interface QuotationCreateDto {
+  customerId: string;
+  branchId?: string;
+  projectId?: string;
+  quotationNumber?: string;
+  issueDate: string;
+  validUntil: string;
+  status?: string;
+  notes?: string;
+  terms?: string;
+  attachmentUrl?: string;
+  items: QuotationItemCreateDto[];
+}
+
+export interface QuotationUpdateDto extends QuotationCreateDto {}
+
+export interface QuotationFilterDto {
+  search?: string;
+  customerId?: string;
+  status?: string;
+  fromDate?: string;
+  toDate?: string;
+  branchId?: string;
+  projectId?: string;
+}
+
+export interface ConvertQuotationDto {
+  issueDate?: string;
+  dueDate?: string;
+  notes?: string;
+}
+
+export interface ConvertQuotationResultDto {
+  invoiceId: string;
+  invoiceNumber: string;
+  status: string;
+}

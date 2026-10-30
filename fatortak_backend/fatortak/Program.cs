@@ -31,6 +31,7 @@ using fatortak.Services.ItemService;
 using fatortak.Services.NotificationService;
 using fatortak.Services.ProjectService;
 using fatortak.Services.QuotaService;
+using fatortak.Services.QuotationService;
 using fatortak.Services.ReminderService;
 using fatortak.Services.StakeholderService;
 using fatortak.Services.SubscriptionService;
@@ -178,6 +179,7 @@ namespace fatortak
             builder.Services.AddScoped<IUserProfileService, UserProfileService>();
             builder.Services.AddScoped<ICustomerService, CustomerService>();
             builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+builder.Services.AddScoped<IQuotationService, QuotationService>();
             builder.Services.AddSingleton<IPublicInvoiceTokenService, PublicInvoiceTokenService>();
             builder.Services.AddSingleton<IDeploymentMode, DeploymentMode>();
             builder.Services.AddScoped<IItemService, ItemService>();

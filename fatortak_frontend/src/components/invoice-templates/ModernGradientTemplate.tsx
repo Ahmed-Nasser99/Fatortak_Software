@@ -225,7 +225,7 @@ const ModernGradientTemplate: React.FC<TemplateProps> = ({
                         : t("none")}
                     </td>
                     <td className="px-4 py-3 text-center font-bold text-slate-900 dark:text-white">
-                      {(item.quantity * item.unitPrice)?.toFixed(2)}{" "}
+                      {Number(item.lineTotal ?? item.quantity * item.unitPrice).toFixed(2)}{" "}
                       {company?.currency || t("defaultCurrency")}
                     </td>
                   </tr>

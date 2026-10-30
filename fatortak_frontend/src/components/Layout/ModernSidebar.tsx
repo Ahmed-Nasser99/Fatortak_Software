@@ -135,6 +135,11 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
       path: "/sell-invoices",
     },
     {
+      name: isRTL ? "عروض الأسعار" : "Quotations",
+      icon: ClipboardList,
+      path: "/quotations",
+    },
+    {
       name: t("expenses") || "Expenses",
       icon: DollarSign,
       path: "/expenses-group",
@@ -536,7 +541,7 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
         )}
 
         {/* Navigation */}
-        <nav className="flex-1 mt-4 px-3 overflow-y-auto overscroll-contain max-h-[calc(100vh-8rem)]">
+        <nav aria-label={isRTL ? "التنقل الرئيسي" : "Main navigation"} className="flex-1 mt-4 px-3 overflow-y-auto overscroll-contain max-h-[calc(100vh-8rem)]">
           <ul className="space-y-1 pb-4">{renderMenuItems(menuItems)}</ul>
         </nav>
 

@@ -210,3 +210,20 @@ button:focus-visible {
 .page-hero .page-hero-icon svg {
   color: #ffffff !important;
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    background: #fff;
+    color: #111827;
+  }
+}

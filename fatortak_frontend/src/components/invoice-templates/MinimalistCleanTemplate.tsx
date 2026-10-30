@@ -134,7 +134,7 @@ const MinimalistCleanTemplate: React.FC<TemplateProps> = ({
               {item.unitPrice?.toFixed(2)}
             </div>
             <div className="col-span-2 text-end rtl:text-start font-medium text-slate-900 dark:text-white">
-              {(item.quantity * item.unitPrice)?.toFixed(2)}
+              {Number(item.lineTotal ?? item.quantity * item.unitPrice).toFixed(2)}
             </div>
           </div>
         ))}

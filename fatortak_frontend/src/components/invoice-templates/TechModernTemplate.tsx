@@ -193,7 +193,7 @@ const TechModernTemplate: React.FC<TemplateProps> = ({
                 <td
                   className={`py-4 px-6 text-end rtl:text-start ${colors.textLight} font-mono font-bold`}
                 >
-                  {(item.quantity * item.unitPrice)?.toFixed(2)}
+                  {Number(item.lineTotal ?? item.quantity * item.unitPrice).toFixed(2)}
                 </td>
               </tr>
             ))}
