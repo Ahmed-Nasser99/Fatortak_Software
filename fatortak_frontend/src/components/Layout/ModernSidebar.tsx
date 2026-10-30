@@ -499,6 +499,7 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
           {isMobile && (
             <button
               onClick={onClose}
+              aria-label={isRTL ? "إغلاق القائمة" : "Close navigation"}
               className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0"
             >
               <X className="w-5 h-5 text-slate-600 dark:text-slate-400" />
@@ -510,6 +511,7 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({
         {!isMobile && (
           <button
             onClick={onToggleCollapse}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             className={`
               absolute top-6 w-6 h-6 bg-white dark:bg-slate-800 
               border border-slate-300 dark:border-slate-600 rounded-full 

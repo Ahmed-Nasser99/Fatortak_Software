@@ -127,6 +127,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
           >
             <button
               onClick={onMenuClick}
+              aria-label={isRTL ? "فتح القائمة" : "Open navigation"}
               className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
             >
               <Menu className="w-5 h-5" />
@@ -151,6 +152,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
               title={
                 theme === "dark"
@@ -172,6 +174,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
+              aria-label={isRTL ? "Switch to English" : "التبديل إلى العربية"}
               className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
               title={isRTL ? "English" : "العربية"}
             >
@@ -278,6 +281,8 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({
             <div className="relative">
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
+                aria-label={isRTL ? "قائمة المستخدم" : "User menu"}
+                aria-expanded={showProfileMenu}
                 className={`flex items-center space-x-3 p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors ${
                   isRTL ? "flex-row-reverse space-x-reverse" : ""
                 }`}
